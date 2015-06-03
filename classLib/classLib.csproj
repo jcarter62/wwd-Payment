@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EA2FEF19-C3F9-407A-983F-B58AD4D1E5DB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>classLib</RootNamespace>
+    <AssemblyName>classLib</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppSettings.cs" />
+    <Compile Include="ComboBoxTrak.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ComboBoxTrak.Designer.cs">
+      <DependentUpon>ComboBoxTrak.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DbSettings.cs" />
+    <Compile Include="EncDec.cs" />
+    <Compile Include="Images.cs" />
+    <Compile Include="Keys.cs" />
+    <Compile Include="PanelTrak.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PanelTrak.Designer.cs">
+      <DependentUpon>PanelTrak.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Payment.cs" />
+    <Compile Include="Payments.cs" />
+    <Compile Include="PosSize.cs" />
+    <Compile Include="ProgramInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ReceiptId.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="SettingsFile.cs" />
+    <Compile Include="ShortGuid.cs" />
+    <Compile Include="TextBoxTrak.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TextBoxTrak.Designer.cs">
+      <DependentUpon>TextBoxTrak.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icons\dialog-ok-2.ico" />
+    <Content Include="icons\dialog-ok-3.ico" />
+    <Content Include="icons\dialog-ok-4.ico" />
+    <Content Include="icons\dialog-ok-apply-2.ico" />
+    <Content Include="icons\dialog-ok-apply-3.ico" />
+    <Content Include="icons\dialog-ok-apply-4.ico" />
+    <Content Include="icons\dialog-ok-apply-6.ico" />
+    <Content Include="icons\dialog-ok-apply.ico" />
+    <Content Include="icons\dialog-ok.ico" />
+    <Content Include="icons\emblem-money-2.ico" />
+    <Content Include="icons\emblem-money.ico" />
+    <Content Include="icons\mail-read-2.ico" />
+    <Content Include="icons\mail-replied-2.ico" />
+    <Content Include="icons\mail-replied.ico" />
+    <Content Include="icons\money.ico" />
+    <Content Include="icons\okteta.ico" />
+    <Content Include="icons\okular.ico" />
+    <Content Include="icons\preferences-desktop-printer-3.ico" />
+    <Content Include="icons\preferences-desktop-printer.ico" />
+    <Content Include="images\dialog-no-2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\dialog-ok-2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\dialog-ok-2.png" />
+    <None Include="Resources\dialog-no-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PanelTrak.resx">
+      <DependentUpon>PanelTrak.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextBoxTrak.resx">
+      <DependentUpon>TextBoxTrak.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\dataLib\dataLib.csproj">
+      <Project>{010a21e3-f30e-45cf-b826-e6b7bcdce890}</Project>
+      <Name>dataLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
