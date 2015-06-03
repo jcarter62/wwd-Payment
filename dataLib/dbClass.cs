@@ -13,8 +13,8 @@ namespace dataLib {
 
     public partial class CRDetail {
         partial void OnCreated() {
-            if (this.Id == null) {
-                this.Id = shortid.newId;
+            if (Id == null) {
+                Id = shortid.newId;
             }
         }
     }
@@ -26,14 +26,14 @@ namespace dataLib {
         /// Set default values for CRMaster Record
         /// </summary>
         partial void OnCreated() {
-            if (this.Id == null) {
-                this.Id = shortid.newId;
-                this.DeliveryName = "";
-                this.PayRef = "";
-                this.Note = "";
-                this.PayType = "Check";
-                this.Amount = 0.0;
-                this.State = "Created";
+            if (Id == null) {
+                Id = shortid.newId;
+                DeliveryName = "";
+                PayRef = "";
+                Note = "";
+                PayType = "Check";
+                Amount = 0.0;
+                State = "Created";
             }
         }
 
@@ -46,9 +46,9 @@ namespace dataLib {
 
         private void depositStatus() {
             _Deposited = "No";
-            if (this.State != null) {
+            if (State != null) {
                 try {
-                    if (this.State.ToString().Trim().ToLower() == "deposited") {
+                    if (State.ToString().Trim().ToLower() == "deposited") {
                         _Deposited = "Yes";
                     }
                 }
