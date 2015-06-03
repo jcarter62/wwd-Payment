@@ -10,17 +10,17 @@ namespace classLib {
         AppSettings aset;
         dbClassDataContext dc;
 
-        String prefix { get; set; }
-        String year;
-        String month;
-        String day;
-        String hour;
-        String minute;
-        String num;
-        String result;
-        public String id { get { return result; } }
+        string prefix { get; set; }
+        string year;
+        string month;
+        string day;
+        string hour;
+        string minute;
+        string num;
+        string result;
+        public string id { get { return result; } }
 
-        static String GoodChars = "0123456789ABCDEFGHIJKMNPQRSTUWXYZ"; 
+        static string GoodChars = "0123456789ABCDEFGHIJKMNPQRSTUWXYZ"; 
         //                         123456789012345678901234567890123
         //                                  1         2         3  
 
@@ -32,8 +32,8 @@ namespace classLib {
 
         private void init() {
             int n;
-            String testid = "";
-            String tempid = "";
+            string testid = "";
+            string tempid = "";
             DateTime now;
             aset = new AppSettings();
             dc = new dbClassDataContext(aset.wmis.connectionString);
@@ -119,13 +119,13 @@ namespace classLib {
 
         // convert day to character 0..9A..Z
         private string day2char(int p) {
-            String result = GoodChars.Substring(p, 1);
+            string result = GoodChars.Substring(p, 1);
             return result;
         }
 
         // convert month to single character. A=Jan, B=Feb, ...
-        private String month2char(int num) {
-            String result = GoodChars.Substring(num, 1);
+        private string month2char(int num) {
+            string result = GoodChars.Substring(num, 1);
             return result;
         }
     }

@@ -7,8 +7,8 @@ using System.Data.SqlClient;
 namespace classLib {
     public class DbSettings {
         #region Properties
-        private String hostname;
-        public String Hostname {
+        private string hostname;
+        public string Hostname {
             get {
                 return hostname;
             }
@@ -18,8 +18,8 @@ namespace classLib {
             }
         }
 
-        private String database;
-        public String Database { 
+        private string database;
+        public string Database { 
             get {
                 return database;
             } 
@@ -40,8 +40,8 @@ namespace classLib {
             }
         }
 
-        private String username;
-        public String Username {
+        private string username;
+        public string Username {
             get {
                 return username;
             }
@@ -51,8 +51,8 @@ namespace classLib {
             }
         }
 
-        private String password;
-        public String Password {
+        private string password;
+        public string Password {
             get {
                 return password;
             }
@@ -62,8 +62,8 @@ namespace classLib {
             }
         }
 
-        private String appname;
-        public String AppName {
+        private string appname;
+        public string AppName {
             get {
                 return appname;
             }
@@ -79,8 +79,8 @@ namespace classLib {
             clearCStr();
         }
 
-        private String cstr;
-        public String connectionString {
+        private string cstr;
+        public string connectionString {
             get {
                 if (cstr.Length <= 0) {
                     cstr = BuildConnectionString();
@@ -95,9 +95,9 @@ namespace classLib {
             cstr = "";
         }
 
-        private String BuildConnectionString() {
-            String cs;
-            String tmp;
+        private string BuildConnectionString() {
+            string cs;
+            string tmp;
             //
             // Example connection strings.
             //

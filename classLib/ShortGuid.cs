@@ -6,7 +6,7 @@ using System.Text;
 namespace classLib {
     public static class ShortGuid {
 
-        public static String newId {
+        public static string newId {
             get {
                 return Guid.NewGuid().ToString().ToLower().Replace("{", "").Replace("}", "").Replace("-", "");
             }

@@ -12,12 +12,12 @@ namespace classLib {
         private int right;
         private int top;
         private int bottom;
-        private String name;
+        private string name;
         private Form form;
 
-        String companyname = "WWD";
-        String appname = "Payments";
-        const String comma = ",";
+        string companyname = "WWD";
+        string appname = "Payments";
+        const string comma = ",";
 
         public PosSize(Form me) {
             companyname = CompanyName();
@@ -30,21 +30,21 @@ namespace classLib {
             bottom = me.Bottom;
         }
 
-        private String CompanyName() {
-            String result = "";
+        private string CompanyName() {
+            string result = "";
             result = Application.CompanyName.ToString();
             return result;
         }
 
-        private String AppName() {
-            String result = "";
+        private string AppName() {
+            string result = "";
             result = Application.ProductName.ToString();
             return result;
         }
 
         public void Save() {
-            String filename = FilePath(this.name);
-            String data;
+            string filename = FilePath(this.name);
+            string data;
             data = left.ToString() + comma +
                 right.ToString() + comma +
                 top.ToString() + comma +
@@ -56,9 +56,9 @@ namespace classLib {
 
         public void Restore() {
             char[] delim = { ',' };
-            String filename = FilePath(this.name);
+            string filename = FilePath(this.name);
             if (File.Exists(filename)) {
-                String data;
+                string data;
                 StreamReader sr = new StreamReader(filename);
                 data = sr.ReadLine();
                 sr.Close();

@@ -10,8 +10,8 @@ namespace classLib {
     public partial class TextBoxTrak:TextBox  {
 
         private Boolean monitoring = false;
-        private String initialhash;
-        private String initialText;
+        private string initialhash;
+        private string initialText;
         private Boolean haschanged ;
 
         public Boolean Changed {
@@ -36,7 +36,7 @@ namespace classLib {
 
         void myChange(object sender, EventArgs e) {
             if (monitoring) {
-                String curHash;
+                string curHash;
                 curHash = this.Text.GetHashCode().ToString();
                 if (initialhash.CompareTo(curHash) == 0)
                     Changed = false;

@@ -34,7 +34,7 @@ namespace classLib {
         }
 
         public int ErrCode { get; set; }
-        public String ErrMsg { get; set; }
+        public string ErrMsg { get; set; }
 
         #endregion properties
 

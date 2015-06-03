@@ -7,11 +7,11 @@ using System.IO;
 
 namespace classLib {
     public class Images {
-        public String successImage { get; protected set; }
-        public String failImage { get; protected set; }
+        public string successImage { get; protected set; }
+        public string failImage { get; protected set; }
 
         public Images() {
-            String Base = AppDomain.CurrentDomain.BaseDirectory + "images\\";
+            string Base = AppDomain.CurrentDomain.BaseDirectory + "images\\";
             successImage = Base + "dialog-ok-2.png";
             failImage = Base + "dialog-no-2.png";
         }

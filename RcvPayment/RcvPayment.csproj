@@ -83,12 +83,6 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Unpaid.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Unpaid.Designer.cs">
-      <DependentUpon>Unpaid.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -109,9 +103,6 @@
     </Compile>
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Unpaid.resx">
-      <DependentUpon>Unpaid.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\DataSources\classLib.Payments.datasource" />
     <None Include="Properties\DataSources\dataLib.CRDetail.datasource" />

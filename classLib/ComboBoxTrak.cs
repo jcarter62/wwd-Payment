@@ -10,9 +10,9 @@ namespace classLib {
     public partial class ComboBoxTrak : ComboBox {
 
         private Boolean monitoring = false;
-        private String initialhash;
+        private string initialhash;
         private Boolean haschanged;
-        private String compareText;
+        private string compareText;
 
         public Boolean Changed {
             get { return haschanged; }
@@ -37,7 +37,7 @@ namespace classLib {
 
         void myChange(object sender, EventArgs e) {
             if (monitoring) {
-                String curHash;
+                string curHash;
                 curHash = this.Text.GetHashCode().ToString();
                 if (initialhash.CompareTo(curHash) == 0)
                     Changed = false;

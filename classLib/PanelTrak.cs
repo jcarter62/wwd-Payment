@@ -91,8 +91,8 @@ namespace classLib {
             Start();
         }
 
-        public String StatusString() {
-            String result = "";
+        public string StatusString() {
+            string result = "";
             foreach (Control ctrl in this.Controls) {
                 if (ctrl.GetType() == typeof(TextBoxTrak)) {
                     result = result + ((TextBoxTrak)ctrl).ToString() + "\n";

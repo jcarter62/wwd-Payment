@@ -9,7 +9,7 @@ using System.Text;
 namespace classLib {
     public class Payments : List<Payment>  {
 
-        String getList;
+        string getList;
 
         public Payments() {
             getList = "select id, state, sessionid, deliveryname, rcptid, amount, " +

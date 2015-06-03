@@ -388,6 +388,7 @@
             this.btnClose.TabIndex = 37;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnPrint
             // 
@@ -409,6 +410,7 @@
             // 
             // panel7
             // 
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel7.Controls.Add(this.btnDeleteItem);
             this.panel7.Controls.Add(this.btnSaveItem);
             this.panel7.Controls.Add(this.textBox8);
@@ -430,7 +432,7 @@
             // btnDeleteItem
             // 
             this.btnDeleteItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeleteItem.Location = new System.Drawing.Point(237, 79);
+            this.btnDeleteItem.Location = new System.Drawing.Point(235, 77);
             this.btnDeleteItem.Name = "btnDeleteItem";
             this.btnDeleteItem.Size = new System.Drawing.Size(69, 26);
             this.btnDeleteItem.TabIndex = 36;
@@ -440,7 +442,7 @@
             // btnSaveItem
             // 
             this.btnSaveItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSaveItem.Location = new System.Drawing.Point(162, 79);
+            this.btnSaveItem.Location = new System.Drawing.Point(162, 77);
             this.btnSaveItem.Name = "btnSaveItem";
             this.btnSaveItem.Size = new System.Drawing.Size(69, 26);
             this.btnSaveItem.TabIndex = 35;
@@ -453,7 +455,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox8.Location = new System.Drawing.Point(47, 51);
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(259, 20);
+            this.textBox8.Size = new System.Drawing.Size(257, 20);
             this.textBox8.TabIndex = 33;
             // 
             // label14
@@ -477,7 +479,7 @@
             "Other"});
             this.comboBox2.Location = new System.Drawing.Point(206, 28);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(98, 21);
+            this.comboBox2.Size = new System.Drawing.Size(96, 21);
             this.comboBox2.TabIndex = 31;
             // 
             // label13
@@ -511,7 +513,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox6.Location = new System.Drawing.Point(190, 5);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(116, 20);
+            this.textBox6.Size = new System.Drawing.Size(114, 20);
             this.textBox6.TabIndex = 25;
             // 
             // label11

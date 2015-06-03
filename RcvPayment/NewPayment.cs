@@ -29,6 +29,7 @@ namespace RcvPayment {
 
         private void ConnectGrid() {
             var q = from item in dc.CRMasters
+                    orderby item.RcptID descending
                     select item;
 
             PaymentsGrid.DataSource = q;
@@ -58,7 +59,7 @@ namespace RcvPayment {
         private void loadDetail(String id) {
             var q = (from item in dc.CRMasters
                      where item.Id == id
-                     select item).First();
+                     select item ).First();
 
             txtReceiptId.Text = q.RcptID;
             txtTimeStamp.Text = q.CDate.ToString();
@@ -146,15 +147,8 @@ namespace RcvPayment {
         private void btnAdd_Click(object sender, EventArgs e) {
             // Let's create a new record.
             ReceiptId newId = new ReceiptId();
-            CRMaster rec = new CRMaster {
-                Id =  ShortGuid.newId,
-                RcptID = newId.id,
-                DeliveryName = "",
-                PayRef = "",
-                Note = "",
-                PayType = "",
-                Amount = 0.0
-            };
+            CRMaster rec = new CRMaster();
+            rec.RcptID = newId.id;
 
             dc.CRMasters.InsertOnSubmit(rec);
 
@@ -166,5 +160,8 @@ namespace RcvPayment {
             }
         }
 
+        private void btnClose_Click(object sender, EventArgs e) {
+            this.Close();
+        }
     }
 }
