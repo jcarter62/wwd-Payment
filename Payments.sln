@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "classLib", "classLib\classLib.csproj", "{EA2FEF19-C3F9-407A-983F-B58AD4D1E5DB}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RcvPayment", "RcvPayment\RcvPayment.csproj", "{B2468FBF-7434-4747-8FB9-8E16723FDB9D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dataLib", "dataLib\dataLib.csproj", "{010A21E3-F30E-45CF-B826-E6B7BCDCE890}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SqlDB", "SqlDB\SqlDB.sqlproj", "{AC0F9B4C-DA58-451F-897B-F2BF9D9C5D87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,12 @@ Global
 		{010A21E3-F30E-45CF-B826-E6B7BCDCE890}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{010A21E3-F30E-45CF-B826-E6B7BCDCE890}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{010A21E3-F30E-45CF-B826-E6B7BCDCE890}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC0F9B4C-DA58-451F-897B-F2BF9D9C5D87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC0F9B4C-DA58-451F-897B-F2BF9D9C5D87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC0F9B4C-DA58-451F-897B-F2BF9D9C5D87}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AC0F9B4C-DA58-451F-897B-F2BF9D9C5D87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC0F9B4C-DA58-451F-897B-F2BF9D9C5D87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC0F9B4C-DA58-451F-897B-F2BF9D9C5D87}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
