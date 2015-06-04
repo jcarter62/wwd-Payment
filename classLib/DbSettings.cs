@@ -88,10 +88,14 @@ namespace classLib {
                 return cstr;
             }
         }
+
+        public string DbType { get; set; }
+
         #endregion Public Methods
 
         #region Other
         private void clearCStr() {
+            DbType = "net";
             cstr = "";
         }
 
