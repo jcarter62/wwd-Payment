@@ -13,11 +13,15 @@ using dataLib;
 namespace RcvPayment {
 
     public partial class NewPayment : RcvPayment.MyForm {
+        string currentID;
+        string currentDetailID;
         AppSettings aset;
         dbClassDataContext dc;
 
         public NewPayment() {
             InitializeComponent();
+            currentID = "";
+            currentDetailID = "";
             aset = new AppSettings();
             dc = new dbClassDataContext(aset.wmis.connectionString);
             statUpdate("");
@@ -43,7 +47,6 @@ namespace RcvPayment {
         private void PaymentsGrid_CellClick(object sender, DataGridViewCellEventArgs e) {
             // user clicked a cell
             // Let's populate right pane with data.
-
             // Load txtReceiptId.text with id
             DataGridView dgv = sender as DataGridView;
             if (dgv == null) {
@@ -51,25 +54,41 @@ namespace RcvPayment {
             }
             else {
                 String id = PaymentsGrid.SelectedRows[0].Cells["Id"].Value.ToString();
+                currentID = id;
                 loadDetail(id);
                 timer1.Enabled = true;
+            }
+        }
+
+        private void ItemsGrid_CellClick(object sender, DataGridViewCellEventArgs e) {
+            // user clicked a cell
+            // Let's populate Item Detail with data.
+            DataGridView dgv = sender as DataGridView;
+            if (dgv == null) {
+                return;
+            }
+            else {
+                String id;
+                id = ItemsGrid.SelectedRows[0].Cells["dataGridViewTextBoxId"].Value.ToString();
+                currentDetailID = id;
+                loadItemDetail(id);
             }
         }
 
         private void loadDetail(String id) {
             var q = (from item in dc.CRMasters
                      where item.Id == id
-                     select item ).First();
+                     select item).First();
 
             txtReceiptId.Text = q.RcptID;
             txtTimeStamp.Text = q.CDate.ToString();
-            txtRecBy.Text = q.CUser; // cells["cUser"].Value.ToString();
-            txtRecFrom.Text = q.DeliveryName; // cells["DeliveryName"].Value.ToString();
-            cbPayType.Text = q.PayType; // cells["PayType"].Value.ToString();
-            txtRef.Text = q.PayRef; // cells["PayRef"].Value.ToString();
-            cbVia.Text = q.DeliveryName; // cells["DeliveryName"].Value.ToString();
-            txtNote.Text = q.Note; // cells["Note"].Value.ToString();
-            txtAmount.Text = q.Amount.ToString(); // cells["Amount"].Value.ToString();
+            txtRecBy.Text = q.CUser;
+            txtRecFrom.Text = q.DeliveryName;
+            cbPayType.Text = q.PayType;
+            txtRef.Text = q.PayRef;
+            cbVia.Text = q.PayVia;
+            txtNote.Text = q.Note;
+            txtAmount.Text = q.Amount.ToString();
 
             panelDetail.Start(btnSavePayment);
             if (q.Deposited) {
@@ -78,16 +97,28 @@ namespace RcvPayment {
             else {
                 panelDetail.EnableControls();
             }
+
+            LoadItemsGrid(id);
+        }
+
+        private void LoadItemsGrid(string id) {
+            var q = from item in dc.CRDetails
+                    where item.CRMid == id
+                    orderby item.UDate descending
+                    select item;
+
+            ItemsGrid.DataSource = q;
         }
 
         private void PaymentsGrid_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+
         }
 
         private void btnPrint_Click(object sender, EventArgs e) {
             String yesno = "no";
             if (txtRecFrom.Changed)
                 yesno = "yes";
-            MessageBox.Show("RecFrom Changed = " + yesno );
+            MessageBox.Show("RecFrom Changed = " + yesno);
         }
 
         private void btnSavePayment_Click(object sender, EventArgs e) {
@@ -122,19 +153,18 @@ namespace RcvPayment {
 
         private void SaveThisPayment() {
             // Save this record.
-            var q = from item in dc.CRMasters
-                    where item.Id == txtReceiptId.Text
-                    select item;
+            var q = (from item in dc.CRMasters
+                     where item.Id == currentID
+                     select item).First();
 
-            foreach (CRMaster rec in q) {
-                rec.DeliveryName = txtRecFrom.Text;
-                rec.PayRef = txtRef.Text;
-                rec.Note = txtNote.Text;
-                rec.PayType = cbPayType.Text;
-                Decimal d;
-                Decimal.TryParse(txtAmount.Text, out d);
-                rec.Amount = (double)d;
-            }
+            q.DeliveryName = txtRecFrom.Text;
+            q.PayRef = txtRef.Text;
+            q.Note = txtNote.Text;
+            q.PayType = cbPayType.Text;
+            q.PayVia = cbVia.Text;
+            Decimal d;
+            Decimal.TryParse(txtAmount.Text, out d);
+            q.Amount = (double)d;
 
             try {
                 dc.SubmitChanges();
@@ -154,6 +184,7 @@ namespace RcvPayment {
 
             try {
                 dc.SubmitChanges();
+                
             }
             catch (Exception ex) {
                 Console.WriteLine(ex.Message);
@@ -163,5 +194,61 @@ namespace RcvPayment {
         private void btnClose_Click(object sender, EventArgs e) {
             this.Close();
         }
+
+        private void btnAddItem_Click(object sender, EventArgs e) {
+            // Add a new record
+            currentDetailID = ShortGuid.newId;
+            CRDetail r = new CRDetail();
+            r.Id = currentDetailID;
+            r.init();
+            r.CRMid = currentID;
+
+            try {
+                dc.CRDetails.InsertOnSubmit(r);
+                dc.SubmitChanges();
+            } 
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+            }
+
+            loadItemDetail(currentDetailID);
+        }
+
+        private void loadItemDetail(string thisId) {
+            var q = (from item in dc.CRDetails
+                     where item.Id == thisId
+                     select item).First();
+
+            if ( q != null ) {
+                txtItmAcct.Text = q.Account;
+                txtItmName.Text = "Name goes Here";
+                txtItmAmount.Text = q.Amount.ToString();
+                txtItmNote.Text = q.Note;
+            }
+        }
+
+        private void btnSaveItem_Click(object sender, EventArgs e) {
+            string thisId = currentDetailID;
+
+            var q = (from item in dc.CRDetails
+                     where item.Id == thisId
+                     select item).Single<CRDetail>();
+
+
+            if (q != null) {
+                try {
+                    q.Account = txtItmAcct.Text;
+                    Decimal d;
+                    Decimal.TryParse(txtAmount.Text, out d);
+                    q.Amount = (double)d;
+                    q.Note = txtItmNote.Text;
+                    dc.SubmitChanges();
+                } 
+                catch (Exception Ex) {
+                    Console.WriteLine(Ex.Message);
+                }
+            }
+        }
+
     }
 }

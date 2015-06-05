@@ -1,4 +1,8 @@
-﻿CREATE TABLE [dbo].[CRMaster] (
+﻿DROP TABLE [dbo].[CRMaster];
+
+GO
+
+CREATE TABLE [dbo].[CRMaster] (
     [Id]           VARCHAR (40) NOT NULL,
     [State]        VARCHAR (15) NULL,
     [SessionId]    VARCHAR (40) NULL,
@@ -7,6 +11,7 @@
     [Amount]       FLOAT (53)   NULL,
     [PayType]      VARCHAR (20) NULL,
     [PayRef]       VARCHAR (20) NULL,
+	[PayVia]	   VARCHAR (20) NULL,
     [Note]         VARCHAR (80) NULL,
     [CDate]        DATETIME     NULL,
     [CUser]        VARCHAR (50) NULL,

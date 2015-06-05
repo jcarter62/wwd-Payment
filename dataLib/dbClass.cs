@@ -13,9 +13,17 @@ namespace dataLib {
 
     public partial class CRDetail {
         partial void OnCreated() {
+
+        }
+
+        public void init() {
             if (Id == null) {
                 Id = shortid.newId;
             }
+
+            Amount = 0.0;
+            Account = "";
+            Note = "";
         }
     }
 
@@ -32,6 +40,7 @@ namespace dataLib {
                 PayRef = "";
                 Note = "";
                 PayType = "Check";
+                PayVia = "USPS";
                 Amount = 0.0;
                 State = "Created";
             }

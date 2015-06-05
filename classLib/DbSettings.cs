@@ -72,10 +72,25 @@ namespace classLib {
                 appname = value;
             }
         }
+        private string _DbType;
+        public string DbType {
+            get { return _DbType; }
+            set {
+                string inp;
+                inp = value.ToString().ToLower().Trim();
+                if (( inp == "net" ) || (inp == "file") ) {
+                    _DbType = inp;
+                } else {
+                    throw new Exception("Incorrect DBType, valid types are 'net' or 'file'");
+                }
+            }
+        }
+
         #endregion Properties
 
         #region Public Methods
         public DbSettings() {
+            DbType = "net";
             clearCStr();
         }
 
@@ -89,13 +104,11 @@ namespace classLib {
             }
         }
 
-        public string DbType { get; set; }
 
         #endregion Public Methods
 
         #region Other
         private void clearCStr() {
-            DbType = "net";
             cstr = "";
         }
 

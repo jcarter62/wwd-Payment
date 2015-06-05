@@ -1,22 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="wmis_dev" Class="dbClassDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=SQL-SVR\MSSQLR2;Initial Catalog=wmis_dev;Integrated Security=True" SettingsObjectName="dataLib.Properties.Settings" SettingsPropertyName="dbConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.CRMaster" Member="CRMasters">
-    <Type Name="CRMaster">
-      <Column Name="Id" Type="System.String" DbType="VarChar(40) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="State" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
-      <Column Name="SessionId" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
-      <Column Name="DeliveryName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="RcptID" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
-      <Column Name="Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="PayType" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="PayRef" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="Note" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
-      <Column Name="CDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CUser" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="UDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="UUser" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-    </Type>
-  </Table>
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="testdb" Class="dbClassDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DF2A\SQLEXPRESS;Initial Catalog=testdb;Integrated Security=True" SettingsObjectName="dataLib.Properties.Settings" SettingsPropertyName="testdbConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.CRMasterId" Member="CRMasterIds">
     <Type Name="CRMasterId">
       <Column Name="id" Type="System.String" DbType="VarChar(40) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -39,6 +22,32 @@
       <Column Name="CUser" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="UDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="UUser" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CRMaster" Member="CRMasters">
+    <Type Name="CRMaster">
+      <Column Name="Id" Type="System.String" DbType="VarChar(40) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="State" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="SessionId" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="DeliveryName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="RcptID" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PayType" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="PayRef" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="PayVia" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Note" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+      <Column Name="CDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CUser" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UUser" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CRAccount" Member="CRAccounts">
+    <Type Name="CRAccount">
+      <Column Name="id" Type="System.String" DbType="VarChar(40) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AccountNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="AccountName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="AccountNoInt" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
 </Database>
