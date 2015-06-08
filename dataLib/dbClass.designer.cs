@@ -140,7 +140,7 @@ namespace dataLib
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="VarChar(40) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="VarChar(40) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
 		public string id
 		{
 			get
@@ -306,7 +306,7 @@ namespace dataLib
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="VarChar(40) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="VarChar(40) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
 		public string Id
 		{
 			get
@@ -326,7 +326,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="VarChar(15)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="VarChar(15)", UpdateCheck=UpdateCheck.Never)]
 		public string State
 		{
 			get
@@ -346,7 +346,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SessionId", DbType="VarChar(40)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SessionId", DbType="VarChar(40)", UpdateCheck=UpdateCheck.Never)]
 		public string SessionId
 		{
 			get
@@ -366,7 +366,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CRMid", DbType="VarChar(40)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CRMid", DbType="VarChar(40)", UpdateCheck=UpdateCheck.Never)]
 		public string CRMid
 		{
 			get
@@ -386,7 +386,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Account", DbType="VarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Account", DbType="VarChar(20)", UpdateCheck=UpdateCheck.Never)]
 		public string Account
 		{
 			get
@@ -406,7 +406,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<double> Amount
 		{
 			get
@@ -426,7 +426,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="VarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="VarChar(20)", UpdateCheck=UpdateCheck.Never)]
 		public string Type
 		{
 			get
@@ -446,7 +446,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Note", DbType="VarChar(80)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Note", DbType="VarChar(80)", UpdateCheck=UpdateCheck.Never)]
 		public string Note
 		{
 			get
@@ -466,7 +466,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CDate", DbType="DateTime")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<System.DateTime> CDate
 		{
 			get
@@ -486,7 +486,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CUser", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CUser", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string CUser
 		{
 			get
@@ -506,7 +506,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UDate", DbType="DateTime")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<System.DateTime> UDate
 		{
 			get
@@ -526,7 +526,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UUser", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UUser", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string UUser
 		{
 			get
@@ -640,7 +640,7 @@ namespace dataLib
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="VarChar(40) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="VarChar(40) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
 		public string Id
 		{
 			get
@@ -660,7 +660,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="VarChar(15)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="VarChar(15)", UpdateCheck=UpdateCheck.Never)]
 		public string State
 		{
 			get
@@ -680,7 +680,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SessionId", DbType="VarChar(40)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SessionId", DbType="VarChar(40)", UpdateCheck=UpdateCheck.Never)]
 		public string SessionId
 		{
 			get
@@ -700,7 +700,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeliveryName", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeliveryName", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string DeliveryName
 		{
 			get
@@ -720,7 +720,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RcptID", DbType="VarChar(15)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RcptID", DbType="VarChar(15)", UpdateCheck=UpdateCheck.Never)]
 		public string RcptID
 		{
 			get
@@ -740,7 +740,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<double> Amount
 		{
 			get
@@ -760,7 +760,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayType", DbType="VarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayType", DbType="VarChar(20)", UpdateCheck=UpdateCheck.Never)]
 		public string PayType
 		{
 			get
@@ -780,7 +780,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayRef", DbType="VarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayRef", DbType="VarChar(20)", UpdateCheck=UpdateCheck.Never)]
 		public string PayRef
 		{
 			get
@@ -800,7 +800,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayVia", DbType="VarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayVia", DbType="VarChar(20)", UpdateCheck=UpdateCheck.Never)]
 		public string PayVia
 		{
 			get
@@ -820,7 +820,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Note", DbType="VarChar(80)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Note", DbType="VarChar(80)", UpdateCheck=UpdateCheck.Never)]
 		public string Note
 		{
 			get
@@ -840,7 +840,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CDate", DbType="DateTime")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<System.DateTime> CDate
 		{
 			get
@@ -860,7 +860,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CUser", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CUser", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string CUser
 		{
 			get
@@ -880,7 +880,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UDate", DbType="DateTime")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<System.DateTime> UDate
 		{
 			get
@@ -900,7 +900,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UUser", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UUser", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string UUser
 		{
 			get
@@ -974,7 +974,7 @@ namespace dataLib
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="VarChar(40) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="VarChar(40) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
 		public string id
 		{
 			get

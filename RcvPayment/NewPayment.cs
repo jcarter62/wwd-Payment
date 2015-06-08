@@ -57,6 +57,7 @@ namespace RcvPayment {
                 currentID = id;
                 loadDetail(id);
                 timer1.Enabled = true;
+                currentDetailID = "";
             }
         }
 
@@ -69,7 +70,7 @@ namespace RcvPayment {
             }
             else {
                 String id;
-                id = ItemsGrid.SelectedRows[0].Cells["dataGridViewTextBoxId"].Value.ToString();
+                id = ItemsGrid.SelectedRows[0].Cells["idDataGridViewTextBoxColumn"].Value.ToString();
                 currentDetailID = id;
                 loadItemDetail(id);
             }
@@ -191,10 +192,6 @@ namespace RcvPayment {
             }
         }
 
-        private void btnClose_Click(object sender, EventArgs e) {
-            this.Close();
-        }
-
         private void btnAddItem_Click(object sender, EventArgs e) {
             // Add a new record
             currentDetailID = ShortGuid.newId;
@@ -210,7 +207,7 @@ namespace RcvPayment {
             catch (Exception ex) {
                 Console.WriteLine(ex.Message);
             }
-
+            updateDetailGrid(currentDetailID);
             loadItemDetail(currentDetailID);
         }
 
@@ -224,31 +221,122 @@ namespace RcvPayment {
                 txtItmName.Text = "Name goes Here";
                 txtItmAmount.Text = q.Amount.ToString();
                 txtItmNote.Text = q.Note;
+                currentDetailID = thisId;
             }
+        }
+
+        /// <summary>
+        /// Initialize the Item Detail data fields.
+        /// </summary>
+        private void initItemDetail() {
+            txtItmAcct.Text = "";
+            txtItmName.Text = "";
+            txtItmAmount.Text = "";
+            txtItmNote.Text = "";
         }
 
         private void btnSaveItem_Click(object sender, EventArgs e) {
             string thisId = currentDetailID;
 
-            var q = (from item in dc.CRDetails
-                     where item.Id == thisId
-                     select item).Single<CRDetail>();
+            // check to see if this is a new record, without user clicking the Add.
+            if ( thisId.Length <= 0 ) {
+                CRDetail rec = new CRDetail();
+                rec.Account = txtItmAcct.Text;
+                rec.Amount = text2double(txtAmount.Text);
+                rec.Note = txtItmNote.Text;
+                rec.Type = cbItmApply2.Text;
+                currentDetailID = rec.Id;
+                thisId = currentDetailID;
 
-
-            if (q != null) {
                 try {
-                    q.Account = txtItmAcct.Text;
-                    Decimal d;
-                    Decimal.TryParse(txtAmount.Text, out d);
-                    q.Amount = (double)d;
-                    q.Note = txtItmNote.Text;
+                    dc.CRDetails.InsertOnSubmit(rec);
                     dc.SubmitChanges();
-                } 
+                }
                 catch (Exception Ex) {
                     Console.WriteLine(Ex.Message);
+                }
+            } else {
+                var q = (from item in dc.CRDetails
+                         where item.Id == thisId
+                         select item).Single();
+
+
+                if (q != null) {
+                    try {
+                        q.Account = txtItmAcct.Text;
+                        q.Amount = text2double(txtItmAmount.Text);
+                        q.Note = txtItmNote.Text;
+                        q.Type = cbItmApply2.Text;
+                        dc.SubmitChanges();
+                    }
+                    catch (Exception Ex) {
+                        Console.WriteLine(Ex.Message);
+                    }
+                }
+            }
+            updateDetailGrid(thisId);
+            loadItemDetail(currentDetailID);
+        }
+
+        private void btnDeleteItem_Click(object sender, EventArgs e) {
+            // Delete selected Item.
+            if (currentDetailID.Trim().Length > 0 ) {
+                var q = (from item in dc.CRDetails
+                         where item.Id == currentDetailID
+                         select item).FirstOrDefault();
+
+                if (q != null) {
+                    try {
+                        dc.CRDetails.DeleteOnSubmit(q);
+                        dc.SubmitChanges();
+                        updateDetailGrid(currentDetailID);
+                        initItemDetail();
+                    }
+                    catch (Exception Ex) {
+                        Console.WriteLine(Ex.Message);
+                    } // try
+                } // if ... q != null
+            } // if ...length > 0
+        } // method
+
+        // ref: http://stackoverflow.com/questions/10179223/find-a-row-in-datagridview-based-on-column-and-value
+        // ref: http://stackoverflow.com/questions/6265228/selecting-a-row-in-datagridview-programmatically
+        /// <summary>
+        /// UpdateDetailGrid: Update the list of items for this payment.
+        /// If the parameter is non empty, then also re-position to this 
+        /// row.
+        /// </summary>
+        /// <param name="id">ID of CRDetail Record</param>
+        private void updateDetailGrid(string id) {
+            // Reload detail grid
+            LoadItemsGrid(currentID);
+            // reposition cursor (select row by id)
+            if ( id.Length > 0 ) {
+                int rowIndex = -1;
+                string searchValue = id;
+                if (ItemsGrid.Rows.Count > 1) {
+                    foreach (DataGridViewRow row in ItemsGrid.Rows) {
+                        if (row.Cells["idDataGridViewTextBoxColumn"].Value.ToString().Equals(searchValue)) {
+                            rowIndex = row.Index;
+
+                            break;
+                        }
+                    }
+                }
+                if ( rowIndex != -1 ) {
+                    ItemsGrid.Rows[rowIndex].Selected = true;
                 }
             }
         }
 
+        private double text2double(string text) {
+            Decimal d;
+            Decimal.TryParse(text, out d);
+            return (double)d;
+        }
+
+        private void btnClose_Click(object sender, EventArgs e) {
+            this.Close();
+        }
     }
 }

@@ -135,6 +135,8 @@ namespace classLib {
             }
 
             //            cs = cs; // +"Application Name=FileMonitor;Max Pool Size=200;Packet Size=1024;";
+            if ( (AppName == null ) || (AppName.Trim().Length < 1) )
+                AppName = "Test App";
             cs = cs + "Application Name=" + AppName + ";";
 
             return cs;

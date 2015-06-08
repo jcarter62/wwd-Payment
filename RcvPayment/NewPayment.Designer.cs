@@ -36,6 +36,11 @@
             this.btnMod = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.PaymentsGrid = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RcptID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Deposited = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.depositedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.cRMasterBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
@@ -56,10 +61,6 @@
             this.txtItmAcct = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.ItemsGrid = new System.Windows.Forms.DataGridView();
-            this.accountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amountDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cRDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.paymentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panelDetail = new classLib.PanelTrak(this.components);
@@ -83,11 +84,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RcptID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Deposited = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.depositedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.accountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amountDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -227,6 +227,47 @@
             this.PaymentsGrid.TabIndex = 0;
             this.PaymentsGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.PaymentsGrid_CellClick);
             // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            this.Id.Width = 50;
+            // 
+            // RcptID
+            // 
+            this.RcptID.DataPropertyName = "RcptID";
+            this.RcptID.HeaderText = "RcptID";
+            this.RcptID.Name = "RcptID";
+            this.RcptID.ReadOnly = true;
+            this.RcptID.Width = 80;
+            // 
+            // Amount
+            // 
+            this.Amount.DataPropertyName = "Amount";
+            this.Amount.HeaderText = "Amount";
+            this.Amount.Name = "Amount";
+            this.Amount.ReadOnly = true;
+            this.Amount.Width = 80;
+            // 
+            // Deposited
+            // 
+            this.Deposited.DataPropertyName = "Deposited";
+            this.Deposited.HeaderText = "Dep";
+            this.Deposited.Name = "Deposited";
+            this.Deposited.ReadOnly = true;
+            this.Deposited.ToolTipText = "Deposited";
+            this.Deposited.Width = 25;
+            // 
+            // depositedDataGridViewCheckBoxColumn
+            // 
+            this.depositedDataGridViewCheckBoxColumn.DataPropertyName = "Deposited";
+            this.depositedDataGridViewCheckBoxColumn.HeaderText = "Deposited";
+            this.depositedDataGridViewCheckBoxColumn.Name = "depositedDataGridViewCheckBoxColumn";
+            this.depositedDataGridViewCheckBoxColumn.ReadOnly = true;
+            // 
             // cRMasterBindingSource
             // 
             this.cRMasterBindingSource.DataSource = typeof(dataLib.CRMaster);
@@ -290,7 +331,7 @@
             this.panel7.Location = new System.Drawing.Point(285, 211);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(314, 109);
-            this.panel7.TabIndex = 22;
+            this.panel7.TabIndex = 2;
             // 
             // btnAddItem
             // 
@@ -298,7 +339,7 @@
             this.btnAddItem.Location = new System.Drawing.Point(11, 79);
             this.btnAddItem.Name = "btnAddItem";
             this.btnAddItem.Size = new System.Drawing.Size(75, 23);
-            this.btnAddItem.TabIndex = 56;
+            this.btnAddItem.TabIndex = 5;
             this.btnAddItem.Text = "&Add";
             this.btnAddItem.UseVisualStyleBackColor = true;
             this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
@@ -309,9 +350,10 @@
             this.btnDeleteItem.Location = new System.Drawing.Point(235, 77);
             this.btnDeleteItem.Name = "btnDeleteItem";
             this.btnDeleteItem.Size = new System.Drawing.Size(69, 26);
-            this.btnDeleteItem.TabIndex = 36;
+            this.btnDeleteItem.TabIndex = 7;
             this.btnDeleteItem.Text = "Delete";
             this.btnDeleteItem.UseVisualStyleBackColor = true;
+            this.btnDeleteItem.Click += new System.EventHandler(this.btnDeleteItem_Click);
             // 
             // btnSaveItem
             // 
@@ -319,7 +361,7 @@
             this.btnSaveItem.Location = new System.Drawing.Point(162, 77);
             this.btnSaveItem.Name = "btnSaveItem";
             this.btnSaveItem.Size = new System.Drawing.Size(69, 26);
-            this.btnSaveItem.TabIndex = 35;
+            this.btnSaveItem.TabIndex = 6;
             this.btnSaveItem.Text = "&Save";
             this.btnSaveItem.UseVisualStyleBackColor = true;
             this.btnSaveItem.Click += new System.EventHandler(this.btnSaveItem_Click);
@@ -331,7 +373,7 @@
             this.txtItmNote.Location = new System.Drawing.Point(47, 51);
             this.txtItmNote.Name = "txtItmNote";
             this.txtItmNote.Size = new System.Drawing.Size(257, 20);
-            this.txtItmNote.TabIndex = 33;
+            this.txtItmNote.TabIndex = 4;
             // 
             // label14
             // 
@@ -355,7 +397,7 @@
             this.cbItmApply2.Location = new System.Drawing.Point(206, 28);
             this.cbItmApply2.Name = "cbItmApply2";
             this.cbItmApply2.Size = new System.Drawing.Size(96, 21);
-            this.cbItmApply2.TabIndex = 31;
+            this.cbItmApply2.TabIndex = 3;
             // 
             // label13
             // 
@@ -371,7 +413,7 @@
             this.txtItmAmount.Location = new System.Drawing.Point(59, 28);
             this.txtItmAmount.Name = "txtItmAmount";
             this.txtItmAmount.Size = new System.Drawing.Size(87, 20);
-            this.txtItmAmount.TabIndex = 28;
+            this.txtItmAmount.TabIndex = 2;
             // 
             // label12
             // 
@@ -389,7 +431,7 @@
             this.txtItmName.Location = new System.Drawing.Point(190, 5);
             this.txtItmName.Name = "txtItmName";
             this.txtItmName.Size = new System.Drawing.Size(114, 20);
-            this.txtItmName.TabIndex = 25;
+            this.txtItmName.TabIndex = 1;
             // 
             // label11
             // 
@@ -405,7 +447,7 @@
             this.txtItmAcct.Location = new System.Drawing.Point(59, 5);
             this.txtItmAcct.Name = "txtItmAcct";
             this.txtItmAcct.Size = new System.Drawing.Size(87, 20);
-            this.txtItmAcct.TabIndex = 23;
+            this.txtItmAcct.TabIndex = 0;
             // 
             // label10
             // 
@@ -426,7 +468,7 @@
             this.accountDataGridViewTextBoxColumn,
             this.amountDataGridViewTextBoxColumn1,
             this.typeDataGridViewTextBoxColumn,
-            this.dataGridViewTextBoxId});
+            this.idDataGridViewTextBoxColumn});
             this.ItemsGrid.DataSource = this.cRDetailBindingSource;
             this.ItemsGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ItemsGrid.Location = new System.Drawing.Point(285, 320);
@@ -439,35 +481,6 @@
             this.ItemsGrid.Size = new System.Drawing.Size(314, 139);
             this.ItemsGrid.TabIndex = 23;
             this.ItemsGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellClick);
-            // 
-            // accountDataGridViewTextBoxColumn
-            // 
-            this.accountDataGridViewTextBoxColumn.DataPropertyName = "Account";
-            this.accountDataGridViewTextBoxColumn.HeaderText = "Account";
-            this.accountDataGridViewTextBoxColumn.Name = "accountDataGridViewTextBoxColumn";
-            this.accountDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // amountDataGridViewTextBoxColumn1
-            // 
-            this.amountDataGridViewTextBoxColumn1.DataPropertyName = "Amount";
-            this.amountDataGridViewTextBoxColumn1.HeaderText = "Amount";
-            this.amountDataGridViewTextBoxColumn1.Name = "amountDataGridViewTextBoxColumn1";
-            this.amountDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // typeDataGridViewTextBoxColumn
-            // 
-            this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
-            this.typeDataGridViewTextBoxColumn.HeaderText = "Type";
-            this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
-            this.typeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxId
-            // 
-            this.dataGridViewTextBoxId.DataPropertyName = "Id";
-            this.dataGridViewTextBoxId.HeaderText = "Id";
-            this.dataGridViewTextBoxId.Name = "dataGridViewTextBoxId";
-            this.dataGridViewTextBoxId.ReadOnly = true;
-            this.dataGridViewTextBoxId.Visible = false;
             // 
             // cRDetailBindingSource
             // 
@@ -502,7 +515,7 @@
             this.panelDetail.Location = new System.Drawing.Point(285, 0);
             this.panelDetail.Name = "panelDetail";
             this.panelDetail.Size = new System.Drawing.Size(314, 211);
-            this.panelDetail.TabIndex = 24;
+            this.panelDetail.TabIndex = 1;
             // 
             // txtNote
             // 
@@ -702,46 +715,34 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // Id
+            // accountDataGridViewTextBoxColumn
             // 
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Visible = false;
-            this.Id.Width = 50;
+            this.accountDataGridViewTextBoxColumn.DataPropertyName = "Account";
+            this.accountDataGridViewTextBoxColumn.HeaderText = "Account";
+            this.accountDataGridViewTextBoxColumn.Name = "accountDataGridViewTextBoxColumn";
+            this.accountDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // RcptID
+            // amountDataGridViewTextBoxColumn1
             // 
-            this.RcptID.DataPropertyName = "RcptID";
-            this.RcptID.HeaderText = "RcptID";
-            this.RcptID.Name = "RcptID";
-            this.RcptID.ReadOnly = true;
-            this.RcptID.Width = 80;
+            this.amountDataGridViewTextBoxColumn1.DataPropertyName = "Amount";
+            this.amountDataGridViewTextBoxColumn1.HeaderText = "Amount";
+            this.amountDataGridViewTextBoxColumn1.Name = "amountDataGridViewTextBoxColumn1";
+            this.amountDataGridViewTextBoxColumn1.ReadOnly = true;
             // 
-            // Amount
+            // typeDataGridViewTextBoxColumn
             // 
-            this.Amount.DataPropertyName = "Amount";
-            this.Amount.HeaderText = "Amount";
-            this.Amount.Name = "Amount";
-            this.Amount.ReadOnly = true;
-            this.Amount.Width = 80;
+            this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
+            this.typeDataGridViewTextBoxColumn.HeaderText = "Type";
+            this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
+            this.typeDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // Deposited
+            // idDataGridViewTextBoxColumn
             // 
-            this.Deposited.DataPropertyName = "Deposited";
-            this.Deposited.HeaderText = "Dep";
-            this.Deposited.Name = "Deposited";
-            this.Deposited.ReadOnly = true;
-            this.Deposited.ToolTipText = "Deposited";
-            this.Deposited.Width = 25;
-            // 
-            // depositedDataGridViewCheckBoxColumn
-            // 
-            this.depositedDataGridViewCheckBoxColumn.DataPropertyName = "Deposited";
-            this.depositedDataGridViewCheckBoxColumn.HeaderText = "Deposited";
-            this.depositedDataGridViewCheckBoxColumn.Name = "depositedDataGridViewCheckBoxColumn";
-            this.depositedDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Visible = false;
             // 
             // NewPayment
             // 
@@ -834,14 +835,14 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.BindingSource cRDetailBindingSource;
         private System.Windows.Forms.Button btnAddItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn accountDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn RcptID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Deposited;
         private System.Windows.Forms.DataGridViewCheckBoxColumn depositedDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn accountDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
     }
 }

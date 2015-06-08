@@ -13,17 +13,17 @@ namespace dataLib {
 
     public partial class CRDetail {
         partial void OnCreated() {
-
+            init();
         }
 
         public void init() {
             if (Id == null) {
                 Id = shortid.newId;
+                Amount = 0.0;
+                Account = "";
+                Note = "";
+                State = "Created";
             }
-
-            Amount = 0.0;
-            Account = "";
-            Note = "";
         }
     }
 

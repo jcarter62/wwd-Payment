@@ -1,4 +1,4 @@
-﻿drop function dbo.get_NT_Username
+﻿DROP function dbo.get_NT_Username
 go
 
 Create FUNCTION dbo.get_NT_Username()
