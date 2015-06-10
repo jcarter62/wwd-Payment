@@ -69,4 +69,8 @@ namespace dataLib {
     public partial class CrMasterIds {
 
     }
+
+    public partial class CRAccount {
+
+    }
 }

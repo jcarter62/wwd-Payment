@@ -24,5 +24,6 @@ namespace RcvPayment {
             f.MdiParent = this;
             f.Show();
         }
+
     }
 }

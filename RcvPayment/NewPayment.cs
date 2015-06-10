@@ -13,11 +13,27 @@ using dataLib;
 namespace RcvPayment {
 
     public partial class NewPayment : RcvPayment.MyForm {
-        string currentID;
-        string currentDetailID;
-        AppSettings aset;
-        dbClassDataContext dc;
 
+        #region Properties
+        private string currentID;
+        private string currentDetailID;
+        private AppSettings aset;
+        private dbClassDataContext dc;
+
+        public string ItemAccount {
+            set {
+                txtItmAcct.Text = value;
+            }
+        }
+
+        public string ItemName {
+            set {
+                txtItmName.Text = value;
+            }
+        }
+        #endregion
+
+        #region Constructors
         public NewPayment() {
             InitializeComponent();
             currentID = "";
@@ -26,54 +42,11 @@ namespace RcvPayment {
             dc = new dbClassDataContext(aset.wmis.connectionString);
             statUpdate("");
         }
+        #endregion
 
+        #region Misc
         private void statUpdate(String msg) {
             statLbl.Text = msg;
-        }
-
-        private void ConnectGrid() {
-            var q = from item in dc.CRMasters
-                    orderby item.RcptID descending
-                    select item;
-
-            PaymentsGrid.DataSource = q;
-        }
-
-        private void NewPayment_Load(object sender, EventArgs e) {
-            ConnectGrid();
-        }
-
-
-        private void PaymentsGrid_CellClick(object sender, DataGridViewCellEventArgs e) {
-            // user clicked a cell
-            // Let's populate right pane with data.
-            // Load txtReceiptId.text with id
-            DataGridView dgv = sender as DataGridView;
-            if (dgv == null) {
-                return;
-            }
-            else {
-                String id = PaymentsGrid.SelectedRows[0].Cells["Id"].Value.ToString();
-                currentID = id;
-                loadDetail(id);
-                timer1.Enabled = true;
-                currentDetailID = "";
-            }
-        }
-
-        private void ItemsGrid_CellClick(object sender, DataGridViewCellEventArgs e) {
-            // user clicked a cell
-            // Let's populate Item Detail with data.
-            DataGridView dgv = sender as DataGridView;
-            if (dgv == null) {
-                return;
-            }
-            else {
-                String id;
-                id = ItemsGrid.SelectedRows[0].Cells["idDataGridViewTextBoxColumn"].Value.ToString();
-                currentDetailID = id;
-                loadItemDetail(id);
-            }
         }
 
         private void loadDetail(String id) {
@@ -109,6 +82,109 @@ namespace RcvPayment {
                     select item;
 
             ItemsGrid.DataSource = q;
+        }
+
+        private void SaveThisPayment() {
+            // Save this record.
+            var q = (from item in dc.CRMasters
+                     where item.Id == currentID
+                     select item).First();
+
+            q.DeliveryName = txtRecFrom.Text;
+            q.PayRef = txtRef.Text;
+            q.Note = txtNote.Text;
+            q.PayType = cbPayType.Text;
+            q.PayVia = cbVia.Text;
+            Decimal d;
+            Decimal.TryParse(txtAmount.Text, out d);
+            q.Amount = (double)d;
+
+            try {
+                dc.SubmitChanges();
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private double text2double(string text) {
+            Decimal d;
+            Decimal.TryParse(text, out d);
+            return (double)d;
+        }
+
+        /// <summary>
+        /// Initialize the Item Detail data fields.
+        /// </summary>
+        private void initItemDetail() {
+            txtItmAcct.Text = "";
+            txtItmName.Text = "";
+            txtItmAmount.Text = "";
+            txtItmNote.Text = "";
+        }
+
+        private void loadItemDetail(string thisId) {
+            var q = (from item in dc.CRDetails
+                     where item.Id == thisId
+                     select item).First();
+
+            if (q != null) {
+                txtItmAcct.Text = q.Account;
+                txtItmName.Text = "Name goes Here";
+                txtItmAmount.Text = q.Amount.ToString();
+                txtItmNote.Text = q.Note;
+                currentDetailID = thisId;
+            }
+        }
+
+
+        #endregion
+
+        #region Initializers
+        private void ConnectGrid() {
+            var q = from item in dc.CRMasters
+                    orderby item.RcptID descending
+                    select item;
+
+            PaymentsGrid.DataSource = q;
+        }
+
+        private void NewPayment_Load(object sender, EventArgs e) {
+            ConnectGrid();
+        }
+        #endregion
+
+        #region Events
+        private void PaymentsGrid_CellClick(object sender, DataGridViewCellEventArgs e) {
+            // user clicked a cell
+            // Let's populate right pane with data.
+            // Load txtReceiptId.text with id
+            DataGridView dgv = sender as DataGridView;
+            if (dgv == null) {
+                return;
+            }
+            else {
+                String id = PaymentsGrid.SelectedRows[0].Cells["Id"].Value.ToString();
+                currentID = id;
+                loadDetail(id);
+                timer1.Enabled = true;
+                currentDetailID = "";
+            }
+        }
+
+        private void ItemsGrid_CellClick(object sender, DataGridViewCellEventArgs e) {
+            // user clicked a cell
+            // Let's populate Item Detail with data.
+            DataGridView dgv = sender as DataGridView;
+            if (dgv == null) {
+                return;
+            }
+            else {
+                String id;
+                id = ItemsGrid.SelectedRows[0].Cells["idDataGridViewTextBoxColumn"].Value.ToString();
+                currentDetailID = id;
+                loadItemDetail(id);
+            }
         }
 
         private void PaymentsGrid_CellContentClick(object sender, DataGridViewCellEventArgs e) {
@@ -152,29 +228,6 @@ namespace RcvPayment {
             panelDetail.Start(btnSavePayment);
         }
 
-        private void SaveThisPayment() {
-            // Save this record.
-            var q = (from item in dc.CRMasters
-                     where item.Id == currentID
-                     select item).First();
-
-            q.DeliveryName = txtRecFrom.Text;
-            q.PayRef = txtRef.Text;
-            q.Note = txtNote.Text;
-            q.PayType = cbPayType.Text;
-            q.PayVia = cbVia.Text;
-            Decimal d;
-            Decimal.TryParse(txtAmount.Text, out d);
-            q.Amount = (double)d;
-
-            try {
-                dc.SubmitChanges();
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
         private void btnAdd_Click(object sender, EventArgs e) {
             // Let's create a new record.
             ReceiptId newId = new ReceiptId();
@@ -209,30 +262,6 @@ namespace RcvPayment {
             }
             updateDetailGrid(currentDetailID);
             loadItemDetail(currentDetailID);
-        }
-
-        private void loadItemDetail(string thisId) {
-            var q = (from item in dc.CRDetails
-                     where item.Id == thisId
-                     select item).First();
-
-            if ( q != null ) {
-                txtItmAcct.Text = q.Account;
-                txtItmName.Text = "Name goes Here";
-                txtItmAmount.Text = q.Amount.ToString();
-                txtItmNote.Text = q.Note;
-                currentDetailID = thisId;
-            }
-        }
-
-        /// <summary>
-        /// Initialize the Item Detail data fields.
-        /// </summary>
-        private void initItemDetail() {
-            txtItmAcct.Text = "";
-            txtItmName.Text = "";
-            txtItmAmount.Text = "";
-            txtItmNote.Text = "";
         }
 
         private void btnSaveItem_Click(object sender, EventArgs e) {
@@ -329,14 +358,29 @@ namespace RcvPayment {
             }
         }
 
-        private double text2double(string text) {
-            Decimal d;
-            Decimal.TryParse(text, out d);
-            return (double)d;
-        }
-
         private void btnClose_Click(object sender, EventArgs e) {
             this.Close();
         }
+
+        private void txtItmAcct_TextChanged(object sender, EventArgs e) {
+
+        }
+
+        /// <summary>
+        /// Item Account Double Click.
+        /// Open the list of accounts, and allow user to pick
+        /// account from this list.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtItmAcct_DoubleClick(object sender, EventArgs e) {
+            if ( ! isFormOpen("custlist") ) {
+                CustList f = new CustList(this);
+                f.MdiParent = MdiParent;
+                f.Show();
+                f.BringToFront();
+            }
+        }
+        #endregion
     }
 }

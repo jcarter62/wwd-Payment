@@ -16,7 +16,6 @@ namespace classLib {
         string day;
         string hour;
         string minute;
-        string num;
         string result;
         public string id { get { return result; } }
 

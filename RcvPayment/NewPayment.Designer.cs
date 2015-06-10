@@ -61,8 +61,12 @@
             this.txtItmAcct = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.ItemsGrid = new System.Windows.Forms.DataGridView();
+            this.accountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amountDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cRDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.paymentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panelDetail = new classLib.PanelTrak(this.components);
             this.txtNote = new classLib.TextBoxTrak(this.components);
             this.txtAmount = new classLib.TextBoxTrak(this.components);
@@ -83,11 +87,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.accountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amountDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.paymentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -98,8 +98,8 @@
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cRDetailBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.paymentsBindingSource)).BeginInit();
             this.panelDetail.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.paymentsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -448,6 +448,8 @@
             this.txtItmAcct.Name = "txtItmAcct";
             this.txtItmAcct.Size = new System.Drawing.Size(87, 20);
             this.txtItmAcct.TabIndex = 0;
+            this.txtItmAcct.TextChanged += new System.EventHandler(this.txtItmAcct_TextChanged);
+            this.txtItmAcct.DoubleClick += new System.EventHandler(this.txtItmAcct_DoubleClick);
             // 
             // label10
             // 
@@ -482,13 +484,43 @@
             this.ItemsGrid.TabIndex = 23;
             this.ItemsGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellClick);
             // 
+            // accountDataGridViewTextBoxColumn
+            // 
+            this.accountDataGridViewTextBoxColumn.DataPropertyName = "Account";
+            this.accountDataGridViewTextBoxColumn.HeaderText = "Account";
+            this.accountDataGridViewTextBoxColumn.Name = "accountDataGridViewTextBoxColumn";
+            this.accountDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // amountDataGridViewTextBoxColumn1
+            // 
+            this.amountDataGridViewTextBoxColumn1.DataPropertyName = "Amount";
+            this.amountDataGridViewTextBoxColumn1.HeaderText = "Amount";
+            this.amountDataGridViewTextBoxColumn1.Name = "amountDataGridViewTextBoxColumn1";
+            this.amountDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // typeDataGridViewTextBoxColumn
+            // 
+            this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
+            this.typeDataGridViewTextBoxColumn.HeaderText = "Type";
+            this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
+            this.typeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Visible = false;
+            // 
             // cRDetailBindingSource
             // 
             this.cRDetailBindingSource.DataSource = typeof(dataLib.CRDetail);
             // 
-            // paymentsBindingSource
+            // timer1
             // 
-            this.paymentsBindingSource.DataSource = typeof(classLib.Payments);
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // panelDetail
             // 
@@ -522,6 +554,7 @@
             this.txtNote.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNote.Changed = false;
+            this.txtNote.Cue = "Any Special Notes about this Payment";
             this.txtNote.Location = new System.Drawing.Point(46, 158);
             this.txtNote.Name = "txtNote";
             this.txtNote.Size = new System.Drawing.Size(257, 20);
@@ -532,6 +565,7 @@
             this.txtAmount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAmount.Changed = false;
+            this.txtAmount.Cue = "Payment Amount $$$";
             this.txtAmount.Location = new System.Drawing.Point(91, 114);
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(212, 20);
@@ -542,6 +576,7 @@
             this.txtRef.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtRef.Changed = false;
+            this.txtRef.Cue = "Check Number";
             this.txtRef.Location = new System.Drawing.Point(205, 93);
             this.txtRef.Name = "txtRef";
             this.txtRef.Size = new System.Drawing.Size(98, 20);
@@ -550,6 +585,7 @@
             // cbPayType
             // 
             this.cbPayType.Changed = false;
+            this.cbPayType.Cue = null;
             this.cbPayType.FormattingEnabled = true;
             this.cbPayType.Items.AddRange(new object[] {
             "Check",
@@ -566,6 +602,7 @@
             this.txtRecFrom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtRecFrom.Changed = false;
+            this.txtRecFrom.Cue = "Delivery Person\'s Name";
             this.txtRecFrom.Location = new System.Drawing.Point(91, 72);
             this.txtRecFrom.Name = "txtRecFrom";
             this.txtRecFrom.Size = new System.Drawing.Size(212, 20);
@@ -596,6 +633,7 @@
             this.cbVia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbVia.Changed = false;
+            this.cbVia.Cue = "Delivery Company";
             this.cbVia.FormattingEnabled = true;
             this.cbVia.Items.AddRange(new object[] {
             "USPS",
@@ -710,39 +748,9 @@
             this.label1.TabIndex = 16;
             this.label1.Text = "Receipt ID:";
             // 
-            // timer1
+            // paymentsBindingSource
             // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // accountDataGridViewTextBoxColumn
-            // 
-            this.accountDataGridViewTextBoxColumn.DataPropertyName = "Account";
-            this.accountDataGridViewTextBoxColumn.HeaderText = "Account";
-            this.accountDataGridViewTextBoxColumn.Name = "accountDataGridViewTextBoxColumn";
-            this.accountDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // amountDataGridViewTextBoxColumn1
-            // 
-            this.amountDataGridViewTextBoxColumn1.DataPropertyName = "Amount";
-            this.amountDataGridViewTextBoxColumn1.HeaderText = "Amount";
-            this.amountDataGridViewTextBoxColumn1.Name = "amountDataGridViewTextBoxColumn1";
-            this.amountDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // typeDataGridViewTextBoxColumn
-            // 
-            this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
-            this.typeDataGridViewTextBoxColumn.HeaderText = "Type";
-            this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
-            this.typeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Visible = false;
+            this.paymentsBindingSource.DataSource = typeof(classLib.Payments);
             // 
             // NewPayment
             // 
@@ -772,9 +780,9 @@
             this.panel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cRDetailBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.paymentsBindingSource)).EndInit();
             this.panelDetail.ResumeLayout(false);
             this.panelDetail.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.paymentsBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
