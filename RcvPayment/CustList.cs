@@ -13,6 +13,9 @@ using dataLib;
 namespace RcvPayment {
     public partial class CustList : RcvPayment.MyForm {
         #region Properties
+        private const string AccountColName = "nAMEIDDataGridViewTextBoxColumn";
+        private const string NameColName = "fullNameDataGridViewTextBoxColumn";
+
         private AppSettings aset;
         private dbClassDataContext dc;
         private BindingSource bsrc;
@@ -47,8 +50,8 @@ namespace RcvPayment {
         }
 
         private void LoadGrid() {
-            IQueryable<CRAccount> q = from itm in dc.CRAccounts
-                    orderby itm.AccountNoInt
+            IQueryable<NAME> q = from itm in dc.NAMEs
+                    orderby itm.NAME_ID
                     select itm ;
 
             bsrc = new BindingSource();
@@ -74,16 +77,24 @@ namespace RcvPayment {
         private void textBoxTrak1_TextChanged(object sender, EventArgs e) {
             string inp;
             inp = textBoxTrak1.Text.Trim().ToLower() ;
-            IQueryable<CRAccount> q;
+            IQueryable<NAME> q;
+            const string sep = "/";
 
             if ( inp.Length > 0 ) {
-                q = from itm in dc.CRAccounts
-                    where itm.AccountName.Contains(inp)
-                    orderby itm.AccountNoInt
+                q = from itm in dc.NAMEs
+                    where 
+                    ( sep + itm.NAME_ID.ToString() + 
+                      sep + itm.FullName + 
+                      sep + itm.Zip +
+                      sep + itm.City +
+                      sep + itm.Address1 +
+                      sep 
+                    ).Contains(inp) 
+                    orderby itm.NAME_ID
                     select itm;
             } else {
-                q = from itm in dc.CRAccounts
-                    orderby itm.AccountNoInt
+                q = from itm in dc.NAMEs
+                    orderby itm.NAME_ID
                     select itm;
             }
             bsrc.DataSource = q;
@@ -92,8 +103,8 @@ namespace RcvPayment {
         private void CustGrid_Click(object sender, EventArgs e) {
             // User selected row, 
             foreach ( DataGridViewRow r in CustGrid.SelectedRows ) {
-                selectedAccount = r.Cells["accountNoDataGridViewTextBoxColumn"].Value.ToString();
-                selectedName = r.Cells["accountNameDataGridViewTextBoxColumn"].Value.ToString();
+                selectedAccount = r.Cells[AccountColName].Value.ToString();
+                selectedName = r.Cells[NameColName].Value.ToString();
             }
         }
 

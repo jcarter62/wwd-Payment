@@ -1,5 +1,7 @@
 using System;
-
+using System.Data.Linq.Mapping;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace dataLib {
     public partial class dbClassDataContext {
@@ -71,6 +73,19 @@ namespace dataLib {
     }
 
     public partial class CRAccount {
+        private const string sep = "/";
+
+        public string searchText {
+            get {
+                string r;
+                r = sep + AccountNo.ToString() + sep + this.AccountName.ToString() + sep;
+                return r;
+            }
+        }
+    }
+
+    public partial class NAME {
 
     }
 }
+

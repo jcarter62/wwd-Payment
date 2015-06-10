@@ -50,4 +50,48 @@
       <Column Name="AccountNoInt" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.NAME" Member="NAMEs">
+    <Type Name="NAME">
+      <Column Name="NAME_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
+      <Column Name="DBA" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
+      <Column Name="Address1" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Address2" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Address3" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="State" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="Zip" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
+      <Column Name="Phone_Ext" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="Fax" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
+      <Column Name="Cell" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
+      <Column Name="Other_Phone" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
+      <Column Name="Other_Ext" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UseStamp" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Created" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RecForm" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CurFormOnFile" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DateLastForm" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="NameType" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Column Name="RRAStatus" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="AcresInFedDistricts" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MultiDistrict" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Citizenship" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="TypeOtherDesc" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Column Name="FullName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Resident" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PENALTYMULTIPLIER" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CountyRecord" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Column Name="SubOfName" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UserCreated" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="DateChanged" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UserChanged" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="LastPenaltyDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EntityLink" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

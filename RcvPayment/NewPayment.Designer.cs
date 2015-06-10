@@ -44,7 +44,6 @@
             this.cRMasterBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
-            this.btnPrint = new System.Windows.Forms.Button();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel7 = new System.Windows.Forms.Panel();
             this.btnAddItem = new System.Windows.Forms.Button();
@@ -88,6 +87,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.paymentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.lblAppliedAmount = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -274,8 +275,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lblAppliedAmount);
             this.panel2.Controls.Add(this.btnClose);
-            this.panel2.Controls.Add(this.btnPrint);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(282, 459);
             this.panel2.Name = "panel2";
@@ -292,16 +293,6 @@
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.Location = new System.Drawing.Point(4, 9);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(90, 26);
-            this.btnPrint.TabIndex = 1;
-            this.btnPrint.Text = "Print Receipt";
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // splitter1
             // 
@@ -483,6 +474,7 @@
             this.ItemsGrid.Size = new System.Drawing.Size(314, 139);
             this.ItemsGrid.TabIndex = 23;
             this.ItemsGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellClick);
+            this.ItemsGrid.Validated += new System.EventHandler(this.ItemsGrid_Validated);
             // 
             // accountDataGridViewTextBoxColumn
             // 
@@ -524,6 +516,7 @@
             // 
             // panelDetail
             // 
+            this.panelDetail.Controls.Add(this.btnPrint);
             this.panelDetail.Controls.Add(this.txtNote);
             this.panelDetail.Controls.Add(this.txtAmount);
             this.panelDetail.Controls.Add(this.txtRef);
@@ -752,6 +745,24 @@
             // 
             this.paymentsBindingSource.DataSource = typeof(classLib.Payments);
             // 
+            // btnPrint
+            // 
+            this.btnPrint.Location = new System.Drawing.Point(10, 179);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(90, 26);
+            this.btnPrint.TabIndex = 55;
+            this.btnPrint.Text = "Print Receipt";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            // 
+            // lblAppliedAmount
+            // 
+            this.lblAppliedAmount.Location = new System.Drawing.Point(10, 9);
+            this.lblAppliedAmount.Name = "lblAppliedAmount";
+            this.lblAppliedAmount.Size = new System.Drawing.Size(209, 24);
+            this.lblAppliedAmount.TabIndex = 38;
+            this.lblAppliedAmount.Text = "Applied Amount: $12345.00";
+            this.lblAppliedAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // NewPayment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -800,7 +811,6 @@
         private System.Windows.Forms.Button btnMod;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Button btnDeleteItem;
@@ -852,5 +862,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label lblAppliedAmount;
+        private System.Windows.Forms.Button btnPrint;
     }
 }

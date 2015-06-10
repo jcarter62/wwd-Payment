@@ -105,6 +105,14 @@ namespace dataLib
 				return this.GetTable<CRAccount>();
 			}
 		}
+		
+		public System.Data.Linq.Table<NAME> NAMEs
+		{
+			get
+			{
+				return this.GetTable<NAME>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CRMasterId")]
@@ -1071,6 +1079,735 @@ namespace dataLib
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.NAME")]
+	public partial class NAME
+	{
+		
+		private int _NAME_ID;
+		
+		private string _LastName;
+		
+		private string _FirstName;
+		
+		private string _DBA;
+		
+		private string _Address1;
+		
+		private string _Address2;
+		
+		private string _Address3;
+		
+		private string _City;
+		
+		private string _State;
+		
+		private string _Zip;
+		
+		private string _Phone;
+		
+		private string _Phone_Ext;
+		
+		private string _Fax;
+		
+		private string _Cell;
+		
+		private string _Other_Phone;
+		
+		private string _Other_Ext;
+		
+		private int _IsActive;
+		
+		private System.Nullable<System.DateTime> _UseStamp;
+		
+		private string _Notes;
+		
+		private System.Nullable<System.DateTime> _Created;
+		
+		private int _RecForm;
+		
+		private int _CurFormOnFile;
+		
+		private System.Nullable<System.DateTime> _DateLastForm;
+		
+		private string _NameType;
+		
+		private string _RRAStatus;
+		
+		private System.Nullable<int> _AcresInFedDistricts;
+		
+		private int _MultiDistrict;
+		
+		private string _Citizenship;
+		
+		private string _TypeOtherDesc;
+		
+		private string _FullName;
+		
+		private int _Resident;
+		
+		private System.Nullable<double> _PENALTYMULTIPLIER;
+		
+		private string _CountyRecord;
+		
+		private System.Nullable<int> _SubOfName;
+		
+		private System.Nullable<System.DateTime> _DateCreated;
+		
+		private string _UserCreated;
+		
+		private System.Nullable<System.DateTime> _DateChanged;
+		
+		private string _UserChanged;
+		
+		private System.Nullable<System.DateTime> _LastPenaltyDate;
+		
+		private System.Nullable<int> _EntityLink;
+		
+		public NAME()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NAME_ID", DbType="Int NOT NULL")]
+		public int NAME_ID
+		{
+			get
+			{
+				return this._NAME_ID;
+			}
+			set
+			{
+				if ((this._NAME_ID != value))
+				{
+					this._NAME_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="VarChar(35) NOT NULL", CanBeNull=false)]
+		public string LastName
+		{
+			get
+			{
+				return this._LastName;
+			}
+			set
+			{
+				if ((this._LastName != value))
+				{
+					this._LastName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="VarChar(35)")]
+		public string FirstName
+		{
+			get
+			{
+				return this._FirstName;
+			}
+			set
+			{
+				if ((this._FirstName != value))
+				{
+					this._FirstName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DBA", DbType="VarChar(35)")]
+		public string DBA
+		{
+			get
+			{
+				return this._DBA;
+			}
+			set
+			{
+				if ((this._DBA != value))
+				{
+					this._DBA = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address1", DbType="VarChar(30)")]
+		public string Address1
+		{
+			get
+			{
+				return this._Address1;
+			}
+			set
+			{
+				if ((this._Address1 != value))
+				{
+					this._Address1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address2", DbType="VarChar(30)")]
+		public string Address2
+		{
+			get
+			{
+				return this._Address2;
+			}
+			set
+			{
+				if ((this._Address2 != value))
+				{
+					this._Address2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address3", DbType="VarChar(30)")]
+		public string Address3
+		{
+			get
+			{
+				return this._Address3;
+			}
+			set
+			{
+				if ((this._Address3 != value))
+				{
+					this._Address3 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City", DbType="VarChar(15)")]
+		public string City
+		{
+			get
+			{
+				return this._City;
+			}
+			set
+			{
+				if ((this._City != value))
+				{
+					this._City = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="VarChar(2)")]
+		public string State
+		{
+			get
+			{
+				return this._State;
+			}
+			set
+			{
+				if ((this._State != value))
+				{
+					this._State = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Zip", DbType="VarChar(10)")]
+		public string Zip
+		{
+			get
+			{
+				return this._Zip;
+			}
+			set
+			{
+				if ((this._Zip != value))
+				{
+					this._Zip = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="VarChar(13)")]
+		public string Phone
+		{
+			get
+			{
+				return this._Phone;
+			}
+			set
+			{
+				if ((this._Phone != value))
+				{
+					this._Phone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone_Ext", DbType="VarChar(5)")]
+		public string Phone_Ext
+		{
+			get
+			{
+				return this._Phone_Ext;
+			}
+			set
+			{
+				if ((this._Phone_Ext != value))
+				{
+					this._Phone_Ext = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fax", DbType="VarChar(13)")]
+		public string Fax
+		{
+			get
+			{
+				return this._Fax;
+			}
+			set
+			{
+				if ((this._Fax != value))
+				{
+					this._Fax = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cell", DbType="VarChar(13)")]
+		public string Cell
+		{
+			get
+			{
+				return this._Cell;
+			}
+			set
+			{
+				if ((this._Cell != value))
+				{
+					this._Cell = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Other_Phone", DbType="VarChar(13)")]
+		public string Other_Phone
+		{
+			get
+			{
+				return this._Other_Phone;
+			}
+			set
+			{
+				if ((this._Other_Phone != value))
+				{
+					this._Other_Phone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Other_Ext", DbType="VarChar(5)")]
+		public string Other_Ext
+		{
+			get
+			{
+				return this._Other_Ext;
+			}
+			set
+			{
+				if ((this._Other_Ext != value))
+				{
+					this._Other_Ext = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Int NOT NULL")]
+		public int IsActive
+		{
+			get
+			{
+				return this._IsActive;
+			}
+			set
+			{
+				if ((this._IsActive != value))
+				{
+					this._IsActive = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UseStamp", DbType="DateTime")]
+		public System.Nullable<System.DateTime> UseStamp
+		{
+			get
+			{
+				return this._UseStamp;
+			}
+			set
+			{
+				if ((this._UseStamp != value))
+				{
+					this._UseStamp = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Notes", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string Notes
+		{
+			get
+			{
+				return this._Notes;
+			}
+			set
+			{
+				if ((this._Notes != value))
+				{
+					this._Notes = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Created", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Created
+		{
+			get
+			{
+				return this._Created;
+			}
+			set
+			{
+				if ((this._Created != value))
+				{
+					this._Created = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecForm", DbType="Int NOT NULL")]
+		public int RecForm
+		{
+			get
+			{
+				return this._RecForm;
+			}
+			set
+			{
+				if ((this._RecForm != value))
+				{
+					this._RecForm = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CurFormOnFile", DbType="Int NOT NULL")]
+		public int CurFormOnFile
+		{
+			get
+			{
+				return this._CurFormOnFile;
+			}
+			set
+			{
+				if ((this._CurFormOnFile != value))
+				{
+					this._CurFormOnFile = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateLastForm", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DateLastForm
+		{
+			get
+			{
+				return this._DateLastForm;
+			}
+			set
+			{
+				if ((this._DateLastForm != value))
+				{
+					this._DateLastForm = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NameType", DbType="VarChar(60)")]
+		public string NameType
+		{
+			get
+			{
+				return this._NameType;
+			}
+			set
+			{
+				if ((this._NameType != value))
+				{
+					this._NameType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RRAStatus", DbType="VarChar(30)")]
+		public string RRAStatus
+		{
+			get
+			{
+				return this._RRAStatus;
+			}
+			set
+			{
+				if ((this._RRAStatus != value))
+				{
+					this._RRAStatus = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AcresInFedDistricts", DbType="Int")]
+		public System.Nullable<int> AcresInFedDistricts
+		{
+			get
+			{
+				return this._AcresInFedDistricts;
+			}
+			set
+			{
+				if ((this._AcresInFedDistricts != value))
+				{
+					this._AcresInFedDistricts = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MultiDistrict", DbType="Int NOT NULL")]
+		public int MultiDistrict
+		{
+			get
+			{
+				return this._MultiDistrict;
+			}
+			set
+			{
+				if ((this._MultiDistrict != value))
+				{
+					this._MultiDistrict = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Citizenship", DbType="VarChar(30)")]
+		public string Citizenship
+		{
+			get
+			{
+				return this._Citizenship;
+			}
+			set
+			{
+				if ((this._Citizenship != value))
+				{
+					this._Citizenship = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TypeOtherDesc", DbType="VarChar(60)")]
+		public string TypeOtherDesc
+		{
+			get
+			{
+				return this._TypeOtherDesc;
+			}
+			set
+			{
+				if ((this._TypeOtherDesc != value))
+				{
+					this._TypeOtherDesc = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullName", DbType="VarChar(50)")]
+		public string FullName
+		{
+			get
+			{
+				return this._FullName;
+			}
+			set
+			{
+				if ((this._FullName != value))
+				{
+					this._FullName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Resident", DbType="Int NOT NULL")]
+		public int Resident
+		{
+			get
+			{
+				return this._Resident;
+			}
+			set
+			{
+				if ((this._Resident != value))
+				{
+					this._Resident = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PENALTYMULTIPLIER", DbType="Float")]
+		public System.Nullable<double> PENALTYMULTIPLIER
+		{
+			get
+			{
+				return this._PENALTYMULTIPLIER;
+			}
+			set
+			{
+				if ((this._PENALTYMULTIPLIER != value))
+				{
+					this._PENALTYMULTIPLIER = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CountyRecord", DbType="VarChar(60)")]
+		public string CountyRecord
+		{
+			get
+			{
+				return this._CountyRecord;
+			}
+			set
+			{
+				if ((this._CountyRecord != value))
+				{
+					this._CountyRecord = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubOfName", DbType="Int")]
+		public System.Nullable<int> SubOfName
+		{
+			get
+			{
+				return this._SubOfName;
+			}
+			set
+			{
+				if ((this._SubOfName != value))
+				{
+					this._SubOfName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCreated", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DateCreated
+		{
+			get
+			{
+				return this._DateCreated;
+			}
+			set
+			{
+				if ((this._DateCreated != value))
+				{
+					this._DateCreated = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserCreated", DbType="VarChar(10)")]
+		public string UserCreated
+		{
+			get
+			{
+				return this._UserCreated;
+			}
+			set
+			{
+				if ((this._UserCreated != value))
+				{
+					this._UserCreated = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateChanged", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DateChanged
+		{
+			get
+			{
+				return this._DateChanged;
+			}
+			set
+			{
+				if ((this._DateChanged != value))
+				{
+					this._DateChanged = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserChanged", DbType="VarChar(10)")]
+		public string UserChanged
+		{
+			get
+			{
+				return this._UserChanged;
+			}
+			set
+			{
+				if ((this._UserChanged != value))
+				{
+					this._UserChanged = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastPenaltyDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> LastPenaltyDate
+		{
+			get
+			{
+				return this._LastPenaltyDate;
+			}
+			set
+			{
+				if ((this._LastPenaltyDate != value))
+				{
+					this._LastPenaltyDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EntityLink", DbType="Int")]
+		public System.Nullable<int> EntityLink
+		{
+			get
+			{
+				return this._EntityLink;
+			}
+			set
+			{
+				if ((this._EntityLink != value))
+				{
+					this._EntityLink = value;
+				}
 			}
 		}
 	}

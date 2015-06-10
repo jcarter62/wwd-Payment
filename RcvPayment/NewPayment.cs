@@ -19,6 +19,23 @@ namespace RcvPayment {
         private string currentDetailID;
         private AppSettings aset;
         private dbClassDataContext dc;
+        private double _AppliedAmount;
+        private string _AppliedAmountMessage;
+        private double AppliedAmount {
+            get {
+                return _AppliedAmount;
+            } 
+            set {
+                _AppliedAmount = value;
+
+                if ( _AppliedAmount == 0.0 ) {
+                    lblAppliedAmount.Text = "";
+                } else {
+                    _AppliedAmountMessage = string.Format("Applied Amount: {0}", _AppliedAmount.ToString("C") );
+                    lblAppliedAmount.Text = _AppliedAmountMessage;
+                }
+            }
+        }
 
         public string ItemAccount {
             set {
@@ -82,6 +99,20 @@ namespace RcvPayment {
                     select item;
 
             ItemsGrid.DataSource = q;
+
+
+            double sumDtl = 0.0;
+            var qsum = (from item in dc.CRDetails
+                        where item.CRMid == id
+                        select item.Amount);
+
+            foreach ( var i in qsum ) {
+                float num;
+                float.TryParse(i.Value.ToString(), out num);
+                sumDtl += num; 
+            }
+
+            AppliedAmount = sumDtl;
         }
 
         private void SaveThisPayment() {
@@ -363,7 +394,11 @@ namespace RcvPayment {
         }
 
         private void txtItmAcct_TextChanged(object sender, EventArgs e) {
-
+            int num;
+            if ( int.TryParse(txtItmAcct.Text, out num) ) {
+                CustomerInfo ci = new CustomerInfo(num);
+                txtItmName.Text = ci.Name;
+            }
         }
 
         /// <summary>
@@ -382,5 +417,10 @@ namespace RcvPayment {
             }
         }
         #endregion
+
+        private void ItemsGrid_Validated(object sender, EventArgs e) {
+            // Update the lblAppliedAmount.text
+
+        }
     }
 }

@@ -49,6 +49,7 @@
     <Compile Include="ComboBoxTrak.Designer.cs">
       <DependentUpon>ComboBoxTrak.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomerInfo.cs" />
     <Compile Include="DbSettings.cs" />
     <Compile Include="EncDec.cs" />
     <Compile Include="Images.cs" />

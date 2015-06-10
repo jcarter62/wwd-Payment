@@ -116,6 +116,7 @@
     <None Include="Properties\DataSources\dataLib.dbClassDataContext.datasource">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\DataSources\dataLib.NAME.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
