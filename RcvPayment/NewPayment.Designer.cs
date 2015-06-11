@@ -43,22 +43,10 @@
             this.depositedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.cRMasterBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblAppliedChk = new System.Windows.Forms.PictureBox();
+            this.lblAppliedAmount = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.btnAddItem = new System.Windows.Forms.Button();
-            this.btnDeleteItem = new System.Windows.Forms.Button();
-            this.btnSaveItem = new System.Windows.Forms.Button();
-            this.txtItmNote = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.cbItmApply2 = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.txtItmAmount = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.txtItmName = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtItmAcct = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.ItemsGrid = new System.Windows.Forms.DataGridView();
             this.accountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amountDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,6 +55,7 @@
             this.cRDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panelDetail = new classLib.PanelTrak(this.components);
+            this.btnPrint = new System.Windows.Forms.Button();
             this.txtNote = new classLib.TextBoxTrak(this.components);
             this.txtAmount = new classLib.TextBoxTrak(this.components);
             this.txtRef = new classLib.TextBoxTrak(this.components);
@@ -87,8 +76,20 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.paymentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnPrint = new System.Windows.Forms.Button();
-            this.lblAppliedAmount = new System.Windows.Forms.Label();
+            this.panelItem = new classLib.PanelTrak(this.components);
+            this.txtItmNote = new classLib.TextBoxTrak(this.components);
+            this.cbItmApply2 = new classLib.ComboBoxTrak(this.components);
+            this.txtItmAmount = new classLib.TextBoxTrak(this.components);
+            this.txtItmName = new classLib.TextBoxTrak(this.components);
+            this.txtItmAcct = new classLib.TextBoxTrak(this.components);
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btnAddItem = new System.Windows.Forms.Button();
+            this.btnDeleteItem = new System.Windows.Forms.Button();
+            this.btnSaveItem = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -96,11 +97,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.PaymentsGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cRMasterBindingSource)).BeginInit();
             this.panel2.SuspendLayout();
-            this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lblAppliedChk)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cRDetailBindingSource)).BeginInit();
             this.panelDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paymentsBindingSource)).BeginInit();
+            this.panelItem.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -180,6 +182,7 @@
             this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnMod
             // 
@@ -275,6 +278,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lblAppliedChk);
             this.panel2.Controls.Add(this.lblAppliedAmount);
             this.panel2.Controls.Add(this.btnClose);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -282,6 +286,25 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(317, 42);
             this.panel2.TabIndex = 1;
+            // 
+            // lblAppliedChk
+            // 
+            this.lblAppliedChk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAppliedChk.Location = new System.Drawing.Point(194, 0);
+            this.lblAppliedChk.Name = "lblAppliedChk";
+            this.lblAppliedChk.Size = new System.Drawing.Size(39, 42);
+            this.lblAppliedChk.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.lblAppliedChk.TabIndex = 39;
+            this.lblAppliedChk.TabStop = false;
+            // 
+            // lblAppliedAmount
+            // 
+            this.lblAppliedAmount.Location = new System.Drawing.Point(10, 9);
+            this.lblAppliedAmount.Name = "lblAppliedAmount";
+            this.lblAppliedAmount.Size = new System.Drawing.Size(182, 24);
+            this.lblAppliedAmount.TabIndex = 38;
+            this.lblAppliedAmount.Text = "Applied Amount: $12345.00";
+            this.lblAppliedAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnClose
             // 
@@ -302,155 +325,6 @@
             this.splitter1.TabIndex = 3;
             this.splitter1.TabStop = false;
             // 
-            // panel7
-            // 
-            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel7.Controls.Add(this.btnAddItem);
-            this.panel7.Controls.Add(this.btnDeleteItem);
-            this.panel7.Controls.Add(this.btnSaveItem);
-            this.panel7.Controls.Add(this.txtItmNote);
-            this.panel7.Controls.Add(this.label14);
-            this.panel7.Controls.Add(this.cbItmApply2);
-            this.panel7.Controls.Add(this.label13);
-            this.panel7.Controls.Add(this.txtItmAmount);
-            this.panel7.Controls.Add(this.label12);
-            this.panel7.Controls.Add(this.txtItmName);
-            this.panel7.Controls.Add(this.label11);
-            this.panel7.Controls.Add(this.txtItmAcct);
-            this.panel7.Controls.Add(this.label10);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel7.Location = new System.Drawing.Point(285, 211);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(314, 109);
-            this.panel7.TabIndex = 2;
-            // 
-            // btnAddItem
-            // 
-            this.btnAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddItem.Location = new System.Drawing.Point(11, 79);
-            this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(75, 23);
-            this.btnAddItem.TabIndex = 5;
-            this.btnAddItem.Text = "&Add";
-            this.btnAddItem.UseVisualStyleBackColor = true;
-            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
-            // 
-            // btnDeleteItem
-            // 
-            this.btnDeleteItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeleteItem.Location = new System.Drawing.Point(235, 77);
-            this.btnDeleteItem.Name = "btnDeleteItem";
-            this.btnDeleteItem.Size = new System.Drawing.Size(69, 26);
-            this.btnDeleteItem.TabIndex = 7;
-            this.btnDeleteItem.Text = "Delete";
-            this.btnDeleteItem.UseVisualStyleBackColor = true;
-            this.btnDeleteItem.Click += new System.EventHandler(this.btnDeleteItem_Click);
-            // 
-            // btnSaveItem
-            // 
-            this.btnSaveItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSaveItem.Location = new System.Drawing.Point(162, 77);
-            this.btnSaveItem.Name = "btnSaveItem";
-            this.btnSaveItem.Size = new System.Drawing.Size(69, 26);
-            this.btnSaveItem.TabIndex = 6;
-            this.btnSaveItem.Text = "&Save";
-            this.btnSaveItem.UseVisualStyleBackColor = true;
-            this.btnSaveItem.Click += new System.EventHandler(this.btnSaveItem_Click);
-            // 
-            // txtItmNote
-            // 
-            this.txtItmNote.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtItmNote.Location = new System.Drawing.Point(47, 51);
-            this.txtItmNote.Name = "txtItmNote";
-            this.txtItmNote.Size = new System.Drawing.Size(257, 20);
-            this.txtItmNote.TabIndex = 4;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(8, 54);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(33, 13);
-            this.label14.TabIndex = 34;
-            this.label14.Text = "Note:";
-            // 
-            // cbItmApply2
-            // 
-            this.cbItmApply2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbItmApply2.FormattingEnabled = true;
-            this.cbItmApply2.Items.AddRange(new object[] {
-            "Water",
-            "LnBase",
-            "Assess",
-            "Other"});
-            this.cbItmApply2.Location = new System.Drawing.Point(206, 28);
-            this.cbItmApply2.Name = "cbItmApply2";
-            this.cbItmApply2.Size = new System.Drawing.Size(96, 21);
-            this.cbItmApply2.TabIndex = 3;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(152, 31);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(52, 13);
-            this.label13.TabIndex = 29;
-            this.label13.Text = "Apply To:";
-            // 
-            // txtItmAmount
-            // 
-            this.txtItmAmount.Location = new System.Drawing.Point(59, 28);
-            this.txtItmAmount.Name = "txtItmAmount";
-            this.txtItmAmount.Size = new System.Drawing.Size(87, 20);
-            this.txtItmAmount.TabIndex = 2;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(9, 31);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(46, 13);
-            this.label12.TabIndex = 27;
-            this.label12.Text = "Amount:";
-            // 
-            // txtItmName
-            // 
-            this.txtItmName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtItmName.Location = new System.Drawing.Point(190, 5);
-            this.txtItmName.Name = "txtItmName";
-            this.txtItmName.Size = new System.Drawing.Size(114, 20);
-            this.txtItmName.TabIndex = 1;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(150, 8);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(38, 13);
-            this.label11.TabIndex = 26;
-            this.label11.Text = "Name:";
-            // 
-            // txtItmAcct
-            // 
-            this.txtItmAcct.Location = new System.Drawing.Point(59, 5);
-            this.txtItmAcct.Name = "txtItmAcct";
-            this.txtItmAcct.Size = new System.Drawing.Size(87, 20);
-            this.txtItmAcct.TabIndex = 0;
-            this.txtItmAcct.TextChanged += new System.EventHandler(this.txtItmAcct_TextChanged);
-            this.txtItmAcct.DoubleClick += new System.EventHandler(this.txtItmAcct_DoubleClick);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(8, 8);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(50, 13);
-            this.label10.TabIndex = 24;
-            this.label10.Text = "Account:";
-            // 
             // ItemsGrid
             // 
             this.ItemsGrid.AllowUserToAddRows = false;
@@ -464,14 +338,14 @@
             this.idDataGridViewTextBoxColumn});
             this.ItemsGrid.DataSource = this.cRDetailBindingSource;
             this.ItemsGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ItemsGrid.Location = new System.Drawing.Point(285, 320);
+            this.ItemsGrid.Location = new System.Drawing.Point(285, 319);
             this.ItemsGrid.MultiSelect = false;
             this.ItemsGrid.Name = "ItemsGrid";
             this.ItemsGrid.ReadOnly = true;
             this.ItemsGrid.RowHeadersVisible = false;
             this.ItemsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ItemsGrid.ShowEditingIcon = false;
-            this.ItemsGrid.Size = new System.Drawing.Size(314, 139);
+            this.ItemsGrid.Size = new System.Drawing.Size(314, 140);
             this.ItemsGrid.TabIndex = 23;
             this.ItemsGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellClick);
             this.ItemsGrid.Validated += new System.EventHandler(this.ItemsGrid_Validated);
@@ -541,6 +415,15 @@
             this.panelDetail.Name = "panelDetail";
             this.panelDetail.Size = new System.Drawing.Size(314, 211);
             this.panelDetail.TabIndex = 1;
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.Location = new System.Drawing.Point(10, 179);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(90, 26);
+            this.btnPrint.TabIndex = 55;
+            this.btnPrint.Text = "Print Receipt";
+            this.btnPrint.UseVisualStyleBackColor = true;
             // 
             // txtNote
             // 
@@ -745,30 +628,172 @@
             // 
             this.paymentsBindingSource.DataSource = typeof(classLib.Payments);
             // 
-            // btnPrint
+            // panelItem
             // 
-            this.btnPrint.Location = new System.Drawing.Point(10, 179);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(90, 26);
-            this.btnPrint.TabIndex = 55;
-            this.btnPrint.Text = "Print Receipt";
-            this.btnPrint.UseVisualStyleBackColor = true;
+            this.panelItem.Controls.Add(this.txtItmNote);
+            this.panelItem.Controls.Add(this.cbItmApply2);
+            this.panelItem.Controls.Add(this.txtItmAmount);
+            this.panelItem.Controls.Add(this.txtItmName);
+            this.panelItem.Controls.Add(this.txtItmAcct);
+            this.panelItem.Controls.Add(this.label14);
+            this.panelItem.Controls.Add(this.label13);
+            this.panelItem.Controls.Add(this.label12);
+            this.panelItem.Controls.Add(this.label11);
+            this.panelItem.Controls.Add(this.label10);
+            this.panelItem.Controls.Add(this.btnAddItem);
+            this.panelItem.Controls.Add(this.btnDeleteItem);
+            this.panelItem.Controls.Add(this.btnSaveItem);
+            this.panelItem.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelItem.Location = new System.Drawing.Point(285, 211);
+            this.panelItem.Name = "panelItem";
+            this.panelItem.Size = new System.Drawing.Size(314, 108);
+            this.panelItem.TabIndex = 24;
             // 
-            // lblAppliedAmount
+            // txtItmNote
             // 
-            this.lblAppliedAmount.Location = new System.Drawing.Point(10, 9);
-            this.lblAppliedAmount.Name = "lblAppliedAmount";
-            this.lblAppliedAmount.Size = new System.Drawing.Size(209, 24);
-            this.lblAppliedAmount.TabIndex = 38;
-            this.lblAppliedAmount.Text = "Applied Amount: $12345.00";
-            this.lblAppliedAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtItmNote.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtItmNote.Changed = false;
+            this.txtItmNote.Cue = "Notes about this Item";
+            this.txtItmNote.Location = new System.Drawing.Point(60, 52);
+            this.txtItmNote.Name = "txtItmNote";
+            this.txtItmNote.Size = new System.Drawing.Size(245, 20);
+            this.txtItmNote.TabIndex = 44;
+            // 
+            // cbItmApply2
+            // 
+            this.cbItmApply2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbItmApply2.Changed = false;
+            this.cbItmApply2.Cue = "Type ";
+            this.cbItmApply2.FormattingEnabled = true;
+            this.cbItmApply2.Items.AddRange(new object[] {
+            "Water",
+            "LnBase",
+            "Assess",
+            "Other"});
+            this.cbItmApply2.Location = new System.Drawing.Point(209, 29);
+            this.cbItmApply2.Name = "cbItmApply2";
+            this.cbItmApply2.Size = new System.Drawing.Size(94, 21);
+            this.cbItmApply2.TabIndex = 43;
+            // 
+            // txtItmAmount
+            // 
+            this.txtItmAmount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtItmAmount.Changed = false;
+            this.txtItmAmount.Cue = "$$$";
+            this.txtItmAmount.Location = new System.Drawing.Point(60, 29);
+            this.txtItmAmount.Name = "txtItmAmount";
+            this.txtItmAmount.Size = new System.Drawing.Size(87, 20);
+            this.txtItmAmount.TabIndex = 42;
+            // 
+            // txtItmName
+            // 
+            this.txtItmName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtItmName.Changed = false;
+            this.txtItmName.Cue = "Account Name";
+            this.txtItmName.Location = new System.Drawing.Point(191, 6);
+            this.txtItmName.Name = "txtItmName";
+            this.txtItmName.Size = new System.Drawing.Size(114, 20);
+            this.txtItmName.TabIndex = 41;
+            // 
+            // txtItmAcct
+            // 
+            this.txtItmAcct.Changed = false;
+            this.txtItmAcct.Cue = "Account #";
+            this.txtItmAcct.Location = new System.Drawing.Point(60, 7);
+            this.txtItmAcct.Name = "txtItmAcct";
+            this.txtItmAcct.Size = new System.Drawing.Size(86, 20);
+            this.txtItmAcct.TabIndex = 40;
+            this.txtItmAcct.TextChanged += new System.EventHandler(this.txtItmAcct_TextChanged);
+            this.txtItmAcct.DoubleClick += new System.EventHandler(this.txtItmAcct_DoubleClick);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(7, 55);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(33, 13);
+            this.label14.TabIndex = 39;
+            this.label14.Text = "Note:";
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(151, 32);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(52, 13);
+            this.label13.TabIndex = 38;
+            this.label13.Text = "Apply To:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(8, 32);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(46, 13);
+            this.label12.TabIndex = 37;
+            this.label12.Text = "Amount:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(149, 9);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(38, 13);
+            this.label11.TabIndex = 36;
+            this.label11.Text = "Name:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(7, 9);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(50, 13);
+            this.label10.TabIndex = 35;
+            this.label10.Text = "Account:";
+            // 
+            // btnAddItem
+            // 
+            this.btnAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAddItem.Location = new System.Drawing.Point(5, 81);
+            this.btnAddItem.Name = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(75, 23);
+            this.btnAddItem.TabIndex = 8;
+            this.btnAddItem.Text = "&Add";
+            this.btnAddItem.UseVisualStyleBackColor = true;
+            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
+            // 
+            // btnDeleteItem
+            // 
+            this.btnDeleteItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteItem.Location = new System.Drawing.Point(238, 79);
+            this.btnDeleteItem.Name = "btnDeleteItem";
+            this.btnDeleteItem.Size = new System.Drawing.Size(69, 26);
+            this.btnDeleteItem.TabIndex = 10;
+            this.btnDeleteItem.Text = "Delete";
+            this.btnDeleteItem.UseVisualStyleBackColor = true;
+            this.btnDeleteItem.Click += new System.EventHandler(this.btnDeleteItem_Click);
+            // 
+            // btnSaveItem
+            // 
+            this.btnSaveItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSaveItem.Location = new System.Drawing.Point(156, 79);
+            this.btnSaveItem.Name = "btnSaveItem";
+            this.btnSaveItem.Size = new System.Drawing.Size(69, 26);
+            this.btnSaveItem.TabIndex = 9;
+            this.btnSaveItem.Text = "&Save";
+            this.btnSaveItem.UseVisualStyleBackColor = true;
+            this.btnSaveItem.Click += new System.EventHandler(this.btnSaveItem_Click);
             // 
             // NewPayment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(599, 501);
             this.Controls.Add(this.ItemsGrid);
-            this.Controls.Add(this.panel7);
+            this.Controls.Add(this.panelItem);
             this.Controls.Add(this.panelDetail);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.panel2);
@@ -787,13 +812,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.PaymentsGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cRMasterBindingSource)).EndInit();
             this.panel2.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lblAppliedChk)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cRDetailBindingSource)).EndInit();
             this.panelDetail.ResumeLayout(false);
             this.panelDetail.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paymentsBindingSource)).EndInit();
+            this.panelItem.ResumeLayout(false);
+            this.panelItem.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -812,19 +838,6 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Splitter splitter1;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Button btnDeleteItem;
-        private System.Windows.Forms.Button btnSaveItem;
-        private System.Windows.Forms.TextBox txtItmNote;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.ComboBox cbItmApply2;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox txtItmAmount;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox txtItmName;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox txtItmAcct;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DataGridView ItemsGrid;
         private System.Windows.Forms.BindingSource paymentsBindingSource;
         private System.Windows.Forms.BindingSource cRMasterBindingSource;
@@ -852,7 +865,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.BindingSource cRDetailBindingSource;
-        private System.Windows.Forms.Button btnAddItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn RcptID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
@@ -864,5 +876,20 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label lblAppliedAmount;
         private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.PictureBox lblAppliedChk;
+        private classLib.PanelTrak panelItem;
+        private classLib.TextBoxTrak txtItmAcct;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnAddItem;
+        private System.Windows.Forms.Button btnDeleteItem;
+        private System.Windows.Forms.Button btnSaveItem;
+        private classLib.ComboBoxTrak cbItmApply2;
+        private classLib.TextBoxTrak txtItmAmount;
+        private classLib.TextBoxTrak txtItmName;
+        private classLib.TextBoxTrak txtItmNote;
     }
 }

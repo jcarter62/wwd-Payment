@@ -25,6 +25,7 @@ namespace dataLib {
                 Account = "";
                 Note = "";
                 State = "Created";
+                Name = "";
             }
         }
     }

@@ -15,12 +15,17 @@ namespace RcvPayment {
     public partial class NewPayment : RcvPayment.MyForm {
 
         #region Properties
+        Images statusImages;
         private string currentID;
         private string currentDetailID;
         private AppSettings aset;
         private dbClassDataContext dc;
+
         private double _AppliedAmount;
         private string _AppliedAmountMessage;
+
+        private double paymentAmount;
+        private double unAppliedAmount;
         private double AppliedAmount {
             get {
                 return _AppliedAmount;
@@ -28,11 +33,28 @@ namespace RcvPayment {
             set {
                 _AppliedAmount = value;
 
-                if ( _AppliedAmount == 0.0 ) {
+                if (_AppliedAmount == 0.0) {
                     lblAppliedAmount.Text = "";
-                } else {
-                    _AppliedAmountMessage = string.Format("Applied Amount: {0}", _AppliedAmount.ToString("C") );
+                }
+                else {
+                    _AppliedAmountMessage = string.Format("Applied Amount: {0}",
+                        _AppliedAmount.ToString("C"));
                     lblAppliedAmount.Text = _AppliedAmountMessage;
+                }
+                // Update the graphic to right side.
+                UpdateAppliedGraphic();
+            }
+        }
+
+        private void UpdateAppliedGraphic() {
+            if ( ItemsGrid.Rows.Count <= 0  ) {
+                lblAppliedChk.Image = null;
+            } else {
+                if (Math.Abs(unAppliedAmount) < 0.001) {
+                    lblAppliedChk.Image = Image.FromFile(statusImages.successImage);
+                }
+                else {
+                    lblAppliedChk.Image = Image.FromFile(statusImages.failImage);
                 }
             }
         }
@@ -53,6 +75,7 @@ namespace RcvPayment {
         #region Constructors
         public NewPayment() {
             InitializeComponent();
+            statusImages = new Images();
             currentID = "";
             currentDetailID = "";
             aset = new AppSettings();
@@ -80,6 +103,7 @@ namespace RcvPayment {
             cbVia.Text = q.PayVia;
             txtNote.Text = q.Note;
             txtAmount.Text = q.Amount.ToString();
+            paymentAmount = q.Amount.Value;
 
             panelDetail.Start(btnSavePayment);
             if (q.Deposited) {
@@ -113,6 +137,7 @@ namespace RcvPayment {
             }
 
             AppliedAmount = sumDtl;
+            unAppliedAmount = paymentAmount - sumDtl;
         }
 
         private void SaveThisPayment() {
@@ -161,7 +186,7 @@ namespace RcvPayment {
 
             if (q != null) {
                 txtItmAcct.Text = q.Account;
-                txtItmName.Text = "Name goes Here";
+                txtItmName.Text = q.Name;
                 txtItmAmount.Text = q.Amount.ToString();
                 txtItmNote.Text = q.Note;
                 currentDetailID = thisId;
@@ -176,6 +201,10 @@ namespace RcvPayment {
             var q = from item in dc.CRMasters
                     orderby item.RcptID descending
                     select item;
+
+            foreach ( DataGridViewRow r in PaymentsGrid.Rows ) {
+                PaymentsGrid.Rows.Remove(r);
+            }
 
             PaymentsGrid.DataSource = q;
         }
@@ -252,6 +281,7 @@ namespace RcvPayment {
 
         private void timer1_Tick(object sender, EventArgs e) {
             panelDetail.HasDataChanged();
+            UpdateAppliedGraphic();
         }
 
         private void btnSavePayment_Click_1(object sender, EventArgs e) {
@@ -283,6 +313,9 @@ namespace RcvPayment {
             r.Id = currentDetailID;
             r.init();
             r.CRMid = currentID;
+            //
+            // set amount = unapplied amount.
+            r.Amount = unAppliedAmount;
 
             try {
                 dc.CRDetails.InsertOnSubmit(r);
@@ -302,6 +335,7 @@ namespace RcvPayment {
             if ( thisId.Length <= 0 ) {
                 CRDetail rec = new CRDetail();
                 rec.Account = txtItmAcct.Text;
+                rec.Name = txtItmName.Text;
                 rec.Amount = text2double(txtAmount.Text);
                 rec.Note = txtItmNote.Text;
                 rec.Type = cbItmApply2.Text;
@@ -316,21 +350,24 @@ namespace RcvPayment {
                     Console.WriteLine(Ex.Message);
                 }
             } else {
-                var q = (from item in dc.CRDetails
-                         where item.Id == thisId
-                         select item).Single();
+                var records = from item in dc.CRDetails
+                        where item.Id == thisId
+                        select item;
 
-
-                if (q != null) {
-                    try {
-                        q.Account = txtItmAcct.Text;
-                        q.Amount = text2double(txtItmAmount.Text);
-                        q.Note = txtItmNote.Text;
-                        q.Type = cbItmApply2.Text;
-                        dc.SubmitChanges();
-                    }
-                    catch (Exception Ex) {
-                        Console.WriteLine(Ex.Message);
+                // there should be 0 or 1 records, since thisId is a guid.
+                foreach (var q in records ) {
+                    if (q != null) {
+                        try {
+                            q.Account = txtItmAcct.Text;
+                            q.Name = txtItmName.Text;
+                            q.Amount = text2double(txtItmAmount.Text);
+                            q.Note = txtItmNote.Text;
+                            q.Type = cbItmApply2.Text;
+                            dc.SubmitChanges();
+                        }
+                        catch (Exception Ex) {
+                            Console.WriteLine(Ex.Message);
+                        }
                     }
                 }
             }
@@ -421,6 +458,57 @@ namespace RcvPayment {
         private void ItemsGrid_Validated(object sender, EventArgs e) {
             // Update the lblAppliedAmount.text
 
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e) {
+            bool ok2del = true;
+
+            // determine if ok to delete.
+
+            if ( ok2del ) {
+                if (userIsOkWithDeletion(currentID)) {
+                    deleteCurrentPayment(currentID);
+                }
+            } else {
+                tellUserTheyCantDelete(currentID);
+            }
+        }
+
+        private void tellUserTheyCantDelete(string currentID) {
+            MessageBox.Show("Sorry, You can not delete this payment.", "Error", MessageBoxButtons.OK);
+        }
+
+        private void deleteCurrentPayment(string curID) {
+            // first delete items
+                var records = from item in dc.CRDetails
+                              where ( item.CRMid == curID )
+                              select item;
+
+            foreach ( var r in records ) {
+                dc.CRDetails.DeleteOnSubmit(r);
+            }
+
+            // then delete the payment
+            var payRec = from item in dc.CRMasters
+                         where item.Id == curID
+                         select item;
+
+            foreach ( var r in payRec ) {
+                dc.CRMasters.DeleteOnSubmit(r);
+            }
+
+            try {
+                dc.SubmitChanges();
+                ConnectGrid();
+            }
+            catch ( Exception ex ) {
+                Console.WriteLine(ex.Message);
+            }
+
+        }
+
+        private bool userIsOkWithDeletion(string currentID) {
+            return (MessageBox.Show("Are You Sure ?", "Warning", MessageBoxButtons.YesNo ) == DialogResult.Yes);
         }
     }
 }

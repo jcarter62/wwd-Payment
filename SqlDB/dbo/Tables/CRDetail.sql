@@ -4,6 +4,7 @@
     [SessionId] VARCHAR (40) NULL,
     [CRMid]     VARCHAR (40) NULL,
     [Account]   VARCHAR (20) NULL,
+	[Name]		VARCHAR (50) NULL,
     [Amount]    FLOAT (53)   NULL,
     [Type]      VARCHAR (20) NULL,
     [Note]      VARCHAR (80) NULL,
