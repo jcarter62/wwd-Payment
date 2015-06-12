@@ -69,6 +69,7 @@
     <Build Include="dbo\Get_NT_Username.sql" />
     <Build Include="dbo\shortGuid.sql" />
     <Build Include="dbo\Tables\CRAccount.sql" />
+    <Build Include="v_CrReceipt.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="copydata.sql" />

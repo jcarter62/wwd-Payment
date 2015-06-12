@@ -88,5 +88,9 @@ namespace dataLib {
     public partial class NAME {
 
     }
-}
 
+    public partial class v_CrReceipt {
+
+    }
+
+}

@@ -45,7 +45,7 @@ namespace dataLib
     #endregion
 		
 		public dbClassDataContext() : 
-				base(global::dataLib.Properties.Settings.Default.testdbConnectionString, mappingSource)
+				base(global::dataLib.Properties.Settings.Default.testdbConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -113,6 +113,14 @@ namespace dataLib
 				return this.GetTable<CRDetail>();
 			}
 		}
+		
+		public System.Data.Linq.Table<v_CrReceipt> v_CrReceipts
+		{
+			get
+			{
+				return this.GetTable<v_CrReceipt>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CRMasterId")]
@@ -168,7 +176,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RcptId", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RcptId", DbType="VarChar(15) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public string RcptId
 		{
 			get
@@ -188,7 +196,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CDate", DbType="DateTime")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<System.DateTime> CDate
 		{
 			get
@@ -208,7 +216,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CUser", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CUser", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string CUser
 		{
 			get
@@ -522,7 +530,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CDate", AutoSync=AutoSync.OnUpdate, DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<System.DateTime> CDate
 		{
 			get
@@ -542,7 +550,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CUser", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CUser", AutoSync=AutoSync.OnUpdate, DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string CUser
 		{
 			get
@@ -562,7 +570,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UDate", AutoSync=AutoSync.OnUpdate, DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<System.DateTime> UDate
 		{
 			get
@@ -582,7 +590,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UUser", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UUser", AutoSync=AutoSync.OnUpdate, DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string UUser
 		{
 			get
@@ -676,7 +684,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountNo", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountNo", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string AccountNo
 		{
 			get
@@ -696,7 +704,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountName", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountName", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string AccountName
 		{
 			get
@@ -716,7 +724,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountNoInt", DbType="Int")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountNoInt", DbType="Int", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<int> AccountNoInt
 		{
 			get
@@ -1832,6 +1840,213 @@ namespace dataLib
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.v_CrReceipt")]
+	public partial class v_CrReceipt
+	{
+		
+		private string _id;
+		
+		private string _DeliveryName;
+		
+		private System.Nullable<double> _mAmount;
+		
+		private string _mPayRef;
+		
+		private string _mPayType;
+		
+		private string _mPayVia;
+		
+		private string _mnote;
+		
+		private string _dAccount;
+		
+		private string _dName;
+		
+		private System.Nullable<double> _dAmount;
+		
+		private string _dnote;
+		
+		public v_CrReceipt()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="VarChar(40) NOT NULL", CanBeNull=false)]
+		public string id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeliveryName", DbType="VarChar(50)")]
+		public string DeliveryName
+		{
+			get
+			{
+				return this._DeliveryName;
+			}
+			set
+			{
+				if ((this._DeliveryName != value))
+				{
+					this._DeliveryName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mAmount", DbType="Float")]
+		public System.Nullable<double> mAmount
+		{
+			get
+			{
+				return this._mAmount;
+			}
+			set
+			{
+				if ((this._mAmount != value))
+				{
+					this._mAmount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mPayRef", DbType="VarChar(20)")]
+		public string mPayRef
+		{
+			get
+			{
+				return this._mPayRef;
+			}
+			set
+			{
+				if ((this._mPayRef != value))
+				{
+					this._mPayRef = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mPayType", DbType="VarChar(20)")]
+		public string mPayType
+		{
+			get
+			{
+				return this._mPayType;
+			}
+			set
+			{
+				if ((this._mPayType != value))
+				{
+					this._mPayType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mPayVia", DbType="VarChar(20)")]
+		public string mPayVia
+		{
+			get
+			{
+				return this._mPayVia;
+			}
+			set
+			{
+				if ((this._mPayVia != value))
+				{
+					this._mPayVia = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mnote", DbType="VarChar(80)")]
+		public string mnote
+		{
+			get
+			{
+				return this._mnote;
+			}
+			set
+			{
+				if ((this._mnote != value))
+				{
+					this._mnote = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dAccount", DbType="VarChar(20)")]
+		public string dAccount
+		{
+			get
+			{
+				return this._dAccount;
+			}
+			set
+			{
+				if ((this._dAccount != value))
+				{
+					this._dAccount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dName", DbType="VarChar(50)")]
+		public string dName
+		{
+			get
+			{
+				return this._dName;
+			}
+			set
+			{
+				if ((this._dName != value))
+				{
+					this._dName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dAmount", DbType="Float")]
+		public System.Nullable<double> dAmount
+		{
+			get
+			{
+				return this._dAmount;
+			}
+			set
+			{
+				if ((this._dAmount != value))
+				{
+					this._dAmount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dnote", DbType="VarChar(80)")]
+		public string dnote
+		{
+			get
+			{
+				return this._dnote;
+			}
+			set
+			{
+				if ((this._dnote != value))
+				{
+					this._dnote = value;
+				}
 			}
 		}
 	}

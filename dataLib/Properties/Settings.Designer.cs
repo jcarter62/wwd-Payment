@@ -42,5 +42,15 @@ namespace dataLib.Properties {
                 return ((string)(this["testdbConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\sqlexpress;Initial Catalog=testdb;Integrated Security=True")]
+        public string testdbConnectionString1 {
+            get {
+                return ((string)(this["testdbConnectionString1"]));
+            }
+        }
     }
 }

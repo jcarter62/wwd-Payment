@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="testdb" Class="dbClassDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DF2A\SQLEXPRESS;Initial Catalog=testdb;Integrated Security=True" SettingsObjectName="dataLib.Properties.Settings" SettingsPropertyName="testdbConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost\sqlexpress;Initial Catalog=testdb;Integrated Security=True" SettingsObjectName="dataLib.Properties.Settings" SettingsPropertyName="testdbConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.CRMasterId" Member="CRMasterIds">
     <Type Name="CRMasterId">
       <Column Name="id" Type="System.String" DbType="VarChar(40) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="RcptId" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
-      <Column Name="CDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CUser" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="RcptId" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CUser" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
     </Type>
   </Table>
   <Table Name="dbo.CRMaster" Member="CRMasters">
@@ -20,18 +20,18 @@
       <Column Name="PayRef" Type="System.String" DbType="VarChar(20)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="PayVia" Type="System.String" DbType="VarChar(20)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Note" Type="System.String" DbType="VarChar(80)" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="CDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="CUser" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="UDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="UUser" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CDate" AutoSync="OnUpdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CUser" AutoSync="OnUpdate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="UDate" AutoSync="OnUpdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="UUser" AutoSync="OnUpdate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
     </Type>
   </Table>
   <Table Name="dbo.CRAccount" Member="CRAccounts">
     <Type Name="CRAccount">
       <Column Name="id" Type="System.String" DbType="VarChar(40) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="AccountNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="AccountName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="AccountNoInt" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AccountNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AccountName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AccountNoInt" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
     </Type>
   </Table>
   <Table Name="dbo.NAME" Member="NAMEs">
@@ -93,6 +93,21 @@
       <Column Name="CUser" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="UDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="UUser" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.v_CrReceipt" Member="v_CrReceipts">
+    <Type Name="v_CrReceipt">
+      <Column Name="id" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="DeliveryName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="mAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="mPayRef" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="mPayType" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="mPayVia" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="mnote" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+      <Column Name="dAccount" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="dName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="dnote" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

@@ -117,49 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>381, 17</value>
-  </metadata>
-  <metadata name="Id.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="RcptID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Amount.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="cRMasterBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>200, 17</value>
-  </metadata>
-  <metadata name="idDataGridViewTextBoxColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="cRDetailBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>584, 17</value>
-  </metadata>
-  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>497, 17</value>
-  </metadata>
-  <metadata name="paymentsBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="CRMasterBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        AAABAAEAICAQAAAAAADoAgAAFgAAACgAAAAgAAAAQAAAAAEABAAAAAAAgAIAAAAAAAAAAAAAAAAAAAAA
+        AAABAAEAICAQcgAAAADoAgAAFgAAACgAAAAgAAAAQAAAAAEABAAAAAAAgAIAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAACAAACAAAAAgIAAgAAAAIAAgACAgAAAgICAAMDAwAAAAP8AAP8AAAD//wD/AAAA/wD/AP//
-        AAD///8AAAAAAAAAAAAAAA///wAAAAAAAAAAAAAAAAD/////AAAAAAAAAAAAAAAP/3V////wAAAAAAAA
-        AAAA//dVVXj//wAA8AAAAAAAD/91VVVVWP8AD//wAAAAAP/3VVVVVVX/D////wAAAA//dVVVVVVV////
-        eP/wAAD/91VVVVVVVf//hVWP//AP/3VVVVVVVVX//1VVV/////dVVVVVVVVV//9VVVVY//91VVVVdVVV
-        Vf//VVVVVY/3VVVVWPVVVVX//1VXVVVXdVVVVY/1VVVV//9VX3VVVVVVVVj/9VVVVf//VV/3VVVVVVeP
-        //VVVVX//1Vf/3VVVVV////1VVVV//9VX/91VVVVf///9VVVVf//VV/3VVVVVVWP//VVVVX//1VfdVVV
-        VVVVWP/1VVVV//9VV1VVV3VVVVWP9VVVVf//VVVVVY/3VVVVV/VVVVX//1VVVVj//3VVVVV1VVVV//9V
-        VVf////3VVVVVVVVVf//hVWP//AP/3VVVVVVVVX///94//AAAP/3VVVVVVVV/w////8AAAAP/3VVVVVV
-        Vf8AD//wAAAAAP/3VVVVVVX/AADwAAAAAAAP/3VVVVVX/wAAAAAAAAAAAP/3VVVY//8AAAAAAAAAAAAP
-        /3V4////AAAAAAAAAAAAAP/////wAAAAAAAAAAAAAAAP//8AAAD///g////wD///4AH//8AA9/+AAOH/
-        AACA/gAAAHwAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAYAAAAfAAAgP4AAOH/AAD3/4AA///AAP//4AD///AH///4Pw==
+        AAD///8ABVVVVVVVVVVVVVVVVVVVUAVfhVX4X4X/9VVVVVVVVVAFX4VV+F919VVVVVVVVVVQBV//hf//
+        Vf/1VVVYh1VVUAVfd/X3f3X1VVVX///4dVAFX3X191+F93VVf/////VQBV//9f//df/1V//////1UAVV
+        VVVVVVVVVX//////9VAFVVVVVVVVVVf///////VQBVVVVXVVVVV////////1UAVY///3VVVX////////
+        9VAFX////4VVf/////f///VQBV/////4WP////hV///1UAVf/4j///////+FVf//9VAFX/+Fj//////3
+        VVX///VQBV//hVj////4VVVV///1UAVf/4VX////91VVVf//9VAFX/+Ff/////+FVVX///VQBV//h///
+        ////+FVV///1UAVf/////3j////3Vf//9VAFX/////dVj////4X///VQBV////hVVVj////4///1UAVX
+        j/+FVVVVj///////9VAFVVWHVVAAVVj///////VQAAVVVVUAAAVVj//////1UAAABVVQAAAAVVj/////
+        9VAAAAAAAAAAAAVVj/////VQAAAAAAAAAAAAVVf///+FUAAAAAAAAAAAAAVVf/h1VVAAAAAAAAAAAAAA
+        VVd1VVVQAAAAAAAAAAAAAAVVVVVQAAAAAAAAAAAAAAAAVVUAAACAAAABgAAAAYAAAAGAAAABgAAAAYAA
+        AAGAAAABgAAAAYAAAAGAAAABgAAAAYAAAAGAAAABgAAAAYAAAAGAAAABgAAAAYAAAAGAAAABgAAAAYAA
+        AAGAAAABgAAAAYAcAAHgPgAB+H8AAf//gAH//8AB///gAf//8AH///gH///8Pw==
 </value>
   </data>
 </root>
