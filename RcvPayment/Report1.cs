@@ -1,4 +1,4 @@
-namespace SimpleTest {
+namespace RcvPayment {
     using System;
     using System.ComponentModel;
     using System.Drawing;

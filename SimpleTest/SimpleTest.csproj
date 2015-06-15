@@ -46,6 +46,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Telerik.Reporting, Version=9.0.15.324, Culture=neutral, PublicKeyToken=a9d7983dfcc261be" />
+    <Reference Include="Telerik.ReportViewer.WinForms, Version=9.0.15.324, Culture=neutral, PublicKeyToken=a9d7983dfcc261be, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="mainform.cs">
@@ -62,6 +63,12 @@
     <Compile Include="Report1.Designer.cs">
       <DependentUpon>Report1.cs</DependentUpon>
     </Compile>
+    <Compile Include="ShowReceipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowReceipt.Designer.cs">
+      <DependentUpon>ShowReceipt.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="mainform.resx">
       <DependentUpon>mainform.cs</DependentUpon>
     </EmbeddedResource>
@@ -76,6 +83,9 @@
     </Compile>
     <EmbeddedResource Include="Report1.resx">
       <DependentUpon>Report1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowReceipt.resx">
+      <DependentUpon>ShowReceipt.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\DataSources\dataLib.CRAccount.datasource" />
     <None Include="Properties\DataSources\dataLib.CRDetail.datasource" />

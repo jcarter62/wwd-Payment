@@ -12,40 +12,35 @@ using classLib;
 namespace RcvPayment {
     public partial class ShowReceipt : RcvPayment.MyForm {
         AppSettings aset;
-        dbClassDataContext dc;
         public string Id { get; set; }
 
         public ShowReceipt() {
             InitializeComponent();
             aset = new AppSettings();
-            dc = new dbClassDataContext(aset.wmis.connectionString);
         }
 
         public void DisplayReport(string id ) {
             Id = id;
-            DisplayReport();
-        }
+            aset = new AppSettings();
 
-        public void DisplayReport() {
-            SetDataSources();
-        }
+            aset = new AppSettings();
+            Report1 rpt = new Report1(aset.wmis.connectionString, Id);
 
-        private void SetDataSources() {
-            var q = from item in dc.CRMasters
-                     where item.Id == Id
-                     select item;
-
-            BindingSource master = new BindingSource();
-            master.DataSource = q;
-            this.CRMasterBindingSource = master;
-
-
+            rview.ReportSource = rpt;
+            rview.RefreshReport();
         }
 
         private void ShowReceipt_Load(object sender, EventArgs e) {
 
-            //            this.rpt.RefreshReport();
+        }
 
+        private void btnClose_Click(object sender, EventArgs e) {
+            this.Close();
+        }
+
+        private void btnEmail_Click(object sender, EventArgs e) {
+            // Email report
+            rview.ExportReport("PDF", null);
         }
     }
 }

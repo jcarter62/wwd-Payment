@@ -25,6 +25,13 @@ namespace classLib {
             get { return _Key;  }
         }
 
+        public string SmtpServer { get; set; }
+        public string SmtpPort { get; set; }
+        public string SmtpUser { get; set; }
+        public string SmtpPass { get; set; }
+        public string EmailFrom { get; set; }
+        public bool SendViaOutlook { get; set; }
+
         #endregion Properties
 
         #region Startup
@@ -69,8 +76,25 @@ namespace classLib {
         public void Load() {
             loadDbInfo(wmis, "wmis");
             loadDbInfo(mas500, "mas500");
+            loadOtherInfo();
         }
 
+        private void loadOtherInfo() {
+            /*
+            WriteString("SmtpServer", SmtpServer);
+            WriteString("SmtpPort", SmtpPort);
+            WriteString("SmtpUser", SmtpUser);
+            WriteString("SmtpPass", SmtpPass);
+            WriteString("EmailFrom", EmailFrom);
+            WriteString("SendViaOutlook", SendViaOutlook);
+            */
+            SmtpServer = GetString("SmtpServer");
+            SmtpPort = GetString("SmtpPort");
+            SmtpUser = GetString("SmtpUser");
+            SmtpPass = GetString("SmtpPass");
+            EmailFrom = GetString("EmailFrom");
+            SendViaOutlook = ( GetString("SendViaOutlook") == "Yes" ? true : false );
+        }
 
         private void saveDbInfo(DbSettings db, string prefix) {
             WriteString(prefix + "Hostname", db.Hostname);
@@ -88,6 +112,16 @@ namespace classLib {
         public void Save() {
             saveDbInfo(wmis, "wmis");
             saveDbInfo(mas500, "mas500");
+            saveOtherInfo();
+        }
+
+        private void saveOtherInfo() {
+            WriteString("SmtpServer", SmtpServer);
+            WriteString("SmtpPort", SmtpPort);
+            WriteString("SmtpUser", SmtpUser);
+            WriteString("SmtpPass", SmtpPass);
+            WriteString("EmailFrom", EmailFrom);
+            WriteString("SendViaOutlook", (SendViaOutlook ? "Yes" : "No" ));
         }
 
         #endregion Methods

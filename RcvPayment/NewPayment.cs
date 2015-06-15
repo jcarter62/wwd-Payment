@@ -263,7 +263,6 @@ namespace RcvPayment {
 
         private void btnAdd_Click(object sender, EventArgs e) {
             // Let's create a new record.
-            string id;
             ReceiptId newId = new ReceiptId();
             CRMaster rec = new CRMaster();
             rec.RcptID = newId.id;

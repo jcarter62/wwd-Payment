@@ -26,13 +26,13 @@
             this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.dbGrid = new System.Windows.Forms.DataGridView();
-            this.cRMasterBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.rcptIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.payTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.payRefDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.payViaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cRMasterBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dbGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cRMasterBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -69,10 +69,6 @@
             this.dbGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dbGrid.Size = new System.Drawing.Size(386, 251);
             this.dbGrid.TabIndex = 1;
-            // 
-            // cRMasterBindingSource
-            // 
-            this.cRMasterBindingSource.DataSource = typeof(dataLib.CRMaster);
             // 
             // rcptIDDataGridViewTextBoxColumn
             // 
@@ -127,6 +123,10 @@
             this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
             this.idDataGridViewTextBoxColumn.ReadOnly = true;
             this.idDataGridViewTextBoxColumn.Width = 41;
+            // 
+            // cRMasterBindingSource
+            // 
+            this.cRMasterBindingSource.DataSource = typeof(dataLib.CRMaster);
             // 
             // mainform
             // 

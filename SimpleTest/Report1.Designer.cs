@@ -6,138 +6,478 @@ namespace SimpleTest {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            Telerik.Reporting.TableGroup tableGroup1 = new Telerik.Reporting.TableGroup();
-            Telerik.Reporting.TableGroup tableGroup2 = new Telerik.Reporting.TableGroup();
-            Telerik.Reporting.TableGroup tableGroup3 = new Telerik.Reporting.TableGroup();
             Telerik.Reporting.Group group1 = new Telerik.Reporting.Group();
             Telerik.Reporting.ReportParameter reportParameter1 = new Telerik.Reporting.ReportParameter();
             Telerik.Reporting.Drawing.StyleRule styleRule1 = new Telerik.Reporting.Drawing.StyleRule();
-            this.groupFooterSection = new Telerik.Reporting.GroupFooterSection();
-            this.groupHeaderSection = new Telerik.Reporting.GroupHeaderSection();
-            this.pageHeaderSection1 = new Telerik.Reporting.PageHeaderSection();
-            this.detail = new Telerik.Reporting.DetailSection();
+            Telerik.Reporting.Drawing.StyleRule styleRule2 = new Telerik.Reporting.Drawing.StyleRule();
+            this.dataSource1 = new Telerik.Reporting.SqlDataSource();
+            this.pageHeaderSection = new Telerik.Reporting.PageHeaderSection();
+            this.invoiceInfoPanel = new Telerik.Reporting.Panel();
+            this.invoiceHeaderTextBox = new Telerik.Reporting.TextBox();
+            this.invoiceNumberHeaderTextBox = new Telerik.Reporting.TextBox();
+            this.invoiceNrTextBox = new Telerik.Reporting.TextBox();
+            this.invoiceDateTextBox = new Telerik.Reporting.TextBox();
+            this.invoiceTotalHeaderTextBox = new Telerik.Reporting.TextBox();
+            this.invoiceTotalTextBox1 = new Telerik.Reporting.TextBox();
+            this.detailSection1 = new Telerik.Reporting.DetailSection();
+            this.itemNrTextBox = new Telerik.Reporting.TextBox();
+            this.itemDescriptionTextBox = new Telerik.Reporting.TextBox();
+            this.lineTotalTextBox = new Telerik.Reporting.TextBox();
             this.pageFooterSection1 = new Telerik.Reporting.PageFooterSection();
-            this.ds = new Telerik.Reporting.SqlDataSource();
-            this.list1 = new Telerik.Reporting.List();
-            this.panel1 = new Telerik.Reporting.Panel();
+            this.groupHeaderSection = new Telerik.Reporting.GroupHeaderSection();
+            this.itemsHeaderPanel = new Telerik.Reporting.Panel();
+            this.ItemNoHeaderTextBox = new Telerik.Reporting.TextBox();
+            this.descriptionHeaderTextBox = new Telerik.Reporting.TextBox();
+            this.lineTotalHeaderTextBox = new Telerik.Reporting.TextBox();
+            this.groupFooterSection = new Telerik.Reporting.GroupFooterSection();
+            this.subTotalPanel = new Telerik.Reporting.Panel();
+            this.subTotalLabelTextBox = new Telerik.Reporting.TextBox();
+            this.subTotalTextBox = new Telerik.Reporting.TextBox();
+            this.invoiceDateHeaderTextBox = new Telerik.Reporting.TextBox();
             this.textBox1 = new Telerik.Reporting.TextBox();
-            this.sqlDataSource1 = new Telerik.Reporting.SqlDataSource();
+            this.textBox2 = new Telerik.Reporting.TextBox();
+            this.textBox3 = new Telerik.Reporting.TextBox();
+            this.textBox4 = new Telerik.Reporting.TextBox();
+            this.textBox5 = new Telerik.Reporting.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
-            // groupFooterSection
+            // dataSource1
             // 
-            this.groupFooterSection.Height = Telerik.Reporting.Drawing.Unit.Inch(1D);
-            this.groupFooterSection.Name = "groupFooterSection";
+            this.dataSource1.ConnectionString = "Data Source=df2a\\sqlexpress;Initial Catalog=testdb;Integrated Security=True";
+            this.dataSource1.Name = "dataSource1";
+            this.dataSource1.Parameters.AddRange(new Telerik.Reporting.SqlDataSourceParameter[] {
+            new Telerik.Reporting.SqlDataSourceParameter("@Param1", System.Data.DbType.String, "= Parameters.Param1.Value")});
+            this.dataSource1.ProviderName = "System.Data.SqlClient";
+            this.dataSource1.SelectCommand = "SELECT        Id, mDeliveryName, mAmount, mPayRef, mPayType, mPayVia, mnote, dAcc" +
+    "ount, dName, dAmount, dnote, mRcptID, mCreatedOn, dType\r\nFROM            v_CrRec" +
+    "eipt\r\nWHERE        (Id = @Param1)";
             // 
-            // groupHeaderSection
+            // pageHeaderSection
             // 
-            this.groupHeaderSection.Height = Telerik.Reporting.Drawing.Unit.Inch(1.8000001907348633D);
-            this.groupHeaderSection.Name = "groupHeaderSection";
+            this.pageHeaderSection.Height = Telerik.Reporting.Drawing.Unit.Inch(1.4960629940032959D);
+            this.pageHeaderSection.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
+            this.invoiceInfoPanel});
+            this.pageHeaderSection.Name = "pageHeaderSection";
             // 
-            // pageHeaderSection1
+            // invoiceInfoPanel
             // 
-            this.pageHeaderSection1.Height = Telerik.Reporting.Drawing.Unit.Inch(1D);
-            this.pageHeaderSection1.Name = "pageHeaderSection1";
+            this.invoiceInfoPanel.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
+            this.invoiceHeaderTextBox,
+            this.invoiceNumberHeaderTextBox,
+            this.invoiceNrTextBox,
+            this.invoiceDateHeaderTextBox,
+            this.invoiceDateTextBox,
+            this.invoiceTotalHeaderTextBox,
+            this.invoiceTotalTextBox1,
+            this.textBox1,
+            this.textBox2,
+            this.textBox5});
+            this.invoiceInfoPanel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.invoiceInfoPanel.Name = "invoiceInfoPanel";
+            this.invoiceInfoPanel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(6.26775598526001D), Telerik.Reporting.Drawing.Unit.Inch(1.4960629940032959D));
             // 
-            // detail
+            // invoiceHeaderTextBox
             // 
-            this.detail.Height = Telerik.Reporting.Drawing.Unit.Inch(2D);
-            this.detail.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
-            this.list1});
-            this.detail.Name = "detail";
+            this.invoiceHeaderTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3.0000784397125244D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.invoiceHeaderTextBox.Name = "invoiceHeaderTextBox";
+            this.invoiceHeaderTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(3.2596855163574219D), Telerik.Reporting.Drawing.Unit.Inch(0.39397674798965454D));
+            this.invoiceHeaderTextBox.Style.Font.Bold = true;
+            this.invoiceHeaderTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(18D);
+            this.invoiceHeaderTextBox.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Point(0D);
+            this.invoiceHeaderTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
+            this.invoiceHeaderTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Top;
+            this.invoiceHeaderTextBox.Value = "Payment Receipt";
+            // 
+            // invoiceNumberHeaderTextBox
+            // 
+            this.invoiceNumberHeaderTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3.5D), Telerik.Reporting.Drawing.Unit.Inch(0.55236375331878662D));
+            this.invoiceNumberHeaderTextBox.Name = "invoiceNumberHeaderTextBox";
+            this.invoiceNumberHeaderTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.90000009536743164D), Telerik.Reporting.Drawing.Unit.Inch(0.23582638800144196D));
+            this.invoiceNumberHeaderTextBox.Style.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.invoiceNumberHeaderTextBox.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.invoiceNumberHeaderTextBox.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.invoiceNumberHeaderTextBox.Style.BorderWidth.Default = Telerik.Reporting.Drawing.Unit.Pixel(1D);
+            this.invoiceNumberHeaderTextBox.Style.Color = System.Drawing.Color.DimGray;
+            this.invoiceNumberHeaderTextBox.Style.Font.Bold = true;
+            this.invoiceNumberHeaderTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(8D);
+            this.invoiceNumberHeaderTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.invoiceNumberHeaderTextBox.Value = "Receipt ID:";
+            // 
+            // invoiceNrTextBox
+            // 
+            this.invoiceNrTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(4.4000787734985352D), Telerik.Reporting.Drawing.Unit.Inch(0.55236375331878662D));
+            this.invoiceNrTextBox.Name = "invoiceNrTextBox";
+            this.invoiceNrTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.8596853017807007D), Telerik.Reporting.Drawing.Unit.Inch(0.23582650721073151D));
+            this.invoiceNrTextBox.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.invoiceNrTextBox.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.invoiceNrTextBox.Style.BorderWidth.Default = Telerik.Reporting.Drawing.Unit.Pixel(1D);
+            this.invoiceNrTextBox.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Inch(0.078740157186985016D);
+            this.invoiceNrTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
+            this.invoiceNrTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.invoiceNrTextBox.Value = "= Fields.mRcptID";
+            // 
+            // invoiceDateTextBox
+            // 
+            this.invoiceDateTextBox.Format = "{0:d}";
+            this.invoiceDateTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(4.4002361297607422D), Telerik.Reporting.Drawing.Unit.Inch(0.78826862573623657D));
+            this.invoiceDateTextBox.Name = "invoiceDateTextBox";
+            this.invoiceDateTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.859527587890625D), Telerik.Reporting.Drawing.Unit.Inch(0.23574751615524292D));
+            this.invoiceDateTextBox.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.invoiceDateTextBox.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.invoiceDateTextBox.Style.BorderWidth.Default = Telerik.Reporting.Drawing.Unit.Pixel(1D);
+            this.invoiceDateTextBox.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Inch(0.078740157186985016D);
+            this.invoiceDateTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
+            this.invoiceDateTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.invoiceDateTextBox.Value = "= Today()";
+            // 
+            // invoiceTotalHeaderTextBox
+            // 
+            this.invoiceTotalHeaderTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3.4994869232177734D), Telerik.Reporting.Drawing.Unit.Inch(1.0240950584411621D));
+            this.invoiceTotalHeaderTextBox.Name = "invoiceTotalHeaderTextBox";
+            this.invoiceTotalHeaderTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.89964473247528076D), Telerik.Reporting.Drawing.Unit.Inch(0.23566851019859314D));
+            this.invoiceTotalHeaderTextBox.Style.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.invoiceTotalHeaderTextBox.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.invoiceTotalHeaderTextBox.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.invoiceTotalHeaderTextBox.Style.BorderWidth.Default = Telerik.Reporting.Drawing.Unit.Pixel(1D);
+            this.invoiceTotalHeaderTextBox.Style.Color = System.Drawing.Color.DimGray;
+            this.invoiceTotalHeaderTextBox.Style.Font.Bold = true;
+            this.invoiceTotalHeaderTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(8D);
+            this.invoiceTotalHeaderTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.invoiceTotalHeaderTextBox.Value = "TOTAL";
+            // 
+            // invoiceTotalTextBox1
+            // 
+            this.invoiceTotalTextBox1.Format = "{0:C2}";
+            this.invoiceTotalTextBox1.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(4.4005126953125D), Telerik.Reporting.Drawing.Unit.Inch(1.0240950584411621D));
+            this.invoiceTotalTextBox1.Name = "invoiceTotalTextBox1";
+            this.invoiceTotalTextBox1.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.8592511415481567D), Telerik.Reporting.Drawing.Unit.Inch(0.23566867411136627D));
+            this.invoiceTotalTextBox1.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.invoiceTotalTextBox1.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.invoiceTotalTextBox1.Style.BorderWidth.Default = Telerik.Reporting.Drawing.Unit.Pixel(1D);
+            this.invoiceTotalTextBox1.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Inch(0.078740157186985016D);
+            this.invoiceTotalTextBox1.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
+            this.invoiceTotalTextBox1.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.invoiceTotalTextBox1.Value = "= Fields.mAmount";
+            // 
+            // detailSection1
+            // 
+            this.detailSection1.Height = Telerik.Reporting.Drawing.Unit.Inch(0.35448837280273438D);
+            this.detailSection1.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
+            this.itemNrTextBox,
+            this.itemDescriptionTextBox,
+            this.lineTotalTextBox,
+            this.textBox4});
+            this.detailSection1.Name = "detailSection1";
+            this.detailSection1.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.detailSection1.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.detailSection1.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.None;
+            this.detailSection1.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(11D);
+            // 
+            // itemNrTextBox
+            // 
+            this.itemNrTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.itemNrTextBox.Name = "itemNrTextBox";
+            this.itemNrTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.1023621559143066D), Telerik.Reporting.Drawing.Unit.Inch(0.35433071851730347D));
+            this.itemNrTextBox.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.itemNrTextBox.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Inch(0.11811023950576782D);
+            this.itemNrTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.itemNrTextBox.Value = "= Fields.dAccount";
+            // 
+            // itemDescriptionTextBox
+            // 
+            this.itemDescriptionTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.1024409532546997D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.itemDescriptionTextBox.Name = "itemDescriptionTextBox";
+            this.itemDescriptionTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.8975590467453003D), Telerik.Reporting.Drawing.Unit.Inch(0.35433071851730347D));
+            this.itemDescriptionTextBox.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.itemDescriptionTextBox.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.itemDescriptionTextBox.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Inch(0.11811023950576782D);
+            this.itemDescriptionTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.itemDescriptionTextBox.Value = "= Fields.dName";
+            // 
+            // lineTotalTextBox
+            // 
+            this.lineTotalTextBox.Format = "{0:C2}";
+            this.lineTotalTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(4.9203925132751465D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.lineTotalTextBox.Name = "lineTotalTextBox";
+            this.lineTotalTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.3472850322723389D), Telerik.Reporting.Drawing.Unit.Inch(0.35433071851730347D));
+            this.lineTotalTextBox.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.lineTotalTextBox.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.lineTotalTextBox.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Inch(0.11811023950576782D);
+            this.lineTotalTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
+            this.lineTotalTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.lineTotalTextBox.Value = "= Fields.dAmount";
             // 
             // pageFooterSection1
             // 
-            this.pageFooterSection1.Height = Telerik.Reporting.Drawing.Unit.Inch(1D);
+            this.pageFooterSection1.Height = Telerik.Reporting.Drawing.Unit.Inch(0.30468478798866272D);
             this.pageFooterSection1.Name = "pageFooterSection1";
             // 
-            // ds
+            // groupHeaderSection
             // 
-            this.ds.ConnectionString = "df2a\\sqlexpress.testdb.dbo";
-            this.ds.Name = "ds";
-            this.ds.SelectCommand = "SELECT        v_CrReceipt.*\r\nFROM            v_CrReceipt";
+            this.groupHeaderSection.Height = Telerik.Reporting.Drawing.Unit.Inch(0.23610194027423859D);
+            this.groupHeaderSection.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
+            this.itemsHeaderPanel});
+            this.groupHeaderSection.Name = "groupHeaderSection";
+            this.groupHeaderSection.PrintOnEveryPage = true;
+            this.groupHeaderSection.Style.Padding.Top = Telerik.Reporting.Drawing.Unit.Inch(0.19685038924217224D);
             // 
-            // list1
+            // itemsHeaderPanel
             // 
-            this.list1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(2D)));
-            this.list1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(5.7000007629394531D)));
-            this.list1.Body.Rows.Add(new Telerik.Reporting.TableBodyRow(Telerik.Reporting.Drawing.Unit.Inch(1D)));
-            this.list1.Body.SetCellContent(0, 1, this.panel1);
-            this.list1.Body.SetCellContent(0, 0, this.textBox1);
-            tableGroup1.Name = "group1";
-            tableGroup2.Name = "ColumnGroup";
-            this.list1.ColumnGroups.Add(tableGroup1);
-            this.list1.ColumnGroups.Add(tableGroup2);
-            this.list1.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
-            this.panel1,
-            this.textBox1});
-            this.list1.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.099999986588954926D), Telerik.Reporting.Drawing.Unit.Inch(0.20000012218952179D));
-            this.list1.Name = "list1";
-            tableGroup3.Groupings.Add(new Telerik.Reporting.Grouping(null));
-            tableGroup3.Name = "DetailGroup";
-            this.list1.RowGroups.Add(tableGroup3);
-            this.list1.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(7.7000007629394531D), Telerik.Reporting.Drawing.Unit.Inch(1D));
+            this.itemsHeaderPanel.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
+            this.ItemNoHeaderTextBox,
+            this.descriptionHeaderTextBox,
+            this.lineTotalHeaderTextBox,
+            this.textBox3});
+            this.itemsHeaderPanel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.itemsHeaderPanel.Name = "itemsHeaderPanel";
+            this.itemsHeaderPanel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(6.2677164077758789D), Telerik.Reporting.Drawing.Unit.Inch(0.23610194027423859D));
+            this.itemsHeaderPanel.Style.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.itemsHeaderPanel.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.itemsHeaderPanel.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
             // 
-            // panel1
+            // ItemNoHeaderTextBox
             // 
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(5.7000007629394531D), Telerik.Reporting.Drawing.Unit.Inch(1D));
+            this.ItemNoHeaderTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.00019709266780409962D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.ItemNoHeaderTextBox.Name = "ItemNoHeaderTextBox";
+            this.ItemNoHeaderTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.1021651029586792D), Telerik.Reporting.Drawing.Unit.Inch(0.23610194027423859D));
+            this.ItemNoHeaderTextBox.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.ItemNoHeaderTextBox.Style.Color = System.Drawing.Color.DimGray;
+            this.ItemNoHeaderTextBox.Style.Font.Bold = true;
+            this.ItemNoHeaderTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(8D);
+            this.ItemNoHeaderTextBox.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Inch(0.11811023950576782D);
+            this.ItemNoHeaderTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.ItemNoHeaderTextBox.Value = "No";
+            // 
+            // descriptionHeaderTextBox
+            // 
+            this.descriptionHeaderTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.1024409532546997D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.descriptionHeaderTextBox.Name = "descriptionHeaderTextBox";
+            this.descriptionHeaderTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.8975589275360107D), Telerik.Reporting.Drawing.Unit.Inch(0.23610194027423859D));
+            this.descriptionHeaderTextBox.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.descriptionHeaderTextBox.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.descriptionHeaderTextBox.Style.Color = System.Drawing.Color.DimGray;
+            this.descriptionHeaderTextBox.Style.Font.Bold = true;
+            this.descriptionHeaderTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(8D);
+            this.descriptionHeaderTextBox.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Inch(0.11811023950576782D);
+            this.descriptionHeaderTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.descriptionHeaderTextBox.Value = "DESCRIPTION";
+            // 
+            // lineTotalHeaderTextBox
+            // 
+            this.lineTotalHeaderTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(4.9203920364379883D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.lineTotalHeaderTextBox.Name = "lineTotalHeaderTextBox";
+            this.lineTotalHeaderTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.3392531871795654D), Telerik.Reporting.Drawing.Unit.Inch(0.23610194027423859D));
+            this.lineTotalHeaderTextBox.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.lineTotalHeaderTextBox.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.lineTotalHeaderTextBox.Style.Color = System.Drawing.Color.DimGray;
+            this.lineTotalHeaderTextBox.Style.Font.Bold = true;
+            this.lineTotalHeaderTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(8D);
+            this.lineTotalHeaderTextBox.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Inch(0.11811023950576782D);
+            this.lineTotalHeaderTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.lineTotalHeaderTextBox.Value = "Amount";
+            // 
+            // groupFooterSection
+            // 
+            this.groupFooterSection.Height = Telerik.Reporting.Drawing.Unit.Inch(0.70866191387176514D);
+            this.groupFooterSection.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
+            this.subTotalPanel});
+            this.groupFooterSection.Name = "groupFooterSection";
+            this.groupFooterSection.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.groupFooterSection.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
+            // 
+            // subTotalPanel
+            // 
+            this.subTotalPanel.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
+            this.subTotalLabelTextBox,
+            this.subTotalTextBox});
+            this.subTotalPanel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.subTotalPanel.Name = "subTotalPanel";
+            this.subTotalPanel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(6.2677164077758789D), Telerik.Reporting.Drawing.Unit.Inch(0.35433071851730347D));
+            this.subTotalPanel.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.subTotalPanel.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.subTotalPanel.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.subTotalPanel.Style.BorderWidth.Top = Telerik.Reporting.Drawing.Unit.Point(2D);
+            // 
+            // subTotalLabelTextBox
+            // 
+            this.subTotalLabelTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3.0000786781311035D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.subTotalLabelTextBox.Name = "subTotalLabelTextBox";
+            this.subTotalLabelTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.9202347993850708D), Telerik.Reporting.Drawing.Unit.Inch(0.35433071851730347D));
+            this.subTotalLabelTextBox.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.subTotalLabelTextBox.Style.Font.Bold = true;
+            this.subTotalLabelTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(11D);
+            this.subTotalLabelTextBox.Style.Padding.Right = Telerik.Reporting.Drawing.Unit.Inch(0.11811023950576782D);
+            this.subTotalLabelTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
+            this.subTotalLabelTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.subTotalLabelTextBox.Value = "Sub Total";
+            // 
+            // subTotalTextBox
+            // 
+            this.subTotalTextBox.Format = "{0:C2}";
+            this.subTotalTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(4.9203920364379883D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.subTotalTextBox.Name = "subTotalTextBox";
+            this.subTotalTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.3473639488220215D), Telerik.Reporting.Drawing.Unit.Inch(0.35433071851730347D));
+            this.subTotalTextBox.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.subTotalTextBox.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.subTotalTextBox.Style.Font.Bold = true;
+            this.subTotalTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(11D);
+            this.subTotalTextBox.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Inch(0.11811023950576782D);
+            this.subTotalTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
+            this.subTotalTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.subTotalTextBox.Value = "=Sum(Fields.[dAmount])";
+            // 
+            // invoiceDateHeaderTextBox
+            // 
+            this.invoiceDateHeaderTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3.5D), Telerik.Reporting.Drawing.Unit.Inch(0.78826886415481567D));
+            this.invoiceDateHeaderTextBox.Name = "invoiceDateHeaderTextBox";
+            this.invoiceDateHeaderTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.90015774965286255D), Telerik.Reporting.Drawing.Unit.Inch(0.23574735224246979D));
+            this.invoiceDateHeaderTextBox.Style.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.invoiceDateHeaderTextBox.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.invoiceDateHeaderTextBox.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.invoiceDateHeaderTextBox.Style.BorderWidth.Default = Telerik.Reporting.Drawing.Unit.Pixel(1D);
+            this.invoiceDateHeaderTextBox.Style.Color = System.Drawing.Color.DimGray;
+            this.invoiceDateHeaderTextBox.Style.Font.Bold = true;
+            this.invoiceDateHeaderTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(8D);
+            this.invoiceDateHeaderTextBox.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.invoiceDateHeaderTextBox.Value = "DATE";
             // 
             // textBox1
             // 
+            this.textBox1.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3.4994869232177734D), Telerik.Reporting.Drawing.Unit.Inch(1.26039457321167D));
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2D), Telerik.Reporting.Drawing.Unit.Inch(1D));
-            this.textBox1.StyleName = "";
+            this.textBox1.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.899644672870636D), Telerik.Reporting.Drawing.Unit.Inch(0.23566851019859314D));
+            this.textBox1.Style.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.textBox1.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.textBox1.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.textBox1.Style.BorderWidth.Default = Telerik.Reporting.Drawing.Unit.Pixel(1D);
+            this.textBox1.Style.Color = System.Drawing.Color.DimGray;
+            this.textBox1.Style.Font.Bold = true;
+            this.textBox1.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(8D);
+            this.textBox1.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.textBox1.Value = "Delivered By:";
             // 
-            // sqlDataSource1
+            // textBox2
             // 
-            this.sqlDataSource1.ConnectionString = "df2a\\sqlexpress.testdb.dbo";
-            this.sqlDataSource1.Name = "sqlDataSource1";
-            this.sqlDataSource1.SelectCommand = "SELECT        v_CrReceipt.*\r\nFROM            v_CrReceipt";
+            this.textBox2.Format = "{0:C2}";
+            this.textBox2.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(4.4085049629211426D), Telerik.Reporting.Drawing.Unit.Inch(1.253426194190979D));
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.8592511415481567D), Telerik.Reporting.Drawing.Unit.Inch(0.23566867411136627D));
+            this.textBox2.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.textBox2.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.textBox2.Style.BorderWidth.Default = Telerik.Reporting.Drawing.Unit.Pixel(1D);
+            this.textBox2.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Inch(0.078740157186985016D);
+            this.textBox2.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
+            this.textBox2.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.textBox2.Value = "= Fields.mDeliveryName + \"/\" + Fields.mPayVia";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3.0000789165496826D), Telerik.Reporting.Drawing.Unit.Inch(7.8837074397597462E-05D));
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.9202344417572022D), Telerik.Reporting.Drawing.Unit.Inch(0.23610194027423859D));
+            this.textBox3.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.textBox3.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.textBox3.Style.Color = System.Drawing.Color.DimGray;
+            this.textBox3.Style.Font.Bold = true;
+            this.textBox3.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(8D);
+            this.textBox3.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Inch(0.11811023950576782D);
+            this.textBox3.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.textBox3.Value = "Note";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3.0000789165496826D), Telerik.Reporting.Drawing.Unit.Inch(0.00015767414879519492D));
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.9202349185943604D), Telerik.Reporting.Drawing.Unit.Inch(0.35433071851730347D));
+            this.textBox4.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.textBox4.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.textBox4.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Inch(0.11811023950576782D);
+            this.textBox4.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.textBox4.Value = "= Fields.dnote";
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.00031582513474859297D), Telerik.Reporting.Drawing.Unit.Inch(3.9378803194267675E-05D));
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.9996840953826904D), Telerik.Reporting.Drawing.Unit.Inch(1.0999605655670166D));
+            this.textBox5.Style.Font.Bold = true;
+            this.textBox5.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(18D);
+            this.textBox5.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Point(0D);
+            this.textBox5.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Left;
+            this.textBox5.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Top;
+            this.textBox5.Value = "Westlands Water District";
             // 
             // Report1
             // 
-            this.DataSource = this.ds;
+            this.Culture = new System.Globalization.CultureInfo("en-US");
+            this.DataSource = this.dataSource1;
             group1.GroupFooter = this.groupFooterSection;
             group1.GroupHeader = this.groupHeaderSection;
-            group1.Groupings.Add(new Telerik.Reporting.Grouping("= Fields.id"));
             group1.Name = "group";
             this.Groups.AddRange(new Telerik.Reporting.Group[] {
             group1});
             this.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
             this.groupHeaderSection,
             this.groupFooterSection,
-            this.pageHeaderSection1,
-            this.detail,
+            this.pageHeaderSection,
+            this.detailSection1,
             this.pageFooterSection1});
-            this.Name = "Report1";
+            this.Name = "Invoice1";
+            this.PageSettings.Landscape = false;
             this.PageSettings.Margins = new Telerik.Reporting.Drawing.MarginsU(Telerik.Reporting.Drawing.Unit.Inch(1D), Telerik.Reporting.Drawing.Unit.Inch(1D), Telerik.Reporting.Drawing.Unit.Inch(1D), Telerik.Reporting.Drawing.Unit.Inch(1D));
-            this.PageSettings.PaperKind = System.Drawing.Printing.PaperKind.Letter;
-            reportParameter1.Name = "id";
-            reportParameter1.Text = "12345";
+            this.PageSettings.PaperKind = System.Drawing.Printing.PaperKind.A4;
+            reportParameter1.Name = "Param1";
+            reportParameter1.Text = "Param1";
+            reportParameter1.Value = "856e091752bb41849a0710d6c71383a7";
             this.ReportParameters.Add(reportParameter1);
             styleRule1.Selectors.AddRange(new Telerik.Reporting.Drawing.ISelector[] {
             new Telerik.Reporting.Drawing.TypeSelector(typeof(Telerik.Reporting.TextItemBase)),
             new Telerik.Reporting.Drawing.TypeSelector(typeof(Telerik.Reporting.HtmlTextBox))});
             styleRule1.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Point(2D);
             styleRule1.Style.Padding.Right = Telerik.Reporting.Drawing.Unit.Point(2D);
+            styleRule2.Selectors.AddRange(new Telerik.Reporting.Drawing.ISelector[] {
+            new Telerik.Reporting.Drawing.TypeSelector(typeof(Telerik.Reporting.TextItemBase)),
+            new Telerik.Reporting.Drawing.TypeSelector(typeof(Telerik.Reporting.HtmlTextBox))});
+            styleRule2.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Point(2D);
+            styleRule2.Style.Padding.Right = Telerik.Reporting.Drawing.Unit.Point(2D);
             this.StyleSheet.AddRange(new Telerik.Reporting.Drawing.StyleRule[] {
-            styleRule1});
-            this.Width = Telerik.Reporting.Drawing.Unit.Inch(7.8000006675720215D);
+            styleRule1,
+            styleRule2});
+            this.UnitOfMeasure = Telerik.Reporting.Drawing.UnitType.Inch;
+            this.Width = Telerik.Reporting.Drawing.Unit.Inch(6.2677164077758789D);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
         #endregion
 
-        private Telerik.Reporting.PageHeaderSection pageHeaderSection1;
-        private Telerik.Reporting.DetailSection detail;
+        private Telerik.Reporting.SqlDataSource dataSource1;
+        private Telerik.Reporting.PageHeaderSection pageHeaderSection;
+        private Telerik.Reporting.Panel invoiceInfoPanel;
+        private Telerik.Reporting.TextBox invoiceHeaderTextBox;
+        private Telerik.Reporting.TextBox invoiceNumberHeaderTextBox;
+        private Telerik.Reporting.TextBox invoiceNrTextBox;
+        private Telerik.Reporting.TextBox invoiceDateHeaderTextBox;
+        private Telerik.Reporting.TextBox invoiceDateTextBox;
+        private Telerik.Reporting.TextBox invoiceTotalHeaderTextBox;
+        private Telerik.Reporting.TextBox invoiceTotalTextBox1;
+        private Telerik.Reporting.DetailSection detailSection1;
+        private Telerik.Reporting.TextBox itemNrTextBox;
+        private Telerik.Reporting.TextBox itemDescriptionTextBox;
+        private Telerik.Reporting.TextBox lineTotalTextBox;
         private Telerik.Reporting.PageFooterSection pageFooterSection1;
         private Telerik.Reporting.GroupHeaderSection groupHeaderSection;
+        private Telerik.Reporting.Panel itemsHeaderPanel;
+        private Telerik.Reporting.TextBox ItemNoHeaderTextBox;
+        private Telerik.Reporting.TextBox descriptionHeaderTextBox;
+        private Telerik.Reporting.TextBox lineTotalHeaderTextBox;
         private Telerik.Reporting.GroupFooterSection groupFooterSection;
-        private Telerik.Reporting.SqlDataSource ds;
-        private Telerik.Reporting.List list1;
-        private Telerik.Reporting.Panel panel1;
+        private Telerik.Reporting.Panel subTotalPanel;
+        private Telerik.Reporting.TextBox subTotalLabelTextBox;
+        private Telerik.Reporting.TextBox subTotalTextBox;
         private Telerik.Reporting.TextBox textBox1;
-        private Telerik.Reporting.SqlDataSource sqlDataSource1;
+        private Telerik.Reporting.TextBox textBox2;
+        private Telerik.Reporting.TextBox textBox4;
+        private Telerik.Reporting.TextBox textBox3;
+        private Telerik.Reporting.TextBox textBox5;
     }
 }

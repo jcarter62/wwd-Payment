@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Linq;
 using System.Data.Linq;
 using classLib;
 using dataLib;
@@ -50,6 +49,15 @@ namespace SimpleTest {
             id = dbGrid.SelectedRows[0].Cells["idDataGridViewTextBoxColumn"].Value.ToString();
 
             MessageBox.Show("Selected: " + id, "Info", MessageBoxButtons.OK);
+            openReport(id);
+        }
+
+        private void openReport(string id) {
+            ShowReceipt f = new ShowReceipt(id);
+            f.Show();
+
+//            Report1 rpt = new Report1(dc.Connection.ConnectionString, id);
+
         }
 
 

@@ -39,13 +39,19 @@
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RcptID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Deposited = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.cRMasterBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblAppliedChk = new System.Windows.Forms.PictureBox();
             this.lblAppliedAmount = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.ItemsGrid = new System.Windows.Forms.DataGridView();
+            this.accountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amountDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cRDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panelDetail = new classLib.PanelTrak(this.components);
             this.btnPrint = new System.Windows.Forms.Button();
@@ -83,25 +89,19 @@
             this.btnAddItem = new System.Windows.Forms.Button();
             this.btnDeleteItem = new System.Windows.Forms.Button();
             this.btnSaveItem = new System.Windows.Forms.Button();
-            this.accountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amountDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cRDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.Deposited = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.cRMasterBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.paymentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PaymentsGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cRMasterBindingSource)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lblAppliedChk)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cRDetailBindingSource)).BeginInit();
             this.panelDetail.SuspendLayout();
             this.panelItem.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cRDetailBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cRMasterBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.paymentsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -258,6 +258,19 @@
             this.Amount.ReadOnly = true;
             this.Amount.Width = 68;
             // 
+            // Deposited
+            // 
+            this.Deposited.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Deposited.DataPropertyName = "Deposited";
+            this.Deposited.HeaderText = "Deposited";
+            this.Deposited.Name = "Deposited";
+            this.Deposited.ReadOnly = true;
+            this.Deposited.Width = 61;
+            // 
+            // cRMasterBindingSource
+            // 
+            this.cRMasterBindingSource.DataSource = typeof(dataLib.CRMaster);
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.lblAppliedChk);
@@ -333,6 +346,27 @@
             this.ItemsGrid.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_RowEnter);
             this.ItemsGrid.Validated += new System.EventHandler(this.ItemsGrid_Validated);
             // 
+            // accountDataGridViewTextBoxColumn
+            // 
+            this.accountDataGridViewTextBoxColumn.DataPropertyName = "Account";
+            this.accountDataGridViewTextBoxColumn.HeaderText = "Account";
+            this.accountDataGridViewTextBoxColumn.Name = "accountDataGridViewTextBoxColumn";
+            this.accountDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // amountDataGridViewTextBoxColumn1
+            // 
+            this.amountDataGridViewTextBoxColumn1.DataPropertyName = "Amount";
+            this.amountDataGridViewTextBoxColumn1.HeaderText = "Amount";
+            this.amountDataGridViewTextBoxColumn1.Name = "amountDataGridViewTextBoxColumn1";
+            this.amountDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // typeDataGridViewTextBoxColumn
+            // 
+            this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
+            this.typeDataGridViewTextBoxColumn.HeaderText = "Type";
+            this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
+            this.typeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // idDataGridViewTextBoxColumn
             // 
             this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
@@ -340,6 +374,10 @@
             this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
             this.idDataGridViewTextBoxColumn.ReadOnly = true;
             this.idDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // cRDetailBindingSource
+            // 
+            this.cRDetailBindingSource.DataSource = typeof(dataLib.CRDetail);
             // 
             // timer1
             // 
@@ -377,6 +415,7 @@
             // 
             // btnPrint
             // 
+            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrint.Location = new System.Drawing.Point(159, 179);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(79, 23);
@@ -755,44 +794,6 @@
             this.btnSaveItem.UseVisualStyleBackColor = true;
             this.btnSaveItem.Click += new System.EventHandler(this.btnSaveItem_Click);
             // 
-            // accountDataGridViewTextBoxColumn
-            // 
-            this.accountDataGridViewTextBoxColumn.DataPropertyName = "Account";
-            this.accountDataGridViewTextBoxColumn.HeaderText = "Account";
-            this.accountDataGridViewTextBoxColumn.Name = "accountDataGridViewTextBoxColumn";
-            this.accountDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // amountDataGridViewTextBoxColumn1
-            // 
-            this.amountDataGridViewTextBoxColumn1.DataPropertyName = "Amount";
-            this.amountDataGridViewTextBoxColumn1.HeaderText = "Amount";
-            this.amountDataGridViewTextBoxColumn1.Name = "amountDataGridViewTextBoxColumn1";
-            this.amountDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // typeDataGridViewTextBoxColumn
-            // 
-            this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
-            this.typeDataGridViewTextBoxColumn.HeaderText = "Type";
-            this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
-            this.typeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // cRDetailBindingSource
-            // 
-            this.cRDetailBindingSource.DataSource = typeof(dataLib.CRDetail);
-            // 
-            // Deposited
-            // 
-            this.Deposited.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Deposited.DataPropertyName = "Deposited";
-            this.Deposited.HeaderText = "Deposited";
-            this.Deposited.Name = "Deposited";
-            this.Deposited.ReadOnly = true;
-            this.Deposited.Width = 61;
-            // 
-            // cRMasterBindingSource
-            // 
-            this.cRMasterBindingSource.DataSource = typeof(dataLib.CRMaster);
-            // 
             // paymentsBindingSource
             // 
             this.paymentsBindingSource.DataSource = typeof(classLib.Payments);
@@ -819,15 +820,15 @@
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PaymentsGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cRMasterBindingSource)).EndInit();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lblAppliedChk)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cRDetailBindingSource)).EndInit();
             this.panelDetail.ResumeLayout(false);
             this.panelDetail.PerformLayout();
             this.panelItem.ResumeLayout(false);
             this.panelItem.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cRDetailBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cRMasterBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.paymentsBindingSource)).EndInit();
             this.ResumeLayout(false);
 
