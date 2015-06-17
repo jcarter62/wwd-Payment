@@ -1,7 +1,4 @@
-﻿DROP function dbo.get_NT_Username
-go
-
-Create FUNCTION dbo.get_NT_Username()
+﻿Create FUNCTION dbo.get_NT_Username()
 RETURNS varchar(40) AS  
 BEGIN 
   declare @NT_Username varchar(128)

@@ -1,7 +1,4 @@
-﻿DROP FUNCTION [dbo].[shortGuid]
-GO
-
--- =============================================
+﻿-- =============================================
 -- Author:		Jim Carter
 -- Create date: 2014-May-28
 -- Description:	Create short guid

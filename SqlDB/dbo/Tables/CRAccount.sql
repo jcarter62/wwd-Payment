@@ -1,7 +1,4 @@
-﻿drop table CrAccount;
-go
-
-CREATE TABLE [dbo].[CRAccount](
+﻿CREATE TABLE [dbo].[CRAccount](
 	[id] [varchar](40) NOT NULL CONSTRAINT [DF_CRAccount_id]  DEFAULT ([dbo].[shortGuid](newid())),
 	[AccountNo] [varchar](50) NULL,
 	[AccountName] [varchar](50) NULL,
@@ -12,9 +9,6 @@ CREATE TABLE [dbo].[CRAccount](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
-go
-
-drop trigger tr_CrAccount_Insert;
 go
 
 CREATE TRIGGER tr_CrAccount_Insert

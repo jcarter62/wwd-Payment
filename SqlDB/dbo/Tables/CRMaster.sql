@@ -1,8 +1,4 @@
-﻿DROP TABLE [dbo].[CRMaster];
-
-GO
-
-CREATE TABLE [dbo].[CRMaster] (
+﻿CREATE TABLE [dbo].[CRMaster] (
     [Id]           VARCHAR (40) NOT NULL,
     [State]        VARCHAR (15) NULL,
     [SessionId]    VARCHAR (40) NULL,
