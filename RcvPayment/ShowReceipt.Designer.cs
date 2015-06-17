@@ -27,6 +27,7 @@
             this.rview = new Telerik.ReportViewer.WinForms.ReportViewer();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnEmail = new System.Windows.Forms.Button();
+            this.cbEmail = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // rview
@@ -61,10 +62,21 @@
             this.btnEmail.UseVisualStyleBackColor = true;
             this.btnEmail.Click += new System.EventHandler(this.btnEmail_Click);
             // 
+            // cbEmail
+            // 
+            this.cbEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbEmail.FormattingEnabled = true;
+            this.cbEmail.Location = new System.Drawing.Point(93, 310);
+            this.cbEmail.Name = "cbEmail";
+            this.cbEmail.Size = new System.Drawing.Size(374, 21);
+            this.cbEmail.TabIndex = 3;
+            // 
             // ShowReceipt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(594, 345);
+            this.Controls.Add(this.cbEmail);
             this.Controls.Add(this.btnEmail);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.rview);
@@ -80,5 +92,6 @@
         private Telerik.ReportViewer.WinForms.ReportViewer rview;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnEmail;
+        private System.Windows.Forms.ComboBox cbEmail;
     }
 }

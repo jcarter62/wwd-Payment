@@ -110,4 +110,39 @@
       <Column Name="dnote" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.CMContact" Member="CMContacts">
+    <Type Name="CMContact">
+      <Column Name="IDContact" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PNL" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="CompanyName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Position" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CMEmail" Member="CMEmails">
+    <Type Name="CMEmail">
+      <Column Name="IDEmail" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CMNameContact" Member="CMNameContacts">
+    <Type Name="CMNameContact">
+      <Column Name="IDNameCont" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="Name_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IDContact" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="Type" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="IDAddress" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="IDPhone" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="IDEmail" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="Prim" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="WO" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="AP" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="RL" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="Other" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -8,26 +9,62 @@ using System.Windows.Forms;
 using System.Linq;
 using dataLib;
 using classLib;
+using Telerik.Reporting;
+using Telerik.Reporting.Processing;
+using System.Net.Mail;
 
 namespace RcvPayment {
     public partial class ShowReceipt : RcvPayment.MyForm {
         AppSettings aset;
+        dbClassDataContext dc;
+
         public string Id { get; set; }
 
         public ShowReceipt() {
             InitializeComponent();
             aset = new AppSettings();
+            dc = new dbClassDataContext(aset.wmis.connectionString);
         }
 
         public void DisplayReport(string id ) {
             Id = id;
             aset = new AppSettings();
-
-            aset = new AppSettings();
             Report1 rpt = new Report1(aset.wmis.connectionString, Id);
 
             rview.ReportSource = rpt;
             rview.RefreshReport();
+
+            loadEmailList();
+        }
+
+/*
+select 
+distinct cont.FirstName, cont.LastName, ce.Email
+from CRDetail d 
+inner join CMNameContact nc on d.Account = nc.Name_ID
+inner join CMEmail ce on nc.IDEmail = ce.IDEmail
+inner join CMContact cont on nc.IDContact = cont.IDContact
+where d.CRMid = '856e091752bb41849a0710d6c71383a7'
+order by ce.Email
+*/
+
+        private void loadEmailList() {
+            var q = (from d in dc.CRDetails
+                     join nc in dc.CMNameContacts on d.Account equals nc.Name_ID.ToString()
+                     join ce in dc.CMEmails on nc.IDEmail equals ce.IDEmail
+                     join cn in dc.CMContacts on nc.IDContact equals cn.IDContact
+                     where d.CRMid == Id
+                     select new { cn.FirstName, cn.LastName, ce.Email }  ).Distinct() ;
+
+            cbEmail.Items.Clear();
+            foreach ( var r in q ) {
+                string item;
+                item =  r.FirstName.Trim() + " " + 
+                        r.LastName.Trim() + " <" + 
+                        r.Email.Trim() + ">";
+                cbEmail.Items.Add(item);
+            }
+            cbEmail.Items.Add("Jim Carter <jcarter@westlandswater.org>");
         }
 
         private void ShowReceipt_Load(object sender, EventArgs e) {
@@ -39,8 +76,73 @@ namespace RcvPayment {
         }
 
         private void btnEmail_Click(object sender, EventArgs e) {
-            // Email report
-            rview.ExportReport("PDF", null);
+            // Export report to pdf.
+            // (1)
+            Report1 rpt = new Report1(aset.wmis.connectionString, Id);
+            //
+            var rptProcessor = new ReportProcessor();
+            var instanceRptSrc = new InstanceReportSource(); // (2)
+            instanceRptSrc.ReportDocument = rpt;
+            var result = rptProcessor.RenderReport("PDF", instanceRptSrc, null);
+
+            string tempfile = System.IO.Path.GetTempPath() + "\\" + Guid.NewGuid().ToString().ToLower().Replace("{", "").Replace("}", "").Replace("-", "") + ".pdf";
+            System.IO.FileStream fs = new System.IO.FileStream(tempfile, System.IO.FileMode.Create);
+
+            fs.Write(result.DocumentBytes, 0, result.DocumentBytes.Length);
+            fs.Close();
+
+            // at this point, the report has been saved as pdf to a pdf named tempfile
+            //
+
+            // Now we need to email this.
+            sendFileToEmailAddress(tempfile);
+
+            // Reference:
+            // (1) http://www.telerik.com/forums/blank-pages-in-export-to-pdf
+            // (2) http://www.telerik.com/support/kb/reporting/details/how-to-migrate-your-project-to-utilize-the-new-reportsource-objects#reportprocessor
+            //
+        }
+
+        private void sendFileToEmailAddress(string tempfile) {
+            AppSettings aset = new AppSettings();
+
+            try {
+                string recptId = getReceiptID();
+                string emailmessage = "Payment Receipt is Attached.";
+                string emailsubject = "WWD Payment Receipt: " + recptId;
+                string toAddress = cbEmail.Text;
+
+                MailMessage mail = new MailMessage(aset.EmailFrom, toAddress );
+                SmtpClient client = new SmtpClient();
+                client.Port = aset.SmtpPortInt;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Host = aset.SmtpServer;
+                mail.Subject = emailsubject;
+                mail.Body = emailmessage;
+                Attachment atch = new Attachment(tempfile);
+                mail.Attachments.Add(atch);
+                client.Send(mail);
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private string getReceiptID() {
+            string result = "";
+            try {
+                var q = (from m in dc.CRMasters
+                         where m.Id == Id
+                         select m.RcptID).First();
+
+                result = q;
+
+            } catch ( Exception ex ) {
+                Console.WriteLine(ex.Message);
+            }
+
+            return result;
         }
     }
 }

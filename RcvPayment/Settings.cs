@@ -36,6 +36,15 @@ namespace RcvPayment {
             textMusername.Text = aset.mas500.Username;
             textMpassword.Text = aset.mas500.Password;
             checkBoxMwinauth.Checked = aset.mas500.WindowsAuth;
+
+            textSmtpServer.Text = aset.SmtpServer;
+            textSmtpPort.Text = aset.SmtpPort;
+            textEmailFrom.Text = aset.EmailFrom;
+            textEmailTo.Text = aset.EmailTo;
+            chkViaAgent.Checked = aset.SendViaOutlook;
+            chkSmtpAuthReq.Checked = aset.SmtpAuthReq;
+            textSmtpUser.Text = aset.SmtpUser;
+            textSmtpPass.Text = aset.SmtpPass;
         }
 
         private void btnSave_Click(object sender, EventArgs e) {
@@ -50,6 +59,15 @@ namespace RcvPayment {
             aset.mas500.Username = textMusername.Text;
             aset.mas500.Password = textMpassword.Text;
             aset.mas500.WindowsAuth = checkBoxMwinauth.Checked;
+
+            aset.SmtpServer = textSmtpServer.Text;
+            aset.SmtpPort = textSmtpPort.Text;
+            aset.EmailFrom = textEmailFrom.Text;
+            aset.EmailTo = textEmailTo.Text;
+            aset.SendViaOutlook = chkViaAgent.Checked;
+            aset.SmtpAuthReq = chkSmtpAuthReq.Checked;
+            aset.SmtpUser = textSmtpUser.Text;
+            aset.SmtpPass = textSmtpPass.Text;
 
             aset.Save();
         }
@@ -73,6 +91,14 @@ namespace RcvPayment {
             }
             else {
                 mas500Image.Image = Image.FromFile(statusImages.failImage);
+            }
+        }
+
+        private void btnEmailTest_Click(object sender, EventArgs e) {
+            if ( aset.TestSmtp() ) {
+                smtpImage.Image = Image.FromFile(statusImages.successImage);
+            } else {
+                smtpImage.Image = Image.FromFile(statusImages.failImage);
             }
         }
     }

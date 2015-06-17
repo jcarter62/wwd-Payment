@@ -121,6 +121,30 @@ namespace dataLib
 				return this.GetTable<v_CrReceipt>();
 			}
 		}
+		
+		public System.Data.Linq.Table<CMContact> CMContacts
+		{
+			get
+			{
+				return this.GetTable<CMContact>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CMEmail> CMEmails
+		{
+			get
+			{
+				return this.GetTable<CMEmail>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CMNameContact> CMNameContacts
+		{
+			get
+			{
+				return this.GetTable<CMNameContact>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CRMasterId")]
@@ -2046,6 +2070,447 @@ namespace dataLib
 				if ((this._dnote != value))
 				{
 					this._dnote = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CMContact")]
+	public partial class CMContact
+	{
+		
+		private string _IDContact;
+		
+		private string _Title;
+		
+		private string _FirstName;
+		
+		private string _MiddleName;
+		
+		private string _LastName;
+		
+		private string _PNL;
+		
+		private string _CompanyName;
+		
+		private string _Position;
+		
+		public CMContact()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDContact", DbType="VarChar(40) NOT NULL", CanBeNull=false)]
+		public string IDContact
+		{
+			get
+			{
+				return this._IDContact;
+			}
+			set
+			{
+				if ((this._IDContact != value))
+				{
+					this._IDContact = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="VarChar(30)")]
+		public string Title
+		{
+			get
+			{
+				return this._Title;
+			}
+			set
+			{
+				if ((this._Title != value))
+				{
+					this._Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="VarChar(30)")]
+		public string FirstName
+		{
+			get
+			{
+				return this._FirstName;
+			}
+			set
+			{
+				if ((this._FirstName != value))
+				{
+					this._FirstName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MiddleName", DbType="VarChar(30)")]
+		public string MiddleName
+		{
+			get
+			{
+				return this._MiddleName;
+			}
+			set
+			{
+				if ((this._MiddleName != value))
+				{
+					this._MiddleName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="VarChar(30)")]
+		public string LastName
+		{
+			get
+			{
+				return this._LastName;
+			}
+			set
+			{
+				if ((this._LastName != value))
+				{
+					this._LastName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PNL", DbType="VarChar(30)")]
+		public string PNL
+		{
+			get
+			{
+				return this._PNL;
+			}
+			set
+			{
+				if ((this._PNL != value))
+				{
+					this._PNL = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CompanyName", DbType="VarChar(50)")]
+		public string CompanyName
+		{
+			get
+			{
+				return this._CompanyName;
+			}
+			set
+			{
+				if ((this._CompanyName != value))
+				{
+					this._CompanyName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Position", DbType="VarChar(50)")]
+		public string Position
+		{
+			get
+			{
+				return this._Position;
+			}
+			set
+			{
+				if ((this._Position != value))
+				{
+					this._Position = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CMEmail")]
+	public partial class CMEmail
+	{
+		
+		private string _IDEmail;
+		
+		private string _Email;
+		
+		private string _Type;
+		
+		public CMEmail()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDEmail", DbType="VarChar(40) NOT NULL", CanBeNull=false)]
+		public string IDEmail
+		{
+			get
+			{
+				return this._IDEmail;
+			}
+			set
+			{
+				if ((this._IDEmail != value))
+				{
+					this._IDEmail = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this._Email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="VarChar(30)")]
+		public string Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this._Type = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CMNameContact")]
+	public partial class CMNameContact
+	{
+		
+		private string _IDNameCont;
+		
+		private int _Name_ID;
+		
+		private string _IDContact;
+		
+		private char _Type;
+		
+		private string _IDAddress;
+		
+		private string _IDPhone;
+		
+		private string _IDEmail;
+		
+		private System.Nullable<char> _Prim;
+		
+		private System.Nullable<char> _WO;
+		
+		private System.Nullable<char> _AP;
+		
+		private System.Nullable<char> _RL;
+		
+		private string _Other;
+		
+		public CMNameContact()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDNameCont", DbType="VarChar(40) NOT NULL", CanBeNull=false)]
+		public string IDNameCont
+		{
+			get
+			{
+				return this._IDNameCont;
+			}
+			set
+			{
+				if ((this._IDNameCont != value))
+				{
+					this._IDNameCont = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name_ID", DbType="Int NOT NULL")]
+		public int Name_ID
+		{
+			get
+			{
+				return this._Name_ID;
+			}
+			set
+			{
+				if ((this._Name_ID != value))
+				{
+					this._Name_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDContact", DbType="VarChar(40)")]
+		public string IDContact
+		{
+			get
+			{
+				return this._IDContact;
+			}
+			set
+			{
+				if ((this._IDContact != value))
+				{
+					this._IDContact = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="Char(1) NOT NULL")]
+		public char Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this._Type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDAddress", DbType="VarChar(40)")]
+		public string IDAddress
+		{
+			get
+			{
+				return this._IDAddress;
+			}
+			set
+			{
+				if ((this._IDAddress != value))
+				{
+					this._IDAddress = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPhone", DbType="VarChar(40)")]
+		public string IDPhone
+		{
+			get
+			{
+				return this._IDPhone;
+			}
+			set
+			{
+				if ((this._IDPhone != value))
+				{
+					this._IDPhone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDEmail", DbType="VarChar(40)")]
+		public string IDEmail
+		{
+			get
+			{
+				return this._IDEmail;
+			}
+			set
+			{
+				if ((this._IDEmail != value))
+				{
+					this._IDEmail = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Prim", DbType="Char(1)")]
+		public System.Nullable<char> Prim
+		{
+			get
+			{
+				return this._Prim;
+			}
+			set
+			{
+				if ((this._Prim != value))
+				{
+					this._Prim = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WO", DbType="Char(1)")]
+		public System.Nullable<char> WO
+		{
+			get
+			{
+				return this._WO;
+			}
+			set
+			{
+				if ((this._WO != value))
+				{
+					this._WO = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AP", DbType="Char(1)")]
+		public System.Nullable<char> AP
+		{
+			get
+			{
+				return this._AP;
+			}
+			set
+			{
+				if ((this._AP != value))
+				{
+					this._AP = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RL", DbType="Char(1)")]
+		public System.Nullable<char> RL
+		{
+			get
+			{
+				return this._RL;
+			}
+			set
+			{
+				if ((this._RL != value))
+				{
+					this._RL = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Other", DbType="VarChar(80)")]
+		public string Other
+		{
+			get
+			{
+				return this._Other;
+			}
+			set
+			{
+				if ((this._Other != value))
+				{
+					this._Other = value;
 				}
 			}
 		}

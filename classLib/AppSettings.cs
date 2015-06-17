@@ -3,6 +3,7 @@ using System.IO;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Xml;
+using System.Net.Mail;
 
 namespace classLib {
 
@@ -22,15 +23,19 @@ namespace classLib {
 
         #region Properties
         public string Key {
-            get { return _Key;  }
+            get { return _Key; }
         }
+
+        public string AppName { get { return _AppName; } }
 
         public string SmtpServer { get; set; }
         public string SmtpPort { get; set; }
+        public string EmailFrom { get; set; }
+        public string EmailTo { get; set; }
+        public bool SendViaOutlook { get; set; }
+        public bool SmtpAuthReq { get; set; }
         public string SmtpUser { get; set; }
         public string SmtpPass { get; set; }
-        public string EmailFrom { get; set; }
-        public bool SendViaOutlook { get; set; }
 
         #endregion Properties
 
@@ -63,11 +68,11 @@ namespace classLib {
         private void loadDbInfo(DbSettings db, string prefix) {
             db.Hostname = GetString(prefix + "Hostname");
             db.Database = GetString(prefix + "Database");
-            db.Username = GetString(prefix + "Username", true );
-            db.Password = GetString(prefix + "Password", true );
+            db.Username = GetString(prefix + "Username", true);
+            db.Password = GetString(prefix + "Password", true);
             string yn;
             yn = GetString(prefix + "WindowsAuthentication");
-            db.WindowsAuth = ( yn == "Y");
+            db.WindowsAuth = (yn == "Y");
         }
 
         /// <summary>
@@ -80,28 +85,22 @@ namespace classLib {
         }
 
         private void loadOtherInfo() {
-            /*
-            WriteString("SmtpServer", SmtpServer);
-            WriteString("SmtpPort", SmtpPort);
-            WriteString("SmtpUser", SmtpUser);
-            WriteString("SmtpPass", SmtpPass);
-            WriteString("EmailFrom", EmailFrom);
-            WriteString("SendViaOutlook", SendViaOutlook);
-            */
             SmtpServer = GetString("SmtpServer");
             SmtpPort = GetString("SmtpPort");
-            SmtpUser = GetString("SmtpUser");
-            SmtpPass = GetString("SmtpPass");
             EmailFrom = GetString("EmailFrom");
-            SendViaOutlook = ( GetString("SendViaOutlook") == "Yes" ? true : false );
+            EmailTo = GetString("EmailTo");
+            SendViaOutlook = (GetString("SendViaOutlook") == "Yes" ? true : false);
+            SmtpAuthReq = (GetString("SmtpAuthReq") == "Yes" ? true : false);
+            SmtpUser = GetString("SmtpUser", true);
+            SmtpPass = GetString("SmtpPass", true);
         }
 
         private void saveDbInfo(DbSettings db, string prefix) {
             WriteString(prefix + "Hostname", db.Hostname);
-            WriteString(prefix + "Database",db.Database);
-            WriteString(prefix + "Username",db.Username,true);
-            WriteString(prefix + "Password",db.Password, true);
-            if ( db.WindowsAuth) {
+            WriteString(prefix + "Database", db.Database);
+            WriteString(prefix + "Username", db.Username, true);
+            WriteString(prefix + "Password", db.Password, true);
+            if (db.WindowsAuth) {
                 WriteString(prefix + "WindowsAuthentication", "Y");
             }
         }
@@ -118,14 +117,17 @@ namespace classLib {
         private void saveOtherInfo() {
             WriteString("SmtpServer", SmtpServer);
             WriteString("SmtpPort", SmtpPort);
-            WriteString("SmtpUser", SmtpUser);
-            WriteString("SmtpPass", SmtpPass);
             WriteString("EmailFrom", EmailFrom);
-            WriteString("SendViaOutlook", (SendViaOutlook ? "Yes" : "No" ));
+            WriteString("EmailTo", EmailTo);
+            WriteString("SendViaOutlook", (SendViaOutlook ? "Yes" : "No"));
+            WriteString("SmtpAuthReq", (SmtpAuthReq ? "Yes" : "No"));
+            WriteString("SmtpUser", SmtpUser, true);
+            WriteString("SmtpPass", SmtpPass, true);
         }
 
         #endregion Methods
 
+        #region GetSet Methods        
         /// <summary>
         /// Get Setting, clear text
         /// </summary>
@@ -179,6 +181,43 @@ namespace classLib {
         private void WriteString(string Name, string Value) {
             WriteString(Name, Value, false);
         }
+        #endregion GetSet Methods
+
+        #region EmailTesting
+
+        public bool TestSmtp() {
+            bool result = false;
+
+            try {
+                string emailmessage = "Test email message from " + this._AppName + " application.";
+                string emailsubject = emailmessage;
+
+                MailMessage mail = new MailMessage(this.EmailFrom, this.EmailTo);
+                SmtpClient client = new SmtpClient();
+                client.Port = this.SmtpPortInt;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Host = this.SmtpServer;
+                mail.Subject = emailsubject;
+                mail.Body = emailmessage;
+                client.Send(mail);
+                result = true;
+            } catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+            }
+
+            return result;
+        }
+
+        public int SmtpPortInt {
+            get {
+                int result;
+                int.TryParse(SmtpPort, out result);
+                return result;
+            }
+        }
+        #endregion
+
 
     }
 }

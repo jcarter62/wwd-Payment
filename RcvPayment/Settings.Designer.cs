@@ -23,12 +23,13 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             this.tabDB = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.mas500Image = new System.Windows.Forms.PictureBox();
-            this.btnMtest = new System.Windows.Forms.Button();
             this.wmisImage = new System.Windows.Forms.PictureBox();
+            this.btnMtest = new System.Windows.Forms.Button();
             this.btnWtest = new System.Windows.Forms.Button();
             this.checkBoxMwinauth = new System.Windows.Forms.CheckBox();
             this.textMpassword = new System.Windows.Forms.TextBox();
@@ -53,17 +54,32 @@
             this.lblWmisHost = new System.Windows.Forms.Label();
             this.lblWmisHdr = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textEmailTo = new classLib.TextBoxTrak(this.components);
+            this.label17 = new System.Windows.Forms.Label();
+            this.smtpImage = new System.Windows.Forms.PictureBox();
+            this.btnEmailTest = new System.Windows.Forms.Button();
+            this.chkViaAgent = new System.Windows.Forms.CheckBox();
+            this.textEmailFrom = new classLib.TextBoxTrak(this.components);
+            this.label16 = new System.Windows.Forms.Label();
+            this.chkSmtpAuthReq = new System.Windows.Forms.CheckBox();
+            this.textSmtpPort = new classLib.TextBoxTrak(this.components);
+            this.label15 = new System.Windows.Forms.Label();
+            this.textSmtpUser = new classLib.TextBoxTrak(this.components);
+            this.label14 = new System.Windows.Forms.Label();
+            this.textSmtpPass = new classLib.TextBoxTrak(this.components);
+            this.label13 = new System.Windows.Forms.Label();
+            this.textSmtpServer = new classLib.TextBoxTrak(this.components);
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.tabDB.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mas500Image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wmisImage)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.smtpImage)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,7 +92,7 @@
             this.tabDB.Name = "tabDB";
             this.tabDB.SelectedIndex = 0;
             this.tabDB.Size = new System.Drawing.Size(546, 346);
-            this.tabDB.TabIndex = 23;
+            this.tabDB.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -120,18 +136,9 @@
             this.mas500Image.Location = new System.Drawing.Point(484, 182);
             this.mas500Image.Name = "mas500Image";
             this.mas500Image.Size = new System.Drawing.Size(48, 48);
+            this.mas500Image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.mas500Image.TabIndex = 48;
             this.mas500Image.TabStop = false;
-            // 
-            // btnMtest
-            // 
-            this.btnMtest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMtest.Location = new System.Drawing.Point(484, 153);
-            this.btnMtest.Name = "btnMtest";
-            this.btnMtest.Size = new System.Drawing.Size(48, 23);
-            this.btnMtest.TabIndex = 47;
-            this.btnMtest.Text = "Test";
-            this.btnMtest.UseVisualStyleBackColor = true;
             // 
             // wmisImage
             // 
@@ -139,18 +146,31 @@
             this.wmisImage.Location = new System.Drawing.Point(484, 29);
             this.wmisImage.Name = "wmisImage";
             this.wmisImage.Size = new System.Drawing.Size(48, 48);
+            this.wmisImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.wmisImage.TabIndex = 46;
             this.wmisImage.TabStop = false;
+            // 
+            // btnMtest
+            // 
+            this.btnMtest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMtest.Location = new System.Drawing.Point(484, 155);
+            this.btnMtest.Name = "btnMtest";
+            this.btnMtest.Size = new System.Drawing.Size(48, 23);
+            this.btnMtest.TabIndex = 47;
+            this.btnMtest.Text = "Test";
+            this.btnMtest.UseVisualStyleBackColor = true;
+            this.btnMtest.Click += new System.EventHandler(this.btnMtest_Click);
             // 
             // btnWtest
             // 
             this.btnWtest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnWtest.Location = new System.Drawing.Point(484, 0);
+            this.btnWtest.Location = new System.Drawing.Point(484, 2);
             this.btnWtest.Name = "btnWtest";
             this.btnWtest.Size = new System.Drawing.Size(48, 23);
             this.btnWtest.TabIndex = 45;
             this.btnWtest.Text = "Test";
             this.btnWtest.UseVisualStyleBackColor = true;
+            this.btnWtest.Click += new System.EventHandler(this.btnWtest_Click);
             // 
             // checkBoxMwinauth
             // 
@@ -158,7 +178,7 @@
             this.checkBoxMwinauth.Location = new System.Drawing.Point(163, 230);
             this.checkBoxMwinauth.Name = "checkBoxMwinauth";
             this.checkBoxMwinauth.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxMwinauth.TabIndex = 36;
+            this.checkBoxMwinauth.TabIndex = 7;
             this.checkBoxMwinauth.UseVisualStyleBackColor = true;
             // 
             // textMpassword
@@ -169,7 +189,7 @@
             this.textMpassword.Name = "textMpassword";
             this.textMpassword.PasswordChar = '*';
             this.textMpassword.Size = new System.Drawing.Size(374, 20);
-            this.textMpassword.TabIndex = 38;
+            this.textMpassword.TabIndex = 9;
             // 
             // textMusername
             // 
@@ -178,7 +198,7 @@
             this.textMusername.Location = new System.Drawing.Point(163, 251);
             this.textMusername.Name = "textMusername";
             this.textMusername.Size = new System.Drawing.Size(374, 20);
-            this.textMusername.TabIndex = 37;
+            this.textMusername.TabIndex = 8;
             // 
             // textMdbname
             // 
@@ -187,7 +207,7 @@
             this.textMdbname.Location = new System.Drawing.Point(163, 206);
             this.textMdbname.Name = "textMdbname";
             this.textMdbname.Size = new System.Drawing.Size(315, 20);
-            this.textMdbname.TabIndex = 35;
+            this.textMdbname.TabIndex = 6;
             // 
             // textMhostname
             // 
@@ -196,7 +216,7 @@
             this.textMhostname.Location = new System.Drawing.Point(163, 182);
             this.textMhostname.Name = "textMhostname";
             this.textMhostname.Size = new System.Drawing.Size(315, 20);
-            this.textMhostname.TabIndex = 34;
+            this.textMhostname.TabIndex = 5;
             // 
             // label2
             // 
@@ -258,7 +278,7 @@
             this.checkBoxWwinauth.Location = new System.Drawing.Point(163, 77);
             this.checkBoxWwinauth.Name = "checkBoxWwinauth";
             this.checkBoxWwinauth.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxWwinauth.TabIndex = 28;
+            this.checkBoxWwinauth.TabIndex = 2;
             this.checkBoxWwinauth.UseVisualStyleBackColor = true;
             // 
             // textWpassword
@@ -269,7 +289,7 @@
             this.textWpassword.Name = "textWpassword";
             this.textWpassword.PasswordChar = '*';
             this.textWpassword.Size = new System.Drawing.Size(374, 20);
-            this.textWpassword.TabIndex = 31;
+            this.textWpassword.TabIndex = 4;
             // 
             // textWusername
             // 
@@ -278,7 +298,7 @@
             this.textWusername.Location = new System.Drawing.Point(163, 98);
             this.textWusername.Name = "textWusername";
             this.textWusername.Size = new System.Drawing.Size(374, 20);
-            this.textWusername.TabIndex = 29;
+            this.textWusername.TabIndex = 3;
             // 
             // textWdbname
             // 
@@ -287,7 +307,7 @@
             this.textWdbname.Location = new System.Drawing.Point(163, 53);
             this.textWdbname.Name = "textWdbname";
             this.textWdbname.Size = new System.Drawing.Size(315, 20);
-            this.textWdbname.TabIndex = 26;
+            this.textWdbname.TabIndex = 1;
             // 
             // textWhostname
             // 
@@ -296,7 +316,7 @@
             this.textWhostname.Location = new System.Drawing.Point(163, 29);
             this.textWhostname.Name = "textWhostname";
             this.textWhostname.Size = new System.Drawing.Size(315, 20);
-            this.textWhostname.TabIndex = 24;
+            this.textWhostname.TabIndex = 0;
             // 
             // label1
             // 
@@ -346,7 +366,7 @@
             // lblWmisHdr
             // 
             this.lblWmisHdr.AutoSize = true;
-            this.lblWmisHdr.Location = new System.Drawing.Point(1, 5);
+            this.lblWmisHdr.Location = new System.Drawing.Point(2, 4);
             this.lblWmisHdr.Name = "lblWmisHdr";
             this.lblWmisHdr.Size = new System.Drawing.Size(151, 13);
             this.lblWmisHdr.TabIndex = 23;
@@ -354,7 +374,21 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.textBox1);
+            this.tabPage2.Controls.Add(this.textEmailTo);
+            this.tabPage2.Controls.Add(this.label17);
+            this.tabPage2.Controls.Add(this.smtpImage);
+            this.tabPage2.Controls.Add(this.btnEmailTest);
+            this.tabPage2.Controls.Add(this.chkViaAgent);
+            this.tabPage2.Controls.Add(this.textEmailFrom);
+            this.tabPage2.Controls.Add(this.label16);
+            this.tabPage2.Controls.Add(this.chkSmtpAuthReq);
+            this.tabPage2.Controls.Add(this.textSmtpPort);
+            this.tabPage2.Controls.Add(this.label15);
+            this.tabPage2.Controls.Add(this.textSmtpUser);
+            this.tabPage2.Controls.Add(this.label14);
+            this.tabPage2.Controls.Add(this.textSmtpPass);
+            this.tabPage2.Controls.Add(this.label13);
+            this.tabPage2.Controls.Add(this.textSmtpServer);
             this.tabPage2.Controls.Add(this.label11);
             this.tabPage2.Controls.Add(this.label12);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -365,23 +399,167 @@
             this.tabPage2.Text = "Email";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // textEmailTo
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.textEmailTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(123, 32);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(315, 20);
-            this.textBox1.TabIndex = 27;
+            this.textEmailTo.Changed = false;
+            this.textEmailTo.Cue = "user@domain used for Testing";
+            this.textEmailTo.Location = new System.Drawing.Point(104, 110);
+            this.textEmailTo.Name = "textEmailTo";
+            this.textEmailTo.Size = new System.Drawing.Size(359, 20);
+            this.textEmailTo.TabIndex = 3;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(9, 113);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(64, 13);
+            this.label17.TabIndex = 48;
+            this.label17.Text = "To Address:";
+            // 
+            // smtpImage
+            // 
+            this.smtpImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.smtpImage.Location = new System.Drawing.Point(484, 32);
+            this.smtpImage.Name = "smtpImage";
+            this.smtpImage.Size = new System.Drawing.Size(48, 48);
+            this.smtpImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.smtpImage.TabIndex = 47;
+            this.smtpImage.TabStop = false;
+            // 
+            // btnEmailTest
+            // 
+            this.btnEmailTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEmailTest.Location = new System.Drawing.Point(484, 3);
+            this.btnEmailTest.Name = "btnEmailTest";
+            this.btnEmailTest.Size = new System.Drawing.Size(48, 23);
+            this.btnEmailTest.TabIndex = 46;
+            this.btnEmailTest.Text = "Test";
+            this.btnEmailTest.UseVisualStyleBackColor = true;
+            this.btnEmailTest.Click += new System.EventHandler(this.btnEmailTest_Click);
+            // 
+            // chkViaAgent
+            // 
+            this.chkViaAgent.AutoSize = true;
+            this.chkViaAgent.Location = new System.Drawing.Point(104, 136);
+            this.chkViaAgent.Name = "chkViaAgent";
+            this.chkViaAgent.Size = new System.Drawing.Size(243, 17);
+            this.chkViaAgent.TabIndex = 4;
+            this.chkViaAgent.Text = "Send Messages Using Outlook or Email Agent";
+            this.chkViaAgent.UseVisualStyleBackColor = true;
+            this.chkViaAgent.Visible = false;
+            // 
+            // textEmailFrom
+            // 
+            this.textEmailFrom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textEmailFrom.Changed = false;
+            this.textEmailFrom.Cue = "user@domain";
+            this.textEmailFrom.Location = new System.Drawing.Point(104, 84);
+            this.textEmailFrom.Name = "textEmailFrom";
+            this.textEmailFrom.Size = new System.Drawing.Size(359, 20);
+            this.textEmailFrom.TabIndex = 2;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(9, 87);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(74, 13);
+            this.label16.TabIndex = 38;
+            this.label16.Text = "From Address:";
+            // 
+            // chkSmtpAuthReq
+            // 
+            this.chkSmtpAuthReq.AutoSize = true;
+            this.chkSmtpAuthReq.Location = new System.Drawing.Point(103, 159);
+            this.chkSmtpAuthReq.Name = "chkSmtpAuthReq";
+            this.chkSmtpAuthReq.Size = new System.Drawing.Size(203, 17);
+            this.chkSmtpAuthReq.TabIndex = 5;
+            this.chkSmtpAuthReq.Text = "Smtp Server Requires Authentication:";
+            this.chkSmtpAuthReq.UseVisualStyleBackColor = true;
+            // 
+            // textSmtpPort
+            // 
+            this.textSmtpPort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textSmtpPort.Changed = false;
+            this.textSmtpPort.Cue = "Port Number (usually 25)";
+            this.textSmtpPort.Location = new System.Drawing.Point(103, 58);
+            this.textSmtpPort.Name = "textSmtpPort";
+            this.textSmtpPort.Size = new System.Drawing.Size(360, 20);
+            this.textSmtpPort.TabIndex = 1;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(8, 61);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(56, 13);
+            this.label15.TabIndex = 34;
+            this.label15.Text = "Smtp Port:";
+            // 
+            // textSmtpUser
+            // 
+            this.textSmtpUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textSmtpUser.Changed = false;
+            this.textSmtpUser.Cue = "Username for Authentication";
+            this.textSmtpUser.Location = new System.Drawing.Point(104, 182);
+            this.textSmtpUser.Name = "textSmtpUser";
+            this.textSmtpUser.Size = new System.Drawing.Size(359, 20);
+            this.textSmtpUser.TabIndex = 6;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(9, 185);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(56, 13);
+            this.label14.TabIndex = 32;
+            this.label14.Text = "SmtpUser:";
+            // 
+            // textSmtpPass
+            // 
+            this.textSmtpPass.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textSmtpPass.Changed = false;
+            this.textSmtpPass.Cue = "Password for Authentication";
+            this.textSmtpPass.Location = new System.Drawing.Point(104, 208);
+            this.textSmtpPass.Name = "textSmtpPass";
+            this.textSmtpPass.Size = new System.Drawing.Size(359, 20);
+            this.textSmtpPass.TabIndex = 7;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(9, 211);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(83, 13);
+            this.label13.TabIndex = 30;
+            this.label13.Text = "Smtp Password:";
+            // 
+            // textSmtpServer
+            // 
+            this.textSmtpServer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textSmtpServer.Changed = false;
+            this.textSmtpServer.Cue = "IP Address, or fqdn";
+            this.textSmtpServer.Location = new System.Drawing.Point(103, 32);
+            this.textSmtpServer.Name = "textSmtpServer";
+            this.textSmtpServer.Size = new System.Drawing.Size(360, 20);
+            this.textSmtpServer.TabIndex = 0;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(29, 32);
+            this.label11.Location = new System.Drawing.Point(8, 35);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(59, 13);
+            this.label11.Size = new System.Drawing.Size(68, 13);
             this.label11.TabIndex = 28;
-            this.label11.Text = "Smtp Host:";
+            this.label11.Text = "Smtp Server:";
             // 
             // label12
             // 
@@ -402,25 +580,27 @@
             this.panel1.Size = new System.Drawing.Size(546, 41);
             this.panel1.TabIndex = 24;
             // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSave.Location = new System.Drawing.Point(12, 5);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(66, 24);
-            this.btnSave.TabIndex = 19;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            // 
             // btnClose
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.Location = new System.Drawing.Point(468, 5);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(66, 24);
-            this.btnClose.TabIndex = 20;
+            this.btnClose.TabIndex = 1;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSave.Location = new System.Drawing.Point(12, 5);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(66, 24);
+            this.btnSave.TabIndex = 0;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // Settings
             // 
@@ -439,6 +619,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.wmisImage)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.smtpImage)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -474,11 +655,25 @@
         private System.Windows.Forms.Label lblWmisHost;
         private System.Windows.Forms.Label lblWmisHdr;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.CheckBox chkViaAgent;
+        private classLib.TextBoxTrak textEmailFrom;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.CheckBox chkSmtpAuthReq;
+        private classLib.TextBoxTrak textSmtpPort;
+        private System.Windows.Forms.Label label15;
+        private classLib.TextBoxTrak textSmtpUser;
+        private System.Windows.Forms.Label label14;
+        private classLib.TextBoxTrak textSmtpPass;
+        private System.Windows.Forms.Label label13;
+        private classLib.TextBoxTrak textSmtpServer;
+        private classLib.TextBoxTrak textEmailTo;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.PictureBox smtpImage;
+        private System.Windows.Forms.Button btnEmailTest;
     }
 }
