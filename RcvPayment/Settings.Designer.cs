@@ -529,6 +529,7 @@
             this.textSmtpPass.Cue = "Password for Authentication";
             this.textSmtpPass.Location = new System.Drawing.Point(104, 208);
             this.textSmtpPass.Name = "textSmtpPass";
+            this.textSmtpPass.PasswordChar = '*';
             this.textSmtpPass.Size = new System.Drawing.Size(359, 20);
             this.textSmtpPass.TabIndex = 7;
             // 

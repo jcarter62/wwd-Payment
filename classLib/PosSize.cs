@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 
 namespace classLib {
     public class PosSize {
@@ -15,7 +16,7 @@ namespace classLib {
         private string name;
         private Form form;
 
-        string companyname = "WWD";
+        string companyname;
         string appname = "Payments";
         const string comma = ",";
 
@@ -32,7 +33,11 @@ namespace classLib {
 
         private string CompanyName() {
             string result = "";
-            result = Application.CompanyName.ToString();
+            // (3)
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            AssemblyCompanyAttribute assemblyCompany = assembly.GetCustomAttributes(typeof(AssemblyCompanyAttribute), false)[0] as AssemblyCompanyAttribute;
+            result = assemblyCompany.Company; 
+            // (3)
             return result;
         }
 
@@ -108,4 +113,7 @@ namespace classLib {
             return dir;
         }
     }
+    // Ref:
+    // (3) https://social.msdn.microsoft.com/Forums/vstudio/en-US/9325957b-cce1-429d-9aa8-f3f4350d72a2/read-the-assembly-information-data
+
 }

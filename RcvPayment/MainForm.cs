@@ -25,5 +25,10 @@ namespace RcvPayment {
             f.Show();
         }
 
+        private void paymentBatchesToolStripMenuItem_Click(object sender, EventArgs e) {
+            PaymentBatches f = new PaymentBatches();
+            f.MdiParent = this;
+            f.Show();
+        }
     }
 }

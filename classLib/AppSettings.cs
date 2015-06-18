@@ -11,23 +11,16 @@ namespace classLib {
     /// This class is used to abstract application settings.
     /// </summary>
     public class AppSettings {
-        private string _AppName = "Payments";
-
-        public DbSettings wmis;
-        public DbSettings mas500;
-
-        private string _Key = Keys.key;
-
-        private SettingsFile sf;
-        private string _filename;
 
         #region Properties
-        public string Key {
-            get { return _Key; }
-        }
-
+        private string _Key; // = Keys.key;
+        public string Key { get { return _Key; } }
+        private string _AppName = "Payments";
         public string AppName { get { return _AppName; } }
-
+        public DbSettings wmis;
+        public DbSettings mas500;
+        private SettingsFile sf;
+        private string _filename;
         public string SmtpServer { get; set; }
         public string SmtpPort { get; set; }
         public string EmailFrom { get; set; }
@@ -36,25 +29,29 @@ namespace classLib {
         public bool SmtpAuthReq { get; set; }
         public string SmtpUser { get; set; }
         public string SmtpPass { get; set; }
-
         #endregion Properties
 
         #region Startup
-
         /// <summary>
-        ///
+        /// Assumes we are using the default xml file name
+        ///  that is located in the %programdata%\WWD\_AppName.xml
         /// </summary>
         public AppSettings() {
             _filename = _AppName + ".xml"; // "settings.xml";
             AppSettingsInit();
         }
 
+        /// <summary>
+        /// Used to specify settings file name during init.
+        /// </summary>
+        /// <param name="filename"></param>
         public AppSettings(string filename) {
             _filename = filename;
             AppSettingsInit();
         }
 
         private void AppSettingsInit() {
+            _Key = Keys.getKey();
             sf = new SettingsFile(_filename);
             wmis = new DbSettings();
             mas500 = new DbSettings();
@@ -148,10 +145,12 @@ namespace classLib {
             se = sf.ReadString(Name, "");
 
             if (Decrypt) {
-                if (se.Length > 0)
-                    se = EncDec.Decrypt(sf.ReadString(Name, ""), Key + Name);
-                else
+                if (se.Length > 0) {
+                    EncDec e = new EncDec();
+                    se = e.Decrypt(sf.ReadString(Name, ""), Key + Name);
+                } else {
                     se = "";
+                }
             }
             return se;
         }
@@ -165,7 +164,8 @@ namespace classLib {
         private void WriteString(string Name, string Value, Boolean Encrypt) {
             string s;
             if (Encrypt) {
-                s = EncDec.Encrypt(Value, Key + Name);
+                EncDec e = new EncDec();
+                s = e.Encrypt(Value, Key + Name);
             }
             else {
                 s = Value;
@@ -217,7 +217,5 @@ namespace classLib {
             }
         }
         #endregion
-
-
     }
 }

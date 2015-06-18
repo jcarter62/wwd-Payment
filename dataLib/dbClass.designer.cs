@@ -42,6 +42,9 @@ namespace dataLib
     partial void InsertCRDetail(CRDetail instance);
     partial void UpdateCRDetail(CRDetail instance);
     partial void DeleteCRDetail(CRDetail instance);
+    partial void InsertCRDepBatch(CRDepBatch instance);
+    partial void UpdateCRDepBatch(CRDepBatch instance);
+    partial void DeleteCRDepBatch(CRDepBatch instance);
     #endregion
 		
 		public dbClassDataContext() : 
@@ -143,6 +146,14 @@ namespace dataLib
 			get
 			{
 				return this.GetTable<CMNameContact>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CRDepBatch> CRDepBatchs
+		{
+			get
+			{
+				return this.GetTable<CRDepBatch>();
 			}
 		}
 	}
@@ -2512,6 +2523,260 @@ namespace dataLib
 				{
 					this._Other = value;
 				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CRDepBatch")]
+	public partial class CRDepBatch : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Id;
+		
+		private string _IDBank;
+		
+		private string _State;
+		
+		private System.Nullable<double> _Amount;
+		
+		private System.Nullable<int> _Qty;
+		
+		private System.Nullable<System.DateTime> _CDate;
+		
+		private string _CUser;
+		
+		private System.Nullable<System.DateTime> _UDate;
+		
+		private string _UUser;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(string value);
+    partial void OnIdChanged();
+    partial void OnIDBankChanging(string value);
+    partial void OnIDBankChanged();
+    partial void OnStateChanging(string value);
+    partial void OnStateChanged();
+    partial void OnAmountChanging(System.Nullable<double> value);
+    partial void OnAmountChanged();
+    partial void OnQtyChanging(System.Nullable<int> value);
+    partial void OnQtyChanged();
+    partial void OnCDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCDateChanged();
+    partial void OnCUserChanging(string value);
+    partial void OnCUserChanged();
+    partial void OnUDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnUDateChanged();
+    partial void OnUUserChanging(string value);
+    partial void OnUUserChanged();
+    #endregion
+		
+		public CRDepBatch()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="VarChar(40) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDBank", DbType="VarChar(20)")]
+		public string IDBank
+		{
+			get
+			{
+				return this._IDBank;
+			}
+			set
+			{
+				if ((this._IDBank != value))
+				{
+					this.OnIDBankChanging(value);
+					this.SendPropertyChanging();
+					this._IDBank = value;
+					this.SendPropertyChanged("IDBank");
+					this.OnIDBankChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="VarChar(15)")]
+		public string State
+		{
+			get
+			{
+				return this._State;
+			}
+			set
+			{
+				if ((this._State != value))
+				{
+					this.OnStateChanging(value);
+					this.SendPropertyChanging();
+					this._State = value;
+					this.SendPropertyChanged("State");
+					this.OnStateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float")]
+		public System.Nullable<double> Amount
+		{
+			get
+			{
+				return this._Amount;
+			}
+			set
+			{
+				if ((this._Amount != value))
+				{
+					this.OnAmountChanging(value);
+					this.SendPropertyChanging();
+					this._Amount = value;
+					this.SendPropertyChanged("Amount");
+					this.OnAmountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Qty", DbType="Int")]
+		public System.Nullable<int> Qty
+		{
+			get
+			{
+				return this._Qty;
+			}
+			set
+			{
+				if ((this._Qty != value))
+				{
+					this.OnQtyChanging(value);
+					this.SendPropertyChanging();
+					this._Qty = value;
+					this.SendPropertyChanged("Qty");
+					this.OnQtyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CDate
+		{
+			get
+			{
+				return this._CDate;
+			}
+			set
+			{
+				if ((this._CDate != value))
+				{
+					this.OnCDateChanging(value);
+					this.SendPropertyChanging();
+					this._CDate = value;
+					this.SendPropertyChanged("CDate");
+					this.OnCDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CUser", DbType="VarChar(50)")]
+		public string CUser
+		{
+			get
+			{
+				return this._CUser;
+			}
+			set
+			{
+				if ((this._CUser != value))
+				{
+					this.OnCUserChanging(value);
+					this.SendPropertyChanging();
+					this._CUser = value;
+					this.SendPropertyChanged("CUser");
+					this.OnCUserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> UDate
+		{
+			get
+			{
+				return this._UDate;
+			}
+			set
+			{
+				if ((this._UDate != value))
+				{
+					this.OnUDateChanging(value);
+					this.SendPropertyChanging();
+					this._UDate = value;
+					this.SendPropertyChanged("UDate");
+					this.OnUDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UUser", DbType="VarChar(50)")]
+		public string UUser
+		{
+			get
+			{
+				return this._UUser;
+			}
+			set
+			{
+				if ((this._UUser != value))
+				{
+					this.OnUUserChanging(value);
+					this.SendPropertyChanging();
+					this._UUser = value;
+					this.SendPropertyChanged("UUser");
+					this.OnUUserChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

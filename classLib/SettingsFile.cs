@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Xml;
@@ -53,14 +54,16 @@ namespace classLib {
         private void SettingsFileInit() {
             ErrCode = 0;
             ErrMsg = "";
-            companyname = "WWD";
+            // (1)
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            AssemblyCompanyAttribute assemblyCompany = assembly.GetCustomAttributes(typeof(AssemblyCompanyAttribute), false)[0] as AssemblyCompanyAttribute;
+            companyname = assemblyCompany.Company;
+            // (1)
             CalcNewFileName();
         }
-
         #endregion Constructor Destructor
 
         #region Private Routines
-
         private void CalcNewFileName() {
             xmlpath = GetUserXMLPath(filename);
             if (sets != null)
@@ -136,4 +139,7 @@ namespace classLib {
         #endregion Public Methods
 
     } // public class SettingsFile
+
+    // Ref:
+    // (1) https://social.msdn.microsoft.com/Forums/vstudio/en-US/9325957b-cce1-429d-9aa8-f3f4350d72a2/read-the-assembly-information-data
 }

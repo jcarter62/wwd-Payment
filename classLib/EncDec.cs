@@ -5,8 +5,11 @@ using System.Security.Cryptography;
 
 namespace classLib {
     public class EncDec {
-        private static string _Key = Keys.key;  // "BlueTiger";
+        private string _Key;
 
+        public EncDec() {
+            _Key = Keys.getKey();
+        }
         //
         //    This sample code is provided "AS IS" with no warranties,
         //    and confers no rights.
@@ -91,7 +94,7 @@ namespace classLib {
         /// </summary>
         /// <param name="clearText"></param>
         /// <returns></returns>
-        public static string Encrypt(string clearText) {
+        public string Encrypt(string clearText) {
             return Encrypt(clearText, _Key);
         }
 
@@ -101,7 +104,7 @@ namespace classLib {
         /// <param name="clearText"></param>
         /// <param name="Password"></param>
         /// <returns></returns>
-        public static string Encrypt(string clearText, string Password) {
+        public string Encrypt(string clearText, string Password) {
             // First we need to turn the input string into a byte array.
             byte[] clearBytes =
               System.Text.Encoding.Unicode.GetBytes(clearText);
@@ -298,7 +301,7 @@ namespace classLib {
         /// </summary>
         /// <param name="cipherText"></param>
         /// <returns></returns>
-        public static string Decrypt(string cipherText) {
+        public string Decrypt(string cipherText) {
             if (cipherText.Length > 0)
                 return Decrypt(cipherText, _Key);
             else
@@ -311,7 +314,7 @@ namespace classLib {
         /// <param name="cipherText"></param>
         /// <param name="Password"></param>
         /// <returns></returns>
-        public static string Decrypt(string cipherText, string Password) {
+        public string Decrypt(string cipherText, string Password) {
             // First we need to turn the input string into a byte array.
             // We presume that Base64 encoding was used
             byte[] cipherBytes = Convert.FromBase64String(cipherText);

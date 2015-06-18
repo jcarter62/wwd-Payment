@@ -4,12 +4,30 @@ using System.Linq;
 using System.Linq.Expressions;
 
 namespace dataLib {
+    partial class CRDepBatch {
+    }
+
     public partial class dbClassDataContext {
     }
 
     static class shortid {
         public static String newId {
             get { return Guid.NewGuid().ToString().ToLower().Replace("{", "").Replace("}", "").Replace("-", ""); }
+        }
+    }
+
+    public partial class CRDepBatch {
+        partial void OnCreated() {
+            init();
+        }
+
+        public void init() {
+            if (Id == null) {
+                Id = shortid.newId;
+                Qty = 0;
+                Amount = 0.0;
+                State = "Created";
+            }
         }
     }
 

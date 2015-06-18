@@ -56,6 +56,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.paymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newPaymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.paymentBatchesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -300,7 +301,8 @@
             // paymentsToolStripMenuItem
             // 
             this.paymentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newPaymentToolStripMenuItem});
+            this.newPaymentToolStripMenuItem,
+            this.paymentBatchesToolStripMenuItem});
             this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
             this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.paymentsToolStripMenuItem.Text = "Payments";
@@ -311,6 +313,13 @@
             this.newPaymentToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.newPaymentToolStripMenuItem.Text = "Add/View Payments";
             this.newPaymentToolStripMenuItem.Click += new System.EventHandler(this.newPaymentToolStripMenuItem_Click);
+            // 
+            // paymentBatchesToolStripMenuItem
+            // 
+            this.paymentBatchesToolStripMenuItem.Name = "paymentBatchesToolStripMenuItem";
+            this.paymentBatchesToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.paymentBatchesToolStripMenuItem.Text = "Payment Batches";
+            this.paymentBatchesToolStripMenuItem.Click += new System.EventHandler(this.paymentBatchesToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -364,6 +373,7 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem paymentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newPaymentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem paymentBatchesToolStripMenuItem;
     }
 }
 

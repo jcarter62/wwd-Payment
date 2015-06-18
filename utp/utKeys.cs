@@ -7,8 +7,7 @@ namespace utp {
     public class utKeys {
         [TestMethod]
         public void TestKeys() {
-            String k;
-            k = Keys.key;
+            String k = Keys.getKey();
             if (k.ToString().Length < 20) {
                 Assert.Fail("Key length is too short");
             }
