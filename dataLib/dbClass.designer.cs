@@ -149,7 +149,7 @@ namespace dataLib
 			}
 		}
 		
-		public System.Data.Linq.Table<CRDepBatch> CRDepBatchs
+		public System.Data.Linq.Table<CRDepBatch> CRDepBatches
 		{
 			get
 			{
@@ -2580,7 +2580,7 @@ namespace dataLib
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="VarChar(40) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="VarChar(40) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
 		public string Id
 		{
 			get
@@ -2600,7 +2600,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDBank", DbType="VarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDBank", DbType="VarChar(20)", UpdateCheck=UpdateCheck.Never)]
 		public string IDBank
 		{
 			get
@@ -2620,7 +2620,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="VarChar(15)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="VarChar(15)", UpdateCheck=UpdateCheck.Never)]
 		public string State
 		{
 			get
@@ -2640,7 +2640,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<double> Amount
 		{
 			get
@@ -2660,7 +2660,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Qty", DbType="Int")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Qty", DbType="Int", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<int> Qty
 		{
 			get
@@ -2680,7 +2680,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CDate", DbType="DateTime")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<System.DateTime> CDate
 		{
 			get
@@ -2700,7 +2700,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CUser", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CUser", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string CUser
 		{
 			get
@@ -2720,7 +2720,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UDate", DbType="DateTime")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<System.DateTime> UDate
 		{
 			get
@@ -2740,7 +2740,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UUser", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UUser", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string UUser
 		{
 			get

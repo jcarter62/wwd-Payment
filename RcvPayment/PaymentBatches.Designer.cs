@@ -27,12 +27,22 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PaymentBatches));
             this.panelTrak1 = new classLib.PanelTrak(this.components);
             this.dgv = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idbank = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.state = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cUserDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.uDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.uUserDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataSrc = new System.Windows.Forms.BindingSource(this.components);
             this.panelTrak2 = new classLib.PanelTrak(this.components);
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnPost = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.btnDocs = new System.Windows.Forms.Button();
             this.lblAmount = new System.Windows.Forms.Label();
             this.lblDocCount = new System.Windows.Forms.Label();
@@ -45,21 +55,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textId = new classLib.TextBoxTrak(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statGrid = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statDetail = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.dataSrc = new System.Windows.Forms.BindingSource(this.components);
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idbank = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.state = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cUserDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.uDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.uUserDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelTrak1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
-            this.panelTrak2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSrc)).BeginInit();
+            this.panelTrak2.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTrak1
@@ -73,6 +76,8 @@
             // 
             // dgv
             // 
+            this.dgv.AllowUserToAddRows = false;
+            this.dgv.AllowUserToDeleteRows = false;
             this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -91,18 +96,101 @@
             this.dgv.DataSource = this.dataSrc;
             this.dgv.Location = new System.Drawing.Point(3, 25);
             this.dgv.Name = "dgv";
+            this.dgv.ReadOnly = true;
             this.dgv.RowHeadersVisible = false;
             this.dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv.Size = new System.Drawing.Size(211, 260);
             this.dgv.TabIndex = 0;
+            this.dgv.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_RowEnter);
+            this.dgv.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dgv_RowStateChanged);
+            // 
+            // id
+            // 
+            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.id.DataPropertyName = "Id";
+            this.id.HeaderText = "Id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // idbank
+            // 
+            this.idbank.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.idbank.DataPropertyName = "IDBank";
+            this.idbank.HeaderText = "ID";
+            this.idbank.Name = "idbank";
+            this.idbank.ReadOnly = true;
+            this.idbank.Width = 43;
+            // 
+            // state
+            // 
+            this.state.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.state.DataPropertyName = "State";
+            this.state.HeaderText = "State";
+            this.state.Name = "state";
+            this.state.ReadOnly = true;
+            this.state.Width = 57;
+            // 
+            // amount
+            // 
+            this.amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.amount.DataPropertyName = "Amount";
+            this.amount.HeaderText = "Amount";
+            this.amount.Name = "amount";
+            this.amount.ReadOnly = true;
+            this.amount.Width = 68;
+            // 
+            // qtyDataGridViewTextBoxColumn
+            // 
+            this.qtyDataGridViewTextBoxColumn.DataPropertyName = "Qty";
+            this.qtyDataGridViewTextBoxColumn.HeaderText = "Qty";
+            this.qtyDataGridViewTextBoxColumn.Name = "qtyDataGridViewTextBoxColumn";
+            this.qtyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.qtyDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // cDateDataGridViewTextBoxColumn
+            // 
+            this.cDateDataGridViewTextBoxColumn.DataPropertyName = "CDate";
+            this.cDateDataGridViewTextBoxColumn.HeaderText = "CDate";
+            this.cDateDataGridViewTextBoxColumn.Name = "cDateDataGridViewTextBoxColumn";
+            this.cDateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.cDateDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // cUserDataGridViewTextBoxColumn
+            // 
+            this.cUserDataGridViewTextBoxColumn.DataPropertyName = "CUser";
+            this.cUserDataGridViewTextBoxColumn.HeaderText = "CUser";
+            this.cUserDataGridViewTextBoxColumn.Name = "cUserDataGridViewTextBoxColumn";
+            this.cUserDataGridViewTextBoxColumn.ReadOnly = true;
+            this.cUserDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // uDateDataGridViewTextBoxColumn
+            // 
+            this.uDateDataGridViewTextBoxColumn.DataPropertyName = "UDate";
+            this.uDateDataGridViewTextBoxColumn.HeaderText = "UDate";
+            this.uDateDataGridViewTextBoxColumn.Name = "uDateDataGridViewTextBoxColumn";
+            this.uDateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.uDateDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // uUserDataGridViewTextBoxColumn
+            // 
+            this.uUserDataGridViewTextBoxColumn.DataPropertyName = "UUser";
+            this.uUserDataGridViewTextBoxColumn.HeaderText = "UUser";
+            this.uUserDataGridViewTextBoxColumn.Name = "uUserDataGridViewTextBoxColumn";
+            this.uUserDataGridViewTextBoxColumn.ReadOnly = true;
+            this.uUserDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // dataSrc
+            // 
+            this.dataSrc.DataSource = typeof(dataLib.CRDepBatch);
             // 
             // panelTrak2
             // 
-            this.panelTrak2.Controls.Add(this.button5);
-            this.panelTrak2.Controls.Add(this.button4);
-            this.panelTrak2.Controls.Add(this.button3);
-            this.panelTrak2.Controls.Add(this.button2);
-            this.panelTrak2.Controls.Add(this.button1);
+            this.panelTrak2.Controls.Add(this.btnPost);
+            this.panelTrak2.Controls.Add(this.btnClose);
+            this.panelTrak2.Controls.Add(this.btnDelete);
+            this.panelTrak2.Controls.Add(this.btnUpdate);
+            this.panelTrak2.Controls.Add(this.btnAdd);
             this.panelTrak2.Controls.Add(this.btnDocs);
             this.panelTrak2.Controls.Add(this.lblAmount);
             this.panelTrak2.Controls.Add(this.lblDocCount);
@@ -120,55 +208,59 @@
             this.panelTrak2.Size = new System.Drawing.Size(219, 288);
             this.panelTrak2.TabIndex = 1;
             // 
-            // button5
+            // btnPost
             // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Location = new System.Drawing.Point(140, 230);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 15;
-            this.button5.Text = "Post";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnPost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPost.Location = new System.Drawing.Point(140, 230);
+            this.btnPost.Name = "btnPost";
+            this.btnPost.Size = new System.Drawing.Size(75, 23);
+            this.btnPost.TabIndex = 15;
+            this.btnPost.Text = "Post";
+            this.btnPost.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnClose
             // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(162, 259);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(51, 23);
-            this.button4.TabIndex = 14;
-            this.button4.Text = "Close";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.Location = new System.Drawing.Point(162, 259);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(51, 23);
+            this.btnClose.TabIndex = 14;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // button3
+            // btnDelete
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(106, 259);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(51, 23);
-            this.button3.TabIndex = 13;
-            this.button3.Text = "Delete";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelete.Location = new System.Drawing.Point(106, 259);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(51, 23);
+            this.btnDelete.TabIndex = 13;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // button2
+            // btnUpdate
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(50, 259);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(51, 23);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "Update";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnUpdate.Location = new System.Drawing.Point(50, 259);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(51, 23);
+            this.btnUpdate.TabIndex = 12;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
-            // button1
+            // btnAdd
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(4, 259);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(41, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "New";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAdd.Location = new System.Drawing.Point(4, 259);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(41, 23);
+            this.btnAdd.TabIndex = 11;
+            this.btnAdd.Text = "New";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_click);
             // 
             // btnDocs
             // 
@@ -279,11 +371,26 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statGrid,
+            this.statDetail});
             this.statusStrip1.Location = new System.Drawing.Point(0, 288);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(439, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // statGrid
+            // 
+            this.statGrid.Name = "statGrid";
+            this.statGrid.Size = new System.Drawing.Size(48, 17);
+            this.statGrid.Text = "statGrid";
+            // 
+            // statDetail
+            // 
+            this.statDetail.Name = "statDetail";
+            this.statDetail.Size = new System.Drawing.Size(56, 17);
+            this.statDetail.Text = "statDetail";
             // 
             // splitter1
             // 
@@ -293,78 +400,6 @@
             this.splitter1.Size = new System.Drawing.Size(4, 288);
             this.splitter1.TabIndex = 3;
             this.splitter1.TabStop = false;
-            // 
-            // dataSrc
-            // 
-            this.dataSrc.DataSource = typeof(dataLib.CRDepBatch);
-            // 
-            // id
-            // 
-            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.id.DataPropertyName = "Id";
-            this.id.HeaderText = "Id";
-            this.id.Name = "id";
-            this.id.Visible = false;
-            this.id.Width = 22;
-            // 
-            // idbank
-            // 
-            this.idbank.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.idbank.DataPropertyName = "IDBank";
-            this.idbank.HeaderText = "ID";
-            this.idbank.Name = "idbank";
-            this.idbank.Width = 43;
-            // 
-            // state
-            // 
-            this.state.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.state.DataPropertyName = "State";
-            this.state.HeaderText = "State";
-            this.state.Name = "state";
-            this.state.Width = 57;
-            // 
-            // amount
-            // 
-            this.amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.amount.DataPropertyName = "Amount";
-            this.amount.HeaderText = "Amount";
-            this.amount.Name = "amount";
-            this.amount.Width = 68;
-            // 
-            // qtyDataGridViewTextBoxColumn
-            // 
-            this.qtyDataGridViewTextBoxColumn.DataPropertyName = "Qty";
-            this.qtyDataGridViewTextBoxColumn.HeaderText = "Qty";
-            this.qtyDataGridViewTextBoxColumn.Name = "qtyDataGridViewTextBoxColumn";
-            this.qtyDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // cDateDataGridViewTextBoxColumn
-            // 
-            this.cDateDataGridViewTextBoxColumn.DataPropertyName = "CDate";
-            this.cDateDataGridViewTextBoxColumn.HeaderText = "CDate";
-            this.cDateDataGridViewTextBoxColumn.Name = "cDateDataGridViewTextBoxColumn";
-            this.cDateDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // cUserDataGridViewTextBoxColumn
-            // 
-            this.cUserDataGridViewTextBoxColumn.DataPropertyName = "CUser";
-            this.cUserDataGridViewTextBoxColumn.HeaderText = "CUser";
-            this.cUserDataGridViewTextBoxColumn.Name = "cUserDataGridViewTextBoxColumn";
-            this.cUserDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // uDateDataGridViewTextBoxColumn
-            // 
-            this.uDateDataGridViewTextBoxColumn.DataPropertyName = "UDate";
-            this.uDateDataGridViewTextBoxColumn.HeaderText = "UDate";
-            this.uDateDataGridViewTextBoxColumn.Name = "uDateDataGridViewTextBoxColumn";
-            this.uDateDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // uUserDataGridViewTextBoxColumn
-            // 
-            this.uUserDataGridViewTextBoxColumn.DataPropertyName = "UUser";
-            this.uUserDataGridViewTextBoxColumn.HeaderText = "UUser";
-            this.uUserDataGridViewTextBoxColumn.Name = "uUserDataGridViewTextBoxColumn";
-            this.uUserDataGridViewTextBoxColumn.Visible = false;
             // 
             // PaymentBatches
             // 
@@ -377,11 +412,14 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PaymentBatches";
             this.Text = "Payment Batches";
+            this.Load += new System.EventHandler(this.PaymentBatches_Load);
             this.panelTrak1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSrc)).EndInit();
             this.panelTrak2.ResumeLayout(false);
             this.panelTrak2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSrc)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -404,11 +442,11 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblCreated;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnPost;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnDocs;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn idbank;
@@ -420,5 +458,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn uDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn uUserDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource dataSrc;
+        private System.Windows.Forms.ToolStripStatusLabel statGrid;
+        private System.Windows.Forms.ToolStripStatusLabel statDetail;
     }
 }
