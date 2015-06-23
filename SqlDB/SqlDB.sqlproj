@@ -71,6 +71,7 @@
     <Build Include="dbo\Tables\CRAccount.sql" />
     <Build Include="v_CrReceipt.sql" />
     <Build Include="dbo\Tables\CRDepBatch.sql" />
+    <Build Include="dbo\Tables\CRDepItem.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="copydata.sql" />

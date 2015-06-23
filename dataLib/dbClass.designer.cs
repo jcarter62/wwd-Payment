@@ -45,6 +45,9 @@ namespace dataLib
     partial void InsertCRDepBatch(CRDepBatch instance);
     partial void UpdateCRDepBatch(CRDepBatch instance);
     partial void DeleteCRDepBatch(CRDepBatch instance);
+    partial void InsertCRDepItem(CRDepItem instance);
+    partial void UpdateCRDepItem(CRDepItem instance);
+    partial void DeleteCRDepItem(CRDepItem instance);
     #endregion
 		
 		public dbClassDataContext() : 
@@ -154,6 +157,14 @@ namespace dataLib
 			get
 			{
 				return this.GetTable<CRDepBatch>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CRDepItem> CRDepItems
+		{
+			get
+			{
+				return this.GetTable<CRDepItem>();
 			}
 		}
 	}
@@ -2756,6 +2767,212 @@ namespace dataLib
 					this._UUser = value;
 					this.SendPropertyChanged("UUser");
 					this.OnUUserChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CRDepItem")]
+	public partial class CRDepItem : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Id;
+		
+		private string _IDBatch;
+		
+		private string _CRMid;
+		
+		private System.Nullable<double> _Amount;
+		
+		private string _PayType;
+		
+		private string _PayRef;
+		
+		private string _State;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(string value);
+    partial void OnIdChanged();
+    partial void OnIDBatchChanging(string value);
+    partial void OnIDBatchChanged();
+    partial void OnCRMidChanging(string value);
+    partial void OnCRMidChanged();
+    partial void OnAmountChanging(System.Nullable<double> value);
+    partial void OnAmountChanged();
+    partial void OnPayTypeChanging(string value);
+    partial void OnPayTypeChanged();
+    partial void OnPayRefChanging(string value);
+    partial void OnPayRefChanged();
+    partial void OnStateChanging(string value);
+    partial void OnStateChanged();
+    #endregion
+		
+		public CRDepItem()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="VarChar(40) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDBatch", DbType="VarChar(40)")]
+		public string IDBatch
+		{
+			get
+			{
+				return this._IDBatch;
+			}
+			set
+			{
+				if ((this._IDBatch != value))
+				{
+					this.OnIDBatchChanging(value);
+					this.SendPropertyChanging();
+					this._IDBatch = value;
+					this.SendPropertyChanged("IDBatch");
+					this.OnIDBatchChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CRMid", DbType="VarChar(40)")]
+		public string CRMid
+		{
+			get
+			{
+				return this._CRMid;
+			}
+			set
+			{
+				if ((this._CRMid != value))
+				{
+					this.OnCRMidChanging(value);
+					this.SendPropertyChanging();
+					this._CRMid = value;
+					this.SendPropertyChanged("CRMid");
+					this.OnCRMidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float")]
+		public System.Nullable<double> Amount
+		{
+			get
+			{
+				return this._Amount;
+			}
+			set
+			{
+				if ((this._Amount != value))
+				{
+					this.OnAmountChanging(value);
+					this.SendPropertyChanging();
+					this._Amount = value;
+					this.SendPropertyChanged("Amount");
+					this.OnAmountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayType", DbType="VarChar(20)")]
+		public string PayType
+		{
+			get
+			{
+				return this._PayType;
+			}
+			set
+			{
+				if ((this._PayType != value))
+				{
+					this.OnPayTypeChanging(value);
+					this.SendPropertyChanging();
+					this._PayType = value;
+					this.SendPropertyChanged("PayType");
+					this.OnPayTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayRef", DbType="VarChar(20)")]
+		public string PayRef
+		{
+			get
+			{
+				return this._PayRef;
+			}
+			set
+			{
+				if ((this._PayRef != value))
+				{
+					this.OnPayRefChanging(value);
+					this.SendPropertyChanging();
+					this._PayRef = value;
+					this.SendPropertyChanged("PayRef");
+					this.OnPayRefChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="VarChar(15)")]
+		public string State
+		{
+			get
+			{
+				return this._State;
+			}
+			set
+			{
+				if ((this._State != value))
+				{
+					this.OnStateChanging(value);
+					this.SendPropertyChanging();
+					this._State = value;
+					this.SendPropertyChanged("State");
+					this.OnStateChanged();
 				}
 			}
 		}

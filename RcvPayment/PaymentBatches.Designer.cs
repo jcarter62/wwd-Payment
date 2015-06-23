@@ -271,6 +271,7 @@
             this.btnDocs.TabIndex = 10;
             this.btnDocs.Text = "Documents";
             this.btnDocs.UseVisualStyleBackColor = true;
+            this.btnDocs.Click += new System.EventHandler(this.btnDocs_Click);
             // 
             // lblAmount
             // 

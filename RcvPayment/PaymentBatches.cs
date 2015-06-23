@@ -25,9 +25,11 @@ namespace RcvPayment {
             private set {
                 _CurrentId = value;
                 DisplayBatchDetails();
+//                HighliteThisRow();
                 UpdateStatusStrip();
             }
         }
+
 
         public PaymentBatches() {
             InitializeComponent();
@@ -43,10 +45,8 @@ namespace RcvPayment {
 
         private void ConnectGrid() {
             try {
-
                 // first remove all rows...
                 dgv.DataSource = null;
-
                 foreach (DataGridViewRow r in dgv.Rows) {
                     dgv.Rows.Remove(r);
                 }
@@ -180,18 +180,11 @@ namespace RcvPayment {
                 }
             }
 
-            // Clear selected rows.
-            foreach ( DataGridViewRow r in dgv.SelectedRows ) {
-                r.Selected = false;
-            }
-
             if ( rownum > 0 ) {
                 // we found it!
-//                dgv.FirstDisplayedScrollingRowIndex = rownum;
                 dgv.Rows[rownum].Selected = true;
-
+                dgv.FirstDisplayedScrollingRowIndex = rownum;
             }
-
         }
 
         private void userSelectedRow() {
@@ -253,20 +246,43 @@ namespace RcvPayment {
 
         #endregion Diagnostics
 
-        // This event is fired after row change, and is fired for both rows.
-        // (2)
         private void dgv_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e) {
-            //DataGridViewRow r = e.Row;
-            //// 
-            //if ( r.Selected ) {
-            //    string id = r.Cells["id"].Value.ToString();
-            //    CurrentId = id;
-            //}
         }
 
         private void btnDelete_Click(object sender, EventArgs e) {
-
         }
+
+        private void button1_Click(object sender, EventArgs e) {
+        }
+
+        private void btnDocs_Click(object sender, EventArgs e) {
+            if ( CurrentId != "" ) {
+                BatchDocs f = new BatchDocs();
+                f.MdiParent = this.MdiParent;
+                f.Show();
+                f.BatchId = CurrentId;
+            }
+        }
+
+        /*
+        private void HighliteThisRow() {
+            string rowid;
+            int i;
+            foreach ( DataGridViewRow r in dgv.Rows ) {
+                rowid = r.Cells["id"].Value.ToString();
+                i = r.Index;
+                if ( rowid == CurrentId ) {
+                    if ( ! r.Selected ) {
+                        dgv.Rows[i].Selected = true;
+                    }
+                } else {
+                    if ( r.Selected ) {
+                        dgv.Rows[i].Selected = false;
+                    }
+                }
+            }
+        }
+        */
     }
     // ref:
     // (1) https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.100).aspx#GeneralDateShortTime

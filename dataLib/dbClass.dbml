@@ -158,4 +158,15 @@
       <Column Name="UUser" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
     </Type>
   </Table>
+  <Table Name="dbo.CRDepItem" Member="CRDepItems">
+    <Type Name="CRDepItem">
+      <Column Name="Id" Type="System.String" DbType="VarChar(40) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDBatch" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="CRMid" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PayType" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="PayRef" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="State" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

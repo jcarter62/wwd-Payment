@@ -31,6 +31,20 @@ namespace dataLib {
         }
     }
 
+    public partial class CRDepItem {
+        partial void OnCreated() {
+            init();
+        }
+
+        public void init() {
+            if (Id == null) {
+                Id = shortid.newId;
+                Amount = 0.0;
+                State = "Created";
+            }
+        }
+    }
+
     public partial class CRDetail {
         partial void OnCreated() {
             init();
