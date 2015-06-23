@@ -85,5 +85,55 @@ namespace RcvPayment {
         }
         #endregion
 
+        #region DragDrop
+        private int dragIndex;
+        private DragDropEffects dragEffect;
+        private Rectangle dragBoxFromMouseDown;
+        private string dragId = "";
+
+        private void dgvPend_MouseDown(object sender, MouseEventArgs e) {
+            Console.WriteLine("Mouse Down");
+            dragIndex = dgvPend.HitTest(e.X, e.Y).RowIndex;
+            if ( dragIndex != -1 ) {
+                dragEffect = DragDropEffects.Copy;
+                Size dragSize = SystemInformation.DragSize;
+
+                dragId = dgvPend.Rows[dragIndex].Cells["iddgvPend"].Value.ToString();
+                dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
+                
+                dgvPend.DoDragDrop(new object(), dragEffect);
+                statLabel.Text = "Mouse Down: " + dragId;
+            } else {
+                dragBoxFromMouseDown = Rectangle.Empty;
+            }
+        }
+
+        private void dgvPend_MouseMove(object sender, MouseEventArgs e) {
+            Console.WriteLine("Mouse Move");
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
+                // If the mouse moves outside the rectangle, start the drag.
+                if (dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
+                    // Proceed with the drag and drop, passing in the list item.                    
+                    DragDropEffects dropEffect = dgvPend.DoDragDrop(new object(), DragDropEffects.Copy);
+                    statLabel.Text = "Mouse Move: " + dragId;
+                }
+            }
+        }
+
+        private void dgvSel_DragOver(object sender, DragEventArgs e) {
+            Console.WriteLine("Drag Over");
+            e.Effect = DragDropEffects.Copy;
+        }
+
+        private void dgvSel_DragDrop(object sender, DragEventArgs e) {
+            Console.WriteLine("Drag Drop");
+            if ( e.Data.GetDataPresent( typeof(DataGridViewRow )) ) {
+                if ( e.Effect == DragDropEffects.Copy ) {
+                    statLabel.Text = "Drag Drop: " + dragId;
+                    MessageBox.Show("Drop : " + dragId);
+                }
+            }
+        }
+        #endregion DragDrop
     }
 }

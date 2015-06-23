@@ -160,8 +160,11 @@
             this.dgvPend.Name = "dgvPend";
             this.dgvPend.ReadOnly = true;
             this.dgvPend.RowHeadersVisible = false;
+            this.dgvPend.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPend.Size = new System.Drawing.Size(211, 234);
             this.dgvPend.TabIndex = 7;
+            this.dgvPend.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvPend_MouseDown);
+            this.dgvPend.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgvPend_MouseMove);
             // 
             // cDatedgvPend
             // 
@@ -320,6 +323,7 @@
             // 
             // dgvSel
             // 
+            this.dgvSel.AllowDrop = true;
             this.dgvSel.AllowUserToAddRows = false;
             this.dgvSel.AllowUserToDeleteRows = false;
             this.dgvSel.AutoGenerateColumns = false;
@@ -338,8 +342,11 @@
             this.dgvSel.Name = "dgvSel";
             this.dgvSel.ReadOnly = true;
             this.dgvSel.RowHeadersVisible = false;
+            this.dgvSel.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSel.Size = new System.Drawing.Size(225, 234);
             this.dgvSel.TabIndex = 1;
+            this.dgvSel.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvSel_DragDrop);
+            this.dgvSel.DragOver += new System.Windows.Forms.DragEventHandler(this.dgvSel_DragOver);
             // 
             // payRefdgvSel
             // 
