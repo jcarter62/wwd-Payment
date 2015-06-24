@@ -55,6 +55,7 @@
     </Compile>
     <Compile Include="CustomerInfo.cs" />
     <Compile Include="DbSettings.cs" />
+    <Compile Include="DragDropInfo.cs" />
     <Compile Include="EncDec.cs" />
     <Compile Include="Images.cs" />
     <Compile Include="Keys.cs" />

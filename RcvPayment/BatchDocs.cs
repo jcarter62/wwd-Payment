@@ -51,6 +51,7 @@ namespace RcvPayment {
             InitializeComponent();
             aset = new AppSettings();
             dc = new dbClassDataContext(aset.wmis.connectionString);
+            DragDropInit();
         }
 
         private void BatchDocs_Load(object sender, EventArgs e) {
@@ -59,11 +60,16 @@ namespace RcvPayment {
         #endregion
 
         #region Private Methods
+
+        // (leftoj)
         private void loadPendingGrid() {
-            var q = from item in dc.CRMasters
-//                    where ( item.Deposited == false ) && (item.State == "Created")
-                    orderby item.CDate 
-                    select item;
+            var q = from m in dc.CRMasters
+                    join sel in dc.CRDepItems on m.Id equals sel.CRMid into selRec
+                    from x in selRec.DefaultIfEmpty()
+                    where (m.State != "Deposited") && (x.Id == null)
+                    orderby m.CDate
+                    select m;
+
 
             dgvPend.DataSource = q;
 
@@ -90,19 +96,20 @@ namespace RcvPayment {
         private DragDropEffects dragEffect;
         private Rectangle dragBoxFromMouseDown;
         private string dragId = "";
+        private DragDropInfo ddInfo;
+
+        private void DragDropInit() {
+            ddInfo = new DragDropInfo("dgvPend");
+        }
 
         private void dgvPend_MouseDown(object sender, MouseEventArgs e) {
-            Console.WriteLine("Mouse Down");
             dragIndex = dgvPend.HitTest(e.X, e.Y).RowIndex;
             if ( dragIndex != -1 ) {
                 dragEffect = DragDropEffects.Copy;
                 Size dragSize = SystemInformation.DragSize;
-
-                dragId = dgvPend.Rows[dragIndex].Cells["iddgvPend"].Value.ToString();
+                ddInfo.id = dgvPend.Rows[dragIndex].Cells["iddgvPend"].Value.ToString();
                 dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
-                
-                dgvPend.DoDragDrop(new object(), dragEffect);
-                statLabel.Text = "Mouse Down: " + dragId;
+                dgvPend.DoDragDrop(ddInfo, dragEffect);
             } else {
                 dragBoxFromMouseDown = Rectangle.Empty;
             }
@@ -114,26 +121,86 @@ namespace RcvPayment {
                 // If the mouse moves outside the rectangle, start the drag.
                 if (dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
                     // Proceed with the drag and drop, passing in the list item.                    
-                    DragDropEffects dropEffect = dgvPend.DoDragDrop(new object(), DragDropEffects.Copy);
-                    statLabel.Text = "Mouse Move: " + dragId;
+                    DragDropEffects dropEffect = dgvPend.DoDragDrop(ddInfo, DragDropEffects.Copy);
+                    statLabel.Text = "Dragging...";
                 }
             }
         }
 
         private void dgvSel_DragOver(object sender, DragEventArgs e) {
-            Console.WriteLine("Drag Over");
             e.Effect = DragDropEffects.Copy;
         }
 
         private void dgvSel_DragDrop(object sender, DragEventArgs e) {
-            Console.WriteLine("Drag Drop");
-            if ( e.Data.GetDataPresent( typeof(DataGridViewRow )) ) {
-                if ( e.Effect == DragDropEffects.Copy ) {
-                    statLabel.Text = "Drag Drop: " + dragId;
-                    MessageBox.Show("Drop : " + dragId);
+            DragDropInfo droppedObj;
+            string droppedId;
+
+            if (e.Data.GetDataPresent(typeof(DragDropInfo))) {
+                droppedObj = (DragDropInfo)e.Data.GetData(typeof(DragDropInfo));
+                if ( droppedObj.source == "dgvPend" ) {
+                    if (e.Effect == DragDropEffects.Copy) {
+                        droppedId = droppedObj.id;
+                        AddMasterToItems(droppedId);
+                        statLabel.Text = "Drop Id=" + droppedId;
+                    }
                 }
             }
         }
+
+        private void AddMasterToItems(string Id) {
+            if ( ! IdInSelectionAlready(Id) ) {
+                InsertIdIntoSelection(Id);
+                UpdateGrids();
+            }
+        }
+
+        private void UpdateGrids() {
+            loadPendingGrid();
+            loadSelectedGrid();
+        }
+
+        private void InsertIdIntoSelection(string id) {
+            try {
+                // Get CRMaster record for this id
+                var src = (from item in dc.CRMasters
+                           where ( item.Id == id )
+                           select item).First();
+
+                if ( src != null ) {
+                    CRDepItem dst = new CRDepItem();
+                    dst.IDBatch = BatchId;
+                    dst.CRMid = src.Id;
+                    dst.Amount = src.Amount;
+                    dst.PayRef = src.PayRef;
+                    dst.PayType = src.PayType;
+                    dc.CRDepItems.InsertOnSubmit(dst);
+                    dc.SubmitChanges();
+                    dc.Refresh(RefreshMode.OverwriteCurrentValues, dst);
+                }
+            } catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private bool IdInSelectionAlready(string id) {
+            bool result = false;
+            try {
+                var RecCount = (from item in dc.CRDepItems
+                         where (item.IDBatch == BatchId) && (item.CRMid == id)
+                         select item).Count();
+
+                if (RecCount > 0 ) {
+                    result = true;
+                }
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+            }
+
+            return result;
+        }
         #endregion DragDrop
     }
+    // (leftoj): https://msdn.microsoft.com/en-us/library/bb397895.aspx
+
 }

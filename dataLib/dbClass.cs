@@ -4,10 +4,9 @@ using System.Linq;
 using System.Linq.Expressions;
 
 namespace dataLib {
-    partial class CRDepBatch {
-    }
 
     public partial class dbClassDataContext {
+
     }
 
     static class shortid {
