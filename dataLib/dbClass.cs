@@ -4,12 +4,13 @@ using System.Linq;
 using System.Linq.Expressions;
 
 namespace dataLib {
-
-    public partial class dbClassDataContext {
-
+    partial class DbClassDataContext {
     }
 
-    static class shortid {
+    public partial class DbClassDataContext {
+    }
+
+    static class Shortid {
         public static String newId {
             get { return Guid.NewGuid().ToString().ToLower().Replace("{", "").Replace("}", "").Replace("-", ""); }
         }
@@ -22,10 +23,10 @@ namespace dataLib {
 
         public void init() {
             if (Id == null) {
-                Id = shortid.newId;
+                Id = Shortid.newId;
                 Qty = 0;
                 Amount = 0.0;
-                State = "Created";
+                State = "created";
             }
         }
     }
@@ -37,9 +38,9 @@ namespace dataLib {
 
         public void init() {
             if (Id == null) {
-                Id = shortid.newId;
+                Id = Shortid.newId;
                 Amount = 0.0;
-                State = "Created";
+                State = "created";
             }
         }
     }
@@ -51,52 +52,58 @@ namespace dataLib {
 
         public void init() {
             if (Id == null) {
-                Id = shortid.newId;
+                Id = Shortid.newId;
                 Amount = 0.0;
                 Account = "";
                 Note = "";
-                State = "Created";
+                State = "created";
                 Name = "";
             }
         }
     }
 
     public partial class CRMaster {
-        private string _Deposited;
+        private string deposited;
 
         /// <summary>
         /// Set default values for CRMaster Record
         /// </summary>
         partial void OnCreated() {
             if (Id == null) {
-                Id = shortid.newId;
+                Id = Shortid.newId;
                 DeliveryName = "";
                 PayRef = "";
                 Note = "";
                 PayType = "Check";
                 PayVia = "USPS";
                 Amount = 0.0;
-                StateAR = "Created";
-                StateGA = "Created";
+                StateAR = "created";
+                StateGA = "created";
             }
         }
 
         public bool Deposited {
             get {
-                depositStatus();
-                return ((_Deposited == "Yes") ? true : false);
+                DepositStatus();
+                return ((deposited == "Yes") ? true : false);
             }
         }
 
-        private void depositStatus() {
-            _Deposited = "No";
-            if (StateGA != null ) {
+        private void DepositStatus() {
+            deposited = "No";
+            if (StateGA != null) {
                 try {
                     if (StateGA.ToString().Trim().ToLower() == "posted") {
-                        _Deposited = "Yes";
+                        deposited = "Yes";
                     }
                 }
                 finally { }
+            }
+        }
+
+        public string DisplayInNewPayments {
+            get {
+                return ((StateGA == "created") ? "yes" : "no");
             }
         }
     }
@@ -106,12 +113,12 @@ namespace dataLib {
     }
 
     public partial class CRAccount {
-        private const string sep = "/";
+        private const string Sep = "/";
 
-        public string searchText {
+        public string SearchText {
             get {
                 string r;
-                r = sep + AccountNo.ToString() + sep + this.AccountName.ToString() + sep;
+                r = Sep + AccountNo.ToString() + Sep + this.AccountName.ToString() + Sep;
                 return r;
             }
         }

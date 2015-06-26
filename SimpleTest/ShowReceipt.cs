@@ -13,7 +13,7 @@ using dataLib;
 namespace SimpleTest {
     public partial class ShowReceipt : Form {
         AppSettings aset;
-        dbClassDataContext dc;
+        DbClassDataContext dc;
 
         public ShowReceipt(string id) {
             InitializeComponent();

@@ -19,7 +19,7 @@ namespace RcvPayment {
         private string currentID;
         private string currentDetailID;
         private AppSettings aset;
-        private dbClassDataContext dc;
+        private DbClassDataContext dc;
 
         private double _AppliedAmount;
         private string _AppliedAmountMessage;
@@ -80,7 +80,7 @@ namespace RcvPayment {
             currentID = "";
             currentDetailID = "";
             aset = new AppSettings();
-            dc = new dbClassDataContext(aset.wmis.connectionString);
+            dc = new DbClassDataContext(aset.wmis.connectionString);
             statUpdate("");
         }
         #endregion
@@ -194,7 +194,7 @@ namespace RcvPayment {
                 currentDetailID = thisId;
 
                 // Start monitoring input objects on this panel.
-                panelItem.Start(btnSaveItem );
+                panelItem.Start(btnSaveItem);
             }
         }
 
@@ -211,9 +211,10 @@ namespace RcvPayment {
             }
 
             // now connect to real data.
-            var q = from item in dc.CRMasters
-                    orderby item.RcptID descending
-                    select item;
+            IOrderedQueryable<CRMaster> q = from item in dc.CRMasters
+                                            where item.StateGA == "created"
+                                            orderby item.RcptID descending
+                                            select item;
 
             PaymentsGrid.DataSource = q;
         }
@@ -595,6 +596,36 @@ namespace RcvPayment {
         private void ItemsGrid_Validated(object sender, EventArgs e) {
             // Update the lblAppliedAmount.text
 
+        }
+
+        private void textSearch_TextChanged(object sender, EventArgs e) {
+            string inp;
+
+            inp = textSearch.Text.Trim().ToLower();
+            IQueryable<CRMaster> q;
+            const string Sep = " / ";
+
+            if (inp.Length > 0) {
+                q = from item in dc.CRMasters
+                    where ( 
+                    (item.StateGA == "created") && 
+                    ( item.DeliveryName.ToLower().Contains(inp) ||
+                      item.Note.ToLower().Contains(inp) ||
+                      item.PayRef.ToLower().Contains(inp) ||
+                      item.RcptID.ToLower().Contains(inp) )
+                    )
+                    orderby item.RcptID descending
+                    select item;
+            }
+            else {
+                q = from item in dc.CRMasters
+                    where item.StateGA == "created"
+                    orderby item.RcptID descending
+                    select item;
+
+            }
+
+            PaymentsGrid.DataSource = q;
         }
     }
 }

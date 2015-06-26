@@ -16,7 +16,7 @@ namespace RcvPayment {
     /// </summary>
     public partial class BatchDocs : MyForm {
         AppSettings aset;
-        dbClassDataContext dc;
+        DbClassDataContext dc;
         public PaymentBatches MyParent { get; set; }
 
         #region properties
@@ -54,13 +54,17 @@ namespace RcvPayment {
         public BatchDocs() {
             InitializeComponent();
             aset = new AppSettings();
-            dc = new dbClassDataContext(aset.wmis.connectionString);
+            dc = new DbClassDataContext(aset.wmis.connectionString);
             MyParent = null;
             DragDropInit();
         }
 
         private void BatchDocs_Load(object sender, EventArgs e) {
             statLabel.Text = "";
+            dgvPend.AlternatingRowsDefaultCellStyle.BackColor = Color.Bisque;
+            dgvPend.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
+            dgvSel.AlternatingRowsDefaultCellStyle.BackColor = Color.Bisque;
+            dgvSel.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
         }
         #endregion
 
@@ -303,6 +307,10 @@ namespace RcvPayment {
                     dc.SubmitChanges();
                     dc.Refresh(RefreshMode.OverwriteCurrentValues, mst);
                     dc.Refresh(RefreshMode.OverwriteCurrentValues, dc.CRDepItems );
+
+                    // Update CRDepBatch Record with 
+                    // new totals.
+                    UpdateCRBatchTotals();
                 }
             }
             catch (Exception ex) {

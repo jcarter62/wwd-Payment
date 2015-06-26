@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using dataLib;
+using classLib;
 
 namespace RcvPayment {
     public partial class MainForm : RcvPayment.MyForm {
@@ -29,6 +31,12 @@ namespace RcvPayment {
             PaymentBatches f = new PaymentBatches();
             f.MdiParent = this;
             f.Show();
+        }
+
+        private void generateTestDataToolStripMenuItem_Click(object sender, EventArgs e) {
+            AppSettings aset = new AppSettings();
+            SampleData sd = new SampleData(aset.wmis.connectionString);
+            sd.CreateData(100);
         }
     }
 }

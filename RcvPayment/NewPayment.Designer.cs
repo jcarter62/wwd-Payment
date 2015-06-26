@@ -24,35 +24,43 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewPayment));
             this.panel1 = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statLbl = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.chkShowAll = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textSearch = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnMod = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.PaymentsGrid = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RcptID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Deposited = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.cRMasterBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblAppliedChk = new System.Windows.Forms.PictureBox();
             this.lblAppliedAmount = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.ItemsGrid = new System.Windows.Forms.DataGridView();
-            this.accountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amountDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cRDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.cRDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.panelItem = new classLib.PanelTrak(this.components);
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtItmNote = new classLib.TextBoxTrak(this.components);
+            this.cbItmApply2 = new classLib.ComboBoxTrak(this.components);
+            this.txtItmAmount = new classLib.TextBoxTrak(this.components);
+            this.txtItmName = new classLib.TextBoxTrak(this.components);
+            this.txtItmAcct = new classLib.TextBoxTrak(this.components);
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btnAddItem = new System.Windows.Forms.Button();
+            this.btnDeleteItem = new System.Windows.Forms.Button();
+            this.btnSaveItem = new System.Windows.Forms.Button();
             this.panelDetail = new classLib.PanelTrak(this.components);
             this.btnPrint = new System.Windows.Forms.Button();
             this.txtNote = new classLib.TextBoxTrak(this.components);
@@ -74,34 +82,28 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.panelItem = new classLib.PanelTrak(this.components);
-            this.label15 = new System.Windows.Forms.Label();
-            this.txtItmNote = new classLib.TextBoxTrak(this.components);
-            this.cbItmApply2 = new classLib.ComboBoxTrak(this.components);
-            this.txtItmAmount = new classLib.TextBoxTrak(this.components);
-            this.txtItmName = new classLib.TextBoxTrak(this.components);
-            this.txtItmAcct = new classLib.TextBoxTrak(this.components);
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.btnAddItem = new System.Windows.Forms.Button();
-            this.btnDeleteItem = new System.Windows.Forms.Button();
-            this.btnSaveItem = new System.Windows.Forms.Button();
+            this.cRMasterBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.paymentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.accountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amountDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RcptID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Deposited = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.panel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PaymentsGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cRMasterBindingSource)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lblAppliedChk)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cRDetailBindingSource)).BeginInit();
-            this.panelDetail.SuspendLayout();
             this.panelItem.SuspendLayout();
+            this.panelDetail.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cRMasterBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.paymentsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -136,7 +138,7 @@
             // panel5
             // 
             this.panel5.Controls.Add(this.chkShowAll);
-            this.panel5.Controls.Add(this.textBox1);
+            this.panel5.Controls.Add(this.textSearch);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
@@ -154,14 +156,15 @@
             this.chkShowAll.Text = "Show All";
             this.chkShowAll.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // textSearch
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.textSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(12, 13);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(181, 20);
-            this.textBox1.TabIndex = 0;
+            this.textSearch.Location = new System.Drawing.Point(12, 13);
+            this.textSearch.Name = "textSearch";
+            this.textSearch.Size = new System.Drawing.Size(181, 20);
+            this.textSearch.TabIndex = 0;
+            this.textSearch.TextChanged += new System.EventHandler(this.textSearch_TextChanged);
             // 
             // panel4
             // 
@@ -230,46 +233,6 @@
             this.PaymentsGrid.TabIndex = 0;
             this.PaymentsGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.PaymentsGrid_CellClick);
             this.PaymentsGrid.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.PaymentsGrid_RowEnter);
-            // 
-            // Id
-            // 
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Visible = false;
-            this.Id.Width = 50;
-            // 
-            // RcptID
-            // 
-            this.RcptID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.RcptID.DataPropertyName = "RcptID";
-            this.RcptID.HeaderText = "Receipt ID";
-            this.RcptID.Name = "RcptID";
-            this.RcptID.ReadOnly = true;
-            this.RcptID.Width = 83;
-            // 
-            // Amount
-            // 
-            this.Amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Amount.DataPropertyName = "Amount";
-            this.Amount.HeaderText = "Amount";
-            this.Amount.Name = "Amount";
-            this.Amount.ReadOnly = true;
-            this.Amount.Width = 68;
-            // 
-            // Deposited
-            // 
-            this.Deposited.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Deposited.DataPropertyName = "Deposited";
-            this.Deposited.HeaderText = "Deposited";
-            this.Deposited.Name = "Deposited";
-            this.Deposited.ReadOnly = true;
-            this.Deposited.Width = 61;
-            // 
-            // cRMasterBindingSource
-            // 
-            this.cRMasterBindingSource.DataSource = typeof(dataLib.CRMaster);
             // 
             // panel2
             // 
@@ -346,43 +309,185 @@
             this.ItemsGrid.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_RowEnter);
             this.ItemsGrid.Validated += new System.EventHandler(this.ItemsGrid_Validated);
             // 
-            // accountDataGridViewTextBoxColumn
+            // timer1
             // 
-            this.accountDataGridViewTextBoxColumn.DataPropertyName = "Account";
-            this.accountDataGridViewTextBoxColumn.HeaderText = "Account";
-            this.accountDataGridViewTextBoxColumn.Name = "accountDataGridViewTextBoxColumn";
-            this.accountDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // amountDataGridViewTextBoxColumn1
-            // 
-            this.amountDataGridViewTextBoxColumn1.DataPropertyName = "Amount";
-            this.amountDataGridViewTextBoxColumn1.HeaderText = "Amount";
-            this.amountDataGridViewTextBoxColumn1.Name = "amountDataGridViewTextBoxColumn1";
-            this.amountDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // typeDataGridViewTextBoxColumn
-            // 
-            this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
-            this.typeDataGridViewTextBoxColumn.HeaderText = "Type";
-            this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
-            this.typeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Visible = false;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // cRDetailBindingSource
             // 
             this.cRDetailBindingSource.DataSource = typeof(dataLib.CRDetail);
             // 
-            // timer1
+            // panelItem
             // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.panelItem.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelItem.Controls.Add(this.label15);
+            this.panelItem.Controls.Add(this.txtItmNote);
+            this.panelItem.Controls.Add(this.cbItmApply2);
+            this.panelItem.Controls.Add(this.txtItmAmount);
+            this.panelItem.Controls.Add(this.txtItmName);
+            this.panelItem.Controls.Add(this.txtItmAcct);
+            this.panelItem.Controls.Add(this.label14);
+            this.panelItem.Controls.Add(this.label13);
+            this.panelItem.Controls.Add(this.label12);
+            this.panelItem.Controls.Add(this.label11);
+            this.panelItem.Controls.Add(this.label10);
+            this.panelItem.Controls.Add(this.btnAddItem);
+            this.panelItem.Controls.Add(this.btnDeleteItem);
+            this.panelItem.Controls.Add(this.btnSaveItem);
+            this.panelItem.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelItem.Location = new System.Drawing.Point(285, 211);
+            this.panelItem.Name = "panelItem";
+            this.panelItem.Size = new System.Drawing.Size(314, 108);
+            this.panelItem.TabIndex = 1;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(9, 82);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(71, 13);
+            this.label15.TabIndex = 45;
+            this.label15.Text = "Item Record: ";
+            // 
+            // txtItmNote
+            // 
+            this.txtItmNote.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtItmNote.Changed = false;
+            this.txtItmNote.Cue = "Notes about this Item";
+            this.txtItmNote.Location = new System.Drawing.Point(60, 52);
+            this.txtItmNote.Name = "txtItmNote";
+            this.txtItmNote.Size = new System.Drawing.Size(241, 20);
+            this.txtItmNote.TabIndex = 4;
+            // 
+            // cbItmApply2
+            // 
+            this.cbItmApply2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbItmApply2.Changed = false;
+            this.cbItmApply2.Cue = "Type ";
+            this.cbItmApply2.FormattingEnabled = true;
+            this.cbItmApply2.Items.AddRange(new object[] {
+            "Water",
+            "LnBase",
+            "Assess",
+            "Other"});
+            this.cbItmApply2.Location = new System.Drawing.Point(205, 29);
+            this.cbItmApply2.Name = "cbItmApply2";
+            this.cbItmApply2.Size = new System.Drawing.Size(94, 21);
+            this.cbItmApply2.TabIndex = 3;
+            // 
+            // txtItmAmount
+            // 
+            this.txtItmAmount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtItmAmount.Changed = false;
+            this.txtItmAmount.Cue = "$$$";
+            this.txtItmAmount.Location = new System.Drawing.Point(60, 29);
+            this.txtItmAmount.Name = "txtItmAmount";
+            this.txtItmAmount.Size = new System.Drawing.Size(83, 20);
+            this.txtItmAmount.TabIndex = 2;
+            // 
+            // txtItmName
+            // 
+            this.txtItmName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtItmName.Changed = false;
+            this.txtItmName.Cue = "Account Name";
+            this.txtItmName.Location = new System.Drawing.Point(191, 6);
+            this.txtItmName.Name = "txtItmName";
+            this.txtItmName.Size = new System.Drawing.Size(110, 20);
+            this.txtItmName.TabIndex = 1;
+            // 
+            // txtItmAcct
+            // 
+            this.txtItmAcct.Changed = false;
+            this.txtItmAcct.Cue = "Account #";
+            this.txtItmAcct.Location = new System.Drawing.Point(60, 7);
+            this.txtItmAcct.Name = "txtItmAcct";
+            this.txtItmAcct.Size = new System.Drawing.Size(86, 20);
+            this.txtItmAcct.TabIndex = 0;
+            this.txtItmAcct.TextChanged += new System.EventHandler(this.txtItmAcct_TextChanged);
+            this.txtItmAcct.DoubleClick += new System.EventHandler(this.txtItmAcct_DoubleClick);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(7, 55);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(33, 13);
+            this.label14.TabIndex = 39;
+            this.label14.Text = "Note:";
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(147, 32);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(52, 13);
+            this.label13.TabIndex = 38;
+            this.label13.Text = "Apply To:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(8, 32);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(46, 13);
+            this.label12.TabIndex = 37;
+            this.label12.Text = "Amount:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(149, 9);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(38, 13);
+            this.label11.TabIndex = 36;
+            this.label11.Text = "Name:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(7, 9);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(50, 13);
+            this.label10.TabIndex = 35;
+            this.label10.Text = "Account:";
+            // 
+            // btnAddItem
+            // 
+            this.btnAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddItem.Location = new System.Drawing.Point(86, 77);
+            this.btnAddItem.Name = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(55, 23);
+            this.btnAddItem.TabIndex = 8;
+            this.btnAddItem.Text = "&Add";
+            this.btnAddItem.UseVisualStyleBackColor = true;
+            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
+            // 
+            // btnDeleteItem
+            // 
+            this.btnDeleteItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteItem.Location = new System.Drawing.Point(244, 75);
+            this.btnDeleteItem.Name = "btnDeleteItem";
+            this.btnDeleteItem.Size = new System.Drawing.Size(55, 26);
+            this.btnDeleteItem.TabIndex = 10;
+            this.btnDeleteItem.Text = "Delete";
+            this.btnDeleteItem.UseVisualStyleBackColor = true;
+            this.btnDeleteItem.Click += new System.EventHandler(this.btnDeleteItem_Click);
+            // 
+            // btnSaveItem
+            // 
+            this.btnSaveItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSaveItem.Location = new System.Drawing.Point(165, 75);
+            this.btnSaveItem.Name = "btnSaveItem";
+            this.btnSaveItem.Size = new System.Drawing.Size(55, 26);
+            this.btnSaveItem.TabIndex = 5;
+            this.btnSaveItem.Text = "&Save";
+            this.btnSaveItem.UseVisualStyleBackColor = true;
+            this.btnSaveItem.Click += new System.EventHandler(this.btnSaveItem_Click);
             // 
             // panelDetail
             // 
@@ -623,180 +728,85 @@
             this.label1.TabIndex = 16;
             this.label1.Text = "Receipt ID:";
             // 
-            // panelItem
+            // cRMasterBindingSource
             // 
-            this.panelItem.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelItem.Controls.Add(this.label15);
-            this.panelItem.Controls.Add(this.txtItmNote);
-            this.panelItem.Controls.Add(this.cbItmApply2);
-            this.panelItem.Controls.Add(this.txtItmAmount);
-            this.panelItem.Controls.Add(this.txtItmName);
-            this.panelItem.Controls.Add(this.txtItmAcct);
-            this.panelItem.Controls.Add(this.label14);
-            this.panelItem.Controls.Add(this.label13);
-            this.panelItem.Controls.Add(this.label12);
-            this.panelItem.Controls.Add(this.label11);
-            this.panelItem.Controls.Add(this.label10);
-            this.panelItem.Controls.Add(this.btnAddItem);
-            this.panelItem.Controls.Add(this.btnDeleteItem);
-            this.panelItem.Controls.Add(this.btnSaveItem);
-            this.panelItem.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelItem.Location = new System.Drawing.Point(285, 211);
-            this.panelItem.Name = "panelItem";
-            this.panelItem.Size = new System.Drawing.Size(314, 108);
-            this.panelItem.TabIndex = 1;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(9, 82);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(71, 13);
-            this.label15.TabIndex = 45;
-            this.label15.Text = "Item Record: ";
-            // 
-            // txtItmNote
-            // 
-            this.txtItmNote.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtItmNote.Changed = false;
-            this.txtItmNote.Cue = "Notes about this Item";
-            this.txtItmNote.Location = new System.Drawing.Point(60, 52);
-            this.txtItmNote.Name = "txtItmNote";
-            this.txtItmNote.Size = new System.Drawing.Size(241, 20);
-            this.txtItmNote.TabIndex = 4;
-            // 
-            // cbItmApply2
-            // 
-            this.cbItmApply2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbItmApply2.Changed = false;
-            this.cbItmApply2.Cue = "Type ";
-            this.cbItmApply2.FormattingEnabled = true;
-            this.cbItmApply2.Items.AddRange(new object[] {
-            "Water",
-            "LnBase",
-            "Assess",
-            "Other"});
-            this.cbItmApply2.Location = new System.Drawing.Point(205, 29);
-            this.cbItmApply2.Name = "cbItmApply2";
-            this.cbItmApply2.Size = new System.Drawing.Size(94, 21);
-            this.cbItmApply2.TabIndex = 3;
-            // 
-            // txtItmAmount
-            // 
-            this.txtItmAmount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtItmAmount.Changed = false;
-            this.txtItmAmount.Cue = "$$$";
-            this.txtItmAmount.Location = new System.Drawing.Point(60, 29);
-            this.txtItmAmount.Name = "txtItmAmount";
-            this.txtItmAmount.Size = new System.Drawing.Size(83, 20);
-            this.txtItmAmount.TabIndex = 2;
-            // 
-            // txtItmName
-            // 
-            this.txtItmName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtItmName.Changed = false;
-            this.txtItmName.Cue = "Account Name";
-            this.txtItmName.Location = new System.Drawing.Point(191, 6);
-            this.txtItmName.Name = "txtItmName";
-            this.txtItmName.Size = new System.Drawing.Size(110, 20);
-            this.txtItmName.TabIndex = 1;
-            // 
-            // txtItmAcct
-            // 
-            this.txtItmAcct.Changed = false;
-            this.txtItmAcct.Cue = "Account #";
-            this.txtItmAcct.Location = new System.Drawing.Point(60, 7);
-            this.txtItmAcct.Name = "txtItmAcct";
-            this.txtItmAcct.Size = new System.Drawing.Size(86, 20);
-            this.txtItmAcct.TabIndex = 0;
-            this.txtItmAcct.TextChanged += new System.EventHandler(this.txtItmAcct_TextChanged);
-            this.txtItmAcct.DoubleClick += new System.EventHandler(this.txtItmAcct_DoubleClick);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(7, 55);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(33, 13);
-            this.label14.TabIndex = 39;
-            this.label14.Text = "Note:";
-            // 
-            // label13
-            // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(147, 32);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(52, 13);
-            this.label13.TabIndex = 38;
-            this.label13.Text = "Apply To:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(8, 32);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(46, 13);
-            this.label12.TabIndex = 37;
-            this.label12.Text = "Amount:";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(149, 9);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(38, 13);
-            this.label11.TabIndex = 36;
-            this.label11.Text = "Name:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(7, 9);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(50, 13);
-            this.label10.TabIndex = 35;
-            this.label10.Text = "Account:";
-            // 
-            // btnAddItem
-            // 
-            this.btnAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddItem.Location = new System.Drawing.Point(86, 77);
-            this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(55, 23);
-            this.btnAddItem.TabIndex = 8;
-            this.btnAddItem.Text = "&Add";
-            this.btnAddItem.UseVisualStyleBackColor = true;
-            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
-            // 
-            // btnDeleteItem
-            // 
-            this.btnDeleteItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeleteItem.Location = new System.Drawing.Point(244, 75);
-            this.btnDeleteItem.Name = "btnDeleteItem";
-            this.btnDeleteItem.Size = new System.Drawing.Size(55, 26);
-            this.btnDeleteItem.TabIndex = 10;
-            this.btnDeleteItem.Text = "Delete";
-            this.btnDeleteItem.UseVisualStyleBackColor = true;
-            this.btnDeleteItem.Click += new System.EventHandler(this.btnDeleteItem_Click);
-            // 
-            // btnSaveItem
-            // 
-            this.btnSaveItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaveItem.Location = new System.Drawing.Point(165, 75);
-            this.btnSaveItem.Name = "btnSaveItem";
-            this.btnSaveItem.Size = new System.Drawing.Size(55, 26);
-            this.btnSaveItem.TabIndex = 5;
-            this.btnSaveItem.Text = "&Save";
-            this.btnSaveItem.UseVisualStyleBackColor = true;
-            this.btnSaveItem.Click += new System.EventHandler(this.btnSaveItem_Click);
+            this.cRMasterBindingSource.DataSource = typeof(dataLib.CRMaster);
             // 
             // paymentsBindingSource
             // 
             this.paymentsBindingSource.DataSource = typeof(classLib.Payments);
+            // 
+            // accountDataGridViewTextBoxColumn
+            // 
+            this.accountDataGridViewTextBoxColumn.DataPropertyName = "Account";
+            this.accountDataGridViewTextBoxColumn.HeaderText = "Account";
+            this.accountDataGridViewTextBoxColumn.Name = "accountDataGridViewTextBoxColumn";
+            this.accountDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // amountDataGridViewTextBoxColumn1
+            // 
+            this.amountDataGridViewTextBoxColumn1.DataPropertyName = "Amount";
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.amountDataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.amountDataGridViewTextBoxColumn1.HeaderText = "Amount";
+            this.amountDataGridViewTextBoxColumn1.Name = "amountDataGridViewTextBoxColumn1";
+            this.amountDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // typeDataGridViewTextBoxColumn
+            // 
+            this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
+            this.typeDataGridViewTextBoxColumn.HeaderText = "Type";
+            this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
+            this.typeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            this.Id.Width = 50;
+            // 
+            // RcptID
+            // 
+            this.RcptID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.RcptID.DataPropertyName = "RcptID";
+            this.RcptID.HeaderText = "Receipt ID";
+            this.RcptID.Name = "RcptID";
+            this.RcptID.ReadOnly = true;
+            this.RcptID.Width = 83;
+            // 
+            // Amount
+            // 
+            this.Amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Amount.DataPropertyName = "Amount";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.Amount.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Amount.HeaderText = "Amount";
+            this.Amount.Name = "Amount";
+            this.Amount.ReadOnly = true;
+            this.Amount.Width = 68;
+            // 
+            // Deposited
+            // 
+            this.Deposited.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Deposited.DataPropertyName = "Deposited";
+            this.Deposited.HeaderText = "Deposited";
+            this.Deposited.Name = "Deposited";
+            this.Deposited.ReadOnly = true;
+            this.Deposited.Width = 61;
             // 
             // NewPayment
             // 
@@ -820,15 +830,15 @@
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PaymentsGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cRMasterBindingSource)).EndInit();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lblAppliedChk)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemsGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cRDetailBindingSource)).EndInit();
-            this.panelDetail.ResumeLayout(false);
-            this.panelDetail.PerformLayout();
             this.panelItem.ResumeLayout(false);
             this.panelItem.PerformLayout();
+            this.panelDetail.ResumeLayout(false);
+            this.panelDetail.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cRMasterBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.paymentsBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -841,7 +851,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.CheckBox chkShowAll;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textSearch;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnMod;
@@ -875,10 +885,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.BindingSource cRDetailBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn accountDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label lblAppliedAmount;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.PictureBox lblAppliedChk;
@@ -897,6 +903,10 @@
         private classLib.TextBoxTrak txtItmName;
         private classLib.TextBoxTrak txtItmNote;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn accountDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn RcptID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;

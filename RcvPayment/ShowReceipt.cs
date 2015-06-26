@@ -16,14 +16,14 @@ using System.Net.Mail;
 namespace RcvPayment {
     public partial class ShowReceipt : RcvPayment.MyForm {
         AppSettings aset;
-        dbClassDataContext dc;
+        DbClassDataContext dc;
 
         public string Id { get; set; }
 
         public ShowReceipt() {
             InitializeComponent();
             aset = new AppSettings();
-            dc = new dbClassDataContext(aset.wmis.connectionString);
+            dc = new DbClassDataContext(aset.wmis.connectionString);
         }
 
         public void DisplayReport(string id ) {

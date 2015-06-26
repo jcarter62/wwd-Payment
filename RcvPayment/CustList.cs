@@ -17,7 +17,7 @@ namespace RcvPayment {
         private const string NameColName = "fullNameDataGridViewTextBoxColumn";
 
         private AppSettings aset;
-        private dbClassDataContext dc;
+        private DbClassDataContext dc;
         private BindingSource bsrc;
         public NewPayment myParent { get; set; }
         public string selectedAccount { get; set; }
@@ -38,7 +38,7 @@ namespace RcvPayment {
 
         private void init() {
             aset = new AppSettings();
-            dc = new dbClassDataContext(aset.wmis.connectionString);
+            dc = new DbClassDataContext(aset.wmis.connectionString);
             selectedAccount = "";
             selectedName = "";
         }

@@ -23,7 +23,7 @@ namespace dataLib
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="testdb")]
-	public partial class dbClassDataContext : System.Data.Linq.DataContext
+	public partial class DbClassDataContext : System.Data.Linq.DataContext
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
@@ -50,31 +50,31 @@ namespace dataLib
     partial void DeleteCRMaster(CRMaster instance);
     #endregion
 		
-		public dbClassDataContext() : 
+		public DbClassDataContext() : 
 				base(global::dataLib.Properties.Settings.Default.testdbConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public dbClassDataContext(string connection) : 
+		public DbClassDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public dbClassDataContext(System.Data.IDbConnection connection) : 
+		public DbClassDataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public dbClassDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public DbClassDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public dbClassDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public DbClassDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();

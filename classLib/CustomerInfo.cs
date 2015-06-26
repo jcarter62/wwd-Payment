@@ -11,12 +11,12 @@ namespace classLib {
     /// customer number as input.
     /// </summary>
     public class CustomerInfo {
-        private dbClassDataContext dc;
+        private DbClassDataContext dc;
         private AppSettings aset;
         
         public CustomerInfo(int AcctNo) {
             aset = new AppSettings();
-            dc = new dbClassDataContext(aset.wmis.connectionString);
+            dc = new DbClassDataContext(aset.wmis.connectionString);
             this.AccountNo = AcctNo;
         }
 

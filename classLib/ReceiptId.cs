@@ -8,7 +8,7 @@ using dataLib;
 namespace classLib {
     public class ReceiptId {
         AppSettings aset;
-        dbClassDataContext dc;
+        DbClassDataContext dc;
 
         string prefix { get; set; }
         string year;
@@ -35,7 +35,7 @@ namespace classLib {
             string tempid = "";
             DateTime now;
             aset = new AppSettings();
-            dc = new dbClassDataContext(aset.wmis.connectionString);
+            dc = new DbClassDataContext(aset.wmis.connectionString);
             
             now = DateTime.Now;
 

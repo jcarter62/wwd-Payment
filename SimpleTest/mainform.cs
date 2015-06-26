@@ -14,13 +14,13 @@ using dataLib;
 namespace SimpleTest {
     public partial class mainform : Form {
         AppSettings aset;
-        dbClassDataContext dc;
+        DbClassDataContext dc;
         string id;
 
         public mainform() {
             InitializeComponent();
             aset = new AppSettings();
-            dc = new dbClassDataContext(aset.wmis.connectionString);
+            dc = new DbClassDataContext(aset.wmis.connectionString);
 
             loadGrid();
             id = "";

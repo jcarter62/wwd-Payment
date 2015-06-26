@@ -13,7 +13,7 @@ using System.Linq;
 namespace RcvPayment {
     public partial class PaymentBatches : RcvPayment.MyForm {
         AppSettings aset;
-        dbClassDataContext dc;
+        DbClassDataContext dc;
 
         // CurrentId is the guid of the batch record.
         // the user does not see this normally.
@@ -33,7 +33,7 @@ namespace RcvPayment {
         public PaymentBatches() {
             InitializeComponent();
             aset = new AppSettings();
-            dc = new dbClassDataContext(aset.wmis.connectionString);
+            dc = new DbClassDataContext(aset.wmis.connectionString);
             CurrentId = "";
             InitStatusLabels();
         }
@@ -69,11 +69,15 @@ namespace RcvPayment {
             FindBatch();
         }
 
-        private void DisplayBatchDetails() {
+        private void DisplayBatchDetails(bool forceReload = false) {
             try {
                 var q = (from item in dc.CRDepBatches
                          where item.Id == CurrentId
                          select item).FirstOrDefault();
+
+                if (forceReload) {
+                    dc.Refresh(RefreshMode.OverwriteCurrentValues, q);
+                }
 
                 if (q != null) {
                     textId.Text = q.IDBank;
@@ -285,7 +289,7 @@ namespace RcvPayment {
         }
 
         public void UpdateDetailAmounts() {
-            DisplayBatchDetails();
+            DisplayBatchDetails(forceReload: true);
         }
 
         private void btnPost_Click(object sender, EventArgs e) {
@@ -296,6 +300,7 @@ namespace RcvPayment {
         }
 
         private void PostThisBatch() {
+            string poststring = "posted";
             // Note, since there is only 1 submitchanges(), we don't
             // need to explicly create a transaction.
             //
@@ -303,12 +308,34 @@ namespace RcvPayment {
             // 2. Next change the CRMaster Records to show posted status.
             // 3. Next update the batch item records, to posted.
 
-            try
-            {
-//                var BatchMaster = (from r ).first();
-                
-            } catch (Exception ex)
-            {
+            try {
+                // (1)
+                CRDepBatch batchRec = (from item in dc.CRDepBatches
+                                       where item.Id == CurrentId
+                                       select item).First();
+
+                batchRec.State = poststring;
+
+                IQueryable<CRDepItem> itemRecs = (from item in dc.CRDepItems
+                                where item.IDBatch == CurrentId
+                                select item);
+
+                foreach (CRDepItem oneitem in itemRecs) {
+                    // (2)
+                    oneitem.State = poststring;
+
+                    CRMaster mst = ( from r in dc.CRMasters
+                                where r.Id == oneitem.CRMid
+                                select r).First();
+                    if ( mst != null )
+                    {
+                        // (3)
+                        mst.StateGA = poststring;
+                    }
+                }
+                dc.SubmitChanges();
+            }
+            catch (Exception ex) {
                 Console.WriteLine(ex.Message);
             }
         }
