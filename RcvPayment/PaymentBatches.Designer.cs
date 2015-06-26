@@ -25,7 +25,7 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PaymentBatches));
-            this.panelTrak1 = new classLib.PanelTrak(this.components);
+            this.panLeft = new classLib.PanelTrak(this.components);
             this.dgv = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idbank = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -37,7 +37,7 @@
             this.uDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uUserDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataSrc = new System.Windows.Forms.BindingSource(this.components);
-            this.panelTrak2 = new classLib.PanelTrak(this.components);
+            this.panRight = new classLib.PanelTrak(this.components);
             this.btnPost = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -58,21 +58,21 @@
             this.statGrid = new System.Windows.Forms.ToolStripStatusLabel();
             this.statDetail = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.panelTrak1.SuspendLayout();
+            this.panLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSrc)).BeginInit();
-            this.panelTrak2.SuspendLayout();
+            this.panRight.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panelTrak1
+            // panLeft
             // 
-            this.panelTrak1.Controls.Add(this.dgv);
-            this.panelTrak1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelTrak1.Location = new System.Drawing.Point(0, 0);
-            this.panelTrak1.Name = "panelTrak1";
-            this.panelTrak1.Size = new System.Drawing.Size(220, 288);
-            this.panelTrak1.TabIndex = 0;
+            this.panLeft.Controls.Add(this.dgv);
+            this.panLeft.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panLeft.Location = new System.Drawing.Point(0, 0);
+            this.panLeft.Name = "panLeft";
+            this.panLeft.Size = new System.Drawing.Size(220, 288);
+            this.panLeft.TabIndex = 0;
             // 
             // dgv
             // 
@@ -103,6 +103,7 @@
             this.dgv.TabIndex = 0;
             this.dgv.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_RowEnter);
             this.dgv.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dgv_RowStateChanged);
+            this.dgv.DoubleClick += new System.EventHandler(this.dgv_DoubleClick);
             // 
             // id
             // 
@@ -184,29 +185,29 @@
             // 
             this.dataSrc.DataSource = typeof(dataLib.CRDepBatch);
             // 
-            // panelTrak2
+            // panRight
             // 
-            this.panelTrak2.Controls.Add(this.btnPost);
-            this.panelTrak2.Controls.Add(this.btnClose);
-            this.panelTrak2.Controls.Add(this.btnDelete);
-            this.panelTrak2.Controls.Add(this.btnUpdate);
-            this.panelTrak2.Controls.Add(this.btnAdd);
-            this.panelTrak2.Controls.Add(this.btnDocs);
-            this.panelTrak2.Controls.Add(this.lblAmount);
-            this.panelTrak2.Controls.Add(this.lblDocCount);
-            this.panelTrak2.Controls.Add(this.lblModified);
-            this.panelTrak2.Controls.Add(this.label6);
-            this.panelTrak2.Controls.Add(this.lblCreated);
-            this.panelTrak2.Controls.Add(this.label4);
-            this.panelTrak2.Controls.Add(this.label3);
-            this.panelTrak2.Controls.Add(this.label2);
-            this.panelTrak2.Controls.Add(this.label1);
-            this.panelTrak2.Controls.Add(this.textId);
-            this.panelTrak2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelTrak2.Location = new System.Drawing.Point(220, 0);
-            this.panelTrak2.Name = "panelTrak2";
-            this.panelTrak2.Size = new System.Drawing.Size(219, 288);
-            this.panelTrak2.TabIndex = 1;
+            this.panRight.Controls.Add(this.btnPost);
+            this.panRight.Controls.Add(this.btnClose);
+            this.panRight.Controls.Add(this.btnDelete);
+            this.panRight.Controls.Add(this.btnUpdate);
+            this.panRight.Controls.Add(this.btnAdd);
+            this.panRight.Controls.Add(this.btnDocs);
+            this.panRight.Controls.Add(this.lblAmount);
+            this.panRight.Controls.Add(this.lblDocCount);
+            this.panRight.Controls.Add(this.lblModified);
+            this.panRight.Controls.Add(this.label6);
+            this.panRight.Controls.Add(this.lblCreated);
+            this.panRight.Controls.Add(this.label4);
+            this.panRight.Controls.Add(this.label3);
+            this.panRight.Controls.Add(this.label2);
+            this.panRight.Controls.Add(this.label1);
+            this.panRight.Controls.Add(this.textId);
+            this.panRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panRight.Location = new System.Drawing.Point(220, 0);
+            this.panRight.Name = "panRight";
+            this.panRight.Size = new System.Drawing.Size(219, 288);
+            this.panRight.TabIndex = 1;
             // 
             // btnPost
             // 
@@ -217,6 +218,7 @@
             this.btnPost.TabIndex = 15;
             this.btnPost.Text = "Post";
             this.btnPost.UseVisualStyleBackColor = true;
+            this.btnPost.Click += new System.EventHandler(this.btnPost_Click);
             // 
             // btnClose
             // 
@@ -407,18 +409,18 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(439, 310);
             this.Controls.Add(this.splitter1);
-            this.Controls.Add(this.panelTrak1);
-            this.Controls.Add(this.panelTrak2);
+            this.Controls.Add(this.panLeft);
+            this.Controls.Add(this.panRight);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PaymentBatches";
             this.Text = "Payment Batches";
             this.Load += new System.EventHandler(this.PaymentBatches_Load);
-            this.panelTrak1.ResumeLayout(false);
+            this.panLeft.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSrc)).EndInit();
-            this.panelTrak2.ResumeLayout(false);
-            this.panelTrak2.PerformLayout();
+            this.panRight.ResumeLayout(false);
+            this.panRight.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -428,8 +430,8 @@
 
         #endregion
 
-        private classLib.PanelTrak panelTrak1;
-        private classLib.PanelTrak panelTrak2;
+        private classLib.PanelTrak panLeft;
+        private classLib.PanelTrak panRight;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.DataGridView dgv;

@@ -76,7 +76,8 @@ namespace dataLib {
                 PayType = "Check";
                 PayVia = "USPS";
                 Amount = 0.0;
-                State = "Created";
+                StateAR = "Created";
+                StateGA = "Created";
             }
         }
 
@@ -89,9 +90,9 @@ namespace dataLib {
 
         private void depositStatus() {
             _Deposited = "No";
-            if (State != null) {
+            if (StateGA != null ) {
                 try {
-                    if (State.ToString().Trim().ToLower() == "deposited") {
+                    if (StateGA.ToString().Trim().ToLower() == "posted") {
                         _Deposited = "Yes";
                     }
                 }

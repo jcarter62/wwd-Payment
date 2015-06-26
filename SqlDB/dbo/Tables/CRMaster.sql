@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [dbo].[CRMaster] (
     [Id]           VARCHAR (40) NOT NULL,
-    [State]        VARCHAR (15) NULL,
+	[StateGA]      varchar(15) null,
+	[StateAR]      varchar(15) null,
     [SessionId]    VARCHAR (40) NULL,
     [DeliveryName] VARCHAR (50) NULL,
     [RcptID]       VARCHAR (15) NULL,

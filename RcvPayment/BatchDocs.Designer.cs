@@ -26,18 +26,17 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BatchDocs));
             this.panBot = new System.Windows.Forms.Panel();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnLoad = new System.Windows.Forms.Button();
             this.statStrip = new System.Windows.Forms.StatusStrip();
             this.statLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.panLeft = new classLib.PanelTrak(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblPendingTotal = new System.Windows.Forms.Label();
             this.dgvPend = new System.Windows.Forms.DataGridView();
             this.cDatedgvPend = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.payRefdgvPend = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amountdgvPend = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.depositeddgvPend = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.iddgvPend = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.statedgvPend = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sessionIddgvPend = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deliveryNamedgvPend = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rcptIDdgvPend = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,6 +50,8 @@
             this.panelTrak4 = new classLib.PanelTrak(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.panRight = new classLib.PanelTrak(this.components);
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lblSelectedTotal = new System.Windows.Forms.Label();
             this.dgvSel = new System.Windows.Forms.DataGridView();
             this.payRefdgvSel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amountdgvSel = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,13 +65,14 @@
             this.textBatchId = new classLib.TextBoxTrak(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.panBot.SuspendLayout();
             this.statStrip.SuspendLayout();
             this.panLeft.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPend)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cRMasterBindingSource)).BeginInit();
             this.panelTrak4.SuspendLayout();
             this.panRight.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cRDepItemBindingSource)).BeginInit();
             this.panelTrak3.SuspendLayout();
@@ -78,33 +80,11 @@
             // 
             // panBot
             // 
-            this.panBot.Controls.Add(this.btnClose);
-            this.panBot.Controls.Add(this.btnLoad);
             this.panBot.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panBot.Location = new System.Drawing.Point(0, 261);
+            this.panBot.Location = new System.Drawing.Point(0, 285);
             this.panBot.Name = "panBot";
-            this.panBot.Size = new System.Drawing.Size(446, 29);
+            this.panBot.Size = new System.Drawing.Size(446, 5);
             this.panBot.TabIndex = 0;
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Location = new System.Drawing.Point(347, 3);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(87, 23);
-            this.btnClose.TabIndex = 1;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            // 
-            // btnLoad
-            // 
-            this.btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLoad.Location = new System.Drawing.Point(12, 3);
-            this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(87, 23);
-            this.btnLoad.TabIndex = 0;
-            this.btnLoad.Text = "Load Pending";
-            this.btnLoad.UseVisualStyleBackColor = true;
             // 
             // statStrip
             // 
@@ -124,16 +104,37 @@
             // 
             // panLeft
             // 
+            this.panLeft.Controls.Add(this.panel1);
             this.panLeft.Controls.Add(this.dgvPend);
             this.panLeft.Controls.Add(this.panelTrak4);
             this.panLeft.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panLeft.Location = new System.Drawing.Point(0, 0);
             this.panLeft.Name = "panLeft";
-            this.panLeft.Size = new System.Drawing.Size(211, 261);
+            this.panLeft.Size = new System.Drawing.Size(211, 285);
             this.panLeft.TabIndex = 2;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lblPendingTotal);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 261);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(211, 24);
+            this.panel1.TabIndex = 8;
+            // 
+            // lblPendingTotal
+            // 
+            this.lblPendingTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPendingTotal.Location = new System.Drawing.Point(10, 3);
+            this.lblPendingTotal.Name = "lblPendingTotal";
+            this.lblPendingTotal.Size = new System.Drawing.Size(195, 18);
+            this.lblPendingTotal.TabIndex = 0;
+            this.lblPendingTotal.Text = "Pending Total Amount: $12345.00";
+            this.lblPendingTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // dgvPend
             // 
+            this.dgvPend.AllowDrop = true;
             this.dgvPend.AllowUserToAddRows = false;
             this.dgvPend.AllowUserToDeleteRows = false;
             this.dgvPend.AutoGenerateColumns = false;
@@ -144,7 +145,6 @@
             this.amountdgvPend,
             this.depositeddgvPend,
             this.iddgvPend,
-            this.statedgvPend,
             this.sessionIddgvPend,
             this.deliveryNamedgvPend,
             this.rcptIDdgvPend,
@@ -161,8 +161,10 @@
             this.dgvPend.ReadOnly = true;
             this.dgvPend.RowHeadersVisible = false;
             this.dgvPend.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPend.Size = new System.Drawing.Size(211, 234);
+            this.dgvPend.Size = new System.Drawing.Size(211, 258);
             this.dgvPend.TabIndex = 7;
+            this.dgvPend.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvPend_DragDrop);
+            this.dgvPend.DragOver += new System.Windows.Forms.DragEventHandler(this.dgvPend_DragOver);
             this.dgvPend.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvPend_MouseDown);
             this.dgvPend.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgvPend_MouseMove);
             // 
@@ -208,14 +210,6 @@
             this.iddgvPend.Name = "iddgvPend";
             this.iddgvPend.ReadOnly = true;
             this.iddgvPend.Visible = false;
-            // 
-            // statedgvPend
-            // 
-            this.statedgvPend.DataPropertyName = "State";
-            this.statedgvPend.HeaderText = "State";
-            this.statedgvPend.Name = "statedgvPend";
-            this.statedgvPend.ReadOnly = true;
-            this.statedgvPend.Visible = false;
             // 
             // sessionIddgvPend
             // 
@@ -313,13 +307,33 @@
             // 
             // panRight
             // 
+            this.panRight.Controls.Add(this.panel2);
             this.panRight.Controls.Add(this.dgvSel);
             this.panRight.Controls.Add(this.panelTrak3);
             this.panRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.panRight.Location = new System.Drawing.Point(221, 0);
             this.panRight.Name = "panRight";
-            this.panRight.Size = new System.Drawing.Size(225, 261);
+            this.panRight.Size = new System.Drawing.Size(225, 285);
             this.panRight.TabIndex = 3;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.lblSelectedTotal);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 261);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(225, 24);
+            this.panel2.TabIndex = 2;
+            // 
+            // lblSelectedTotal
+            // 
+            this.lblSelectedTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSelectedTotal.Location = new System.Drawing.Point(3, 3);
+            this.lblSelectedTotal.Name = "lblSelectedTotal";
+            this.lblSelectedTotal.Size = new System.Drawing.Size(217, 18);
+            this.lblSelectedTotal.TabIndex = 1;
+            this.lblSelectedTotal.Text = "Selected Total Amount: $12345.00";
+            this.lblSelectedTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // dgvSel
             // 
@@ -343,10 +357,12 @@
             this.dgvSel.ReadOnly = true;
             this.dgvSel.RowHeadersVisible = false;
             this.dgvSel.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSel.Size = new System.Drawing.Size(225, 234);
+            this.dgvSel.Size = new System.Drawing.Size(225, 258);
             this.dgvSel.TabIndex = 1;
             this.dgvSel.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvSel_DragDrop);
             this.dgvSel.DragOver += new System.Windows.Forms.DragEventHandler(this.dgvSel_DragOver);
+            this.dgvSel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvSel_MouseDown);
+            this.dgvSel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgvSel_MouseMove);
             // 
             // payRefdgvSel
             // 
@@ -446,7 +462,7 @@
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
             this.splitter1.Location = new System.Drawing.Point(211, 0);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(10, 261);
+            this.splitter1.Size = new System.Drawing.Size(10, 285);
             this.splitter1.TabIndex = 6;
             this.splitter1.TabStop = false;
             // 
@@ -462,16 +478,18 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BatchDocs";
             this.Text = "Payment Batch / Documents";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BatchDocs_FormClosing);
             this.Load += new System.EventHandler(this.BatchDocs_Load);
-            this.panBot.ResumeLayout(false);
             this.statStrip.ResumeLayout(false);
             this.statStrip.PerformLayout();
             this.panLeft.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPend)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cRMasterBindingSource)).EndInit();
             this.panelTrak4.ResumeLayout(false);
             this.panelTrak4.PerformLayout();
             this.panRight.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cRDepItemBindingSource)).EndInit();
             this.panelTrak3.ResumeLayout(false);
@@ -485,8 +503,6 @@
 
         private System.Windows.Forms.Panel panBot;
         private System.Windows.Forms.StatusStrip statStrip;
-        private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Button btnLoad;
         private classLib.PanelTrak panLeft;
         private System.Windows.Forms.DataGridView dgvPend;
         private classLib.PanelTrak panelTrak4;
@@ -522,5 +538,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cRMiddgvSel;
         private System.Windows.Forms.DataGridViewTextBoxColumn payTypedgvSel;
         private System.Windows.Forms.DataGridViewTextBoxColumn statedgvSel;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblPendingTotal;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label lblSelectedTotal;
     }
 }

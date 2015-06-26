@@ -25,7 +25,6 @@ namespace RcvPayment {
             private set {
                 _CurrentId = value;
                 DisplayBatchDetails();
-//                HighliteThisRow();
                 UpdateStatusStrip();
             }
         }
@@ -36,7 +35,7 @@ namespace RcvPayment {
             aset = new AppSettings();
             dc = new dbClassDataContext(aset.wmis.connectionString);
             CurrentId = "";
-            initStatusLabels();
+            InitStatusLabels();
         }
 
         private void PaymentBatches_Load(object sender, EventArgs e) {
@@ -72,11 +71,11 @@ namespace RcvPayment {
 
         private void DisplayBatchDetails() {
             try {
-                var q = ( from item in dc.CRDepBatches
-                        where item.Id == CurrentId
-                        select item).FirstOrDefault() ;
+                var q = (from item in dc.CRDepBatches
+                         where item.Id == CurrentId
+                         select item).FirstOrDefault();
 
-                if ( q != null ) {
+                if (q != null) {
                     textId.Text = q.IDBank;
                     lblDocCount.Text = int2StringFmt(q.Qty, "D3");
                     lblAmount.Text = double2StringFtm(q.Amount, "");
@@ -84,7 +83,8 @@ namespace RcvPayment {
                     lblModified.Text = DatetimeByUser(q.UUser, q.UDate, "g");
                 }
 
-            } catch ( Exception ex ) {
+            }
+            catch (Exception ex) {
                 Console.WriteLine(ex.Message);
             }
         }
@@ -92,7 +92,7 @@ namespace RcvPayment {
         private string DatetimeByUser(string cUser, DateTime? cDate, string fmt) {
             string result = "";
 
-            if ( cDate.HasValue ) {
+            if (cDate.HasValue) {
                 result = result + cDate.Value.ToString(fmt);
             }
             result = result + " by " + cUser;
@@ -149,7 +149,7 @@ namespace RcvPayment {
             do {
                 num = num + 1;
                 testid = baseid + num.ToString("D3");
-            } while (BankIdExists(testid)) ;
+            } while (BankIdExists(testid));
 
             result = testid;
 
@@ -160,8 +160,8 @@ namespace RcvPayment {
             bool result = true;
 
             var q = (from item in dc.CRDepBatches
-                    where item.IDBank == proposedId
-                    select item).Count();
+                     where item.IDBank == proposedId
+                     select item).Count();
 
             result = (q == 0 ? false : true);
 
@@ -172,15 +172,15 @@ namespace RcvPayment {
             string rowid = "";
             int rownum = -1;
 
-            foreach ( DataGridViewRow row in dgv.Rows ) {
+            foreach (DataGridViewRow row in dgv.Rows) {
                 rowid = row.Cells["id"].Value.ToString();
-                if ( rowid == CurrentId ) {
+                if (rowid == CurrentId) {
                     rownum = row.Index;
                     break;
                 }
             }
 
-            if ( rownum > 0 ) {
+            if (rownum > 0) {
                 // we found it!
                 dgv.Rows[rownum].Selected = true;
                 dgv.FirstDisplayedScrollingRowIndex = rownum;
@@ -205,10 +205,10 @@ namespace RcvPayment {
 
         private void btnUpdate_Click(object sender, EventArgs e) {
             var records = from item in dc.CRDepBatches
-                     where item.Id == CurrentId
-                     select item;
+                          where item.Id == CurrentId
+                          select item;
 
-            foreach ( var q in records ) {
+            foreach (var q in records) {
                 q.IDBank = textId.Text.Trim();
             }
 
@@ -218,7 +218,7 @@ namespace RcvPayment {
                 ConnectGrid();
                 FindBatch();
             }
-            catch ( Exception ex ) {
+            catch (Exception ex) {
                 Console.WriteLine(ex.Message);
             }
         }
@@ -227,7 +227,7 @@ namespace RcvPayment {
         private string GridId { get; set; }
         private string DetlId { get; set; }
 
-        private void initStatusLabels() {
+        private void InitStatusLabels() {
             statDetail.Text = "";
             statGrid.Text = "";
         }
@@ -236,7 +236,7 @@ namespace RcvPayment {
             string idOfGridSelected = "";
 
 
-            if ( dgv.SelectedRows.Count > 0 ) {
+            if (dgv.SelectedRows.Count > 0) {
                 idOfGridSelected = dgv.SelectedRows[0].Cells["id"].Value.ToString();
             }
 
@@ -256,33 +256,74 @@ namespace RcvPayment {
         }
 
         private void btnDocs_Click(object sender, EventArgs e) {
-            if ( CurrentId != "" ) {
-                BatchDocs f = new BatchDocs();
+            if (CurrentId != "") {
+                var f = new BatchDocs();
                 f.MdiParent = this.MdiParent;
                 f.Show();
                 f.BatchId = CurrentId;
+                f.MyParent = this;
+                this.DisableControls();
             }
         }
 
-        /*
-        private void HighliteThisRow() {
-            string rowid;
-            int i;
-            foreach ( DataGridViewRow r in dgv.Rows ) {
-                rowid = r.Cells["id"].Value.ToString();
-                i = r.Index;
-                if ( rowid == CurrentId ) {
-                    if ( ! r.Selected ) {
-                        dgv.Rows[i].Selected = true;
-                    }
-                } else {
-                    if ( r.Selected ) {
-                        dgv.Rows[i].Selected = false;
-                    }
-                }
+        public void ReturningFromDocuments() {
+            this.EnableControls();
+        }
+
+        private void dgv_DoubleClick(object sender, EventArgs e) {
+            btnDocs_Click(sender, e);
+        }
+
+        private void DisableControls() {
+            panLeft.DisableControls();
+            panRight.DisableControls();
+        }
+
+        private void EnableControls() {
+            panLeft.EnableControls();
+            panRight.EnableControls();
+        }
+
+        public void UpdateDetailAmounts() {
+            DisplayBatchDetails();
+        }
+
+        private void btnPost_Click(object sender, EventArgs e) {
+            // User wishes to post a batch
+            if (BatchIsOkToPost()) {
+                PostThisBatch();
             }
         }
-        */
+
+        private void PostThisBatch() {
+            // Note, since there is only 1 submitchanges(), we don't
+            // need to explicly create a transaction.
+            //
+            // 1. First update the main batch record, changing the state.
+            // 2. Next change the CRMaster Records to show posted status.
+            // 3. Next update the batch item records, to posted.
+
+            try
+            {
+//                var BatchMaster = (from r ).first();
+                
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        // ref: http://weblogs.asp.net/scottgu/linq-to-sql-part-4-updating-our-database
+
+        private bool BatchIsOkToPost() {
+            bool result = true;
+            CRDepBatch batchRec = (from item in dc.CRDepBatches
+                                   where item.Id == CurrentId
+                                   select item).First();
+
+            if (batchRec.State == "posted") result = false;
+
+            return result;
+        }
     }
     // ref:
     // (1) https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.100).aspx#GeneralDateShortTime

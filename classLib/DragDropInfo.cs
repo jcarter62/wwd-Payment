@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Drawing;
 
 namespace classLib {
     /// <summary>
@@ -10,38 +8,57 @@ namespace classLib {
     /// via the DoDragDrop() method.
     /// </summary>
     public class DragDropInfo {
-        public string id { get; set; }
-        public int value { get; set; }
-        public string source { get; set; }
-        public string dest { get; set; }
-        public object obj { get; set; }
+        public string Id { get; set; }
+        public int Value { get; set; }
+        public string Source { get; set; }
+
+        public string Dest { get; set; }
+        public object Obj { get; set; }
+        public Rectangle StartRegion { get; set; }
+        public List<string> IdList {get;set;}
+
+        public bool IsAList;
 
         public DragDropInfo() {
-            obj = null;
-            id = "";
-            source = "";
-            dest = "";
+            StandardInit();
+        }
+
+        public override string ToString() {
+            return string.Format(
+                format: "Id:{0}, Source:{1}, Dest:{2}", 
+                arg0: Id, arg1: Source, arg2: Dest);
+        }
+
+        public string ToString(string msg) {
+            return msg + ToString();
         }
 
         public DragDropInfo(string Source) {
-            obj = null;
-            dest = "";
-            id = "";
-            source = Source;
+            StandardInit();
+            this.Source = Source;
         }
 
         public DragDropInfo(string Id, string Source) {
-            obj = null;
-            dest = "";
-            id = Id;
-            source = Source;
+            StandardInit();
+            this.Id = Id;
+            this.Source = Source;
         }
 
         public DragDropInfo(object Obj, string Source) {
-            obj = Obj;
-            dest = "";
-            id = "";
-            source = Source;
+            StandardInit();
+            this.Obj = Obj;
+            this.Source = Source;
         }
+
+        private void StandardInit() {
+            Obj = null;
+            Id = "";
+            Source = "";
+            Dest = "";
+            StartRegion = Rectangle.Empty;
+            IdList = new List<string>();
+            IsAList = false;
+        }
+
     }
 }

@@ -53,6 +53,14 @@ namespace classLib {
                 if (ctrl is CheckBox) {
                     ((CheckBox)ctrl).Enabled = p;
                 }
+                if (ctrl is Button)
+                {
+                    ((Button)ctrl).Enabled = p;
+                }
+                if (ctrl is DataGridView)
+                {
+                    ((DataGridView)ctrl).Enabled = p;
+                }
             }
         }
 
