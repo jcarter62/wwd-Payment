@@ -16,27 +16,33 @@ namespace RcvPayment {
         }
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e) {
-            Settings f = new Settings();
+            var f = new Settings();
             f.MdiParent = this;
             f.Show();
         }
 
         private void newPaymentToolStripMenuItem_Click(object sender, EventArgs e) {
-            NewPayment f = new NewPayment();
+            var f = new NewPayment();
             f.MdiParent = this;
             f.Show();
         }
 
         private void paymentBatchesToolStripMenuItem_Click(object sender, EventArgs e) {
-            PaymentBatches f = new PaymentBatches();
+            var f = new PaymentBatches();
             f.MdiParent = this;
             f.Show();
         }
 
         private void generateTestDataToolStripMenuItem_Click(object sender, EventArgs e) {
-            AppSettings aset = new AppSettings();
-            SampleData sd = new SampleData(aset.wmis.connectionString);
-            sd.CreateData(100);
+            var aset = new AppSettings();
+            var sd = new SampleData(aset.wmis.connectionString);
+            sd.CreateData(10);
+        }
+
+        private void unAppliedPaymentsToolStripMenuItem_Click(object sender, EventArgs e) {
+            var f = new Ca.UnApplied();
+            f.MdiParent = this;
+            f.Show();
         }
     }
 }

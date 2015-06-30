@@ -48,6 +48,7 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generateTestDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.indexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,7 +58,7 @@
             this.paymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newPaymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.paymentBatchesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.generateTestDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.unAppliedPaymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -259,6 +260,13 @@
             this.optionsToolStripMenuItem.Text = "&Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
+            // generateTestDataToolStripMenuItem
+            // 
+            this.generateTestDataToolStripMenuItem.Name = "generateTestDataToolStripMenuItem";
+            this.generateTestDataToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.generateTestDataToolStripMenuItem.Text = "Generate Test Data";
+            this.generateTestDataToolStripMenuItem.Click += new System.EventHandler(this.generateTestDataToolStripMenuItem_Click);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -304,7 +312,8 @@
             // 
             this.paymentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newPaymentToolStripMenuItem,
-            this.paymentBatchesToolStripMenuItem});
+            this.paymentBatchesToolStripMenuItem,
+            this.unAppliedPaymentsToolStripMenuItem});
             this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
             this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.paymentsToolStripMenuItem.Text = "Payments";
@@ -312,23 +321,23 @@
             // newPaymentToolStripMenuItem
             // 
             this.newPaymentToolStripMenuItem.Name = "newPaymentToolStripMenuItem";
-            this.newPaymentToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.newPaymentToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.newPaymentToolStripMenuItem.Text = "Add/View Payments";
             this.newPaymentToolStripMenuItem.Click += new System.EventHandler(this.newPaymentToolStripMenuItem_Click);
             // 
             // paymentBatchesToolStripMenuItem
             // 
             this.paymentBatchesToolStripMenuItem.Name = "paymentBatchesToolStripMenuItem";
-            this.paymentBatchesToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.paymentBatchesToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.paymentBatchesToolStripMenuItem.Text = "Payment Batches";
             this.paymentBatchesToolStripMenuItem.Click += new System.EventHandler(this.paymentBatchesToolStripMenuItem_Click);
             // 
-            // generateTestDataToolStripMenuItem
+            // unAppliedPaymentsToolStripMenuItem
             // 
-            this.generateTestDataToolStripMenuItem.Name = "generateTestDataToolStripMenuItem";
-            this.generateTestDataToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.generateTestDataToolStripMenuItem.Text = "Generate Test Data";
-            this.generateTestDataToolStripMenuItem.Click += new System.EventHandler(this.generateTestDataToolStripMenuItem_Click);
+            this.unAppliedPaymentsToolStripMenuItem.Name = "unAppliedPaymentsToolStripMenuItem";
+            this.unAppliedPaymentsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.unAppliedPaymentsToolStripMenuItem.Text = "Apply Payments to AR";
+            this.unAppliedPaymentsToolStripMenuItem.Click += new System.EventHandler(this.unAppliedPaymentsToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -384,6 +393,7 @@
         private System.Windows.Forms.ToolStripMenuItem newPaymentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem paymentBatchesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generateTestDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem unAppliedPaymentsToolStripMenuItem;
     }
 }
 

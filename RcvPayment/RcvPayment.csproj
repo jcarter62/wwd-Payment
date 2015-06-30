@@ -68,6 +68,12 @@
     <Compile Include="BatchDocs.Designer.cs">
       <DependentUpon>BatchDocs.cs</DependentUpon>
     </Compile>
+    <Compile Include="ca\UnApplied.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ca\UnApplied.Designer.cs">
+      <DependentUpon>UnApplied.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +127,9 @@
     <EmbeddedResource Include="BatchDocs.resx">
       <DependentUpon>BatchDocs.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ca\UnApplied.resx">
+      <DependentUpon>UnApplied.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustList.resx">
       <DependentUpon>CustList.cs</DependentUpon>
     </EmbeddedResource>
@@ -156,15 +165,19 @@
       <DependentUpon>ShowReceipt.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\DataSources\classLib.Payments.datasource" />
+    <None Include="Properties\DataSources\dataLib.CMContact.datasource" />
+    <None Include="Properties\DataSources\dataLib.CMEmail.datasource" />
+    <None Include="Properties\DataSources\dataLib.CMNameContact.datasource" />
     <None Include="Properties\DataSources\dataLib.CRAccount.datasource" />
     <None Include="Properties\DataSources\dataLib.CRDepBatch.datasource" />
     <None Include="Properties\DataSources\dataLib.CRDepItem.datasource" />
     <None Include="Properties\DataSources\dataLib.CRDetail.datasource" />
     <None Include="Properties\DataSources\dataLib.CRMaster.datasource" />
-    <None Include="Properties\DataSources\dataLib.dbClassDataContext.datasource">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="Properties\DataSources\dataLib.CRMasterId.datasource" />
+    <None Include="Properties\DataSources\dataLib.DbClassDataContext1.datasource" />
     <None Include="Properties\DataSources\dataLib.NAME.datasource" />
+    <None Include="Properties\DataSources\dataLib.SampleData.datasource" />
+    <None Include="Properties\DataSources\dataLib.v_CrReceipt.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

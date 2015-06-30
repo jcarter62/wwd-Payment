@@ -307,6 +307,7 @@ namespace RcvPayment {
             // 1. First update the main batch record, changing the state.
             // 2. Next change the CRMaster Records to show posted status.
             // 3. Next update the batch item records, to posted.
+            // 4. Next update CRDetail Records if any to show posted status.
 
             try {
                 // (1)
@@ -317,22 +318,32 @@ namespace RcvPayment {
                 batchRec.State = poststring;
 
                 IQueryable<CRDepItem> itemRecs = (from item in dc.CRDepItems
-                                where item.IDBatch == CurrentId
-                                select item);
+                                                  where item.IDBatch == CurrentId
+                                                  select item);
 
                 foreach (CRDepItem oneitem in itemRecs) {
                     // (2)
                     oneitem.State = poststring;
 
-                    CRMaster mst = ( from r in dc.CRMasters
-                                where r.Id == oneitem.CRMid
-                                select r).First();
-                    if ( mst != null )
-                    {
+                    CRMaster mst = (from r in dc.CRMasters
+                                    where r.Id == oneitem.CRMid
+                                    select r).First();
+
+                    if (mst != null) {
                         // (3)
                         mst.StateGA = poststring;
+                        IQueryable<CRDetail> detailRecords = from d in dc.CRDetails
+                                                             where d.CRMid == mst.Id
+                                                             select d;
+                        if (detailRecords != null) {
+                            foreach (var oneDetail in detailRecords) {
+                                // (4)
+                                oneDetail.State = poststring;
+                            }
+                        }
                     }
                 }
+
                 dc.SubmitChanges();
             }
             catch (Exception ex) {
