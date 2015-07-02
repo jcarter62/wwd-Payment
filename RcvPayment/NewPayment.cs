@@ -627,5 +627,15 @@ namespace RcvPayment {
 
             PaymentsGrid.DataSource = q;
         }
+
+        private void txtItmAmount_DoubleClick(object sender, EventArgs e) {
+            if (!isFormOpen("unpaidlist")) {
+                UnpaidList f = new UnpaidList(this);
+                f.MdiParent = MdiParent;
+                f.Show();
+                f.BringToFront();
+            }
+
+        }
     }
 }

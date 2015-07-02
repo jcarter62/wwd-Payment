@@ -19,6 +19,7 @@ namespace classLib {
         string companyname;
         string appname = "Payments";
         const string comma = ",";
+        private char[] delim = { ',' };
 
         public PosSize(Form me) {
             companyname = CompanyName();
@@ -36,7 +37,7 @@ namespace classLib {
             // (3)
             Assembly assembly = Assembly.GetExecutingAssembly();
             AssemblyCompanyAttribute assemblyCompany = assembly.GetCustomAttributes(typeof(AssemblyCompanyAttribute), false)[0] as AssemblyCompanyAttribute;
-            result = assemblyCompany.Company; 
+            result = assemblyCompany.Company;
             // (3)
             return result;
         }
@@ -56,17 +57,27 @@ namespace classLib {
                 bottom.ToString();
             System.IO.StreamWriter sw = new StreamWriter(filename);
             sw.WriteLine(data);
+            SavePanelSizes(sw);
             sw.Close();
         }
 
+        private void SavePanelSizes(StreamWriter sw) {
+            foreach (var ctrl in form.Controls) {
+                if ((ctrl is Panel) || (ctrl is PanelTrak)) {
+                    var p = (Panel)ctrl;
+                    if (p.Dock != DockStyle.None) {
+                        sw.WriteLine("{0},{1},{2}", p.Name, p.Width, p.Height);
+                    }
+                }
+            }
+        }
+
         public void Restore() {
-            char[] delim = { ',' };
             string filename = FilePath(this.name);
             if (File.Exists(filename)) {
                 string data;
                 StreamReader sr = new StreamReader(filename);
                 data = sr.ReadLine();
-                sr.Close();
 
                 string[] words = data.Split(delim);
                 // only restore if we have 4 numbers
@@ -82,11 +93,45 @@ namespace classLib {
                 form.Top = top;
                 form.Height = bottom - top;
 
+                RestorePanelSizes(sr);
+                sr.Close();
             }
             //
             // Set Icon for this form, based on Application Icon.
             //
             form.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+        }
+
+        private void RestorePanelSizes(StreamReader sr) {
+            string lineofdata;
+            // Restore any panels if available.
+            lineofdata = sr.ReadLine();
+            while ( lineofdata != null )
+            {
+                string[] words = lineofdata.Split(delim);
+                // perform only if we have 3
+                if ( words.Length == 3 )
+                {
+                    UpdatePanelSize( words[0], 
+                            Convert.ToInt32(words[1]), 
+                            Convert.ToInt32(words[2]));
+                }
+                lineofdata = sr.ReadLine();
+            }
+        }
+
+        private void UpdatePanelSize(string panelName, int width, int height) {
+            foreach (var ctrl in form.Controls) {
+                if ((ctrl is Panel) || (ctrl is PanelTrak)) {
+                    var p = (Panel)ctrl;
+                    if ( p.Name == panelName )
+                    {
+                        p.Width = width;
+                        p.Height = height;
+                    }
+                }
+            }
+
         }
 
         private string FilePath(string formname) {

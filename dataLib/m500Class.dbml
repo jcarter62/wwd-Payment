@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="mas500_Development_app" Class="m500ClassDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=sql-svr;Initial Catalog=mas500_Development_app;Integrated Security=True" SettingsObjectName="dataLib.Properties.Settings" SettingsPropertyName="mas500_Development_appConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tarCustomer" Member="tarCustomers">
+    <Type Name="tarCustomer">
+      <Column Name="CustKey" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ABANo" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="AllowCustRefund" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="AllowWriteOff" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="BillingType" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="BillToNationalAcctParent" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="CompanyID" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="ConsolidatedStatement" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateType" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="CreateUserID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="CreditLimit" Type="System.Decimal" DbType="Decimal(12,0) NOT NULL" CanBeNull="false" />
+      <Column Name="CreditLimitAgeCat" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="CreditLimitUsed" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="CRMCustID" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
+      <Column Name="CurrExchSchdKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CustClassKey" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustID" Type="System.String" DbType="VarChar(12) NOT NULL" CanBeNull="false" />
+      <Column Name="CustName" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="CustRefNo" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="DateEstab" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DfltBillToAddrKey" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DfltItemKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DfltSalesAcctKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DfltSalesReturnAcctKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DfltShipToAddrKey" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FinChgFlatAmt" Type="System.Decimal" DbType="Decimal(15,3) NOT NULL" CanBeNull="false" />
+      <Column Name="FinChgPct" Type="System.Decimal" DbType="Decimal(5,4)" CanBeNull="true" />
+      <Column Name="Hold" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="ImportLogKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NationalAcctLevelKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PmtByNationalAcctParent" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="PrimaryAddrKey" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PrimaryCntctKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PrintDunnMsg" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="ReqCreditLimit" Type="System.Decimal" DbType="Decimal(15,3)" CanBeNull="true" />
+      <Column Name="ReqPO" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="RetntPct" Type="System.Decimal" DbType="Decimal(5,4)" CanBeNull="true" />
+      <Column Name="SalesSourceKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShipPriority" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="StdIndusCodeID" Type="System.String" DbType="VarChar(7)" CanBeNull="true" />
+      <Column Name="StmtCycleKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StmtFormKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TradeDiscPct" Type="System.Decimal" DbType="Decimal(5,4)" CanBeNull="true" />
+      <Column Name="UpdateCounter" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdateUserID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="UserFld1" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="UserFld2" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="UserFld3" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="UserFld4" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="VendKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

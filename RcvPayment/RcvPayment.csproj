@@ -124,6 +124,12 @@
     <Compile Include="ShowReceipt.Designer.cs">
       <DependentUpon>ShowReceipt.cs</DependentUpon>
     </Compile>
+    <Compile Include="UnpaidList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnpaidList.Designer.cs">
+      <DependentUpon>UnpaidList.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="BatchDocs.resx">
       <DependentUpon>BatchDocs.cs</DependentUpon>
     </EmbeddedResource>
@@ -164,6 +170,9 @@
     <EmbeddedResource Include="ShowReceipt.resx">
       <DependentUpon>ShowReceipt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UnpaidList.resx">
+      <DependentUpon>UnpaidList.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\DataSources\classLib.Payments.datasource" />
     <None Include="Properties\DataSources\dataLib.CMContact.datasource" />
     <None Include="Properties\DataSources\dataLib.CMEmail.datasource" />
@@ -199,6 +208,10 @@
     <ProjectReference Include="..\dataLib\dataLib.csproj">
       <Project>{010a21e3-f30e-45cf-b826-e6b7bcdce890}</Project>
       <Name>dataLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DbCombined\DbCombined.csproj">
+      <Project>{b80f3811-91b0-4e17-bb9b-e5e8d4449ca2}</Project>
+      <Name>DbCombined</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -52,5 +52,16 @@ namespace dataLib.Properties {
                 return ((string)(this["testdbConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=sql-svr;Initial Catalog=mas500_Development_app;Integrated Security=Tr" +
+            "ue")]
+        public string mas500_Development_appConnectionString {
+            get {
+                return ((string)(this["mas500_Development_appConnectionString"]));
+            }
+        }
     }
 }

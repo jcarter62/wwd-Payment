@@ -189,6 +189,29 @@ namespace dataLib
 				return this.GetTable<ArDtl>();
 			}
 		}
+		
+		public System.Data.Linq.Table<v_TestData1> v_TestData1s
+		{
+			get
+			{
+				return this.GetTable<v_TestData1>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CROutstanding> CROutstandings
+		{
+			get
+			{
+				return this.GetTable<CROutstanding>();
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Outstanding")]
+		public int sp_Outstanding([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Account", DbType="Int")] System.Nullable<int> account, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Session", DbType="VarChar(50)")] string session)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), account, session);
+			return ((int)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CRMasterId")]
@@ -5273,6 +5296,240 @@ namespace dataLib
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.v_TestData1")]
+	public partial class v_TestData1
+	{
+		
+		private int _account;
+		
+		private string _FullName;
+		
+		private string _type;
+		
+		private System.Nullable<double> _Amount;
+		
+		public v_TestData1()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_account", DbType="Int NOT NULL")]
+		public int account
+		{
+			get
+			{
+				return this._account;
+			}
+			set
+			{
+				if ((this._account != value))
+				{
+					this._account = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullName", DbType="VarChar(50)")]
+		public string FullName
+		{
+			get
+			{
+				return this._FullName;
+			}
+			set
+			{
+				if ((this._FullName != value))
+				{
+					this._FullName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="VarChar(6)")]
+		public string type
+		{
+			get
+			{
+				return this._type;
+			}
+			set
+			{
+				if ((this._type != value))
+				{
+					this._type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float")]
+		public System.Nullable<double> Amount
+		{
+			get
+			{
+				return this._Amount;
+			}
+			set
+			{
+				if ((this._Amount != value))
+				{
+					this._Amount = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CROutstanding")]
+	public partial class CROutstanding
+	{
+		
+		private int _ItemGroup;
+		
+		private string _TranType;
+		
+		private string _Description;
+		
+		private string _DueDate;
+		
+		private System.Nullable<double> _Amount;
+		
+		private System.Nullable<int> _Account;
+		
+		private System.Nullable<int> _Invoice;
+		
+		private string _Session;
+		
+		public CROutstanding()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemGroup", DbType="Int NOT NULL")]
+		public int ItemGroup
+		{
+			get
+			{
+				return this._ItemGroup;
+			}
+			set
+			{
+				if ((this._ItemGroup != value))
+				{
+					this._ItemGroup = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TranType", DbType="VarChar(6)")]
+		public string TranType
+		{
+			get
+			{
+				return this._TranType;
+			}
+			set
+			{
+				if ((this._TranType != value))
+				{
+					this._TranType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(100)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this._Description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DueDate", DbType="VarChar(10)")]
+		public string DueDate
+		{
+			get
+			{
+				return this._DueDate;
+			}
+			set
+			{
+				if ((this._DueDate != value))
+				{
+					this._DueDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float")]
+		public System.Nullable<double> Amount
+		{
+			get
+			{
+				return this._Amount;
+			}
+			set
+			{
+				if ((this._Amount != value))
+				{
+					this._Amount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Account", DbType="Int")]
+		public System.Nullable<int> Account
+		{
+			get
+			{
+				return this._Account;
+			}
+			set
+			{
+				if ((this._Account != value))
+				{
+					this._Account = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Invoice", DbType="Int")]
+		public System.Nullable<int> Invoice
+		{
+			get
+			{
+				return this._Invoice;
+			}
+			set
+			{
+				if ((this._Invoice != value))
+				{
+					this._Invoice = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Session", DbType="VarChar(50)")]
+		public string Session
+		{
+			get
+			{
+				return this._Session;
+			}
+			set
+			{
+				if ((this._Session != value))
+				{
+					this._Session = value;
+				}
 			}
 		}
 	}

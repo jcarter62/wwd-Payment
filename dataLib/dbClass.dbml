@@ -267,4 +267,29 @@
       <Association Name="Armst_ArDtl" Member="Armst" ThisKey="ARMSTID" OtherKey="ARMSTID" Type="Armst" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.v_TestData1" Member="v_TestData1s">
+    <Type Name="v_TestData1">
+      <Column Name="account" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="type" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CROutstanding" Member="CROutstandings">
+    <Type Name="CROutstanding">
+      <Column Name="ItemGroup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TranType" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DueDate" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Account" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Invoice" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Session" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.sp_Outstanding" Method="sp_Outstanding">
+    <Parameter Name="Account" Parameter="account" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Session" Parameter="session" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
 </Database>

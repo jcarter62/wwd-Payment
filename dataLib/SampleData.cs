@@ -7,67 +7,35 @@ namespace dataLib {
     public class SampleData {
         DbClassDataContext dc;
         Random r;
-        private Outstanding[] outstanding;
+        private UnpaidRecord[] outstanding;
 
         public SampleData(string ConnString) {
             dc = new DbClassDataContext(ConnString);
             r = new Random();
-            CreateListOfOutstandingCharges();
         }
 
         //
         // group by linq
         // ref: http://stackoverflow.com/a/530947
         //
-        private void CreateListOfOutstandingCharges() {
-            List<Outstanding> lst = new List<Outstanding>();
+        private void CreateListOfOutstandingCharges(int num2create) {
+            var lst = new List<UnpaidRecord>();
 
-            var acctRecs = (from r in dc.Armsts
-                            where ((r.PostDate > (DateTime.Now.AddDays(-(365 * 2)))) &&
-                                    (r.Posted == 1) &&
-                                    (r.DueDate != null))
-                            select new {
-                                Account = r.Name_ID,
-                                Type = r.BillingType_ID
-                            }).Distinct();
+            var acctRecs = from r in dc.v_TestData1s 
+                           orderby r.account, r.type
+                           select r;
 
             foreach (var r in acctRecs) {
-                var q = from rec in dc.Armsts
-                        where (rec.Name_ID == r.Account) &&
-                              (rec.BillingType_ID == r.Type) &&
-                              (rec.PostDate > (DateTime.Now.AddDays(-(365 * 2)))) &&
-                              (rec.Posted == 1) &&
-                              (rec.DueDate != null)
-                        group rec by rec.Name_ID into grp
-                        select new {
-                            Amount = grp.Sum(y => y.CurrAmount)
-                        };
-
-                foreach (var item in q) {
-                    var o = new Outstanding();
-                    o.Account = r.Account.Value;
-                    o.Name = lookupName(r.Account.Value);
-                    o.Amount = item.Amount.Value;
-                    o.Type = r.Type;
-                    o.Used = false;
-
-                    lst.Add(o);
-                }
+                var o = new UnpaidRecord();
+                o.Account = r.account;
+                o.Name = r.FullName;
+                o.Amount = r.Amount.Value;
+                o.Type = r.type;
+                o.Used = false;
+                lst.Add(o);
             }
 
-            outstanding = lst.ToArray<Outstanding>();
-        }
-
-        private string lookupName(int account) {
-            string result = "";
-            string thisname = (from namerec in dc.NAMEs
-                               where namerec.NAME_ID == account
-                               select namerec.FullName).First();
-
-            if (thisname != null) {
-                result = thisname;
-            }
-            return result;
+            outstanding = lst.ToArray<UnpaidRecord>();
         }
 
         /// <summary>
@@ -75,6 +43,8 @@ namespace dataLib {
         /// </summary>
         /// <param name="n">Number of Payments to create</param>
         public void CreateData(int n) {
+            CreateListOfOutstandingCharges(n * 3);
+
             for (int i = 0; i < n; i++) {
                 CreateRecord(i);
             }
@@ -91,11 +61,11 @@ namespace dataLib {
                 CRDetail d = new CRDetail();
                 d.CRMid = m.Id;
                 d.Name = outstanding[oIndx].Name;
-                d.Amount = outstanding[oIndx].Amount;
+                d.Amount = Math.Round(outstanding[oIndx].Amount,2);
                 d.Account = outstanding[oIndx].Account.ToString();
                 d.Type = outstanding[oIndx].Type;
                 d.Note = "";
-                paymentAmount = paymentAmount + d.Amount.Value;
+                paymentAmount = Math.Round(paymentAmount + d.Amount.Value,2);
                 dc.CRDetails.InsertOnSubmit(d);
                 outstanding[oIndx].Used = true;
 
@@ -113,7 +83,7 @@ namespace dataLib {
 
 
             //            m.Amount = RandomAmount(10000.0);
-            m.Amount = paymentAmount;
+            m.Amount = Math.Round(paymentAmount,2) ;
             m.DeliveryName = RandomName();
             m.PayType = "Check";
             m.PayVia = "Person";
@@ -220,7 +190,7 @@ namespace dataLib {
     }
 
 #pragma warning disable JustCode_CSharp_TypeFileNameMismatch // Types not matching file names
-    public class Outstanding
+    public class UnpaidRecord
 #pragma warning restore JustCode_CSharp_TypeFileNameMismatch // Types not matching file names
     {
         public int Account;

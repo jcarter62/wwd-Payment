@@ -36,7 +36,7 @@ namespace RcvPayment {
         private void generateTestDataToolStripMenuItem_Click(object sender, EventArgs e) {
             var aset = new AppSettings();
             var sd = new SampleData(aset.wmis.connectionString);
-            sd.CreateData(10);
+            sd.CreateData(100);
         }
 
         private void unAppliedPaymentsToolStripMenuItem_Click(object sender, EventArgs e) {
