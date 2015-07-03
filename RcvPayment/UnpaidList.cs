@@ -57,6 +57,7 @@ namespace RcvPayment {
             dbcombined = new AllAccounts();
             dbCharges = new OutstandingCharges();
             InitGridAccounts();
+            DragDropInit();
         }
 
         private void InitGridAccounts() {
@@ -199,5 +200,70 @@ namespace RcvPayment {
                 Account = id.ToString();
             }
         }
+
+        #region DragDrop
+        private DragDropInfo ddUnpaid;
+
+        private void DragDropInit() {
+            ddUnpaid = new DragDropInfo("ddUnpaid");
+        }
+
+        private void gridCharges_MouseDown(object sender, MouseEventArgs e) {
+            int dragIndex;
+            dragIndex = gridCharges.HitTest(e.X, e.Y).RowIndex;
+            if (dragIndex != -1) {
+                Size dragSize = SystemInformation.DragSize;
+                ddUnpaid.StartRegion = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
+                ddUnpaid.Obj = ListOfSelectedIds(gridCharges);
+                ddUnpaid.IsAList = true;
+                gridCharges.DoDragDrop(ddUnpaid, DragDropEffects.Copy);
+            }
+            else {
+                ddUnpaid.Obj = null;
+                ddUnpaid.StartRegion = Rectangle.Empty;
+            }
+            // Start the drag operation.
+        }
+
+        private List<UnpaidDataRecord> ListOfSelectedIds(DataGridView grid) {
+            var lst = new List<UnpaidDataRecord>();
+            foreach (DataGridViewRow row in grid.SelectedRows) {
+                var r = new UnpaidDataRecord();
+                r.TranType = row.Cells["TranType"].Value.ToString();
+                r.Description = row.Cells["Description"].Value.ToString();
+                r.DueDate = row.Cells["DueDate"].Value.ToString();
+                r.Amount = Convert2double(row.Cells["Amount"].Value.ToString());
+                r.Account = Convert2int(row.Cells["Account"].Value.ToString());
+                r.Invoice = Convert2int(row.Cells["Invoice"].Value.ToString());
+                // r.Session = row.Cells["Session"].Value.ToString();
+                lst.Add(r);
+            }
+            return lst;
+        }
+
+        private int Convert2int(string v) {
+            int i = 0;
+            if ( v.Length > 0 )
+            {
+                int.TryParse(v,out i);
+            }
+            return i;
+        }
+
+        private double Convert2double(string v) {
+            double d = 0.0;
+            if (v.Length > 0) {
+                double.TryParse(v, out d);
+            }
+            return d;
+        }
+
+        private void gridCharges_MouseMove(object sender, MouseEventArgs e) {
+            // 
+        }
+
+        #endregion DragDrop
+
+
     }
 }

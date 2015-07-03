@@ -33,20 +33,35 @@ namespace RcvPayment {
             set {
                 _AppliedAmount = value;
 
-                if (_AppliedAmount == 0.0) {
-                    lblAppliedAmount.Text = "-- UnApplied --";
-                }
-                else {
-                    _AppliedAmountMessage = string.Format("Applied Amount: {0}",
-                        _AppliedAmount.ToString("C"));
-                    lblAppliedAmount.Text = _AppliedAmountMessage;
-                }
                 // Update the graphic to right side.
                 UpdateAppliedGraphic();
             }
         }
 
+        // Update graphic, and message to left.
         private void UpdateAppliedGraphic() {
+
+            if (Math.Abs(_AppliedAmount) < 0.001) {
+                lblAppliedAmount.Text = "-- UnApplied --";
+            }
+            else {
+                string msg;
+
+                if (Math.Abs(unAppliedAmount) < 0.001) {
+                    msg = "Applied.";
+                }
+                else {
+                    if (unAppliedAmount > 0) {
+                        msg = string.Format("Under Applied by {0}", unAppliedAmount.ToString("C"));
+                    }
+                    else {
+                        msg = string.Format("Over Applied by {0}", (-1.0 * unAppliedAmount).ToString("C"));
+                    }
+                }
+                _AppliedAmountMessage = msg;
+                lblAppliedAmount.Text = _AppliedAmountMessage;
+            }
+
             if (ItemsGrid.Rows.Count <= 0) {
                 lblAppliedChk.Image = Image.FromFile(statusImages.failImage);
             }
@@ -181,20 +196,25 @@ namespace RcvPayment {
         }
 
         private void loadItemDetail(string thisId) {
-            var q = (from item in dc.CRDetails
-                     where item.Id == thisId
-                     select item).First();
+            try {
+                var q = (from item in dc.CRDetails
+                         where item.Id == thisId
+                         select item).First();
 
-            if (q != null) {
-                txtItmAcct.Text = q.Account;
-                txtItmName.Text = q.Name;
-                txtItmAmount.Text = q.Amount.ToString();
-                txtItmNote.Text = q.Note;
-                cbItmApply2.Text = q.Type;
-                currentDetailID = thisId;
+                if (q != null) {
+                    txtItmAcct.Text = q.Account;
+                    txtItmName.Text = q.Name;
+                    txtItmAmount.Text = q.Amount.ToString();
+                    txtItmNote.Text = q.Note;
+                    cbItmApply2.Text = q.Type;
+                    currentDetailID = thisId;
 
-                // Start monitoring input objects on this panel.
-                panelItem.Start(btnSaveItem);
+                    // Start monitoring input objects on this panel.
+                    panelItem.Start(btnSaveItem);
+                }
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -582,14 +602,32 @@ namespace RcvPayment {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void txtItmAcct_DoubleClick(object sender, EventArgs e) {
-            if (!isFormOpen("custlist")) {
-                CustList f = new CustList(this);
-                f.MdiParent = MdiParent;
-                f.Show();
-                f.BringToFront();
-            }
+            OpenUnpaidList();
         }
 
+        /// <summary>
+        /// Item Amount Double Click.
+        /// Open the list of accounts & Charges, and allow user to pick
+        /// Rows.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtItmAmount_DoubleClick(object sender, EventArgs e) {
+            OpenUnpaidList();
+        }
+
+        private void OpenUnpaidList() {
+            // First check to make sure we have a Receipt Record CRMaster
+            // 
+            if (currentID.Length > 0) {
+                if (!isFormOpen("unpaidlist")) {
+                    UnpaidList f = new UnpaidList(this);
+                    f.MdiParent = MdiParent;
+                    f.Show();
+                    f.BringToFront();
+                }
+            }
+        }
 
         #endregion Events
 
@@ -607,12 +645,12 @@ namespace RcvPayment {
 
             if (inp.Length > 0) {
                 q = from item in dc.CRMasters
-                    where ( 
-                    (item.StateGA == "created") && 
-                    ( item.DeliveryName.ToLower().Contains(inp) ||
+                    where (
+                    (item.StateGA == "created") &&
+                    (item.DeliveryName.ToLower().Contains(inp) ||
                       item.Note.ToLower().Contains(inp) ||
                       item.PayRef.ToLower().Contains(inp) ||
-                      item.RcptID.ToLower().Contains(inp) )
+                      item.RcptID.ToLower().Contains(inp))
                     )
                     orderby item.RcptID descending
                     select item;
@@ -628,14 +666,53 @@ namespace RcvPayment {
             PaymentsGrid.DataSource = q;
         }
 
-        private void txtItmAmount_DoubleClick(object sender, EventArgs e) {
-            if (!isFormOpen("unpaidlist")) {
-                UnpaidList f = new UnpaidList(this);
-                f.MdiParent = MdiParent;
-                f.Show();
-                f.BringToFront();
+        private void ItemsGrid_DragOver(object sender, DragEventArgs e) {
+            e.Effect = DragDropEffects.Copy;
+        }
+
+        private void ItemsGrid_DragDrop(object sender, DragEventArgs e) {
+            DragDropInfo droppedObj;
+            string droppedId;
+
+            if (e.Data.GetDataPresent(typeof(DragDropInfo))) {
+                droppedObj = (DragDropInfo)e.Data.GetData(typeof(DragDropInfo));
+                if (droppedObj.Source == "ddUnpaid") {
+                    if (e.Effect == DragDropEffects.Copy) {
+                        var lst = (List<UnpaidDataRecord>)droppedObj.Obj;
+                        foreach (var r in lst) {
+                            AddDetailRecord(r);
+                        }
+
+                        try {
+                            dc.SubmitChanges();
+                            dc.Refresh(RefreshMode.OverwriteCurrentValues);
+                        }
+                        catch (Exception Ex) {
+                            Console.WriteLine(Ex.Message);
+                        }
+                        updateDetailGrid(currentDetailID);
+                        loadItemDetail(currentDetailID);
+                    }
+                }
             }
 
+        }
+
+        // TODO: lookup account name
+        private void AddDetailRecord(UnpaidDataRecord r) {
+            CRDetail rec = new CRDetail();
+            int num;
+            rec.CRMid = currentID;
+            rec.Account = r.Account.ToString();
+            if (int.TryParse(r.Account.Value.ToString(), out num)) {
+                CustomerInfo ci = new CustomerInfo(num);
+                rec.Name = ci.Name;
+            }
+            rec.Amount = r.Amount;
+            rec.Note = string.Format("Inv:{0}, {1}", r.Invoice.ToString(), r.Description);
+            rec.Type = r.TranType;
+            currentDetailID = rec.Id;
+            dc.CRDetails.InsertOnSubmit(rec);
         }
     }
 }

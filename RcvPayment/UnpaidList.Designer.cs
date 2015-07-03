@@ -108,6 +108,8 @@
             this.gridCharges.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridCharges.Size = new System.Drawing.Size(332, 269);
             this.gridCharges.TabIndex = 0;
+            this.gridCharges.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gridCharges_MouseDown);
+            this.gridCharges.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gridCharges_MouseMove);
             // 
             // labelLoading
             // 

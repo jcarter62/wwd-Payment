@@ -301,9 +301,11 @@
             // 
             // lblAppliedAmount
             // 
-            this.lblAppliedAmount.Location = new System.Drawing.Point(10, 9);
+            this.lblAppliedAmount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAppliedAmount.Location = new System.Drawing.Point(10, 0);
             this.lblAppliedAmount.Name = "lblAppliedAmount";
-            this.lblAppliedAmount.Size = new System.Drawing.Size(182, 24);
+            this.lblAppliedAmount.Size = new System.Drawing.Size(182, 42);
             this.lblAppliedAmount.TabIndex = 38;
             this.lblAppliedAmount.Text = "Applied Amount: $12345.00";
             this.lblAppliedAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -329,6 +331,7 @@
             // 
             // ItemsGrid
             // 
+            this.ItemsGrid.AllowDrop = true;
             this.ItemsGrid.AllowUserToAddRows = false;
             this.ItemsGrid.AllowUserToDeleteRows = false;
             this.ItemsGrid.AutoGenerateColumns = false;
@@ -351,6 +354,8 @@
             this.ItemsGrid.TabIndex = 23;
             this.ItemsGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_CellClick);
             this.ItemsGrid.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsGrid_RowEnter);
+            this.ItemsGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.ItemsGrid_DragDrop);
+            this.ItemsGrid.DragOver += new System.Windows.Forms.DragEventHandler(this.ItemsGrid_DragOver);
             this.ItemsGrid.Validated += new System.EventHandler(this.ItemsGrid_Validated);
             // 
             // accountDataGridViewTextBoxColumn

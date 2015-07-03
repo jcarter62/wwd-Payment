@@ -188,6 +188,8 @@
             this.gridDetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridDetail.Size = new System.Drawing.Size(311, 129);
             this.gridDetail.TabIndex = 1;
+            this.gridDetail.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gridDetail_MouseDown);
+            this.gridDetail.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gridDetail_MouseMove);
             // 
             // typeDataGridViewTextBoxColumn
             // 

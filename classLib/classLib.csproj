@@ -86,6 +86,7 @@
     <Compile Include="TextBoxTrak.Designer.cs">
       <DependentUpon>TextBoxTrak.cs</DependentUpon>
     </Compile>
+    <Compile Include="UnpaidRecord.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons\dialog-ok-2.ico" />

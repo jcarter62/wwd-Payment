@@ -18,17 +18,25 @@ namespace RcvPayment.Ca {
         int currentMasterRow;
         int masterIdCol;
         int masterRcptIDCol;
-        int detailIdCol;
 
+        int detailIdCol;
+        int detailAmountCol;
+        int detailAccountCol;
+
+        #region Constructor
         public UnApplied() {
             InitializeComponent();
             localInit();
+            DragDropInit();
         }
 
         private void localInit() {
             masterIdCol = 0;
             masterRcptIDCol = 0;
             detailIdCol = 0;
+            detailAmountCol = 0;
+            detailAccountCol = 0;
+
 
             currentMasterId = null;
             currentMasterRow = -1;
@@ -37,7 +45,9 @@ namespace RcvPayment.Ca {
             dc = new DbClassDataContext(aset.wmis.connectionString);
             OpenMasterTable();
         }
+        #endregion
 
+        #region Data Stuff
         private void OpenMasterTable() {
             gridMaster.DataSource = null;
 
@@ -67,6 +77,38 @@ namespace RcvPayment.Ca {
             }
         }
 
+        private void LoadDetailRecords() {
+            gridDetail.DataSource = null;
+
+            foreach (DataGridViewRow r in gridDetail.Rows) {
+                gridDetail.Rows.Remove(r);
+            }
+
+            var detail = (from dtl in dc.CRDetails
+                          where dtl.CRMid == currentMasterId
+                          orderby dtl.Account descending, dtl.Amount ascending
+                          select dtl);
+
+            gridDetail.DataSource = detail;
+
+            // Determine column for Id field.
+            detailIdCol = 0;
+            for (int c = 0; c < gridDetail.ColumnCount; c++) {
+                string colname = gridDetail.Columns[c].DataPropertyName.ToLower();
+                if (colname == "id") {
+                    detailIdCol = c;
+                }
+                else if (colname == "amount") {
+                    detailAmountCol = c;
+                }
+                else if (colname == "account") {
+                    detailAccountCol = c;
+                }
+            }
+        }
+        #endregion Data Stuff
+
+        #region Row Selection Activity
         // User has changed to another row, and this fires before the row has changed.
         private void gridMaster_RowEnter(object sender, DataGridViewCellEventArgs e) {
             string id;
@@ -77,8 +119,10 @@ namespace RcvPayment.Ca {
                 currentMasterId = id;
                 currentMasterRow = newindex;
                 MasterSelected();
+                LoadDetailRecords();
             }
         }
+
 
         private void MasterSelected() {
             if (currentMasterRow >= 0) {
@@ -89,5 +133,72 @@ namespace RcvPayment.Ca {
                 lblDetail.Text = "Payment Detail Records";
             }
         }
+        #endregion Row Selection Activity
+
+        #region Drag Drop
+
+        #region Detail Grid
+
+        private DragDropInfo ddDetail;
+        private string copyBuffer;
+
+        private void DragDropInit() {
+            ddDetail = new DragDropInfo("gridDetail");
+            copyBuffer = "";
+        }
+
+        private void gridDetail_MouseDown(object sender, MouseEventArgs e) {
+            //
+            int dragIndex;
+            Rectangle dragBoxFromMouseDown;
+            dragIndex = gridDetail.HitTest(e.X, e.Y).RowIndex;
+            if (dragIndex != -1) {
+                Size dragSize = SystemInformation.DragSize;
+                ddDetail.StartRegion = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
+                dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
+                ddDetail.Id = gridDetail.Rows[dragIndex].Cells[detailIdCol].Value.ToString();
+                ddDetail.IsAList = false;
+                gridDetail.DoDragDrop(ddDetail, DragDropEffects.Copy);
+                copyBuffer = DetailCopyInfo(dragIndex);
+                if ( ( copyBuffer != null ) && ( copyBuffer.Length > 0 ))
+                    Clipboard.SetText(copyBuffer);
+            }
+            else {
+                ddDetail.Id = "";
+                ddDetail.StartRegion = Rectangle.Empty;
+            }
+
+        }
+
+        private string DetailCopyInfo(int index) {
+            string result = "";
+            string sep = ",";
+            string id = gridDetail.Rows[index].Cells[detailIdCol].Value.ToString();
+            string account = gridDetail.Rows[index].Cells[detailAccountCol].Value.ToString();
+            string amount = gridDetail.Rows[index].Cells[detailAmountCol].Value.ToString();
+
+            result = "UnApplied" + sep + id + sep + account + sep + amount;
+            return result;
+        }
+
+        private void gridDetail_MouseMove(object sender, MouseEventArgs e) {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
+                if (ddDetail.StartRegion != Rectangle.Empty) {
+                    // If the mouse moves outside the rectangle, start the drag.
+                    if (!ddDetail.StartRegion.Contains(e.X, e.Y)) {
+                        // Proceed with the drag and drop, passing in the list item.   
+                        DragDropEffects dropEffect = gridDetail.DoDragDrop(ddDetail, DragDropEffects.Copy);
+                        // statLabel.Text = "Dragging...";
+                        statLabel.Text = copyBuffer;
+                    }
+                }
+            }
+
+        }
+        #endregion Detail Grid
+
+        #endregion Drag Drop
+
     }
 }
+

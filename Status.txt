@@ -1,7 +1,8 @@
 Items to do:
 
 Payment Entry/Review
-( ) List open/unpaid charges from wmis & mas500
+(x) List open/unpaid charges from wmis
+(x) List open/unpaid charges from mas500
 ( ) Mark charges as wmis or mas500 when created.
 ( ) In pop-up window, if user double clicks on
     account, then send back account # only,
