@@ -150,38 +150,54 @@ namespace RcvPayment.Ca {
         private void gridDetail_MouseDown(object sender, MouseEventArgs e) {
             //
             int dragIndex;
-            Rectangle dragBoxFromMouseDown;
             dragIndex = gridDetail.HitTest(e.X, e.Y).RowIndex;
             if (dragIndex != -1) {
                 Size dragSize = SystemInformation.DragSize;
                 ddDetail.StartRegion = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
-                dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
                 ddDetail.Id = gridDetail.Rows[dragIndex].Cells[detailIdCol].Value.ToString();
                 ddDetail.IsAList = false;
-                gridDetail.DoDragDrop(ddDetail, DragDropEffects.Copy);
-                copyBuffer = DetailCopyInfo(dragIndex);
-                if ( ( copyBuffer != null ) && ( copyBuffer.Length > 0 ))
+                //                copyBuffer = DetailCopyInfo(dragIndex);
+                copyBuffer = GetSelectedRecords(gridDetail.SelectedRows);
+                if ((copyBuffer != null) && (copyBuffer.Length > 0)) {
+                    gridDetail.DoDragDrop(ddDetail, DragDropEffects.Copy);
+                    Clipboard.Clear();
                     Clipboard.SetText(copyBuffer);
+                    statLabel.Text = copyBuffer;
+                }
             }
             else {
                 ddDetail.Id = "";
                 ddDetail.StartRegion = Rectangle.Empty;
+                statLabel.Text = "";
             }
 
+        }
+
+        // Create list of record IDs to paste into wmis.
+        private string GetSelectedRecords(DataGridViewSelectedRowCollection selectedRows) {
+            string result = "";
+            string sep = ",";
+            foreach (DataGridViewRow r in selectedRows) {
+                result = result + r.Cells[detailIdCol].Value.ToString() + sep;
+            }
+            result = "id" + sep + result;
+            return result;
         }
 
         private string DetailCopyInfo(int index) {
             string result = "";
             string sep = ",";
             string id = gridDetail.Rows[index].Cells[detailIdCol].Value.ToString();
-            string account = gridDetail.Rows[index].Cells[detailAccountCol].Value.ToString();
-            string amount = gridDetail.Rows[index].Cells[detailAmountCol].Value.ToString();
+            //            string account = gridDetail.Rows[index].Cells[detailAccountCol].Value.ToString();
+            //            string amount = gridDetail.Rows[index].Cells[detailAmountCol].Value.ToString();
 
-            result = "UnApplied" + sep + id + sep + account + sep + amount;
+            result = "id" + sep + id;
             return result;
         }
 
+
         private void gridDetail_MouseMove(object sender, MouseEventArgs e) {
+            //Console.WriteLine(ShowDragLocation(ddDetail, e.X, e.Y));
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
                 if (ddDetail.StartRegion != Rectangle.Empty) {
                     // If the mouse moves outside the rectangle, start the drag.
@@ -189,12 +205,26 @@ namespace RcvPayment.Ca {
                         // Proceed with the drag and drop, passing in the list item.   
                         DragDropEffects dropEffect = gridDetail.DoDragDrop(ddDetail, DragDropEffects.Copy);
                         // statLabel.Text = "Dragging...";
-                        statLabel.Text = copyBuffer;
+                        statLabel.Text = "Dragging: " + copyBuffer;
                     }
                 }
             }
 
         }
+
+        private string ShowDragLocation(DragDropInfo ddInfo, int x, int y) {
+            string result = "";
+
+            if (ddInfo != null) {
+                result = string.Format("Start Region: x={0} y={1}, Mouse Position: x={2} y={3}",
+                                ddInfo.StartRegion.X, ddInfo.StartRegion.Y, x, y);
+            }
+            else {
+                result = string.Format("Drag Drop Info = null, Mouse Position: x={0} y={1}", x, y);
+            }
+            return result;
+        }
+
         #endregion Detail Grid
 
         #endregion Drag Drop

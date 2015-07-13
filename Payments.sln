@@ -25,6 +25,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbCombined", "DbCombined\DbCombined.csproj", "{B80F3811-91B0-4E17-BB9B-E5E8D4449CA2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Setup", "Setup", "{2BF0C407-D7D5-41D1-B6A8-6B8EB6F38DAD}"
+	ProjectSection(SolutionItems) = preProject
+		setup\scripts\0-InstallScript.sql = setup\scripts\0-InstallScript.sql
+		setup\scripts\BuildScript.cmd = setup\scripts\BuildScript.cmd
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -158,6 +158,7 @@
             // 
             // gridDetail
             // 
+            this.gridDetail.AllowDrop = true;
             this.gridDetail.AllowUserToAddRows = false;
             this.gridDetail.AllowUserToDeleteRows = false;
             this.gridDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -181,7 +182,6 @@
             this.uUserDataGridViewTextBoxColumn1});
             this.gridDetail.DataSource = this.cRDetailBindingSource;
             this.gridDetail.Location = new System.Drawing.Point(4, 17);
-            this.gridDetail.MultiSelect = false;
             this.gridDetail.Name = "gridDetail";
             this.gridDetail.ReadOnly = true;
             this.gridDetail.RowHeadersVisible = false;

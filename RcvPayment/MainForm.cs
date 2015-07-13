@@ -37,6 +37,7 @@ namespace RcvPayment {
             var aset = new AppSettings();
             var sd = new SampleData(aset.wmis.connectionString);
             sd.CreateData(100);
+            MessageBox.Show("Sample Data has been created.", "Information", MessageBoxButtons.OK );
         }
 
         private void unAppliedPaymentsToolStripMenuItem_Click(object sender, EventArgs e) {
