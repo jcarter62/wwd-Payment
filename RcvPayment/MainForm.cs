@@ -11,8 +11,25 @@ using classLib;
 
 namespace RcvPayment {
     public partial class MainForm : RcvPayment.MyForm {
+        public enum StatusTypes { DB, Misc}
+
         public MainForm() {
             InitializeComponent();
+        }
+
+        public void UpdateMessage( StatusTypes type, string Msg)
+        {
+            switch (type)
+            {
+                case StatusTypes.DB:
+                    statusDB.Text = Msg;
+                    break;
+                case StatusTypes.Misc:
+                    statusMisc.Text = Msg;
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -44,6 +61,11 @@ namespace RcvPayment {
             var f = new Ca.UnApplied();
             f.MdiParent = this;
             f.Show();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e) {
+            UpdateMessage(StatusTypes.DB, "");
+            UpdateMessage(StatusTypes.Misc, "");
         }
     }
 }

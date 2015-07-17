@@ -71,6 +71,12 @@
             this.textSmtpServer = new classLib.TextBoxTrak(this.components);
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.cbUseAsPM = new classLib.ComboBoxTrak(this.components);
+            this.label20 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.cbReqPM = new classLib.ComboBoxTrak(this.components);
+            this.label19 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -80,6 +86,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.wmisImage)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.smtpImage)).BeginInit();
+            this.tabPage3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,6 +94,7 @@
             // 
             this.tabDB.Controls.Add(this.tabPage1);
             this.tabDB.Controls.Add(this.tabPage2);
+            this.tabDB.Controls.Add(this.tabPage3);
             this.tabDB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabDB.Location = new System.Drawing.Point(0, 0);
             this.tabDB.Name = "tabDB";
@@ -571,6 +579,73 @@
             this.label12.TabIndex = 26;
             this.label12.Text = "Email Configuration";
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.cbUseAsPM);
+            this.tabPage3.Controls.Add(this.label20);
+            this.tabPage3.Controls.Add(this.label18);
+            this.tabPage3.Controls.Add(this.cbReqPM);
+            this.tabPage3.Controls.Add(this.label19);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(538, 320);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Other";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // cbUseAsPM
+            // 
+            this.cbUseAsPM.Changed = false;
+            this.cbUseAsPM.Cue = null;
+            this.cbUseAsPM.FormattingEnabled = true;
+            this.cbUseAsPM.Items.AddRange(new object[] {
+            "Yes",
+            "No"});
+            this.cbUseAsPM.Location = new System.Drawing.Point(236, 32);
+            this.cbUseAsPM.Name = "cbUseAsPM";
+            this.cbUseAsPM.Size = new System.Drawing.Size(81, 21);
+            this.cbUseAsPM.TabIndex = 33;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(8, 35);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(222, 13);
+            this.label20.TabIndex = 32;
+            this.label20.Text = "Use Current Date Time as Default Postmark ?";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(3, 3);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(85, 13);
+            this.label18.TabIndex = 31;
+            this.label18.Text = "Postmark Dates:";
+            // 
+            // cbReqPM
+            // 
+            this.cbReqPM.Changed = false;
+            this.cbReqPM.Cue = null;
+            this.cbReqPM.FormattingEnabled = true;
+            this.cbReqPM.Items.AddRange(new object[] {
+            "Yes",
+            "No"});
+            this.cbReqPM.Location = new System.Drawing.Point(115, 56);
+            this.cbReqPM.Name = "cbReqPM";
+            this.cbReqPM.Size = new System.Drawing.Size(81, 21);
+            this.cbReqPM.TabIndex = 30;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(8, 59);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(100, 13);
+            this.label19.TabIndex = 29;
+            this.label19.Text = "Require Postmark ?";
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.btnClose);
@@ -621,6 +696,8 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.smtpImage)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -676,5 +753,11 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.PictureBox smtpImage;
         private System.Windows.Forms.Button btnEmailTest;
+        private System.Windows.Forms.TabPage tabPage3;
+        private classLib.ComboBoxTrak cbUseAsPM;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label18;
+        private classLib.ComboBoxTrak cbReqPM;
+        private System.Windows.Forms.Label label19;
     }
 }

@@ -10,6 +10,7 @@
     [PayRef]       VARCHAR (20) NULL,
 	[PayVia]	   VARCHAR (20) NULL,
     [Note]         VARCHAR (80) NULL,
+	[Postmark]     DATETIME     NULL,
     [CDate]        DATETIME     NULL,
     [CUser]        VARCHAR (50) NULL,
     [UDate]        DATETIME     NULL,

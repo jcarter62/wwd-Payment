@@ -118,8 +118,9 @@ namespace RcvPayment {
             txtRef.Text = q.PayRef;
             cbVia.Text = q.PayVia;
             txtNote.Text = q.Note;
-            txtAmount.Text = q.Amount.ToString();
+            txtAmount.Text = q.Amount.Value.ToString("C");
             paymentAmount = q.Amount.Value;
+            txtPM.Text = q.Postmark.ToString();
 
             panelDetail.Start(btnSavePayment);
             if (q.Deposited) {
@@ -170,6 +171,12 @@ namespace RcvPayment {
             q.Amount = (double)d;
             paymentAmount = q.Amount.Value;
 
+            {
+                DateTime dt;
+                DateTime.TryParse(txtPM.Text, out dt);
+                q.Postmark = dt;
+            }
+
             try {
                 dc.SubmitChanges();
                 dc.Refresh(RefreshMode.OverwriteCurrentValues, q);
@@ -204,7 +211,7 @@ namespace RcvPayment {
                 if (q != null) {
                     txtItmAcct.Text = q.Account;
                     txtItmName.Text = q.Name;
-                    txtItmAmount.Text = q.Amount.ToString();
+                    txtItmAmount.Text = q.Amount.Value.ToString("C");
                     txtItmNote.Text = q.Note;
                     cbItmApply2.Text = q.Type;
                     currentDetailID = thisId;
@@ -288,6 +295,10 @@ namespace RcvPayment {
             CRMaster rec = new CRMaster();
             rec.RcptID = newId.id;
             currentID = rec.Id;
+
+            if (aset.UseTimeStampAsPM == "Yes") {
+                rec.Postmark = DateTime.Now;
+            }
 
             dc.CRMasters.InsertOnSubmit(rec);
 

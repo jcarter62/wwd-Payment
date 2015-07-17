@@ -45,6 +45,8 @@ namespace RcvPayment {
             chkSmtpAuthReq.Checked = aset.SmtpAuthReq;
             textSmtpUser.Text = aset.SmtpUser;
             textSmtpPass.Text = aset.SmtpPass;
+            cbUseAsPM.Text = aset.UseTimeStampAsPM;
+            cbReqPM.Text = aset.RequirePM;
         }
 
         private void btnSave_Click(object sender, EventArgs e) {
@@ -68,6 +70,9 @@ namespace RcvPayment {
             aset.SmtpAuthReq = chkSmtpAuthReq.Checked;
             aset.SmtpUser = textSmtpUser.Text;
             aset.SmtpPass = textSmtpPass.Text;
+
+            aset.UseTimeStampAsPM = cbUseAsPM.Text;
+            aset.RequirePM = cbReqPM.Text;
 
             aset.Save();
         }

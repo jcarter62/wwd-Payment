@@ -24,6 +24,7 @@ CREATE TABLE [dbo].[CRMaster](
 	[PayRef] [varchar](20) NULL,
 	[PayVia] [varchar](20) NULL,
 	[Note] [varchar](80) NULL,
+	[Postmark] [datetime] NULL,
 	[CDate] [datetime] NULL,
 	[CUser] [varchar](50) NULL,
 	[UDate] [datetime] NULL,

@@ -29,6 +29,8 @@ namespace classLib {
         public bool SmtpAuthReq { get; set; }
         public string SmtpUser { get; set; }
         public string SmtpPass { get; set; }
+        public string UseTimeStampAsPM {get;set;}
+        public string RequirePM {get;set;}
         #endregion Properties
 
         #region Startup
@@ -90,6 +92,8 @@ namespace classLib {
             SmtpAuthReq = (GetString("SmtpAuthReq") == "Yes" ? true : false);
             SmtpUser = GetString("SmtpUser", true);
             SmtpPass = GetString("SmtpPass", true);
+            UseTimeStampAsPM = GetString("UseTimeStampAsPM" );
+            RequirePM = GetString("RequirePM");
         }
 
         private void saveDbInfo(DbSettings db, string prefix) {
@@ -120,6 +124,8 @@ namespace classLib {
             WriteString("SmtpAuthReq", (SmtpAuthReq ? "Yes" : "No"));
             WriteString("SmtpUser", SmtpUser, true);
             WriteString("SmtpPass", SmtpPass, true);
+            WriteString("UseTimeStampAsPM", UseTimeStampAsPM);
+            WriteString("RequirePM", RequirePM);
         }
 
         #endregion Methods
