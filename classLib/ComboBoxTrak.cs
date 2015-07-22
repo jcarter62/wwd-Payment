@@ -34,6 +34,7 @@ namespace classLib {
 
         void myInit() {
             TextChanged += myChange;
+//            DropDownClosed += myChange;
         }
 
         void myChange(object sender, EventArgs e) {

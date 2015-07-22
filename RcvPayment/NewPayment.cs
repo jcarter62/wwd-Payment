@@ -9,6 +9,7 @@ using System.Linq;
 using System.Data.Linq;
 using classLib;
 using dataLib;
+using System.Globalization;
 
 namespace RcvPayment {
 
@@ -38,40 +39,40 @@ namespace RcvPayment {
             }
         }
 
+        private int itemsGridIdCol = 0;
+        private bool PaymentPosted = false;
+
         // Update graphic, and message to left.
         private void UpdateAppliedGraphic() {
+
+            Image i;
 
             if (Math.Abs(_AppliedAmount) < 0.001) {
                 lblAppliedAmount.Text = "-- UnApplied --";
             }
             else {
                 string msg;
+                bool isApplied = false;
 
-                if (Math.Abs(unAppliedAmount) < 0.001) {
+                isApplied = (Math.Abs(unAppliedAmount) < 0.01);
+
+                if (isApplied) {
                     msg = "Applied.";
+                    i = Image.FromFile(statusImages.successImage);
                 }
                 else {
-                    if (unAppliedAmount > 0) {
-                        msg = string.Format("Under Applied by {0}", unAppliedAmount.ToString("C"));
-                    }
-                    else {
+                    if (unAppliedAmount < 0.00) {
                         msg = string.Format("Over Applied by {0}", (-1.0 * unAppliedAmount).ToString("C"));
                     }
+                    else {
+                        msg = string.Format("Under Applied by {0}", unAppliedAmount.ToString("C"));
+                    }
+                    i = Image.FromFile(statusImages.failImage);
                 }
+
                 _AppliedAmountMessage = msg;
                 lblAppliedAmount.Text = _AppliedAmountMessage;
-            }
-
-            if (ItemsGrid.Rows.Count <= 0) {
-                lblAppliedChk.Image = Image.FromFile(statusImages.failImage);
-            }
-            else {
-                if (Math.Abs(unAppliedAmount) < 0.001) {
-                    lblAppliedChk.Image = Image.FromFile(statusImages.successImage);
-                }
-                else {
-                    lblAppliedChk.Image = Image.FromFile(statusImages.failImage);
-                }
+                lblAppliedChk.Image = i;
             }
         }
 
@@ -122,8 +123,11 @@ namespace RcvPayment {
             paymentAmount = q.Amount.Value;
             txtPM.Text = q.Postmark.ToString();
 
+            PaymentPosted = q.ReceivePost;
+
+
             panelDetail.Start(btnSavePayment);
-            if (q.Deposited) {
+            if (PaymentPosted) {
                 panelDetail.DisableControls();
             }
             else {
@@ -139,7 +143,24 @@ namespace RcvPayment {
                     select item;
 
             ItemsGrid.DataSource = q;
+            if (PaymentPosted) {
+                ItemsGrid.Enabled = false;
+            }
+            else {
+                ItemsGrid.Enabled = true;
+            }
 
+            // Determine what is the id column number
+            itemsGridIdCol = -1;
+
+            for (int c = 0; c < ItemsGrid.ColumnCount; c++) {
+                string colname = ItemsGrid.Columns[c].DataPropertyName.ToLower();
+                if (colname == "id") {
+                    itemsGridIdCol = c;
+                }
+            }
+
+            // 
             double sumDtl = 0.0;
             var qsum = (from item in dc.CRDetails
                         where item.CRMid == id
@@ -166,9 +187,7 @@ namespace RcvPayment {
             q.Note = txtNote.Text;
             q.PayType = cbPayType.Text;
             q.PayVia = cbVia.Text;
-            Decimal d;
-            Decimal.TryParse(txtAmount.Text, out d);
-            q.Amount = (double)d;
+            q.Amount = text2double(txtAmount.Text);
             paymentAmount = q.Amount.Value;
 
             {
@@ -187,9 +206,9 @@ namespace RcvPayment {
         }
 
         private double text2double(string text) {
-            Decimal d;
-            Decimal.TryParse(text, out d);
-            return (double)d;
+            double d;
+            d = (double)decimal.Parse(text, NumberStyles.Currency);
+            return d;
         }
 
         /// <summary>
@@ -200,6 +219,7 @@ namespace RcvPayment {
             txtItmName.Text = "";
             txtItmAmount.Text = "";
             txtItmNote.Text = "";
+            panelItem.Start(btnSaveItem);
         }
 
         private void loadItemDetail(string thisId) {
@@ -217,14 +237,21 @@ namespace RcvPayment {
                     currentDetailID = thisId;
 
                     // Start monitoring input objects on this panel.
-                    panelItem.Start(btnSaveItem);
+                    if (PaymentPosted)
+                    {
+                        panelItem.DisableControls();
+                    }
+                    else
+                    {
+                        panelItem.EnableControls();
+                        panelItem.Start(btnSaveItem);
+                    }
                 }
             }
             catch (Exception ex) {
                 Console.WriteLine(ex.Message);
             }
         }
-
 
         #endregion
 
@@ -238,11 +265,19 @@ namespace RcvPayment {
             }
 
             // now connect to real data.
-            IOrderedQueryable<CRMaster> q = from item in dc.CRMasters
-                                            where item.StateGA == "created"
-                                            orderby item.RcptID descending
-                                            select item;
-
+            IOrderedQueryable<CRMaster> q;
+            if (!chkShowAll.Checked) {
+                q = from item in dc.CRMasters
+                    where item.StateRcv == "created"
+                    orderby item.RcptID descending
+                    select item;
+            }
+            else {
+                q = from item in dc.CRMasters
+                        //                    where item.StateGA == "created"
+                    orderby item.RcptID descending
+                    select item;
+            }
             PaymentsGrid.DataSource = q;
         }
 
@@ -401,7 +436,7 @@ namespace RcvPayment {
             }
             else {
                 String id;
-                id = ItemsGrid.SelectedRows[0].Cells[ItemCellId].Value.ToString();
+                id = ItemsGrid.SelectedRows[0].Cells[itemsGridIdCol].Value.ToString();
                 currentDetailID = id;
                 loadItemDetail(id);
             }
@@ -411,7 +446,7 @@ namespace RcvPayment {
             // User selected row
             String id;
             int newindex = e.RowIndex;
-            id = ItemsGrid.Rows[newindex].Cells[ItemCellId].Value.ToString();
+            id = ItemsGrid.Rows[newindex].Cells[itemsGridIdCol].Value.ToString();
             currentDetailID = id;
             loadItemDetail(id);
         }
@@ -498,7 +533,7 @@ namespace RcvPayment {
                 CRDetail rec = new CRDetail();
                 rec.Account = txtItmAcct.Text;
                 rec.Name = txtItmName.Text;
-                rec.Amount = text2double(txtAmount.Text);
+                rec.Amount = text2double(txtItmAmount.Text);
                 rec.Note = txtItmNote.Text;
                 rec.Type = cbItmApply2.Text;
                 currentDetailID = rec.Id;
@@ -657,7 +692,9 @@ namespace RcvPayment {
             if (inp.Length > 0) {
                 q = from item in dc.CRMasters
                     where (
-                    (item.StateGA == "created") &&
+                    ( chkShowAll.Checked  || 
+                      ( !chkShowAll.Checked && (item.StateRcv == "created") ) 
+                    ) &&
                     (item.DeliveryName.ToLower().Contains(inp) ||
                       item.Note.ToLower().Contains(inp) ||
                       item.PayRef.ToLower().Contains(inp) ||
@@ -667,13 +704,21 @@ namespace RcvPayment {
                     select item;
             }
             else {
-                q = from item in dc.CRMasters
-                    where item.StateGA == "created"
-                    orderby item.RcptID descending
-                    select item;
+                if (!chkShowAll.Checked) {
+                    q = from item in dc.CRMasters
+                        where item.StateRcv == "created"
+                        orderby item.RcptID descending
+                        select item;
 
+
+                }
+                else {
+                    q = from item in dc.CRMasters
+                            //                    where item.StateGA == "created"
+                        orderby item.RcptID descending
+                        select item;
+                }
             }
-
             PaymentsGrid.DataSource = q;
         }
 
@@ -724,6 +769,56 @@ namespace RcvPayment {
             rec.Type = r.TranType;
             currentDetailID = rec.Id;
             dc.CRDetails.InsertOnSubmit(rec);
+        }
+
+        private void btnPost_Click(object sender, EventArgs e) {
+            if (btnSavePayment.Enabled) {
+                MessageBox.Show("Please Save Payment before Posting.", "Warning", MessageBoxButtons.OK);
+            }
+            else {
+                PostThisPayment();
+                ReloadGrids();
+            }
+        }
+
+        private void ReloadGrids() {
+            ConnectGrid();
+            if (PaymentsGrid.RowCount > 0) {
+                string id;
+                PaymentsGrid.Rows[0].Selected = true;
+                id = PaymentsGrid.SelectedRows[0].Cells["Id"].Value.ToString();
+                userSelectedPaymentRow(id);
+            }
+        }
+
+        private void PostThisPayment() {
+            // Save this record.
+            var q = (from item in dc.CRMasters
+                     where item.Id == currentID
+                     select item).First();
+
+            q.StateRcv = "posted";
+            q.StateAR = "created";
+            q.StateGA = "created";
+
+            TblLog l = new TblLog();
+            l.tblName = "crmaster";
+            l.tblId = currentID;
+            l.txt = "receiving post";
+
+            try {
+                dc.TblLogs.InsertOnSubmit(l);
+                dc.SubmitChanges();
+                dc.Refresh(RefreshMode.OverwriteCurrentValues, q);
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void chkShowAll_CheckStateChanged(object sender, EventArgs e) {
+            // User changed this, so reload grid
+            ReloadGrids();
         }
     }
 }

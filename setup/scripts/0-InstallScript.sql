@@ -14,6 +14,7 @@ GO
 
 CREATE TABLE [dbo].[CRMaster](
 	[Id] [varchar](40) NOT NULL,
+	[StateRcv] [varchar](15) NULL,
 	[StateGA] [varchar](15) NULL,
 	[StateAR] [varchar](15) NULL,
 	[SessionId] [varchar](40) NULL,

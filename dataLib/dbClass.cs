@@ -78,8 +78,9 @@ namespace dataLib {
                 PayType = "Check";
                 PayVia = "USPS";
                 Amount = 0.0;
-                StateAR = "created";
-                StateGA = "created";
+                StateRcv = "created";
+                StateAR = "";
+                StateGA = "";
             }
         }
 
@@ -107,6 +108,25 @@ namespace dataLib {
                 return ((StateGA == "created") ? "yes" : "no");
             }
         }
+
+        public bool ReceivePost {
+            get {
+                return ((StateRcv == "posted") ? true : false);
+            }
+        }
+
+        public bool ARPost {
+            get {
+                return ((StateAR == "posted") ? true : false);
+            }
+        }
+
+        public bool GAPost {
+            get {
+                return ((StateGA == "posted") ? true : false);
+            }
+        }
+
     }
 
     public partial class CrMasterIds {
@@ -131,6 +151,14 @@ namespace dataLib {
 
     public partial class v_CrReceipt {
 
+    }
+
+    public partial class TblLog {
+        partial void OnCreated() {
+            if (id == null) {
+                id = Shortid.newId;
+            }
+        }
     }
 
 }

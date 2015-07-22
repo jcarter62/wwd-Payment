@@ -88,8 +88,9 @@ namespace dataLib {
             m.PayType = "Check";
             m.PayVia = "Person";
             m.PayRef = RandomCheckNum();
-            m.StateGA = "created";
-            m.StateAR = "created";
+            m.StateRcv = "created";
+            m.StateGA = "";
+            m.StateAR = "";
             m.RcptID = RandomRcpt();
             dc.CRMasters.InsertOnSubmit(m);
 

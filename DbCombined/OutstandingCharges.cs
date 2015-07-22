@@ -39,7 +39,12 @@ namespace DbCombined {
             if ((dc != null) && (sessionId != null)) {
                 string cmd;
                 cmd = string.Format("delete CROutstanding where session = '{0}'", sessionId);
-                dc.ExecuteCommand(cmd, "");
+                try {
+                    dc.ExecuteCommand(cmd, "");
+                }
+                catch (Exception ex) {
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
 
@@ -75,12 +80,12 @@ namespace DbCombined {
             rows = dc.sp_Outstanding(AccountKey, sessionId);
 
             IQueryable<CROutstanding> q = from r in dc.CROutstandings
-                    where r.Session == sessionId
-                    select r;
+                                          where r.Session == sessionId
+                                          select r;
 
             foreach (var r in q) {
                 Data.Rows.Add(r.ItemGroup, r.TranType, r.Description,
-                              r.DueDate, r.Amount, r.Account, r.Invoice );
+                              r.DueDate, r.Amount, r.Account, r.Invoice);
             }
             // At this point, data contains the accounts from both lists.
 

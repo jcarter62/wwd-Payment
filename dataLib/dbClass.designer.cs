@@ -51,6 +51,9 @@ namespace dataLib
     partial void InsertArDtl(ArDtl instance);
     partial void UpdateArDtl(ArDtl instance);
     partial void DeleteArDtl(ArDtl instance);
+    partial void InsertTblLog(TblLog instance);
+    partial void UpdateTblLog(TblLog instance);
+    partial void DeleteTblLog(TblLog instance);
     partial void InsertCRMaster(CRMaster instance);
     partial void UpdateCRMaster(CRMaster instance);
     partial void DeleteCRMaster(CRMaster instance);
@@ -195,6 +198,14 @@ namespace dataLib
 			get
 			{
 				return this.GetTable<CROutstanding>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TblLog> TblLogs
+		{
+			get
+			{
+				return this.GetTable<TblLog>();
 			}
 		}
 		
@@ -5136,6 +5147,188 @@ namespace dataLib
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TblLog")]
+	public partial class TblLog : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _id;
+		
+		private string _tblName;
+		
+		private string _tblId;
+		
+		private System.Nullable<System.DateTime> _cdate;
+		
+		private string _cuser;
+		
+		private string _txt;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(string value);
+    partial void OnidChanged();
+    partial void OntblNameChanging(string value);
+    partial void OntblNameChanged();
+    partial void OntblIdChanging(string value);
+    partial void OntblIdChanged();
+    partial void OncdateChanging(System.Nullable<System.DateTime> value);
+    partial void OncdateChanged();
+    partial void OncuserChanging(string value);
+    partial void OncuserChanged();
+    partial void OntxtChanging(string value);
+    partial void OntxtChanged();
+    #endregion
+		
+		public TblLog()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="VarChar(40) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tblName", DbType="VarChar(50)")]
+		public string tblName
+		{
+			get
+			{
+				return this._tblName;
+			}
+			set
+			{
+				if ((this._tblName != value))
+				{
+					this.OntblNameChanging(value);
+					this.SendPropertyChanging();
+					this._tblName = value;
+					this.SendPropertyChanged("tblName");
+					this.OntblNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tblId", DbType="VarChar(40)")]
+		public string tblId
+		{
+			get
+			{
+				return this._tblId;
+			}
+			set
+			{
+				if ((this._tblId != value))
+				{
+					this.OntblIdChanging(value);
+					this.SendPropertyChanging();
+					this._tblId = value;
+					this.SendPropertyChanged("tblId");
+					this.OntblIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cdate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> cdate
+		{
+			get
+			{
+				return this._cdate;
+			}
+			set
+			{
+				if ((this._cdate != value))
+				{
+					this.OncdateChanging(value);
+					this.SendPropertyChanging();
+					this._cdate = value;
+					this.SendPropertyChanged("cdate");
+					this.OncdateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cuser", DbType="VarChar(10)")]
+		public string cuser
+		{
+			get
+			{
+				return this._cuser;
+			}
+			set
+			{
+				if ((this._cuser != value))
+				{
+					this.OncuserChanging(value);
+					this.SendPropertyChanging();
+					this._cuser = value;
+					this.SendPropertyChanged("cuser");
+					this.OncuserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_txt", DbType="VarChar(100)")]
+		public string txt
+		{
+			get
+			{
+				return this._txt;
+			}
+			set
+			{
+				if ((this._txt != value))
+				{
+					this.OntxtChanging(value);
+					this.SendPropertyChanging();
+					this._txt = value;
+					this.SendPropertyChanged("txt");
+					this.OntxtChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CRMaster")]
 	public partial class CRMaster : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -5143,6 +5336,8 @@ namespace dataLib
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private string _Id;
+		
+		private string _StateRcv;
 		
 		private string _StateGA;
 		
@@ -5180,6 +5375,8 @@ namespace dataLib
     partial void OnCreated();
     partial void OnIdChanging(string value);
     partial void OnIdChanged();
+    partial void OnStateRcvChanging(string value);
+    partial void OnStateRcvChanged();
     partial void OnStateGAChanging(string value);
     partial void OnStateGAChanged();
     partial void OnStateARChanging(string value);
@@ -5233,6 +5430,26 @@ namespace dataLib
 					this._Id = value;
 					this.SendPropertyChanged("Id");
 					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateRcv", DbType="VarChar(15)")]
+		public string StateRcv
+		{
+			get
+			{
+				return this._StateRcv;
+			}
+			set
+			{
+				if ((this._StateRcv != value))
+				{
+					this.OnStateRcvChanging(value);
+					this.SendPropertyChanging();
+					this._StateRcv = value;
+					this.SendPropertyChanged("StateRcv");
+					this.OnStateRcvChanged();
 				}
 			}
 		}

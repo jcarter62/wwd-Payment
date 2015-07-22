@@ -41,6 +41,7 @@
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RcptID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReceivePost = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Deposited = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.cRMasterBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
@@ -71,6 +72,7 @@
             this.btnDeleteItem = new System.Windows.Forms.Button();
             this.btnSaveItem = new System.Windows.Forms.Button();
             this.panelDetail = new classLib.PanelTrak(this.components);
+            this.btnPost = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnSavePayment = new System.Windows.Forms.Button();
             this.txtPM = new classLib.TextBoxTrak(this.components);
@@ -157,6 +159,7 @@
             this.chkShowAll.TabIndex = 1;
             this.chkShowAll.Text = "Show All";
             this.chkShowAll.UseVisualStyleBackColor = true;
+            this.chkShowAll.CheckStateChanged += new System.EventHandler(this.chkShowAll_CheckStateChanged);
             // 
             // textSearch
             // 
@@ -221,6 +224,7 @@
             this.Id,
             this.RcptID,
             this.Amount,
+            this.ReceivePost,
             this.Deposited});
             this.PaymentsGrid.DataSource = this.cRMasterBindingSource;
             this.PaymentsGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -266,6 +270,15 @@
             this.Amount.Name = "Amount";
             this.Amount.ReadOnly = true;
             this.Amount.Width = 68;
+            // 
+            // ReceivePost
+            // 
+            this.ReceivePost.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.ReceivePost.DataPropertyName = "ReceivePost";
+            this.ReceivePost.HeaderText = "RcvPost";
+            this.ReceivePost.Name = "ReceivePost";
+            this.ReceivePost.ReadOnly = true;
+            this.ReceivePost.Width = 54;
             // 
             // Deposited
             // 
@@ -576,6 +589,7 @@
             // panelDetail
             // 
             this.panelDetail.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelDetail.Controls.Add(this.btnPost);
             this.panelDetail.Controls.Add(this.btnPrint);
             this.panelDetail.Controls.Add(this.btnSavePayment);
             this.panelDetail.Controls.Add(this.txtPM);
@@ -604,10 +618,21 @@
             this.panelDetail.Size = new System.Drawing.Size(314, 245);
             this.panelDetail.TabIndex = 0;
             // 
+            // btnPost
+            // 
+            this.btnPost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPost.Location = new System.Drawing.Point(224, 213);
+            this.btnPost.Name = "btnPost";
+            this.btnPost.Size = new System.Drawing.Size(75, 23);
+            this.btnPost.TabIndex = 57;
+            this.btnPost.Text = "Post";
+            this.btnPost.UseVisualStyleBackColor = true;
+            this.btnPost.Click += new System.EventHandler(this.btnPost_Click);
+            // 
             // btnPrint
             // 
-            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint.Location = new System.Drawing.Point(159, 213);
+            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnPrint.Location = new System.Drawing.Point(12, 213);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(79, 23);
             this.btnPrint.TabIndex = 55;
@@ -618,8 +643,8 @@
             // 
             // btnSavePayment
             // 
-            this.btnSavePayment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSavePayment.Location = new System.Drawing.Point(244, 213);
+            this.btnSavePayment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSavePayment.Location = new System.Drawing.Point(97, 213);
             this.btnSavePayment.Name = "btnSavePayment";
             this.btnSavePayment.Size = new System.Drawing.Size(55, 23);
             this.btnSavePayment.TabIndex = 7;
@@ -938,11 +963,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private classLib.TextBoxTrak txtPM;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button btnPost;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn RcptID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn ReceivePost;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Deposited;
-        private classLib.TextBoxTrak txtPM;
-        private System.Windows.Forms.Label label16;
     }
 }

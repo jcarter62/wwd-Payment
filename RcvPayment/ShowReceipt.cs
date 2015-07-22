@@ -19,6 +19,8 @@ namespace RcvPayment {
         DbClassDataContext dc;
 
         public string Id { get; set; }
+        public string EmailResult { get; protected set; }
+        public string EmailAddress { get; set; }
 
         public ShowReceipt() {
             InitializeComponent();
@@ -26,7 +28,7 @@ namespace RcvPayment {
             dc = new DbClassDataContext(aset.wmis.connectionString);
         }
 
-        public void DisplayReport(string id ) {
+        public void DisplayReport(string id) {
             Id = id;
             aset = new AppSettings();
             Report1 rpt = new Report1(aset.wmis.connectionString, Id);
@@ -37,16 +39,16 @@ namespace RcvPayment {
             loadEmailList();
         }
 
-/*
-select 
-distinct cont.FirstName, cont.LastName, ce.Email
-from CRDetail d 
-inner join CMNameContact nc on d.Account = nc.Name_ID
-inner join CMEmail ce on nc.IDEmail = ce.IDEmail
-inner join CMContact cont on nc.IDContact = cont.IDContact
-where d.CRMid = '856e091752bb41849a0710d6c71383a7'
-order by ce.Email
-*/
+        /*
+        select 
+        distinct cont.FirstName, cont.LastName, ce.Email
+        from CRDetail d 
+        inner join CMNameContact nc on d.Account = nc.Name_ID
+        inner join CMEmail ce on nc.IDEmail = ce.IDEmail
+        inner join CMContact cont on nc.IDContact = cont.IDContact
+        where d.CRMid = '856e091752bb41849a0710d6c71383a7'
+        order by ce.Email
+        */
 
         private void loadEmailList() {
             var q = (from d in dc.CRDetails
@@ -54,13 +56,13 @@ order by ce.Email
                      join ce in dc.CMEmails on nc.IDEmail equals ce.IDEmail
                      join cn in dc.CMContacts on nc.IDContact equals cn.IDContact
                      where d.CRMid == Id
-                     select new { cn.FirstName, cn.LastName, ce.Email }  ).Distinct() ;
+                     select new { cn.FirstName, cn.LastName, ce.Email }).Distinct();
 
             cbEmail.Items.Clear();
-            foreach ( var r in q ) {
+            foreach (var r in q) {
                 string item;
-                item =  r.FirstName.Trim() + " " + 
-                        r.LastName.Trim() + " <" + 
+                item = r.FirstName.Trim() + " " +
+                        r.LastName.Trim() + " <" +
                         r.Email.Trim() + ">";
                 cbEmail.Items.Add(item);
             }
@@ -95,7 +97,23 @@ order by ce.Email
             //
 
             // Now we need to email this.
-            sendFileToEmailAddress(tempfile);
+            bool DoneSendingEmail = false;
+            while (!DoneSendingEmail) {
+                if (sendFileToEmailAddress(tempfile)) {
+                    MessageBox.Show("Success!", "Information", MessageBoxButtons.OK);
+                    DoneSendingEmail = true;
+                    ReportEmailSent();
+                }
+                else {
+                    DialogResult rslt;
+                    string fullmsg;
+                    fullmsg = "Message Failed!\n" + EmailResult;
+                    rslt = MessageBox.Show(fullmsg, "Error", MessageBoxButtons.AbortRetryIgnore);
+                    if ((rslt == DialogResult.Abort) || (rslt == DialogResult.Ignore)) {
+                        DoneSendingEmail = true;
+                    }
+                }
+            }
 
             // Reference:
             // (1) http://www.telerik.com/forums/blank-pages-in-export-to-pdf
@@ -103,8 +121,26 @@ order by ce.Email
             //
         }
 
-        private void sendFileToEmailAddress(string tempfile) {
+        private void ReportEmailSent() {
+            TblLog l = new TblLog();
+            l.tblId = Id;
+            l.tblName = "crmaster";
+            l.txt = "Send Receipt to:" + EmailAddress;
+
+            try {
+                dc.TblLogs.InsertOnSubmit(l);
+                dc.SubmitChanges();
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+            }
+
+        }
+
+        private bool sendFileToEmailAddress(string tempfile) {
+            bool result;
             AppSettings aset = new AppSettings();
+            result = false;
 
             try {
                 string recptId = getReceiptID();
@@ -112,7 +148,9 @@ order by ce.Email
                 string emailsubject = "WWD Payment Receipt: " + recptId;
                 string toAddress = cbEmail.Text;
 
-                MailMessage mail = new MailMessage(aset.EmailFrom, toAddress );
+                EmailAddress = toAddress;
+
+                MailMessage mail = new MailMessage(aset.EmailFrom, toAddress);
                 SmtpClient client = new SmtpClient();
                 client.Port = aset.SmtpPortInt;
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
@@ -123,11 +161,16 @@ order by ce.Email
                 Attachment atch = new Attachment(tempfile);
                 mail.Attachments.Add(atch);
                 client.Send(mail);
+                result = true;
             }
             catch (Exception ex) {
                 Console.WriteLine(ex.Message);
+                EmailResult = ex.Message;
+                result = false;
             }
+            return result;
         }
+
 
         private string getReceiptID() {
             string result = "";
@@ -138,7 +181,8 @@ order by ce.Email
 
                 result = q;
 
-            } catch ( Exception ex ) {
+            }
+            catch (Exception ex) {
                 Console.WriteLine(ex.Message);
             }
 
