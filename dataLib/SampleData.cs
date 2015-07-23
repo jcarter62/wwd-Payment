@@ -92,9 +92,16 @@ namespace dataLib {
             m.StateGA = "";
             m.StateAR = "";
             m.RcptID = RandomRcpt();
+            m.Postmark = TodaysDate();
             dc.CRMasters.InsertOnSubmit(m);
 
             dc.SubmitChanges();
+        }
+
+        private DateTime? TodaysDate() {
+            DateTime dt = DateTime.Now;
+            dt = dt - dt.TimeOfDay;
+            return dt;
         }
 
         private int GetAnUnusedIndex() {

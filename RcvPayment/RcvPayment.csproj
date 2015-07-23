@@ -112,6 +112,18 @@
     <Compile Include="Report1.Designer.cs">
       <DependentUpon>Report1.cs</DependentUpon>
     </Compile>
+    <Compile Include="report\DepositBatch.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report\DepositBatch.Designer.cs">
+      <DependentUpon>DepositBatch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="report\DepositBatchView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="report\DepositBatchView.Designer.cs">
+      <DependentUpon>DepositBatchView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +176,12 @@
     <EmbeddedResource Include="Report1.resx">
       <DependentUpon>Report1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="report\DepositBatch.resx">
+      <DependentUpon>DepositBatch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report\DepositBatchView.resx">
+      <DependentUpon>DepositBatchView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
@@ -173,6 +191,7 @@
     <EmbeddedResource Include="UnpaidList.resx">
       <DependentUpon>UnpaidList.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\DataSources\classLib.Payments.datasource" />
     <None Include="Properties\DataSources\dataLib.CMContact.datasource" />
     <None Include="Properties\DataSources\dataLib.CMEmail.datasource" />
@@ -186,6 +205,7 @@
     <None Include="Properties\DataSources\dataLib.DbClassDataContext1.datasource" />
     <None Include="Properties\DataSources\dataLib.NAME.datasource" />
     <None Include="Properties\DataSources\dataLib.SampleData.datasource" />
+    <None Include="Properties\DataSources\dataLib.v_CrDepositBatch.datasource" />
     <None Include="Properties\DataSources\dataLib.v_CrReceipt.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -214,6 +234,7 @@
       <Name>DbCombined</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

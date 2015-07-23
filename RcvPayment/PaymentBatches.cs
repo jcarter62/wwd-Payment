@@ -14,6 +14,7 @@ namespace RcvPayment {
     public partial class PaymentBatches : RcvPayment.MyForm {
         AppSettings aset;
         DbClassDataContext dc;
+        bool allowChanges;
 
         // CurrentId is the guid of the batch record.
         // the user does not see this normally.
@@ -70,6 +71,8 @@ namespace RcvPayment {
         }
 
         private void DisplayBatchDetails(bool forceReload = false) {
+            allowChanges = true;
+
             try {
                 var q = (from item in dc.CRDepBatches
                          where item.Id == CurrentId
@@ -85,12 +88,16 @@ namespace RcvPayment {
                     lblAmount.Text = double2StringFtm(q.Amount, "");
                     lblCreated.Text = DatetimeByUser(q.CUser, q.CDate, "g"); // "g" == (1)
                     lblModified.Text = DatetimeByUser(q.UUser, q.UDate, "g");
+                    if (q.State == "posted") {
+                        allowChanges = false;
+                    }
                 }
-
             }
             catch (Exception ex) {
                 Console.WriteLine(ex.Message);
             }
+
+            EnableDisableUI(allowChanges);
         }
 
         private string DatetimeByUser(string cUser, DateTime? cDate, string fmt) {
@@ -254,6 +261,31 @@ namespace RcvPayment {
         }
 
         private void btnDelete_Click(object sender, EventArgs e) {
+            // Only allow deletion if there are no documents,
+            // and status = "created"
+            string msg = "";
+            bool abort = false;
+
+            try
+            {
+                var record = (from item in dc.CRDepBatches
+                              where item.Id == CurrentId
+                              select item).First<CRDepBatch>();
+
+                if ( record.Locked )
+                { 
+                    abort = true;
+                    msg = msg + "This batch has been posted.\n";
+                }
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            if ( abort )
+            {
+                MessageBox.Show(msg, "Abort");
+            }
         }
 
         private void button1_Click(object sender, EventArgs e) {
@@ -270,8 +302,22 @@ namespace RcvPayment {
             }
         }
 
+
         public void ReturningFromDocuments() {
-            this.EnableControls();
+            EnableDisableUI(allowChanges);
+        }
+
+        private void EnableDisableUI(bool changes) {
+            if (changes) {
+                this.EnableControls();
+            }
+            else {
+                this.DisableControls();
+                btnDocs.Enabled = true;
+                btnAdd.Enabled = true;
+                btnClose.Enabled = true;
+                btnReport.Enabled = true;
+            }
         }
 
         private void dgv_DoubleClick(object sender, EventArgs e) {
@@ -279,7 +325,7 @@ namespace RcvPayment {
         }
 
         private void DisableControls() {
-            panLeft.DisableControls();
+            panLeft.EnableControls();
             panRight.DisableControls();
         }
 
@@ -341,6 +387,13 @@ namespace RcvPayment {
                                 oneDetail.State = poststring;
                             }
                         }
+
+                        TblLog log = new TblLog();
+                        log.tblId = mst.Id;
+                        log.tblName = "crmaster";
+                        log.txt = "ga post";
+                        //         123456789012345
+                        dc.TblLogs.InsertOnSubmit(log);
                     }
                 }
 
@@ -361,6 +414,18 @@ namespace RcvPayment {
             if (batchRec.State == "posted") result = false;
 
             return result;
+        }
+
+        private void btnReport_Click(object sender, EventArgs e) {
+//            if (!isFormOpen("showreceipt")) {
+                var f = new report.DepositBatchView();
+                f.MdiParent = MdiParent;
+                f.Show();
+                f.BringToFront();
+                // 
+                f.DisplayReport(CurrentId);
+//            }
+
         }
     }
     // ref:

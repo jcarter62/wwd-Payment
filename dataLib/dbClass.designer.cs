@@ -217,6 +217,14 @@ namespace dataLib
 			}
 		}
 		
+		public System.Data.Linq.Table<v_CrDepositBatch> v_CrDepositBatches
+		{
+			get
+			{
+				return this.GetTable<v_CrDepositBatch>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Outstanding")]
 		public int sp_Outstanding([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Account", DbType="Int")] System.Nullable<int> account, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Session", DbType="VarChar(50)")] string session)
 		{
@@ -5771,6 +5779,213 @@ namespace dataLib
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.v_CrDepositBatch")]
+	public partial class v_CrDepositBatch
+	{
+		
+		private string _id;
+		
+		private string _IDBank;
+		
+		private string _State;
+		
+		private System.Nullable<int> _Qty;
+		
+		private System.Nullable<double> _DepositAmount;
+		
+		private string _PayRef;
+		
+		private string _PayType;
+		
+		private System.Nullable<double> _PaymentAmount;
+		
+		private string _RcptID;
+		
+		private string _PayVia;
+		
+		private string _DeliveryName;
+		
+		public v_CrDepositBatch()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="VarChar(40) NOT NULL", CanBeNull=false)]
+		public string id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDBank", DbType="VarChar(20)")]
+		public string IDBank
+		{
+			get
+			{
+				return this._IDBank;
+			}
+			set
+			{
+				if ((this._IDBank != value))
+				{
+					this._IDBank = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="VarChar(15)")]
+		public string State
+		{
+			get
+			{
+				return this._State;
+			}
+			set
+			{
+				if ((this._State != value))
+				{
+					this._State = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Qty", DbType="Int")]
+		public System.Nullable<int> Qty
+		{
+			get
+			{
+				return this._Qty;
+			}
+			set
+			{
+				if ((this._Qty != value))
+				{
+					this._Qty = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepositAmount", DbType="Float")]
+		public System.Nullable<double> DepositAmount
+		{
+			get
+			{
+				return this._DepositAmount;
+			}
+			set
+			{
+				if ((this._DepositAmount != value))
+				{
+					this._DepositAmount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayRef", DbType="VarChar(20)")]
+		public string PayRef
+		{
+			get
+			{
+				return this._PayRef;
+			}
+			set
+			{
+				if ((this._PayRef != value))
+				{
+					this._PayRef = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayType", DbType="VarChar(20)")]
+		public string PayType
+		{
+			get
+			{
+				return this._PayType;
+			}
+			set
+			{
+				if ((this._PayType != value))
+				{
+					this._PayType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaymentAmount", DbType="Float")]
+		public System.Nullable<double> PaymentAmount
+		{
+			get
+			{
+				return this._PaymentAmount;
+			}
+			set
+			{
+				if ((this._PaymentAmount != value))
+				{
+					this._PaymentAmount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RcptID", DbType="VarChar(15)")]
+		public string RcptID
+		{
+			get
+			{
+				return this._RcptID;
+			}
+			set
+			{
+				if ((this._RcptID != value))
+				{
+					this._RcptID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayVia", DbType="VarChar(20)")]
+		public string PayVia
+		{
+			get
+			{
+				return this._PayVia;
+			}
+			set
+			{
+				if ((this._PayVia != value))
+				{
+					this._PayVia = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeliveryName", DbType="VarChar(50)")]
+		public string DeliveryName
+		{
+			get
+			{
+				return this._DeliveryName;
+			}
+			set
+			{
+				if ((this._DeliveryName != value))
+				{
+					this._DeliveryName = value;
+				}
 			}
 		}
 	}

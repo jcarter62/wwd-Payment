@@ -32,6 +32,7 @@ namespace RcvPayment {
                 loadSelectedGrid();
             }
         }
+        private bool allowChanges = false;
 
         private string BatchIdDescription() {
             string result = "";
@@ -40,6 +41,7 @@ namespace RcvPayment {
                          where (item.Id.CompareTo(BatchId) == 0)
                          select item).First();
 
+                allowChanges = (q.State == "posted")? false : true;
                 result = q.IDBank;
             }
             catch (Exception ex) {
@@ -91,6 +93,8 @@ namespace RcvPayment {
             lbl = string.Format("Pending Total Amount: {0}", total.ToString("C"));
 
             lblPendingTotal.Text = lbl;
+
+            panLeft.Enabled = allowChanges;
         }
 
         private void loadSelectedGrid() {
@@ -109,6 +113,7 @@ namespace RcvPayment {
             }
 
             lblSelectedTotal.Text = string.Format("Selected Amount: {0}", total.ToString("C"));
+            panRight.Enabled = allowChanges;
         }
         #endregion
 
