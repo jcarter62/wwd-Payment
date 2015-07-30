@@ -55,11 +55,47 @@ namespace RcvPayment.Ca {
                 gridMaster.Rows.Remove(r);
             }
 
-            var mst = (from pmt in dc.CRMasters
-                       where pmt.StateAR == "created" ||
-                       pmt.StateAR == "selected"
-                       orderby pmt.CDate descending
-                       select pmt);
+            /*
+                        var mst = (from pmt in dc.CRMasters
+                                   where pmt.StateAR == "created" ||
+                                   pmt.StateAR == "selected"
+                                   orderby pmt.CDate descending
+                                   select pmt);
+            */
+            var mst =
+            from pmt in dc.CRMasters
+            from log in dc.TblLogs.Where(log => ((pmt.Id == log.tblId) && (log.txt == "receiving post"))).DefaultIfEmpty()
+            where (pmt.StateRcv == "posted") && (pmt.StateAR != "posted")
+            orderby pmt.CDate descending
+            select new {
+                pmt.Id,
+                pmt.RcptID,
+                pmt.CDate,
+                pmt.Postmark,
+                pmt.DeliveryName,
+                pmt.PayRef,
+                pmt.Note,
+                pmt.Amount,
+                logid = log.id,
+                postdate = log.cdate,
+                postuser = log.cuser,
+                log.txt
+            };
+
+            WipeColumns(gridMaster);
+            foreach (var rec in mst) {
+                //        grid object, field name, header text
+                AddColumn(gridMaster, "CDate", "Created");
+                AddColumn(gridMaster, "DeliveryName", "Name");
+                AddColumn(gridMaster, "PayRef", "Check/Ref" );
+                AddColumn(gridMaster, "Amount", "Amount", IsCurrency:true );
+                AddColumn(gridMaster, "RcptID", "Receipt ID");
+                AddColumn(gridMaster, "postdate", "Rcv Post At");
+                AddColumn(gridMaster, "postuser", "By");
+                AddColumn(gridMaster, "Note", "Notes");
+                AddColumn(gridMaster, "Id", "Id", hidden:true);
+                break;
+            }
 
             gridMaster.DataSource = mst;
 
@@ -77,17 +113,64 @@ namespace RcvPayment.Ca {
             }
         }
 
+        private void AddColumn(DataGridView grid, string colName, string colTitle, 
+                               bool hidden = false, bool IsCurrency = false) {
+            var cellStyle = new DataGridViewCellStyle();
+            DataGridViewColumn c = new DataGridViewTextBoxColumn();  // new DataGridViewColumn();
+            c.Resizable = DataGridViewTriState.True;
+            c.DividerWidth = 1;
+            c.DataPropertyName = colName;
+            c.HeaderText = colTitle;
+            c.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            if (hidden) {
+                c.Visible = false;
+            }
+            if (IsCurrency)
+            {
+                cellStyle.Format = "C2";
+                cellStyle.NullValue = null;
+                cellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+            c.DefaultCellStyle = cellStyle;
+            grid.Columns.Add(c);
+        }
+
+        private void WipeColumns(DataGridView grid) {
+            grid.Columns.Clear();
+        }
+
         private void LoadDetailRecords() {
             gridDetail.DataSource = null;
+            gridDetail.Rows.Clear();
 
-            foreach (DataGridViewRow r in gridDetail.Rows) {
-                gridDetail.Rows.Remove(r);
+            var detail = (
+            from dtl in dc.CRDetails
+            from n in dc.NAMEs.Where(n => dtl.Account == n.NAME_ID.ToString()).DefaultIfEmpty()
+            where dtl.CRMid == currentMasterId
+            orderby dtl.Account descending, dtl.Amount ascending
+            select new {
+                dtl.Type,
+                dtl.Amount,
+                dtl.Account,
+                dtl.State,
+                dtl.Id,
+                n.FullName,
+                dtl.Note
+            });
+
+
+            WipeColumns(gridDetail);
+            foreach (var rec in detail) {
+                //        grid object, field name, header text
+                AddColumn(gridDetail, "Type", "Type");
+                AddColumn(gridDetail, "Amount", "Amount", IsCurrency:true);
+                AddColumn(gridDetail, "Account", "Account");
+                AddColumn(gridDetail, "FullName", "Account Name" );
+                AddColumn(gridDetail, "State", "State");
+                AddColumn(gridDetail, "Note", "Notes");
+                AddColumn(gridDetail, "Id", "Id", hidden: true);
+                break;
             }
-
-            var detail = (from dtl in dc.CRDetails
-                          where dtl.CRMid == currentMasterId
-                          orderby dtl.Account descending, dtl.Amount ascending
-                          select dtl);
 
             gridDetail.DataSource = detail;
 
@@ -120,6 +203,7 @@ namespace RcvPayment.Ca {
                 currentMasterRow = newindex;
                 MasterSelected();
                 LoadDetailRecords();
+
             }
         }
 
@@ -128,6 +212,8 @@ namespace RcvPayment.Ca {
             if (currentMasterRow >= 0) {
                 lblDetail.Text = string.Format("Payment Detail Records for {0}",
                     gridMaster.Rows[currentMasterRow].Cells[masterRcptIDCol].Value);
+                copyBuffer = "id," + currentMasterId;
+                statLabel.Text = copyBuffer;
             }
             else {
                 lblDetail.Text = "Payment Detail Records";
@@ -137,13 +223,15 @@ namespace RcvPayment.Ca {
 
         #region Drag Drop
 
-        #region Detail Grid
-
-        private DragDropInfo ddDetail;
         private string copyBuffer;
+        private DragDropInfo ddDetail;
+        private DragDropInfo ddMaster;
+
+        #region Detail Grid
 
         private void DragDropInit() {
             ddDetail = new DragDropInfo("gridDetail");
+            ddMaster = new DragDropInfo("gridMaster");
             copyBuffer = "";
         }
 
@@ -224,8 +312,46 @@ namespace RcvPayment.Ca {
             }
             return result;
         }
-
         #endregion Detail Grid
+
+        #region Master Grid
+        private void gridMaster_MouseDown(object sender, MouseEventArgs e) {
+            int dragIndex;
+            dragIndex = gridDetail.HitTest(e.X, e.Y).RowIndex;
+            if (dragIndex != -1) {
+                Size dragSize = SystemInformation.DragSize;
+                ddMaster.StartRegion = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
+                ddMaster.Id = currentMasterId;
+//                    gridMaster.Rows[dragIndex].Cells[masterIdCol].Value.ToString();
+                ddMaster.IsAList = false;
+                copyBuffer = "id," + ddMaster.Id;
+                gridMaster.DoDragDrop(ddMaster, DragDropEffects.Copy);
+                Clipboard.Clear();
+                Clipboard.SetText(copyBuffer);
+                statLabel.Text = copyBuffer;
+            }
+            else {
+                ddMaster.Id = "";
+                ddMaster.StartRegion = Rectangle.Empty;
+                statLabel.Text = "";
+            }
+        }
+
+        private void gridMaster_MouseMove(object sender, MouseEventArgs e) {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
+                if (ddMaster.StartRegion != Rectangle.Empty) {
+                    // If the mouse moves outside the rectangle, start the drag.
+                    if (!ddMaster.StartRegion.Contains(e.X, e.Y)) {
+                        // Proceed with the drag and drop, passing in the list item.   
+                        DragDropEffects dropEffect = gridDetail.DoDragDrop(ddMaster, DragDropEffects.Copy);
+                        // statLabel.Text = "Dragging...";
+                        statLabel.Text = "Dragging: " + copyBuffer;
+                    }
+                }
+            }
+        }
+
+        #endregion Master Grid
 
         #endregion Drag Drop
 

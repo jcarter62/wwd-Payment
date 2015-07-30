@@ -62,10 +62,10 @@
     <Reference Include="TelerikCommon, Version=2015.1.331.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BatchDocs.cs">
+    <Compile Include="ga\BatchDocs.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BatchDocs.Designer.cs">
+    <Compile Include="ga\BatchDocs.Designer.cs">
       <DependentUpon>BatchDocs.cs</DependentUpon>
     </Compile>
     <Compile Include="ca\UnApplied.cs">
@@ -74,10 +74,10 @@
     <Compile Include="ca\UnApplied.Designer.cs">
       <DependentUpon>UnApplied.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustList.cs">
+    <Compile Include="misc\CustList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CustList.Designer.cs">
+    <Compile Include="misc\CustList.Designer.cs">
       <DependentUpon>CustList.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
@@ -86,10 +86,10 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MyForm.cs">
+    <Compile Include="misc\MyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MyForm.Designer.cs">
+    <Compile Include="misc\MyForm.Designer.cs">
       <DependentUpon>MyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="NewPayment.cs">
@@ -98,18 +98,18 @@
     <Compile Include="NewPayment.Designer.cs">
       <DependentUpon>NewPayment.cs</DependentUpon>
     </Compile>
-    <Compile Include="PaymentBatches.cs">
+    <Compile Include="ga\PaymentBatches.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PaymentBatches.Designer.cs">
+    <Compile Include="ga\PaymentBatches.Designer.cs">
       <DependentUpon>PaymentBatches.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Report1.cs">
+    <Compile Include="report\Report1.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Report1.Designer.cs">
+    <Compile Include="report\Report1.Designer.cs">
       <DependentUpon>Report1.cs</DependentUpon>
     </Compile>
     <Compile Include="report\DepositBatch.cs">
@@ -124,43 +124,43 @@
     <Compile Include="report\DepositBatchView.Designer.cs">
       <DependentUpon>DepositBatchView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs">
+    <Compile Include="misc\Settings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Settings.Designer.cs">
+    <Compile Include="misc\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
-    <Compile Include="ShowReceipt.cs">
+    <Compile Include="report\ShowReceipt.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ShowReceipt.Designer.cs">
+    <Compile Include="report\ShowReceipt.Designer.cs">
       <DependentUpon>ShowReceipt.cs</DependentUpon>
     </Compile>
-    <Compile Include="UnpaidList.cs">
+    <Compile Include="misc\UnpaidList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UnpaidList.Designer.cs">
+    <Compile Include="misc\UnpaidList.Designer.cs">
       <DependentUpon>UnpaidList.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="BatchDocs.resx">
+    <EmbeddedResource Include="ga\BatchDocs.resx">
       <DependentUpon>BatchDocs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ca\UnApplied.resx">
       <DependentUpon>UnApplied.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustList.resx">
+    <EmbeddedResource Include="misc\CustList.resx">
       <DependentUpon>CustList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MyForm.resx">
+    <EmbeddedResource Include="misc\MyForm.resx">
       <DependentUpon>MyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewPayment.resx">
       <DependentUpon>NewPayment.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PaymentBatches.resx">
+    <EmbeddedResource Include="ga\PaymentBatches.resx">
       <DependentUpon>PaymentBatches.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
@@ -173,7 +173,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Report1.resx">
+    <EmbeddedResource Include="report\Report1.resx">
       <DependentUpon>Report1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="report\DepositBatch.resx">
@@ -182,13 +182,13 @@
     <EmbeddedResource Include="report\DepositBatchView.resx">
       <DependentUpon>DepositBatchView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Settings.resx">
+    <EmbeddedResource Include="misc\Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ShowReceipt.resx">
+    <EmbeddedResource Include="report\ShowReceipt.resx">
       <DependentUpon>ShowReceipt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UnpaidList.resx">
+    <EmbeddedResource Include="misc\UnpaidList.resx">
       <DependentUpon>UnpaidList.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />

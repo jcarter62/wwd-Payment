@@ -24,6 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UnApplied));
             this.panButtons = new classLib.PanelTrak(this.components);
             this.btnMark = new System.Windows.Forms.Button();
@@ -335,6 +336,7 @@
             // 
             // gridMaster
             // 
+            this.gridMaster.AllowDrop = true;
             this.gridMaster.AllowUserToAddRows = false;
             this.gridMaster.AllowUserToDeleteRows = false;
             this.gridMaster.AllowUserToOrderColumns = true;
@@ -370,6 +372,8 @@
             this.gridMaster.Size = new System.Drawing.Size(311, 150);
             this.gridMaster.TabIndex = 1;
             this.gridMaster.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridMaster_RowEnter);
+            this.gridMaster.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gridMaster_MouseDown);
+            this.gridMaster.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gridMaster_MouseMove);
             // 
             // cDateDataGridViewTextBoxColumn
             // 
@@ -393,6 +397,10 @@
             // 
             this.amountDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.amountDataGridViewTextBoxColumn.DataPropertyName = "Amount";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.amountDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.amountDataGridViewTextBoxColumn.HeaderText = "Amount";
             this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
             this.amountDataGridViewTextBoxColumn.ReadOnly = true;
