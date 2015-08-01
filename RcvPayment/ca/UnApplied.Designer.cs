@@ -29,7 +29,6 @@
             this.panButtons = new classLib.PanelTrak(this.components);
             this.btnMark = new System.Windows.Forms.Button();
             this.btnDetail = new System.Windows.Forms.Button();
-            this.btnLoad = new System.Windows.Forms.Button();
             this.btnImport = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -48,6 +47,8 @@
             this.cUserDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uDateDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uUserDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cMenuDtl = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.selectDetailRecords = new System.Windows.Forms.ToolStripMenuItem();
             this.cRDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.lblDetail = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
@@ -69,15 +70,21 @@
             this.cUserDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uUserDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.selectMasterRecords = new System.Windows.Forms.ToolStripMenuItem();
             this.cRMasterBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
+            this.timeCheck = new System.Windows.Forms.Timer(this.components);
+            this.timeLbl = new System.Windows.Forms.Label();
             this.panButtons.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridDetail)).BeginInit();
+            this.cMenuDtl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cRDetailBindingSource)).BeginInit();
             this.panMaster.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridMaster)).BeginInit();
+            this.cMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cRMasterBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,7 +92,6 @@
             // 
             this.panButtons.Controls.Add(this.btnMark);
             this.panButtons.Controls.Add(this.btnDetail);
-            this.panButtons.Controls.Add(this.btnLoad);
             this.panButtons.Controls.Add(this.btnImport);
             this.panButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panButtons.Location = new System.Drawing.Point(0, 328);
@@ -95,7 +101,7 @@
             // 
             // btnMark
             // 
-            this.btnMark.Location = new System.Drawing.Point(152, 6);
+            this.btnMark.Location = new System.Drawing.Point(64, 6);
             this.btnMark.Name = "btnMark";
             this.btnMark.Size = new System.Drawing.Size(53, 23);
             this.btnMark.TabIndex = 3;
@@ -104,21 +110,12 @@
             // 
             // btnDetail
             // 
-            this.btnDetail.Location = new System.Drawing.Point(93, 6);
+            this.btnDetail.Location = new System.Drawing.Point(5, 6);
             this.btnDetail.Name = "btnDetail";
             this.btnDetail.Size = new System.Drawing.Size(53, 23);
             this.btnDetail.TabIndex = 2;
             this.btnDetail.Text = "Details";
             this.btnDetail.UseVisualStyleBackColor = true;
-            // 
-            // btnLoad
-            // 
-            this.btnLoad.Location = new System.Drawing.Point(3, 6);
-            this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(84, 23);
-            this.btnLoad.TabIndex = 1;
-            this.btnLoad.Text = "Load Pending";
-            this.btnLoad.UseVisualStyleBackColor = true;
             // 
             // btnImport
             // 
@@ -159,7 +156,6 @@
             // 
             // gridDetail
             // 
-            this.gridDetail.AllowDrop = true;
             this.gridDetail.AllowUserToAddRows = false;
             this.gridDetail.AllowUserToDeleteRows = false;
             this.gridDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -181,6 +177,7 @@
             this.cUserDataGridViewTextBoxColumn1,
             this.uDateDataGridViewTextBoxColumn1,
             this.uUserDataGridViewTextBoxColumn1});
+            this.gridDetail.ContextMenuStrip = this.cMenuDtl;
             this.gridDetail.DataSource = this.cRDetailBindingSource;
             this.gridDetail.Location = new System.Drawing.Point(4, 17);
             this.gridDetail.Name = "gridDetail";
@@ -189,8 +186,7 @@
             this.gridDetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridDetail.Size = new System.Drawing.Size(311, 129);
             this.gridDetail.TabIndex = 1;
-            this.gridDetail.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gridDetail_MouseDown);
-            this.gridDetail.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gridDetail_MouseMove);
+            this.gridDetail.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridDetail_RowEnter);
             // 
             // typeDataGridViewTextBoxColumn
             // 
@@ -300,6 +296,20 @@
             this.uUserDataGridViewTextBoxColumn1.ReadOnly = true;
             this.uUserDataGridViewTextBoxColumn1.Visible = false;
             // 
+            // cMenuDtl
+            // 
+            this.cMenuDtl.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.selectDetailRecords});
+            this.cMenuDtl.Name = "cMenuDtl";
+            this.cMenuDtl.Size = new System.Drawing.Size(184, 26);
+            // 
+            // selectDetailRecords
+            // 
+            this.selectDetailRecords.Name = "selectDetailRecords";
+            this.selectDetailRecords.Size = new System.Drawing.Size(183, 22);
+            this.selectDetailRecords.Text = "Select Detail Records";
+            this.selectDetailRecords.Click += new System.EventHandler(this.SelectDetailRecordsClick);
+            // 
             // cRDetailBindingSource
             // 
             this.cRDetailBindingSource.DataSource = typeof(dataLib.CRDetail);
@@ -326,6 +336,7 @@
             // panMaster
             // 
             this.panMaster.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panMaster.Controls.Add(this.timeLbl);
             this.panMaster.Controls.Add(this.gridMaster);
             this.panMaster.Controls.Add(this.label1);
             this.panMaster.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -336,7 +347,6 @@
             // 
             // gridMaster
             // 
-            this.gridMaster.AllowDrop = true;
             this.gridMaster.AllowUserToAddRows = false;
             this.gridMaster.AllowUserToDeleteRows = false;
             this.gridMaster.AllowUserToOrderColumns = true;
@@ -362,18 +372,17 @@
             this.cUserDataGridViewTextBoxColumn,
             this.uDateDataGridViewTextBoxColumn,
             this.uUserDataGridViewTextBoxColumn});
+            this.gridMaster.ContextMenuStrip = this.cMenu;
             this.gridMaster.DataSource = this.cRMasterBindingSource;
             this.gridMaster.Location = new System.Drawing.Point(4, 17);
-            this.gridMaster.MultiSelect = false;
             this.gridMaster.Name = "gridMaster";
             this.gridMaster.ReadOnly = true;
             this.gridMaster.RowHeadersVisible = false;
             this.gridMaster.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridMaster.Size = new System.Drawing.Size(311, 150);
             this.gridMaster.TabIndex = 1;
+            this.gridMaster.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridMaster_CellFormatting);
             this.gridMaster.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridMaster_RowEnter);
-            this.gridMaster.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gridMaster_MouseDown);
-            this.gridMaster.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gridMaster_MouseMove);
             // 
             // cDateDataGridViewTextBoxColumn
             // 
@@ -511,6 +520,20 @@
             this.uUserDataGridViewTextBoxColumn.ReadOnly = true;
             this.uUserDataGridViewTextBoxColumn.Visible = false;
             // 
+            // cMenu
+            // 
+            this.cMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.selectMasterRecords});
+            this.cMenu.Name = "cMenu";
+            this.cMenu.Size = new System.Drawing.Size(190, 26);
+            // 
+            // selectMasterRecords
+            // 
+            this.selectMasterRecords.Name = "selectMasterRecords";
+            this.selectMasterRecords.Size = new System.Drawing.Size(189, 22);
+            this.selectMasterRecords.Text = "Select Master Records";
+            this.selectMasterRecords.Click += new System.EventHandler(this.SelectMasterRecordsClick);
+            // 
             // cRMasterBindingSource
             // 
             this.cRMasterBindingSource.DataSource = typeof(dataLib.CRMaster);
@@ -523,6 +546,22 @@
             this.label1.Size = new System.Drawing.Size(126, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Payment Master Records";
+            // 
+            // timeCheck
+            // 
+            this.timeCheck.Interval = 1000;
+            this.timeCheck.Tick += new System.EventHandler(this.timeCheck_Tick);
+            // 
+            // timeLbl
+            // 
+            this.timeLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.timeLbl.AutoSize = true;
+            this.timeLbl.Location = new System.Drawing.Point(298, 1);
+            this.timeLbl.Name = "timeLbl";
+            this.timeLbl.Size = new System.Drawing.Size(13, 13);
+            this.timeLbl.TabIndex = 2;
+            this.timeLbl.Text = "+";
+            this.timeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // UnApplied
             // 
@@ -542,10 +581,12 @@
             this.panDetail.ResumeLayout(false);
             this.panDetail.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridDetail)).EndInit();
+            this.cMenuDtl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cRDetailBindingSource)).EndInit();
             this.panMaster.ResumeLayout(false);
             this.panMaster.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridMaster)).EndInit();
+            this.cMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cRMasterBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -557,7 +598,6 @@
         private classLib.PanelTrak panButtons;
         private System.Windows.Forms.Button btnMark;
         private System.Windows.Forms.Button btnDetail;
-        private System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.Button btnImport;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel statLabel;
@@ -599,5 +639,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cUserDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn uDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn uUserDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ContextMenuStrip cMenu;
+        private System.Windows.Forms.ToolStripMenuItem selectMasterRecords;
+        private System.Windows.Forms.ContextMenuStrip cMenuDtl;
+        private System.Windows.Forms.ToolStripMenuItem selectDetailRecords;
+        private System.Windows.Forms.Timer timeCheck;
+        private System.Windows.Forms.Label timeLbl;
     }
 }

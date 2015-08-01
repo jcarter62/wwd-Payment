@@ -29,6 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Setup", "Setup", "{2BF0C407
 	ProjectSection(SolutionItems) = preProject
 		setup\scripts\0-InstallScript.sql = setup\scripts\0-InstallScript.sql
 		setup\scripts\BuildScript.cmd = setup\scripts\BuildScript.cmd
+		setup\scripts\CrArMst.sql = setup\scripts\CrArMst.sql
 		setup\scripts\CRDepBatch.sql = setup\scripts\CRDepBatch.sql
 		setup\scripts\CRDepItem.sql = setup\scripts\CRDepItem.sql
 		setup\scripts\CRDetail.sql = setup\scripts\CRDetail.sql

@@ -18,6 +18,8 @@ namespace RcvPayment.Ca {
         int currentMasterRow;
         int masterIdCol;
         int masterRcptIDCol;
+        int masterStateARIdCol;
+        Color defaultRowColor = Color.White;
 
         int detailIdCol;
         int detailAmountCol;
@@ -27,7 +29,7 @@ namespace RcvPayment.Ca {
         public UnApplied() {
             InitializeComponent();
             localInit();
-            DragDropInit();
+            //            DragDropInit();
         }
 
         private void localInit() {
@@ -79,7 +81,8 @@ namespace RcvPayment.Ca {
                 logid = log.id,
                 postdate = log.cdate,
                 postuser = log.cuser,
-                log.txt
+                log.txt,
+                pmt.StateAR
             };
 
             WipeColumns(gridMaster);
@@ -87,16 +90,18 @@ namespace RcvPayment.Ca {
                 //        grid object, field name, header text
                 AddColumn(gridMaster, "CDate", "Created");
                 AddColumn(gridMaster, "DeliveryName", "Name");
-                AddColumn(gridMaster, "PayRef", "Check/Ref" );
-                AddColumn(gridMaster, "Amount", "Amount", IsCurrency:true );
+                AddColumn(gridMaster, "PayRef", "Check/Ref");
+                AddColumn(gridMaster, "Amount", "Amount", IsCurrency: true);
                 AddColumn(gridMaster, "RcptID", "Receipt ID");
                 AddColumn(gridMaster, "postdate", "Rcv Post At");
                 AddColumn(gridMaster, "postuser", "By");
                 AddColumn(gridMaster, "Note", "Notes");
-                AddColumn(gridMaster, "Id", "Id", hidden:true);
+                AddColumn(gridMaster, "Id", "Id", hidden: true);
+                AddColumn(gridMaster, "StateAR", "State");
                 break;
             }
 
+            defaultRowColor = gridMaster.DefaultCellStyle.BackColor;
             gridMaster.DataSource = mst;
 
             // Determine column for Id field.
@@ -110,10 +115,13 @@ namespace RcvPayment.Ca {
                 else if (colname == "rcptid") {
                     masterRcptIDCol = c;
                 }
+                else if (colname == "statear") {
+                    masterStateARIdCol = c;
+                }
             }
         }
 
-        private void AddColumn(DataGridView grid, string colName, string colTitle, 
+        private void AddColumn(DataGridView grid, string colName, string colTitle,
                                bool hidden = false, bool IsCurrency = false) {
             var cellStyle = new DataGridViewCellStyle();
             DataGridViewColumn c = new DataGridViewTextBoxColumn();  // new DataGridViewColumn();
@@ -125,8 +133,7 @@ namespace RcvPayment.Ca {
             if (hidden) {
                 c.Visible = false;
             }
-            if (IsCurrency)
-            {
+            if (IsCurrency) {
                 cellStyle.Format = "C2";
                 cellStyle.NullValue = null;
                 cellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -163,9 +170,9 @@ namespace RcvPayment.Ca {
             foreach (var rec in detail) {
                 //        grid object, field name, header text
                 AddColumn(gridDetail, "Type", "Type");
-                AddColumn(gridDetail, "Amount", "Amount", IsCurrency:true);
+                AddColumn(gridDetail, "Amount", "Amount", IsCurrency: true);
                 AddColumn(gridDetail, "Account", "Account");
-                AddColumn(gridDetail, "FullName", "Account Name" );
+                AddColumn(gridDetail, "FullName", "Account Name");
                 AddColumn(gridDetail, "State", "State");
                 AddColumn(gridDetail, "Note", "Notes");
                 AddColumn(gridDetail, "Id", "Id", hidden: true);
@@ -203,8 +210,8 @@ namespace RcvPayment.Ca {
                 currentMasterRow = newindex;
                 MasterSelected();
                 LoadDetailRecords();
-
             }
+            timeCheck_Stop();
         }
 
 
@@ -276,9 +283,6 @@ namespace RcvPayment.Ca {
             string result = "";
             string sep = ",";
             string id = gridDetail.Rows[index].Cells[detailIdCol].Value.ToString();
-            //            string account = gridDetail.Rows[index].Cells[detailAccountCol].Value.ToString();
-            //            string amount = gridDetail.Rows[index].Cells[detailAmountCol].Value.ToString();
-
             result = "id" + sep + id;
             return result;
         }
@@ -314,47 +318,182 @@ namespace RcvPayment.Ca {
         }
         #endregion Detail Grid
 
-        #region Master Grid
-        private void gridMaster_MouseDown(object sender, MouseEventArgs e) {
-            int dragIndex;
-            dragIndex = gridDetail.HitTest(e.X, e.Y).RowIndex;
-            if (dragIndex != -1) {
-                Size dragSize = SystemInformation.DragSize;
-                ddMaster.StartRegion = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
-                ddMaster.Id = currentMasterId;
-//                    gridMaster.Rows[dragIndex].Cells[masterIdCol].Value.ToString();
-                ddMaster.IsAList = false;
-                copyBuffer = "id," + ddMaster.Id;
-                gridMaster.DoDragDrop(ddMaster, DragDropEffects.Copy);
+        #endregion Drag Drop
+
+        #region Context Menus
+        private void SelectMasterRecordsClick(object sender, EventArgs e) {
+            // User clicked Select Master Records.
+            string copyBuffer;
+            copyBuffer = EnumerateSelectedMasterRecords(gridMaster.SelectedRows);
+            if ((copyBuffer != null) && (copyBuffer.Length > 0)) {
                 Clipboard.Clear();
                 Clipboard.SetText(copyBuffer);
                 statLabel.Text = copyBuffer;
-            }
-            else {
-                ddMaster.Id = "";
-                ddMaster.StartRegion = Rectangle.Empty;
-                statLabel.Text = "";
+                timeCheck_Start();
             }
         }
 
-        private void gridMaster_MouseMove(object sender, MouseEventArgs e) {
-            if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
-                if (ddMaster.StartRegion != Rectangle.Empty) {
-                    // If the mouse moves outside the rectangle, start the drag.
-                    if (!ddMaster.StartRegion.Contains(e.X, e.Y)) {
-                        // Proceed with the drag and drop, passing in the list item.   
-                        DragDropEffects dropEffect = gridDetail.DoDragDrop(ddMaster, DragDropEffects.Copy);
-                        // statLabel.Text = "Dragging...";
-                        statLabel.Text = "Dragging: " + copyBuffer;
-                    }
+        // Create list of selected record ids, in form "id,guid1,guid2,...".
+        private string EnumerateSelectedMasterRecords(DataGridViewSelectedRowCollection selectedRows) {
+            string result = "";
+            string sep = ",";
+            foreach (DataGridViewRow r in selectedRows) {
+                result = result + r.Cells[masterIdCol].Value.ToString() + sep;
+            }
+            result = "id" + sep + result;
+            return result;
+        }
+        #endregion Context Menus
+
+        private void SelectDetailRecordsClick(object sender, EventArgs e) {
+            // User clicked Select Detail Records.
+            string copyBuffer;
+            copyBuffer = EnumerateSelectedDetailRecords(gridDetail.SelectedRows);
+            if ((copyBuffer != null) && (copyBuffer.Length > 0)) {
+                Clipboard.Clear();
+                Clipboard.SetText(copyBuffer);
+                statLabel.Text = copyBuffer;
+                timeCheck_Start();
+            }
+        }
+
+        private string EnumerateSelectedDetailRecords(DataGridViewSelectedRowCollection selectedRows) {
+            string result = "";
+            string sep = ",";
+            foreach (DataGridViewRow r in selectedRows) {
+                result = result + r.Cells[detailIdCol].Value.ToString() + sep;
+            }
+            result = "id" + sep + result;
+            return result;
+        }
+
+        // Show Selected Rows differently
+        // ref: http://stackoverflow.com/a/19380320
+        private void gridMaster_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
+            // masterStateARIdCol = c;
+
+            foreach (DataGridViewRow r in gridMaster.Rows) {
+                if (r.Cells[masterStateARIdCol].Value.ToString() == "selected") {
+                    r.DefaultCellStyle.BackColor = Color.LightGoldenrodYellow;
+                }
+                else {
+                    r.DefaultCellStyle.BackColor = defaultRowColor;
                 }
             }
         }
 
-        #endregion Master Grid
+        string initialTimeCheckHash = "";
+        int timestate;
 
-        #endregion Drag Drop
+        private void timeCheck_Start() {
+            timestate = 0;
+            initialTimeCheckHash = calculateHash();
+            timeCheck.Enabled = true;
+        }
 
+        private void timeCheck_Stop() {
+            timeCheck.Enabled = false;
+        }
+
+        private string calculateHash() {
+            string records;
+            string hashnow;
+            var r =
+            from m in dc.CRMasters
+            from d in dc.CRDetails.Where(d => (m.Id == d.CRMid)).DefaultIfEmpty()
+            where (m.StateRcv == "posted") && (m.StateAR != "posted")
+            orderby m.Id ascending, d.Id ascending
+            select new {
+                masterid = m.Id,
+                m.StateAR,
+                detailid = d.Id,
+                d.State
+            };
+
+            records = "";
+            foreach (var rec in r) {
+                records = records +
+                    rec.masterid +
+                    rec.StateAR +
+                    rec.detailid +
+                    rec.State;
+            }
+
+            r = null;
+
+            hashnow = records.GetHashCode().ToString();
+            return hashnow;
+        }
+
+        private void timeCheck_Tick(object sender, EventArgs e) {
+
+            // Check to see if the current record states have changed.
+            if (recordsChanged()) {
+                UpdateDisplay();
+            }
+
+            timestate++;
+            if ( timestate > 8) timestate = 0;
+
+            string x;
+            switch (timestate)
+            {
+                case 0:
+                    x = "|";
+                    break;
+                case 1:
+                    x = "/";
+                    break;
+                case 2:
+                    x = "-";
+                    break;
+                case 3:
+                    x = "\\";
+                    break;
+                case 4: 
+                    x = "|";
+                    break;
+                case 5:
+                    x = "/";
+                    break;
+                case 6:
+                    x = "-";
+                    break;
+                case 7:
+                    x = "\\";
+                    break;
+                case 8:
+                    x = "|";
+                    break;
+                default:
+                    x = " ";
+                    break;
+            }
+            timeLbl.Text = x;
+            timeLbl.Refresh();
+        }
+
+        private void UpdateDisplay() {
+            OpenMasterTable();
+            timeCheck_Start();
+        }
+
+        private bool recordsChanged() {
+            string hashnow;
+            bool result;
+
+            result = false;
+            hashnow = calculateHash();
+            if (hashnow.CompareTo(initialTimeCheckHash) != 0) {
+                timeCheck.Enabled = false;
+                result = true;
+            }
+            return result;
+        }
+
+        private void gridDetail_RowEnter(object sender, DataGridViewCellEventArgs e) {
+            timeCheck_Stop();
+        }
     }
 }
 
