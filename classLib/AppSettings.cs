@@ -31,6 +31,8 @@ namespace classLib {
         public string SmtpPass { get; set; }
         public string UseTimeStampAsPM {get;set;}
         public string RequirePM {get;set;}
+        public string NTGroup {get;set;}
+        public string Suama {get;set;}
         #endregion Properties
 
         #region Startup
@@ -94,9 +96,11 @@ namespace classLib {
             SmtpPass = GetString("SmtpPass", true);
             UseTimeStampAsPM = GetString("UseTimeStampAsPM" );
             RequirePM = GetString("RequirePM");
-        }
+            NTGroup = GetString("NTGroup");
+            Suama = GetString("Suama");
+    }
 
-        private void saveDbInfo(DbSettings db, string prefix) {
+    private void saveDbInfo(DbSettings db, string prefix) {
             WriteString(prefix + "Hostname", db.Hostname);
             WriteString(prefix + "Database", db.Database);
             WriteString(prefix + "Username", db.Username, true);
@@ -126,6 +130,8 @@ namespace classLib {
             WriteString("SmtpPass", SmtpPass, true);
             WriteString("UseTimeStampAsPM", UseTimeStampAsPM);
             WriteString("RequirePM", RequirePM);
+            WriteString("NTGroup", NTGroup);
+            WriteString("Suama", Suama);
         }
 
         #endregion Methods

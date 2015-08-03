@@ -20,6 +20,16 @@ namespace RcvPayment {
 
         private void Settings_Load(object sender, EventArgs e) {
             loadfields();
+            loadComboBoxItems();
+        }
+
+        private void loadComboBoxItems() {
+            // NT Groups
+            NtGroups nt = new NtGroups();
+            cbNTGroup.Items.Clear();
+            foreach (var g in nt.GroupNames) {
+                cbNTGroup.Items.Add(g);
+            }
         }
 
         private void loadfields() {
@@ -47,6 +57,9 @@ namespace RcvPayment {
             textSmtpPass.Text = aset.SmtpPass;
             cbUseAsPM.Text = aset.UseTimeStampAsPM;
             cbReqPM.Text = aset.RequirePM;
+
+            cbNTGroup.Text = aset.NTGroup;
+            cbSuama.Text = aset.Suama;
         }
 
         private void btnSave_Click(object sender, EventArgs e) {
@@ -74,6 +87,9 @@ namespace RcvPayment {
             aset.UseTimeStampAsPM = cbUseAsPM.Text;
             aset.RequirePM = cbReqPM.Text;
 
+            aset.NTGroup = cbNTGroup.Text;
+            aset.Suama = cbSuama.Text;
+
             aset.Save();
         }
 
@@ -100,9 +116,10 @@ namespace RcvPayment {
         }
 
         private void btnEmailTest_Click(object sender, EventArgs e) {
-            if ( aset.TestSmtp() ) {
+            if (aset.TestSmtp()) {
                 smtpImage.Image = Image.FromFile(statusImages.successImage);
-            } else {
+            }
+            else {
                 smtpImage.Image = Image.FromFile(statusImages.failImage);
             }
         }
