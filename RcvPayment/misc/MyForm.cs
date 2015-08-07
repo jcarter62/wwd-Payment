@@ -43,5 +43,21 @@ namespace RcvPayment {
             } // if
             return result;
         }
+
+        public void GetFormPtr(string formname, ref Form formptr )
+        {
+            string srch = formname.Trim().ToLower();
+
+            if (MdiParent != null) {
+                int n = MdiParent.MdiChildren.Count();
+                for (int i = 0; i < n; i++) {
+                    Form f = MdiParent.MdiChildren[i];
+                    if (f.Name.Trim().ToLower().CompareTo(srch) == 0) {
+                        formptr = f;
+                        break;
+                    } // if 
+                } // for
+            } // if
+        }
     }
 }

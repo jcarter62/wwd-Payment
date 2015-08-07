@@ -96,6 +96,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.paymentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cMenuList = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuLog = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -109,6 +111,7 @@
             this.panelItem.SuspendLayout();
             this.panelDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paymentsBindingSource)).BeginInit();
+            this.cMenuList.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -226,6 +229,7 @@
             this.Amount,
             this.ReceivePost,
             this.Deposited});
+            this.PaymentsGrid.ContextMenuStrip = this.cMenuList;
             this.PaymentsGrid.DataSource = this.cRMasterBindingSource;
             this.PaymentsGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.PaymentsGrid.Location = new System.Drawing.Point(0, 41);
@@ -864,6 +868,20 @@
             // 
             this.paymentsBindingSource.DataSource = typeof(classLib.Payments);
             // 
+            // cMenuList
+            // 
+            this.cMenuList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuLog});
+            this.cMenuList.Name = "cMenuList";
+            this.cMenuList.Size = new System.Drawing.Size(153, 48);
+            // 
+            // menuLog
+            // 
+            this.menuLog.Name = "menuLog";
+            this.menuLog.Size = new System.Drawing.Size(152, 22);
+            this.menuLog.Text = "Show Log";
+            this.menuLog.Click += new System.EventHandler(this.menuLog_Click);
+            // 
             // NewPayment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -896,6 +914,7 @@
             this.panelDetail.ResumeLayout(false);
             this.panelDetail.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paymentsBindingSource)).EndInit();
+            this.cMenuList.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -971,5 +990,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ReceivePost;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Deposited;
+        private System.Windows.Forms.ContextMenuStrip cMenuList;
+        private System.Windows.Forms.ToolStripMenuItem menuLog;
     }
 }

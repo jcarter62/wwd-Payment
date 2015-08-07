@@ -84,7 +84,9 @@ namespace RcvPayment {
 
                 if (q != null) {
                     textId.Text = q.IDBank;
-                    lblDocCount.Text = int2StringFmt(q.Qty, "D3");
+                    textDepositDate.Text = q.DepositDate.ToString();
+
+                    lblDocCount.Text = int2StringFmt(q.Qty, "D3") + " ";
                     lblAmount.Text = double2StringFtm(q.Amount, "");
                     lblCreated.Text = DatetimeByUser(q.CUser, q.CDate, "g"); // "g" == (1)
                     lblModified.Text = DatetimeByUser(q.UUser, q.UDate, "g");
@@ -115,7 +117,7 @@ namespace RcvPayment {
             double n;
             string result;
             n = (amount.HasValue ? amount.Value : 0.0);
-            result = n.ToString("C2");
+            result = n.ToString("C2") + " ";
             return result;
         }
 
@@ -131,6 +133,7 @@ namespace RcvPayment {
             string result;
             CRDepBatch r = new CRDepBatch();
             r.IDBank = GenerateNewBankId();
+            r.DepositDate = DateTime.Now;
             result = r.Id;
             Console.WriteLine("CreateNewBatch: Result 1 : {0}", result);
 
@@ -221,6 +224,7 @@ namespace RcvPayment {
 
             foreach (var q in records) {
                 q.IDBank = textId.Text.Trim();
+                q.DepositDate = textDepositDate.Value;
             }
 
             try {
@@ -266,24 +270,35 @@ namespace RcvPayment {
             string msg = "";
             bool abort = false;
 
-            try
-            {
+            try {
                 var record = (from item in dc.CRDepBatches
                               where item.Id == CurrentId
                               select item).First<CRDepBatch>();
 
-                if ( record.Locked )
-                { 
+                if (record.Qty > 0) {
+                    abort = true;
+                    msg = msg + "Batch is not empty, can't delete.\n";
+                }
+
+                if (record.Locked) {
                     abort = true;
                     msg = msg + "This batch has been posted.\n";
                 }
-            } catch (Exception ex)
-            {
+
+                if (!abort) {
+                    // If we are here, then batch has no related records
+                    // and has not been posted.  So delete is ok.
+                    dc.CRDepBatches.DeleteOnSubmit(record);
+                    dc.SubmitChanges();
+                    ConnectGrid();
+                }
+
+            }
+            catch (Exception ex) {
                 Console.WriteLine(ex.Message);
             }
 
-            if ( abort )
-            {
+            if (abort) {
                 MessageBox.Show(msg, "Abort");
             }
         }
@@ -340,8 +355,12 @@ namespace RcvPayment {
 
         private void btnPost_Click(object sender, EventArgs e) {
             // User wishes to post a batch
-            if (BatchIsOkToPost()) {
+            string msg;
+            if (BatchIsOkToPost(out msg)) {
                 PostThisBatch();
+            }
+            else {
+                MessageBox.Show(msg, "Information", MessageBoxButtons.OK);
             }
         }
 
@@ -353,7 +372,6 @@ namespace RcvPayment {
             // 1. First update the main batch record, changing the state.
             // 2. Next change the CRMaster Records to show posted status.
             // 3. Next update the batch item records, to posted.
-            // 4. Next update CRDetail Records if any to show posted status.
 
             try {
                 // (1)
@@ -361,6 +379,7 @@ namespace RcvPayment {
                                        where item.Id == CurrentId
                                        select item).First();
 
+                DateTime batchDepositDate = batchRec.DepositDate.Value;
                 batchRec.State = poststring;
 
                 IQueryable<CRDepItem> itemRecs = (from item in dc.CRDepItems
@@ -378,13 +397,25 @@ namespace RcvPayment {
                     if (mst != null) {
                         // (3)
                         mst.StateGA = poststring;
-                        IQueryable<CRDetail> detailRecords = from d in dc.CRDetails
-                                                             where d.CRMid == mst.Id
-                                                             select d;
-                        if (detailRecords != null) {
-                            foreach (var oneDetail in detailRecords) {
-                                // (4)
-                                oneDetail.State = poststring;
+
+                        // If master has AR Records, then update the deposit dates.
+                        IQueryable<CrArMst> crarm = (from Ref in dc.CrArMsts
+                                                     where Ref.CrMid == mst.Id
+                                                     select Ref);
+                        foreach (var r in crarm) {
+                            int armstid;
+                            armstid = r.ArMstId.Value;
+
+                            try {
+                                Armst armst = (from m in dc.Armsts
+                                               where m.ARMSTID == armstid
+                                               select m).First();
+                                if (armst != null) {
+                                    armst.DepositDate = batchDepositDate;
+                                }
+                            }
+                            catch {
+                                //
                             }
                         }
 
@@ -405,26 +436,49 @@ namespace RcvPayment {
         }
         // ref: http://weblogs.asp.net/scottgu/linq-to-sql-part-4-updating-our-database
 
-        private bool BatchIsOkToPost() {
+        private bool BatchIsOkToPost(out string message) {
             bool result = true;
+            message = "";
             CRDepBatch batchRec = (from item in dc.CRDepBatches
                                    where item.Id == CurrentId
                                    select item).First();
 
-            if (batchRec.State == "posted") result = false;
+            if (batchRec.State == "posted") {
+                result = false;
+                message = message + "Batch Already Posted.\n";
+            }
+
+            DateTime FiveDaysAgo = DateTime.Now.AddDays(-5);
+            DateTime OneDayInFuture = DateTime.Now.AddDays(1);
+
+            if (textDepositDate.Text.Trim().Length <= 0) {
+                result = false;
+                message = message + "Deposit Date Missing.\n";
+            }
+
+            if ((batchRec.DepositDate < FiveDaysAgo) ||
+                (batchRec.DepositDate > OneDayInFuture)) {
+                result = false;
+                message = message + "Deposit Date Outside Acceptable Range (-5 ... +1 ) days\n";
+            }
+
+            if (batchRec.Qty <= 0) {
+                result = false;
+                message = message + "Can't post empty batch.\n";
+            }
 
             return result;
         }
 
         private void btnReport_Click(object sender, EventArgs e) {
-//            if (!isFormOpen("showreceipt")) {
-                var f = new report.DepositBatchView();
-                f.MdiParent = MdiParent;
-                f.Show();
-                f.BringToFront();
-                // 
-                f.DisplayReport(CurrentId);
-//            }
+            //            if (!isFormOpen("showreceipt")) {
+            var f = new report.DepositBatchView();
+            f.MdiParent = MdiParent;
+            f.Show();
+            f.BringToFront();
+            // 
+            f.DisplayReport(CurrentId);
+            //            }
 
         }
     }

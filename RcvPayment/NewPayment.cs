@@ -237,12 +237,10 @@ namespace RcvPayment {
                     currentDetailID = thisId;
 
                     // Start monitoring input objects on this panel.
-                    if (PaymentPosted)
-                    {
+                    if (PaymentPosted) {
                         panelItem.DisableControls();
                     }
-                    else
-                    {
+                    else {
                         panelItem.EnableControls();
                         panelItem.Start(btnSaveItem);
                     }
@@ -259,10 +257,7 @@ namespace RcvPayment {
         private void ConnectGrid() {
             // first remove all rows...
             PaymentsGrid.DataSource = null;
-
-            foreach (DataGridViewRow r in PaymentsGrid.Rows) {
-                PaymentsGrid.Rows.Remove(r);
-            }
+            PaymentsGrid.Rows.Clear();
 
             // now connect to real data.
             IOrderedQueryable<CRMaster> q;
@@ -322,6 +317,7 @@ namespace RcvPayment {
             currentDetailID = "";
             // wipe item detail
             initItemDetail();
+            UpdateLogWindow(currentID);
         }
 
         private void btnAdd_Click(object sender, EventArgs e) {
@@ -496,9 +492,30 @@ namespace RcvPayment {
             SaveThisPayment();
             panelDetail.Start(btnSavePayment);
 
+            // Reload list of payments, and find the currentID
+            // for selection.
+            ConnectGrid();
+            FindPaymentRecord(currentID);
+
             // Even though there are no detail records, we need to calculate
             // payment & applied amounts.
             LoadItemsGrid(currentID);
+        }
+
+        private void FindPaymentRecord(string currentID) {
+            // Let's see if we can find the ID by row.
+            int selRow = 0;
+            string id;
+            for (int i = 0; (i < PaymentsGrid.Rows.Count) && (selRow == 0); i++) {
+                id = PaymentsGrid.Rows[i].Cells["Id"].Value.ToString();
+                if (id.CompareTo(currentID) == 0) {
+                    selRow = i;
+                    PaymentsGrid.Rows[i].Selected = true;
+                }
+            }
+            if (selRow != 0) {
+                PaymentsGrid.FirstDisplayedScrollingRowIndex = PaymentsGrid.Rows[selRow].Index;
+            }
         }
 
         private void btnAddItem_Click(object sender, EventArgs e) {
@@ -692,8 +709,8 @@ namespace RcvPayment {
             if (inp.Length > 0) {
                 q = from item in dc.CRMasters
                     where (
-                    ( chkShowAll.Checked  || 
-                      ( !chkShowAll.Checked && (item.StateRcv == "created") ) 
+                    (chkShowAll.Checked ||
+                      (!chkShowAll.Checked && (item.StateRcv == "created"))
                     ) &&
                     (item.DeliveryName.ToLower().Contains(inp) ||
                       item.Note.ToLower().Contains(inp) ||
@@ -819,6 +836,30 @@ namespace RcvPayment {
         private void chkShowAll_CheckStateChanged(object sender, EventArgs e) {
             // User changed this, so reload grid
             ReloadGrids();
+        }
+
+        private void menuLog_Click(object sender, EventArgs e) {
+            // First check to make sure we have a Receipt Record CRMaster
+            // 
+            if (currentID.Length > 0) {
+                if (!isFormOpen("logview")) {
+                    misc.LogView f = new misc.LogView();
+                    f.MdiParent = MdiParent;
+                    f.Show();
+                    f.Id = currentID;
+                    f.BringToFront();
+                }
+            }
+        }
+
+        private void UpdateLogWindow(string currID) {
+            Form f = null;
+
+            GetFormPtr("logview", ref f);
+            if (f != null) {
+                misc.LogView lf = f as misc.LogView;
+                lf.Id = currID;
+            }
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Data;
 using System.Linq;
 using System.Data.Linq;
 using dataLib;
@@ -20,13 +20,13 @@ namespace RcvPayment {
         public PaymentBatches MyParent { get; set; }
 
         #region properties
-        private string _BatchId;
+        private string pBatchId;
         public string BatchId {
             get {
-                return _BatchId;
+                return pBatchId;
             }
             set {
-                _BatchId = value;
+                pBatchId = value;
                 textBatchId.Text = BatchIdDescription();
                 loadPendingGrid();
                 loadSelectedGrid();
@@ -41,7 +41,7 @@ namespace RcvPayment {
                          where (item.Id.CompareTo(BatchId) == 0)
                          select item).First();
 
-                allowChanges = (q.State == "posted")? false : true;
+                allowChanges = (q.State == "posted") ? false : true;
                 result = q.IDBank;
             }
             catch (Exception ex) {
@@ -81,6 +81,10 @@ namespace RcvPayment {
                     orderby m.CDate
                     select m;
 
+            //
+            // Force changes in case we are returning from edit amount.
+            dc.Refresh(RefreshMode.OverwriteCurrentValues, q);
+            //
             dgvPend.DataSource = q;
             /* 
             Calculate total pending, and display somewhere at bottom.
@@ -300,18 +304,19 @@ namespace RcvPayment {
 
 
                 if (src != null) {
-                    CRMaster mst = (from m in dc.CRMasters
-                                    where (m.Id == src.CRMid)
-                                    select m).First();
+                    var mst = from m in dc.CRMasters
+                              where (m.Id == src.CRMid)
+                              select m;
 
-                    if (mst != null) {
-                        mst.StateGA = "created";
+                    // this should only be 1 record.
+                    foreach (var master in mst) {
+                        master.StateGA = "created";
                     }
 
                     dc.CRDepItems.DeleteOnSubmit(src);
-                    dc.SubmitChanges();
+                    dc.SubmitChanges(ConflictMode.ContinueOnConflict);
                     dc.Refresh(RefreshMode.OverwriteCurrentValues, mst);
-                    dc.Refresh(RefreshMode.OverwriteCurrentValues, dc.CRDepItems );
+                    dc.Refresh(RefreshMode.OverwriteCurrentValues, dc.CRDepItems);
 
                     // Update CRDepBatch Record with 
                     // new totals.
@@ -415,7 +420,155 @@ namespace RcvPayment {
             if (MyParent != null) {
                 MyParent.ReturningFromDocuments();
             }
+        }
 
+        private void ctxEditAmount_Click(object sender, EventArgs e) {
+        }
+
+        private string Only1RowSelected() {
+            string result = "";
+
+            if (dgvPend.SelectedRows.Count == 1) {
+                DataGridViewRow row = dgvPend.SelectedRows[0];
+                result = row.Cells["iddgvPend"].Value.ToString();
+            }
+            return result;
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e) {
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e) {
+            string selectedId;
+            double StartAmount;
+            double EndAmount;
+
+            selectedId = Only1RowSelected();
+
+            if (selectedId.Length > 0) {
+                StartAmount = getAmount(selectedId);
+                GaEditAmount f = new GaEditAmount();
+                f.Id = selectedId;
+                f.ShowDialog();
+                EndAmount = getAmount(selectedId);
+
+                // now, update grids & reposition to the 
+                // record we just completed edits.
+                UpdateGrids();
+                FindRecord(selectedId);
+
+                // If we changed the amount ?
+                // And, the record has been selected/posted, then
+                // General Accounting must physically visit Customer Accounting
+                // to discuss the amount change.
+                if (RecordChangedByCustAcct(selectedId)) {
+                    if (StartAmount != EndAmount) {
+                        ShowMessageManualMessage(selectedId, EndAmount);
+                    }
+                    else {
+                        UpdateMasterRecord(selectedId, EndAmount);
+                    }
+                }
+                else
+                {
+                    UpdateMasterRecord(selectedId, EndAmount);
+                }
+            }
+            else {
+                MessageBox.Show("Please Select a Single Row for Editing.", "Error", MessageBoxButtons.OK);
+            }
+        }
+
+        private void UpdateMasterRecord(string selectedId, double endAmount) {
+            var rec = (from r in dc.CRMasters
+                       where r.Id == selectedId
+                       select r).First();
+
+            try {
+                if (rec != null) {
+                    rec.Amount = endAmount;
+
+                    TblLog l = new TblLog();
+                    l.tblName = "crmaster";
+                    l.tblId = selectedId;
+                    l.txt = "Chg " + endAmount.ToString("C2");
+
+                    dc.TblLogs.InsertOnSubmit(l);
+                    dc.SubmitChanges();
+                }
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void ShowMessageManualMessage(string selectedId, double Amt) {
+            string msg;
+            msg = "This record has been changed by Customer Accounting,\n" +
+                  "and you have changed the amount.  Please visit\n" +
+                  "customer accounting to discuss the proposed change.";
+
+            try {
+                TblLog l = new TblLog();
+                l.tblName = "crmaster";
+                l.tblId = selectedId;
+                l.txt = "Chg " + Amt.ToString("C2");
+
+                dc.TblLogs.InsertOnSubmit(l);
+                dc.SubmitChanges();
+                dc.Refresh(RefreshMode.OverwriteCurrentValues);
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+            }
+
+            MessageBox.Show(msg, "Error", MessageBoxButtons.OK);
+        }
+
+        private bool RecordChangedByCustAcct(string selectedId) {
+            bool result = false;
+            var rec = (from r in dc.CRMasters
+                       where r.Id == selectedId
+                       select r).First();
+
+            if (!rec.StateAR.Contains("creat")) {
+                result = true;
+            }
+
+            return result;
+        }
+
+        private double getAmount(string selectedId) {
+            double result = 0.0;
+            var rec = (from r in dc.CRMasters
+                       where r.Id == selectedId
+                       select r).First();
+
+            dc.Refresh(RefreshMode.OverwriteCurrentValues, rec);
+            if (rec != null) {
+                result = rec.Amount.Value;
+            }
+
+            return result;
+        }
+
+
+
+        private void FindRecord(string searchId) {
+            // Let's see if we can find the ID by row.
+            int selRow = 0;
+            string id;
+
+            for (int i = 0; (i < dgvPend.Rows.Count) && (selRow == 0); i++) {
+                id = dgvPend.Rows[i].Cells["iddgvPend"].Value.ToString();
+                if (id.CompareTo(searchId) == 0) {
+                    selRow = i;
+                    dgvPend.Rows[i].Selected = true;
+                }
+            }
+            if (selRow != 0) {
+                dgvPend.FirstDisplayedScrollingRowIndex = dgvPend.Rows[selRow].Index;
+            }
         }
     }
     // (leftoj): https://msdn.microsoft.com/en-us/library/bb397895.aspx

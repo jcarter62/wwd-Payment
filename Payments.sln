@@ -37,6 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Setup", "Setup", "{2BF0C407
 		setup\scripts\CRMasterId.sql = setup\scripts\CRMasterId.sql
 		setup\scripts\CROutstanding.sql = setup\scripts\CROutstanding.sql
 		setup\scripts\sp_Outstanding.sql = setup\scripts\sp_Outstanding.sql
+		setup\scripts\sp_RecMst_Post.sql = setup\scripts\sp_RecMst_Post.sql
 		setup\scripts\V_CrReceipt.sql = setup\scripts\V_CrReceipt.sql
 		setup\scripts\V_TestData1.sql = setup\scripts\V_TestData1.sql
 	EndProjectSection

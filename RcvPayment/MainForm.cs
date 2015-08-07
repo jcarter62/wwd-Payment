@@ -12,7 +12,7 @@ using classLib;
 namespace RcvPayment {
     public partial class MainForm : RcvPayment.MyForm {
         public enum StatusTypes { DB, Misc }
-        public enum AuthTypes { Authorized, NotAuthorized }
+        public enum AuthTypes { Authorized, NotAuthorized, Administrator }
 
         public MainForm() {
             InitializeComponent();
@@ -22,22 +22,25 @@ namespace RcvPayment {
             MessageBox.Show(msg, "Warning", MessageBoxButtons.OK);
         }
 
+        private bool IsAdmin(NtGroups g) {
+            bool result = false;
+            if (g.IsInGroup("administrators") || g.IsInGroup("domain admins"))
+                result = true;
+            return result;
+        }
+
         private AuthTypes CheckAuth() {
             AuthTypes result = AuthTypes.Authorized;
 
             NtGroups g = new NtGroups();
             AppSettings aset = new AppSettings();
             if (aset.NTGroup.Trim().Length > 0) {
+                if (IsAdmin(g)) {
+                    result = AuthTypes.Administrator;
+                }
+                else
                 if (!g.IsInGroup(aset.NTGroup)) {
                     result = AuthTypes.NotAuthorized;
-                    if (g.IsInGroup("administrators") || g.IsInGroup("domain admins")) {
-                        result = AuthTypes.Authorized;
-                        string msg = "You are currently not authorized to use this application, " +
-                                     "however you have been granted access because you are an administrator." +
-                                     "Your access to this application has been logged.";
-
-                        AuthorizationMessageToUser(msg);
-                    }
                 }
             }
 
@@ -90,8 +93,9 @@ namespace RcvPayment {
 
         private void MainForm_Load(object sender, EventArgs e) {
             AppSettings aset = new AppSettings();
+            AuthTypes authtype = CheckAuth();
 
-            if (CheckAuth() != AuthTypes.Authorized) {
+            if (authtype == AuthTypes.NotAuthorized) {
                 string msg = "You are not authorized to use this application.\n" +
                              "Membership in the security group (" + aset.NTGroup + "), is required " +
                              "to access this application. ";
@@ -102,6 +106,11 @@ namespace RcvPayment {
             string statmsg = aset.wmis.Hostname + ":" + aset.wmis.Database;
             UpdateMessage(StatusTypes.DB, statmsg);
             UpdateMessage(StatusTypes.Misc, "");
+
+            // If this is an administrator, then allow test data generation
+            if (authtype != AuthTypes.Administrator)
+                generateTestDataToolStripMenuItem.Visible = false;
+
         }
     }
 }

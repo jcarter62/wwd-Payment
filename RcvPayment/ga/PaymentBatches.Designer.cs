@@ -39,6 +39,7 @@
             this.uUserDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataSrc = new System.Windows.Forms.BindingSource(this.components);
             this.panRight = new classLib.PanelTrak(this.components);
+            this.label5 = new System.Windows.Forms.Label();
             this.btnReport = new System.Windows.Forms.Button();
             this.btnPost = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
@@ -60,6 +61,7 @@
             this.statGrid = new System.Windows.Forms.ToolStripStatusLabel();
             this.statDetail = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.textDepositDate = new System.Windows.Forms.DateTimePicker();
             this.panLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSrc)).BeginInit();
@@ -193,6 +195,8 @@
             // 
             // panRight
             // 
+            this.panRight.Controls.Add(this.textDepositDate);
+            this.panRight.Controls.Add(this.label5);
             this.panRight.Controls.Add(this.btnReport);
             this.panRight.Controls.Add(this.btnPost);
             this.panRight.Controls.Add(this.btnClose);
@@ -215,6 +219,15 @@
             this.panRight.Name = "panRight";
             this.panRight.Size = new System.Drawing.Size(219, 288);
             this.panRight.TabIndex = 1;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 34);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(72, 13);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Deposit Date:";
             // 
             // btnReport
             // 
@@ -296,9 +309,9 @@
             // lblAmount
             // 
             this.lblAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAmount.Location = new System.Drawing.Point(152, 46);
+            this.lblAmount.Location = new System.Drawing.Point(106, 68);
             this.lblAmount.Name = "lblAmount";
-            this.lblAmount.Size = new System.Drawing.Size(55, 14);
+            this.lblAmount.Size = new System.Drawing.Size(101, 14);
             this.lblAmount.TabIndex = 9;
             this.lblAmount.Text = "123";
             this.lblAmount.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -306,9 +319,9 @@
             // lblDocCount
             // 
             this.lblDocCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblDocCount.Location = new System.Drawing.Point(152, 32);
+            this.lblDocCount.Location = new System.Drawing.Point(106, 54);
             this.lblDocCount.Name = "lblDocCount";
-            this.lblDocCount.Size = new System.Drawing.Size(55, 14);
+            this.lblDocCount.Size = new System.Drawing.Size(101, 14);
             this.lblDocCount.TabIndex = 8;
             this.lblDocCount.Text = "123";
             this.lblDocCount.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -317,7 +330,7 @@
             // 
             this.lblModified.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblModified.Location = new System.Drawing.Point(7, 121);
+            this.lblModified.Location = new System.Drawing.Point(7, 143);
             this.lblModified.Name = "lblModified";
             this.lblModified.Size = new System.Drawing.Size(200, 14);
             this.lblModified.TabIndex = 7;
@@ -327,7 +340,7 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.Location = new System.Drawing.Point(7, 107);
+            this.label6.Location = new System.Drawing.Point(7, 129);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(200, 14);
             this.label6.TabIndex = 6;
@@ -337,7 +350,7 @@
             // 
             this.lblCreated.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCreated.Location = new System.Drawing.Point(7, 83);
+            this.lblCreated.Location = new System.Drawing.Point(7, 105);
             this.lblCreated.Name = "lblCreated";
             this.lblCreated.Size = new System.Drawing.Size(200, 14);
             this.lblCreated.TabIndex = 5;
@@ -347,7 +360,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.Location = new System.Drawing.Point(7, 69);
+            this.label4.Location = new System.Drawing.Point(7, 91);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(200, 14);
             this.label4.TabIndex = 4;
@@ -355,7 +368,7 @@
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(7, 46);
+            this.label3.Location = new System.Drawing.Point(7, 68);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 14);
             this.label3.TabIndex = 3;
@@ -364,7 +377,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 32);
+            this.label2.Location = new System.Drawing.Point(7, 54);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 13);
             this.label2.TabIndex = 2;
@@ -421,6 +434,16 @@
             this.splitter1.Size = new System.Drawing.Size(4, 288);
             this.splitter1.TabIndex = 3;
             this.splitter1.TabStop = false;
+            // 
+            // textDepositDate
+            // 
+            this.textDepositDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textDepositDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.textDepositDate.Location = new System.Drawing.Point(103, 31);
+            this.textDepositDate.Name = "textDepositDate";
+            this.textDepositDate.Size = new System.Drawing.Size(104, 20);
+            this.textDepositDate.TabIndex = 19;
             // 
             // PaymentBatches
             // 
@@ -482,5 +505,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn uDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn uUserDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button btnReport;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DateTimePicker textDepositDate;
     }
 }

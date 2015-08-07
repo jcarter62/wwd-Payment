@@ -1,5 +1,20 @@
 Items to do:
 
+* During Post operation, apply deposit date to Armst records as deposit date.
+* If deposit date is available, use deposit date during paydrop.
+* In Un-Applied Payments:
+  Add to context menu, mark as posted.
+* Payment Entry/Review
+  Add context menu to show payment log.
+* Allow GA to modify payment amount.
+
+Done:
+* Add Deposit Date to CRDepBatch
+* Require entry of Deposit Date in CrDepBatch table, prior to post.
+
+
+
+
 Payment Entry/Review
 (x) List open/unpaid charges from wmis
 (x) List open/unpaid charges from mas500

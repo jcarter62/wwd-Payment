@@ -21,7 +21,7 @@ namespace dataLib {
         private void CreateListOfOutstandingCharges(int num2create) {
             var lst = new List<UnpaidRecord>();
 
-            var acctRecs = from r in dc.v_TestData1s 
+            var acctRecs = from r in dc.v_TestData1s
                            orderby r.account, r.type
                            select r;
 
@@ -31,6 +31,7 @@ namespace dataLib {
                 o.Name = r.FullName;
                 o.Amount = r.Amount.Value;
                 o.Type = r.type;
+                o.Note = r.note;
                 o.Used = false;
                 lst.Add(o);
             }
@@ -61,11 +62,11 @@ namespace dataLib {
                 CRDetail d = new CRDetail();
                 d.CRMid = m.Id;
                 d.Name = outstanding[oIndx].Name;
-                d.Amount = Math.Round(outstanding[oIndx].Amount,2);
+                d.Amount = Math.Round(outstanding[oIndx].Amount, 2);
                 d.Account = outstanding[oIndx].Account.ToString();
                 d.Type = outstanding[oIndx].Type;
-                d.Note = "";
-                paymentAmount = Math.Round(paymentAmount + d.Amount.Value,2);
+                d.Note = outstanding[oIndx].Note;
+                paymentAmount = Math.Round(paymentAmount + d.Amount.Value, 2);
                 dc.CRDetails.InsertOnSubmit(d);
                 outstanding[oIndx].Used = true;
 
@@ -83,7 +84,7 @@ namespace dataLib {
 
 
             //            m.Amount = RandomAmount(10000.0);
-            m.Amount = Math.Round(paymentAmount,2) ;
+            m.Amount = Math.Round(paymentAmount, 2);
             m.DeliveryName = RandomName();
             m.PayType = "Check";
             m.PayVia = "Person";
@@ -206,6 +207,7 @@ namespace dataLib {
         public double Amount;
         private string type;
         public bool Used;
+        public string Note;
 
         public string Type {
             get {

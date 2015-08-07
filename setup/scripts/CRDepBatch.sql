@@ -19,6 +19,7 @@ CREATE TABLE [dbo].[CRDepBatch](
 	[State] [varchar](15) NULL,
 	[Amount] [float] NULL,
 	[Qty] [int] NULL,
+	[DepositDate] [datetime] NULL,
 	[CDate] [datetime] NULL,
 	[CUser] [varchar](50) NULL,
 	[UDate] [datetime] NULL,

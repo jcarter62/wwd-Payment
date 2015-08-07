@@ -39,9 +39,6 @@ namespace dataLib
     partial void InsertCRDetail(CRDetail instance);
     partial void UpdateCRDetail(CRDetail instance);
     partial void DeleteCRDetail(CRDetail instance);
-    partial void InsertCRDepBatch(CRDepBatch instance);
-    partial void UpdateCRDepBatch(CRDepBatch instance);
-    partial void DeleteCRDepBatch(CRDepBatch instance);
     partial void InsertCRDepItem(CRDepItem instance);
     partial void UpdateCRDepItem(CRDepItem instance);
     partial void DeleteCRDepItem(CRDepItem instance);
@@ -57,6 +54,12 @@ namespace dataLib
     partial void InsertCRMaster(CRMaster instance);
     partial void UpdateCRMaster(CRMaster instance);
     partial void DeleteCRMaster(CRMaster instance);
+    partial void InsertCRDepBatch(CRDepBatch instance);
+    partial void UpdateCRDepBatch(CRDepBatch instance);
+    partial void DeleteCRDepBatch(CRDepBatch instance);
+    partial void InsertCrArMst(CrArMst instance);
+    partial void UpdateCrArMst(CrArMst instance);
+    partial void DeleteCrArMst(CrArMst instance);
     #endregion
 		
 		public DbClassDataContext() : 
@@ -153,14 +156,6 @@ namespace dataLib
 			}
 		}
 		
-		public System.Data.Linq.Table<CRDepBatch> CRDepBatches
-		{
-			get
-			{
-				return this.GetTable<CRDepBatch>();
-			}
-		}
-		
 		public System.Data.Linq.Table<CRDepItem> CRDepItems
 		{
 			get
@@ -182,14 +177,6 @@ namespace dataLib
 			get
 			{
 				return this.GetTable<ArDtl>();
-			}
-		}
-		
-		public System.Data.Linq.Table<v_TestData1> v_TestData1s
-		{
-			get
-			{
-				return this.GetTable<v_TestData1>();
 			}
 		}
 		
@@ -222,6 +209,30 @@ namespace dataLib
 			get
 			{
 				return this.GetTable<v_CrDepositBatch>();
+			}
+		}
+		
+		public System.Data.Linq.Table<v_TestData1> v_TestData1s
+		{
+			get
+			{
+				return this.GetTable<v_TestData1>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CRDepBatch> CRDepBatches
+		{
+			get
+			{
+				return this.GetTable<CRDepBatch>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CrArMst> CrArMsts
+		{
+			get
+			{
+				return this.GetTable<CrArMst>();
 			}
 		}
 		
@@ -2228,260 +2239,6 @@ namespace dataLib
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CRDepBatch")]
-	public partial class CRDepBatch : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _Id;
-		
-		private string _IDBank;
-		
-		private string _State;
-		
-		private System.Nullable<double> _Amount;
-		
-		private System.Nullable<int> _Qty;
-		
-		private System.Nullable<System.DateTime> _CDate;
-		
-		private string _CUser;
-		
-		private System.Nullable<System.DateTime> _UDate;
-		
-		private string _UUser;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(string value);
-    partial void OnIdChanged();
-    partial void OnIDBankChanging(string value);
-    partial void OnIDBankChanged();
-    partial void OnStateChanging(string value);
-    partial void OnStateChanged();
-    partial void OnAmountChanging(System.Nullable<double> value);
-    partial void OnAmountChanged();
-    partial void OnQtyChanging(System.Nullable<int> value);
-    partial void OnQtyChanged();
-    partial void OnCDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCDateChanged();
-    partial void OnCUserChanging(string value);
-    partial void OnCUserChanged();
-    partial void OnUDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnUDateChanged();
-    partial void OnUUserChanging(string value);
-    partial void OnUUserChanged();
-    #endregion
-		
-		public CRDepBatch()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="VarChar(40) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
-		public string Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDBank", DbType="VarChar(20)", UpdateCheck=UpdateCheck.Never)]
-		public string IDBank
-		{
-			get
-			{
-				return this._IDBank;
-			}
-			set
-			{
-				if ((this._IDBank != value))
-				{
-					this.OnIDBankChanging(value);
-					this.SendPropertyChanging();
-					this._IDBank = value;
-					this.SendPropertyChanged("IDBank");
-					this.OnIDBankChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="VarChar(15)", UpdateCheck=UpdateCheck.Never)]
-		public string State
-		{
-			get
-			{
-				return this._State;
-			}
-			set
-			{
-				if ((this._State != value))
-				{
-					this.OnStateChanging(value);
-					this.SendPropertyChanging();
-					this._State = value;
-					this.SendPropertyChanged("State");
-					this.OnStateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<double> Amount
-		{
-			get
-			{
-				return this._Amount;
-			}
-			set
-			{
-				if ((this._Amount != value))
-				{
-					this.OnAmountChanging(value);
-					this.SendPropertyChanging();
-					this._Amount = value;
-					this.SendPropertyChanged("Amount");
-					this.OnAmountChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Qty", DbType="Int", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<int> Qty
-		{
-			get
-			{
-				return this._Qty;
-			}
-			set
-			{
-				if ((this._Qty != value))
-				{
-					this.OnQtyChanging(value);
-					this.SendPropertyChanging();
-					this._Qty = value;
-					this.SendPropertyChanged("Qty");
-					this.OnQtyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<System.DateTime> CDate
-		{
-			get
-			{
-				return this._CDate;
-			}
-			set
-			{
-				if ((this._CDate != value))
-				{
-					this.OnCDateChanging(value);
-					this.SendPropertyChanging();
-					this._CDate = value;
-					this.SendPropertyChanged("CDate");
-					this.OnCDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CUser", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
-		public string CUser
-		{
-			get
-			{
-				return this._CUser;
-			}
-			set
-			{
-				if ((this._CUser != value))
-				{
-					this.OnCUserChanging(value);
-					this.SendPropertyChanging();
-					this._CUser = value;
-					this.SendPropertyChanged("CUser");
-					this.OnCUserChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<System.DateTime> UDate
-		{
-			get
-			{
-				return this._UDate;
-			}
-			set
-			{
-				if ((this._UDate != value))
-				{
-					this.OnUDateChanging(value);
-					this.SendPropertyChanging();
-					this._UDate = value;
-					this.SendPropertyChanged("UDate");
-					this.OnUDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UUser", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
-		public string UUser
-		{
-			get
-			{
-				return this._UUser;
-			}
-			set
-			{
-				if ((this._UUser != value))
-				{
-					this.OnUUserChanging(value);
-					this.SendPropertyChanging();
-					this._UUser = value;
-					this.SendPropertyChanged("UUser");
-					this.OnUUserChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CRDepItem")]
 	public partial class CRDepItem : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2527,7 +2284,7 @@ namespace dataLib
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="VarChar(40) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="VarChar(40) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
 		public string Id
 		{
 			get
@@ -2547,7 +2304,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDBatch", DbType="VarChar(40)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDBatch", DbType="VarChar(40)", UpdateCheck=UpdateCheck.Never)]
 		public string IDBatch
 		{
 			get
@@ -2567,7 +2324,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CRMid", DbType="VarChar(40)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CRMid", DbType="VarChar(40)", UpdateCheck=UpdateCheck.Never)]
 		public string CRMid
 		{
 			get
@@ -2587,7 +2344,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<double> Amount
 		{
 			get
@@ -2607,7 +2364,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayType", DbType="VarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayType", DbType="VarChar(20)", UpdateCheck=UpdateCheck.Never)]
 		public string PayType
 		{
 			get
@@ -2627,7 +2384,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayRef", DbType="VarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayRef", DbType="VarChar(20)", UpdateCheck=UpdateCheck.Never)]
 		public string PayRef
 		{
 			get
@@ -2647,7 +2404,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="VarChar(15)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="VarChar(15)", UpdateCheck=UpdateCheck.Never)]
 		public string State
 		{
 			get
@@ -4921,87 +4678,6 @@ namespace dataLib
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.v_TestData1")]
-	public partial class v_TestData1
-	{
-		
-		private int _account;
-		
-		private string _FullName;
-		
-		private string _type;
-		
-		private System.Nullable<double> _Amount;
-		
-		public v_TestData1()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_account", DbType="Int NOT NULL")]
-		public int account
-		{
-			get
-			{
-				return this._account;
-			}
-			set
-			{
-				if ((this._account != value))
-				{
-					this._account = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullName", DbType="VarChar(50)")]
-		public string FullName
-		{
-			get
-			{
-				return this._FullName;
-			}
-			set
-			{
-				if ((this._FullName != value))
-				{
-					this._FullName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="VarChar(6)")]
-		public string type
-		{
-			get
-			{
-				return this._type;
-			}
-			set
-			{
-				if ((this._type != value))
-				{
-					this._type = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float")]
-		public System.Nullable<double> Amount
-		{
-			get
-			{
-				return this._Amount;
-			}
-			set
-			{
-				if ((this._Amount != value))
-				{
-					this._Amount = value;
-				}
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CROutstanding")]
 	public partial class CROutstanding
 	{
@@ -5422,7 +5098,7 @@ namespace dataLib
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="VarChar(40) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="VarChar(40) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
 		public string Id
 		{
 			get
@@ -5442,7 +5118,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateRcv", DbType="VarChar(15)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateRcv", DbType="VarChar(15)", UpdateCheck=UpdateCheck.Never)]
 		public string StateRcv
 		{
 			get
@@ -5462,7 +5138,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateGA", DbType="VarChar(15)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateGA", DbType="VarChar(15)", UpdateCheck=UpdateCheck.Never)]
 		public string StateGA
 		{
 			get
@@ -5482,7 +5158,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateAR", DbType="VarChar(15)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StateAR", DbType="VarChar(15)", UpdateCheck=UpdateCheck.Never)]
 		public string StateAR
 		{
 			get
@@ -5502,7 +5178,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SessionId", DbType="VarChar(40)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SessionId", DbType="VarChar(40)", UpdateCheck=UpdateCheck.Never)]
 		public string SessionId
 		{
 			get
@@ -5522,7 +5198,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeliveryName", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeliveryName", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string DeliveryName
 		{
 			get
@@ -5542,7 +5218,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RcptID", DbType="VarChar(15)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RcptID", DbType="VarChar(15)", UpdateCheck=UpdateCheck.Never)]
 		public string RcptID
 		{
 			get
@@ -5562,7 +5238,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<double> Amount
 		{
 			get
@@ -5582,7 +5258,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayType", DbType="VarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayType", DbType="VarChar(20)", UpdateCheck=UpdateCheck.Never)]
 		public string PayType
 		{
 			get
@@ -5602,7 +5278,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayRef", DbType="VarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayRef", DbType="VarChar(20)", UpdateCheck=UpdateCheck.Never)]
 		public string PayRef
 		{
 			get
@@ -5622,7 +5298,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayVia", DbType="VarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayVia", DbType="VarChar(20)", UpdateCheck=UpdateCheck.Never)]
 		public string PayVia
 		{
 			get
@@ -5642,7 +5318,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Note", DbType="VarChar(80)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Note", DbType="VarChar(80)", UpdateCheck=UpdateCheck.Never)]
 		public string Note
 		{
 			get
@@ -5662,7 +5338,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Postmark", DbType="DateTime")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Postmark", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<System.DateTime> Postmark
 		{
 			get
@@ -5682,7 +5358,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CDate", DbType="DateTime")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<System.DateTime> CDate
 		{
 			get
@@ -5702,7 +5378,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CUser", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CUser", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string CUser
 		{
 			get
@@ -5722,7 +5398,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UDate", DbType="DateTime")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<System.DateTime> UDate
 		{
 			get
@@ -5742,7 +5418,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UUser", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UUser", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string UUser
 		{
 			get
@@ -5986,6 +5662,517 @@ namespace dataLib
 				{
 					this._DeliveryName = value;
 				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.v_TestData1")]
+	public partial class v_TestData1
+	{
+		
+		private int _account;
+		
+		private string _FullName;
+		
+		private string _type;
+		
+		private System.Nullable<double> _Amount;
+		
+		private string _note;
+		
+		public v_TestData1()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_account", DbType="Int NOT NULL")]
+		public int account
+		{
+			get
+			{
+				return this._account;
+			}
+			set
+			{
+				if ((this._account != value))
+				{
+					this._account = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullName", DbType="VarChar(50)")]
+		public string FullName
+		{
+			get
+			{
+				return this._FullName;
+			}
+			set
+			{
+				if ((this._FullName != value))
+				{
+					this._FullName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="VarChar(6)")]
+		public string type
+		{
+			get
+			{
+				return this._type;
+			}
+			set
+			{
+				if ((this._type != value))
+				{
+					this._type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float")]
+		public System.Nullable<double> Amount
+		{
+			get
+			{
+				return this._Amount;
+			}
+			set
+			{
+				if ((this._Amount != value))
+				{
+					this._Amount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_note", DbType="VarChar(38)")]
+		public string note
+		{
+			get
+			{
+				return this._note;
+			}
+			set
+			{
+				if ((this._note != value))
+				{
+					this._note = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CRDepBatch")]
+	public partial class CRDepBatch : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Id;
+		
+		private string _IDBank;
+		
+		private string _State;
+		
+		private System.Nullable<double> _Amount;
+		
+		private System.Nullable<int> _Qty;
+		
+		private System.Nullable<System.DateTime> _DepositDate;
+		
+		private System.Nullable<System.DateTime> _CDate;
+		
+		private string _CUser;
+		
+		private System.Nullable<System.DateTime> _UDate;
+		
+		private string _UUser;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(string value);
+    partial void OnIdChanged();
+    partial void OnIDBankChanging(string value);
+    partial void OnIDBankChanged();
+    partial void OnStateChanging(string value);
+    partial void OnStateChanged();
+    partial void OnAmountChanging(System.Nullable<double> value);
+    partial void OnAmountChanged();
+    partial void OnQtyChanging(System.Nullable<int> value);
+    partial void OnQtyChanged();
+    partial void OnDepositDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnDepositDateChanged();
+    partial void OnCDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCDateChanged();
+    partial void OnCUserChanging(string value);
+    partial void OnCUserChanged();
+    partial void OnUDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnUDateChanged();
+    partial void OnUUserChanging(string value);
+    partial void OnUUserChanged();
+    #endregion
+		
+		public CRDepBatch()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="VarChar(40) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
+		public string Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDBank", DbType="VarChar(20)", UpdateCheck=UpdateCheck.Never)]
+		public string IDBank
+		{
+			get
+			{
+				return this._IDBank;
+			}
+			set
+			{
+				if ((this._IDBank != value))
+				{
+					this.OnIDBankChanging(value);
+					this.SendPropertyChanging();
+					this._IDBank = value;
+					this.SendPropertyChanged("IDBank");
+					this.OnIDBankChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="VarChar(15)", UpdateCheck=UpdateCheck.Never)]
+		public string State
+		{
+			get
+			{
+				return this._State;
+			}
+			set
+			{
+				if ((this._State != value))
+				{
+					this.OnStateChanging(value);
+					this.SendPropertyChanging();
+					this._State = value;
+					this.SendPropertyChanged("State");
+					this.OnStateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", DbType="Float", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<double> Amount
+		{
+			get
+			{
+				return this._Amount;
+			}
+			set
+			{
+				if ((this._Amount != value))
+				{
+					this.OnAmountChanging(value);
+					this.SendPropertyChanging();
+					this._Amount = value;
+					this.SendPropertyChanged("Amount");
+					this.OnAmountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Qty", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<int> Qty
+		{
+			get
+			{
+				return this._Qty;
+			}
+			set
+			{
+				if ((this._Qty != value))
+				{
+					this.OnQtyChanging(value);
+					this.SendPropertyChanging();
+					this._Qty = value;
+					this.SendPropertyChanged("Qty");
+					this.OnQtyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepositDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<System.DateTime> DepositDate
+		{
+			get
+			{
+				return this._DepositDate;
+			}
+			set
+			{
+				if ((this._DepositDate != value))
+				{
+					this.OnDepositDateChanging(value);
+					this.SendPropertyChanging();
+					this._DepositDate = value;
+					this.SendPropertyChanged("DepositDate");
+					this.OnDepositDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<System.DateTime> CDate
+		{
+			get
+			{
+				return this._CDate;
+			}
+			set
+			{
+				if ((this._CDate != value))
+				{
+					this.OnCDateChanging(value);
+					this.SendPropertyChanging();
+					this._CDate = value;
+					this.SendPropertyChanged("CDate");
+					this.OnCDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CUser", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string CUser
+		{
+			get
+			{
+				return this._CUser;
+			}
+			set
+			{
+				if ((this._CUser != value))
+				{
+					this.OnCUserChanging(value);
+					this.SendPropertyChanging();
+					this._CUser = value;
+					this.SendPropertyChanged("CUser");
+					this.OnCUserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UDate", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<System.DateTime> UDate
+		{
+			get
+			{
+				return this._UDate;
+			}
+			set
+			{
+				if ((this._UDate != value))
+				{
+					this.OnUDateChanging(value);
+					this.SendPropertyChanging();
+					this._UDate = value;
+					this.SendPropertyChanged("UDate");
+					this.OnUDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UUser", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string UUser
+		{
+			get
+			{
+				return this._UUser;
+			}
+			set
+			{
+				if ((this._UUser != value))
+				{
+					this.OnUUserChanging(value);
+					this.SendPropertyChanging();
+					this._UUser = value;
+					this.SendPropertyChanged("UUser");
+					this.OnUUserChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CrArMst")]
+	public partial class CrArMst : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _id;
+		
+		private System.Nullable<int> _ArMstId;
+		
+		private string _CrMid;
+		
+		private string _CrDid;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(string value);
+    partial void OnidChanged();
+    partial void OnArMstIdChanging(System.Nullable<int> value);
+    partial void OnArMstIdChanged();
+    partial void OnCrMidChanging(string value);
+    partial void OnCrMidChanged();
+    partial void OnCrDidChanging(string value);
+    partial void OnCrDidChanged();
+    #endregion
+		
+		public CrArMst()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="VarChar(40) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ArMstId", DbType="Int")]
+		public System.Nullable<int> ArMstId
+		{
+			get
+			{
+				return this._ArMstId;
+			}
+			set
+			{
+				if ((this._ArMstId != value))
+				{
+					this.OnArMstIdChanging(value);
+					this.SendPropertyChanging();
+					this._ArMstId = value;
+					this.SendPropertyChanged("ArMstId");
+					this.OnArMstIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CrMid", DbType="VarChar(50)")]
+		public string CrMid
+		{
+			get
+			{
+				return this._CrMid;
+			}
+			set
+			{
+				if ((this._CrMid != value))
+				{
+					this.OnCrMidChanging(value);
+					this.SendPropertyChanging();
+					this._CrMid = value;
+					this.SendPropertyChanged("CrMid");
+					this.OnCrMidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CrDid", DbType="VarChar(50)")]
+		public string CrDid
+		{
+			get
+			{
+				return this._CrDid;
+			}
+			set
+			{
+				if ((this._CrDid != value))
+				{
+					this.OnCrDidChanging(value);
+					this.SendPropertyChanging();
+					this._CrDid = value;
+					this.SendPropertyChanged("CrDid");
+					this.OnCrDidChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

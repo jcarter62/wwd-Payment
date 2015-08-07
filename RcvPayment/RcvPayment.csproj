@@ -62,6 +62,12 @@
     <Reference Include="TelerikCommon, Version=2015.1.331.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GaEditAmount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GaEditAmount.Designer.cs">
+      <DependentUpon>GaEditAmount.cs</DependentUpon>
+    </Compile>
     <Compile Include="ga\BatchDocs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,12 @@
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="misc\LogView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="misc\LogView.Designer.cs">
+      <DependentUpon>LogView.cs</DependentUpon>
     </Compile>
     <Compile Include="misc\MyForm.cs">
       <SubType>Form</SubType>
@@ -142,6 +154,9 @@
     <Compile Include="misc\UnpaidList.Designer.cs">
       <DependentUpon>UnpaidList.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="GaEditAmount.resx">
+      <DependentUpon>GaEditAmount.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ga\BatchDocs.resx">
       <DependentUpon>BatchDocs.cs</DependentUpon>
     </EmbeddedResource>
@@ -153,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="misc\LogView.resx">
+      <DependentUpon>LogView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="misc\MyForm.resx">
       <DependentUpon>MyForm.cs</DependentUpon>
