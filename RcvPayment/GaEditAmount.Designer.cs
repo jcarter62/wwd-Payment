@@ -43,9 +43,9 @@
             this.panelTrak1.Controls.Add(this.btnSave);
             this.panelTrak1.Controls.Add(this.btnClose);
             this.panelTrak1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelTrak1.Location = new System.Drawing.Point(0, 157);
+            this.panelTrak1.Location = new System.Drawing.Point(0, 122);
             this.panelTrak1.Name = "panelTrak1";
-            this.panelTrak1.Size = new System.Drawing.Size(300, 30);
+            this.panelTrak1.Size = new System.Drawing.Size(299, 30);
             this.panelTrak1.TabIndex = 0;
             // 
             // btnSave
@@ -54,20 +54,21 @@
             this.btnSave.Location = new System.Drawing.Point(3, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 1;
+            this.btnSave.TabIndex = 0;
             this.btnSave.Text = "&Save";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.BtnSaveClick);
             // 
             // btnClose
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Location = new System.Drawing.Point(223, 4);
+            this.btnClose.Location = new System.Drawing.Point(222, 4);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 0;
+            this.btnClose.TabIndex = 1;
             this.btnClose.Text = "&Close";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.BtnCloseClick);
             // 
             // panelTrak2
             // 
@@ -75,7 +76,7 @@
             this.panelTrak2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTrak2.Location = new System.Drawing.Point(0, 0);
             this.panelTrak2.Name = "panelTrak2";
-            this.panelTrak2.Size = new System.Drawing.Size(300, 30);
+            this.panelTrak2.Size = new System.Drawing.Size(299, 30);
             this.panelTrak2.TabIndex = 1;
             // 
             // labelText
@@ -94,7 +95,7 @@
             this.panelTrak3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelTrak3.Location = new System.Drawing.Point(0, 30);
             this.panelTrak3.Name = "panelTrak3";
-            this.panelTrak3.Size = new System.Drawing.Size(300, 127);
+            this.panelTrak3.Size = new System.Drawing.Size(299, 92);
             this.panelTrak3.TabIndex = 2;
             // 
             // txtAmount
@@ -105,8 +106,8 @@
             this.txtAmount.Cue = null;
             this.txtAmount.Location = new System.Drawing.Point(108, 18);
             this.txtAmount.Name = "txtAmount";
-            this.txtAmount.Size = new System.Drawing.Size(172, 20);
-            this.txtAmount.TabIndex = 1;
+            this.txtAmount.Size = new System.Drawing.Size(171, 20);
+            this.txtAmount.TabIndex = 0;
             this.txtAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblAmount
@@ -121,7 +122,7 @@
             // GaEditAmount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(300, 187);
+            this.ClientSize = new System.Drawing.Size(299, 152);
             this.Controls.Add(this.panelTrak3);
             this.Controls.Add(this.panelTrak2);
             this.Controls.Add(this.panelTrak1);

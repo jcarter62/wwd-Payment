@@ -64,6 +64,7 @@
             this.statusDB = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusMisc = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.viewPaymentDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -319,7 +320,8 @@
             this.paymentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newPaymentToolStripMenuItem,
             this.paymentBatchesToolStripMenuItem,
-            this.unAppliedPaymentsToolStripMenuItem});
+            this.unAppliedPaymentsToolStripMenuItem,
+            this.viewPaymentDetailToolStripMenuItem});
             this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
             this.paymentsToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.paymentsToolStripMenuItem.Text = "Payments";
@@ -327,22 +329,22 @@
             // newPaymentToolStripMenuItem
             // 
             this.newPaymentToolStripMenuItem.Name = "newPaymentToolStripMenuItem";
-            this.newPaymentToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.newPaymentToolStripMenuItem.Text = "Add/View Payments";
+            this.newPaymentToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.newPaymentToolStripMenuItem.Text = "Add/View Payments (Receiving)";
             this.newPaymentToolStripMenuItem.Click += new System.EventHandler(this.newPaymentToolStripMenuItem_Click);
             // 
             // paymentBatchesToolStripMenuItem
             // 
             this.paymentBatchesToolStripMenuItem.Name = "paymentBatchesToolStripMenuItem";
-            this.paymentBatchesToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.paymentBatchesToolStripMenuItem.Text = "Payment Batches";
+            this.paymentBatchesToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.paymentBatchesToolStripMenuItem.Text = "Payment Batches (General Accounting)";
             this.paymentBatchesToolStripMenuItem.Click += new System.EventHandler(this.paymentBatchesToolStripMenuItem_Click);
             // 
             // unAppliedPaymentsToolStripMenuItem
             // 
             this.unAppliedPaymentsToolStripMenuItem.Name = "unAppliedPaymentsToolStripMenuItem";
-            this.unAppliedPaymentsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.unAppliedPaymentsToolStripMenuItem.Text = "Apply Payments to AR";
+            this.unAppliedPaymentsToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.unAppliedPaymentsToolStripMenuItem.Text = "Apply Payments (Accounts Receivable)";
             this.unAppliedPaymentsToolStripMenuItem.Click += new System.EventHandler(this.unAppliedPaymentsToolStripMenuItem_Click);
             // 
             // statusStrip1
@@ -367,6 +369,13 @@
             this.statusMisc.Name = "statusMisc";
             this.statusMisc.Size = new System.Drawing.Size(56, 17);
             this.statusMisc.Text = "Misc Info";
+            // 
+            // viewPaymentDetailToolStripMenuItem
+            // 
+            this.viewPaymentDetailToolStripMenuItem.Name = "viewPaymentDetailToolStripMenuItem";
+            this.viewPaymentDetailToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.viewPaymentDetailToolStripMenuItem.Text = "View Payment Detail";
+            this.viewPaymentDetailToolStripMenuItem.Click += new System.EventHandler(this.viewPaymentDetailToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -431,6 +440,7 @@
         private System.Windows.Forms.ToolStripStatusLabel statusDB;
         private System.Windows.Forms.ToolStripStatusLabel statusMisc;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripMenuItem viewPaymentDetailToolStripMenuItem;
     }
 }
 

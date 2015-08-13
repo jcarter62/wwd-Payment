@@ -16,14 +16,22 @@ namespace RcvPayment {
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
         }
 
-        private void MyForm_Load(object sender, EventArgs e) {
-            PosSize ps = new PosSize(this);
+        protected override void OnLoad(EventArgs e) {
+            base.OnLoad(e);
+            PosSize ps = new PosSize(this );
             ps.Restore();
         }
 
-        private void MyForm_FormClosing(object sender, FormClosingEventArgs e) {
+        private void MyForm_Load(object sender, EventArgs e) {
+        }
+
+        protected override void OnClosing(CancelEventArgs e) {
             PosSize ps = new PosSize(this);
             ps.Save();
+            base.OnClosing(e);
+        }
+
+        private void MyForm_FormClosing(object sender, FormClosingEventArgs e) {
         }
 
         protected bool isFormOpen(string formname) {

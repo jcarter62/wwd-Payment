@@ -116,6 +116,12 @@
     <Compile Include="ga\PaymentBatches.Designer.cs">
       <DependentUpon>PaymentBatches.cs</DependentUpon>
     </Compile>
+    <Compile Include="PaymentDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PaymentDetails.Designer.cs">
+      <DependentUpon>PaymentDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="report\Report1.cs">
@@ -180,6 +186,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ga\PaymentBatches.resx">
       <DependentUpon>PaymentBatches.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PaymentDetails.resx">
+      <DependentUpon>PaymentDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

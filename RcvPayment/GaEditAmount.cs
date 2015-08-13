@@ -31,7 +31,7 @@ namespace RcvPayment {
             }
             set {
                 pId = value;
-                setId();
+                SetId();
             }
         }
 
@@ -51,7 +51,7 @@ namespace RcvPayment {
             dc = new DbClassDataContext(aset.wmis.connectionString);
         }
 
-        private void setId() {
+        private void SetId() {
             var payment = (from r in dc.CRMasters
                           where r.Id == pId
                           select r).FirstOrDefault();
@@ -68,7 +68,7 @@ namespace RcvPayment {
             txtAmount.Text = AmountStr;
         }
 
-        private void btnSave_Click(object sender, EventArgs e) {
+        private void BtnSaveClick(object sender, EventArgs e) {
             if (pId.Length > 0 )
             {
                 var payment = (from r in dc.CRMasters
@@ -83,6 +83,10 @@ namespace RcvPayment {
                 }
             }
 
+        }
+
+        private void BtnCloseClick(object sender, EventArgs e) {
+            this.Close();
         }
     }
 }

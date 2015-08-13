@@ -318,6 +318,21 @@ namespace RcvPayment {
             // wipe item detail
             initItemDetail();
             UpdateLogWindow(currentID);
+            UpdateDetailWindow(currentID);
+        }
+
+        private void UpdateDetailWindow(string currentID) {
+            string fname = "paymentdetails";
+            Form f = null;
+
+            if ( isFormOpen(fname) )
+            {
+                GetFormPtr(fname, ref f );
+                if ( f != null )
+                {
+                    (f as PaymentDetails).Id = currentID;
+                }
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e) {

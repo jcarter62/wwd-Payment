@@ -82,6 +82,7 @@
             this.Controls.Add(this.rview);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ShowReceipt";
+            this.Text = "Receipt";
             this.Load += new System.EventHandler(this.ShowReceipt_Load);
             this.ResumeLayout(false);
 

@@ -112,5 +112,30 @@ namespace RcvPayment {
                 generateTestDataToolStripMenuItem.Visible = false;
 
         }
+
+        private void viewPaymentDetailToolStripMenuItem_Click(object sender, EventArgs e) {
+            // Open PaymentDetails if not already open.
+            string frm = "paymentdetails";
+            bool isopn = false;
+            int n;
+
+            n = this.MdiChildren.Count();
+            for ( int i = 0; i < n; i++)
+            {
+                Form f = MdiChildren[i];
+                if (f.Name.Trim().ToLower().CompareTo(frm) == 0) {
+                    isopn = true;
+                    f.BringToFront();
+                    break;
+                } // if 
+            }
+            if ( ! isopn )
+            {
+                PaymentDetails f = new PaymentDetails();
+                f.MdiParent = this;
+                f.Show();
+                f.BringToFront();
+            } 
+        }
     }
 }

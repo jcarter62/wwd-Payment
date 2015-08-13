@@ -154,6 +154,7 @@
             this.dgvPend.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPend.Size = new System.Drawing.Size(211, 234);
             this.dgvPend.TabIndex = 7;
+            this.dgvPend.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPend_CellContentClick);
             this.dgvPend.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvPend_DragDrop);
             this.dgvPend.DragOver += new System.Windows.Forms.DragEventHandler(this.dgvPend_DragOver);
             this.dgvPend.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvPend_MouseDown);
@@ -378,6 +379,7 @@
             this.dgvSel.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSel.Size = new System.Drawing.Size(225, 258);
             this.dgvSel.TabIndex = 1;
+            this.dgvSel.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSel_CellContentClick);
             this.dgvSel.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvSel_DragDrop);
             this.dgvSel.DragOver += new System.Windows.Forms.DragEventHandler(this.dgvSel_DragOver);
             this.dgvSel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvSel_MouseDown);

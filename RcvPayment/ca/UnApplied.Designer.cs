@@ -26,10 +26,6 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UnApplied));
-            this.panButtons = new classLib.PanelTrak(this.components);
-            this.btnMark = new System.Windows.Forms.Button();
-            this.btnDetail = new System.Windows.Forms.Button();
-            this.btnImport = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.panDetail = new classLib.PanelTrak(this.components);
@@ -53,6 +49,7 @@
             this.lblDetail = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panMaster = new classLib.PanelTrak(this.components);
+            this.timeLbl = new System.Windows.Forms.Label();
             this.gridMaster = new System.Windows.Forms.DataGridView();
             this.cDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deliveryNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,8 +72,6 @@
             this.cRMasterBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.timeCheck = new System.Windows.Forms.Timer(this.components);
-            this.timeLbl = new System.Windows.Forms.Label();
-            this.panButtons.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridDetail)).BeginInit();
@@ -87,45 +82,6 @@
             this.cMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cRMasterBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // panButtons
-            // 
-            this.panButtons.Controls.Add(this.btnMark);
-            this.panButtons.Controls.Add(this.btnDetail);
-            this.panButtons.Controls.Add(this.btnImport);
-            this.panButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panButtons.Location = new System.Drawing.Point(0, 328);
-            this.panButtons.Name = "panButtons";
-            this.panButtons.Size = new System.Drawing.Size(320, 32);
-            this.panButtons.TabIndex = 2;
-            // 
-            // btnMark
-            // 
-            this.btnMark.Location = new System.Drawing.Point(64, 6);
-            this.btnMark.Name = "btnMark";
-            this.btnMark.Size = new System.Drawing.Size(53, 23);
-            this.btnMark.TabIndex = 3;
-            this.btnMark.Text = "Mark";
-            this.btnMark.UseVisualStyleBackColor = true;
-            // 
-            // btnDetail
-            // 
-            this.btnDetail.Location = new System.Drawing.Point(5, 6);
-            this.btnDetail.Name = "btnDetail";
-            this.btnDetail.Size = new System.Drawing.Size(53, 23);
-            this.btnDetail.TabIndex = 2;
-            this.btnDetail.Text = "Details";
-            this.btnDetail.UseVisualStyleBackColor = true;
-            // 
-            // btnImport
-            // 
-            this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnImport.Location = new System.Drawing.Point(242, 6);
-            this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(75, 23);
-            this.btnImport.TabIndex = 0;
-            this.btnImport.Text = "Import ABP";
-            this.btnImport.UseVisualStyleBackColor = true;
             // 
             // statusStrip1
             // 
@@ -149,7 +105,7 @@
             this.panDetail.Controls.Add(this.gridDetail);
             this.panDetail.Controls.Add(this.lblDetail);
             this.panDetail.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panDetail.Location = new System.Drawing.Point(0, 177);
+            this.panDetail.Location = new System.Drawing.Point(0, 209);
             this.panDetail.Name = "panDetail";
             this.panDetail.Size = new System.Drawing.Size(320, 151);
             this.panDetail.TabIndex = 4;
@@ -327,7 +283,7 @@
             // 
             this.splitter1.Cursor = System.Windows.Forms.Cursors.HSplit;
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.splitter1.Location = new System.Drawing.Point(0, 172);
+            this.splitter1.Location = new System.Drawing.Point(0, 204);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(320, 5);
             this.splitter1.TabIndex = 5;
@@ -342,8 +298,19 @@
             this.panMaster.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panMaster.Location = new System.Drawing.Point(0, 0);
             this.panMaster.Name = "panMaster";
-            this.panMaster.Size = new System.Drawing.Size(320, 172);
+            this.panMaster.Size = new System.Drawing.Size(320, 204);
             this.panMaster.TabIndex = 6;
+            // 
+            // timeLbl
+            // 
+            this.timeLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.timeLbl.AutoSize = true;
+            this.timeLbl.Location = new System.Drawing.Point(298, 1);
+            this.timeLbl.Name = "timeLbl";
+            this.timeLbl.Size = new System.Drawing.Size(13, 13);
+            this.timeLbl.TabIndex = 2;
+            this.timeLbl.Text = "+";
+            this.timeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // gridMaster
             // 
@@ -379,7 +346,7 @@
             this.gridMaster.ReadOnly = true;
             this.gridMaster.RowHeadersVisible = false;
             this.gridMaster.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridMaster.Size = new System.Drawing.Size(311, 150);
+            this.gridMaster.Size = new System.Drawing.Size(311, 182);
             this.gridMaster.TabIndex = 1;
             this.gridMaster.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridMaster_CellFormatting);
             this.gridMaster.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridMaster_RowEnter);
@@ -552,17 +519,6 @@
             this.timeCheck.Interval = 1000;
             this.timeCheck.Tick += new System.EventHandler(this.timeCheck_Tick);
             // 
-            // timeLbl
-            // 
-            this.timeLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.timeLbl.AutoSize = true;
-            this.timeLbl.Location = new System.Drawing.Point(298, 1);
-            this.timeLbl.Name = "timeLbl";
-            this.timeLbl.Size = new System.Drawing.Size(13, 13);
-            this.timeLbl.TabIndex = 2;
-            this.timeLbl.Text = "+";
-            this.timeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // UnApplied
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -570,12 +526,10 @@
             this.Controls.Add(this.panMaster);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.panDetail);
-            this.Controls.Add(this.panButtons);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UnApplied";
             this.Text = "Un-Applied Payments";
-            this.panButtons.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.panDetail.ResumeLayout(false);
@@ -594,11 +548,6 @@
         }
 
         #endregion
-
-        private classLib.PanelTrak panButtons;
-        private System.Windows.Forms.Button btnMark;
-        private System.Windows.Forms.Button btnDetail;
-        private System.Windows.Forms.Button btnImport;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel statLabel;
         private classLib.PanelTrak panDetail;

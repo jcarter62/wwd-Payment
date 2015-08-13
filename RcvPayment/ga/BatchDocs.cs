@@ -152,6 +152,15 @@ namespace RcvPayment {
                 ddInfoPending.Id = "";
                 ddInfoPending.StartRegion = Rectangle.Empty;
             }
+
+            /* Update Detail Window if available. */
+            try {
+                if ((dragIndex != -1) && (dgvPend.Rows.Count > 0)) {
+                    string id = dgvPend.Rows[dragIndex].Cells["iddgvPend"].Value.ToString();
+                    UpdateDetailWindow(id);
+                }
+            }
+            finally { }
         }
 
         private List<string> ListOfSelectedIds(DataGridView grid, string v) {
@@ -236,6 +245,15 @@ namespace RcvPayment {
                 ddInfoSelected.Id = "";
                 ddInfoSelected.StartRegion = Rectangle.Empty;
             }
+
+            /* Update Detail Window if available. */
+            try {
+                if ((dragIndex != -1) && (dgvSel.Rows.Count > 0)) {
+                    string id = dgvSel.Rows[dragIndex].Cells["cRMiddgvSel"].Value.ToString();
+                    UpdateDetailWindow(id);
+                }
+            }
+            finally { }
         }
 
         private void dgvSel_MouseMove(object sender, MouseEventArgs e) {
@@ -469,8 +487,7 @@ namespace RcvPayment {
                         UpdateMasterRecord(selectedId, EndAmount);
                     }
                 }
-                else
-                {
+                else {
                     UpdateMasterRecord(selectedId, EndAmount);
                 }
             }
@@ -504,9 +521,9 @@ namespace RcvPayment {
 
         private void ShowMessageManualMessage(string selectedId, double Amt) {
             string msg;
-            msg = "This record has been changed by Customer Accounting,\n" +
+            msg = "This record has been changed or posted to A/R,\n" +
                   "and you have changed the amount.  Please visit\n" +
-                  "customer accounting to discuss the proposed change.";
+                  "customer accounting to discuss this proposed change.";
 
             try {
                 TblLog l = new TblLog();
@@ -552,8 +569,6 @@ namespace RcvPayment {
             return result;
         }
 
-
-
         private void FindRecord(string searchId) {
             // Let's see if we can find the ID by row.
             int selRow = 0;
@@ -569,6 +584,26 @@ namespace RcvPayment {
             if (selRow != 0) {
                 dgvPend.FirstDisplayedScrollingRowIndex = dgvPend.Rows[selRow].Index;
             }
+        }
+
+        private void dgvPend_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+
+        }
+
+        private void UpdateDetailWindow(string currentID) {
+            string fname = "paymentdetails";
+            Form f = null;
+
+            if (isFormOpen(fname)) {
+                GetFormPtr(fname, ref f);
+                if (f != null) {
+                    (f as PaymentDetails).Id = currentID;
+                }
+            }
+        }
+
+        private void dgvSel_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+
         }
     }
     // (leftoj): https://msdn.microsoft.com/en-us/library/bb397895.aspx

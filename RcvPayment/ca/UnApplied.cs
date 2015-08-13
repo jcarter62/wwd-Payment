@@ -221,6 +221,8 @@ namespace RcvPayment.Ca {
                     gridMaster.Rows[currentMasterRow].Cells[masterRcptIDCol].Value);
                 copyBuffer = "id," + currentMasterId;
                 statLabel.Text = copyBuffer;
+
+                UpdateDetailWindow(currentMasterId);
             }
             else {
                 lblDetail.Text = "Payment Detail Records";
@@ -493,6 +495,18 @@ namespace RcvPayment.Ca {
 
         private void gridDetail_RowEnter(object sender, DataGridViewCellEventArgs e) {
             timeCheck_Stop();
+        }
+
+        private void UpdateDetailWindow(string currentID) {
+            string fname = "paymentdetails";
+            Form f = null;
+
+            if (isFormOpen(fname)) {
+                GetFormPtr(fname, ref f);
+                if (f != null) {
+                    (f as PaymentDetails).Id = currentID;
+                }
+            }
         }
     }
 }
