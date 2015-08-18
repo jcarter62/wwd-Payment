@@ -12,15 +12,16 @@ namespace classLib {
     /// </summary>
     public class AppSettings {
 
-        #region Properties
         private string _Key; // = Keys.key;
-        public string Key { get { return _Key; } }
         private string _AppName = "Payments";
+        private SettingsFile sf;
+        private string _filename;
+
+        #region Properties
+        public string Key { get { return _Key; } }
         public string AppName { get { return _AppName; } }
         public DbSettings wmis;
         public DbSettings mas500;
-        private SettingsFile sf;
-        private string _filename;
         public string SmtpServer { get; set; }
         public string SmtpPort { get; set; }
         public string EmailFrom { get; set; }
@@ -197,6 +198,10 @@ namespace classLib {
 
         #region EmailTesting
 
+        /// <summary>
+        /// Tests the SMTP settings
+        /// </summary>
+        /// <returns>True if Success, and False if Fails</returns>
         public bool TestSmtp() {
             bool result = false;
 
@@ -221,6 +226,12 @@ namespace classLib {
             return result;
         }
 
+        /// <summary>
+        /// Gets the SMTP port int.
+        /// </summary>
+        /// <value>
+        /// The SMTP port int.
+        /// </value>
         public int SmtpPortInt {
             get {
                 int result;

@@ -234,6 +234,7 @@ namespace RcvPayment {
                 r.DueDate = row.Cells["DueDate"].Value.ToString();
                 r.Amount = Convert2double(row.Cells["Amount"].Value.ToString());
                 r.Account = Convert2int(row.Cells["Account"].Value.ToString());
+                r.SAccount = row.Cells["Account"].Value.ToString();
                 r.Invoice = Convert2int(row.Cells["Invoice"].Value.ToString());
                 // r.Session = row.Cells["Session"].Value.ToString();
                 lst.Add(r);

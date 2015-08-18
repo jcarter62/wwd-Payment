@@ -57,4 +57,71 @@
       <Column Name="VendKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.tarInvoice" Member="tarInvoices">
+    <Type Name="tarInvoice">
+      <Column Name="InvcKey" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AuthOvrdAmt" Type="System.Decimal" DbType="Decimal(15,3) NOT NULL" CanBeNull="false" />
+      <Column Name="Balance" Type="System.Decimal" DbType="Decimal(15,3) NOT NULL" CanBeNull="false" />
+      <Column Name="BalanceHC" Type="System.Decimal" DbType="Decimal(15,3) NOT NULL" CanBeNull="false" />
+      <Column Name="BatchKey" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BillToAddrKey" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BillToCustAddrKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ClosingPostDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ClosingTranDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CommPlanKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CompanyID" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="ConfirmToCntctKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CostOfSales" Type="System.Decimal" DbType="Decimal(15,3) NOT NULL" CanBeNull="false" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreateType" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="CreateUserID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="CurrExchRate" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="CurrExchSchdKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CurrID" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="CustClassKey" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustKey" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustPONo" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="DiscAmt" Type="System.Decimal" DbType="Decimal(15,3) NOT NULL" CanBeNull="false" />
+      <Column Name="DiscDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DiscTakenAmt" Type="System.Decimal" DbType="Decimal(15,3) NOT NULL" CanBeNull="false" />
+      <Column Name="DueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FOBKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="HandlAmt" Type="System.Decimal" DbType="Decimal(15,3) NOT NULL" CanBeNull="false" />
+      <Column Name="ImportLogKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="InDispute" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="InvcFormKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NextApplEntryNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PmtTermsKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PostDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PrimarySperKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Printed" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="ReasonCodeKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RecurInvoiceKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RetntAmt" Type="System.Decimal" DbType="Decimal(15,3) NOT NULL" CanBeNull="false" />
+      <Column Name="RetntPct" Type="System.Decimal" DbType="Decimal(5,4)" CanBeNull="true" />
+      <Column Name="SalesAmt" Type="System.Decimal" DbType="Decimal(15,3) NOT NULL" CanBeNull="false" />
+      <Column Name="ShipAmt" Type="System.Decimal" DbType="Decimal(15,3) NOT NULL" CanBeNull="false" />
+      <Column Name="ShipMethKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShipToAddrKey" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ShipToCustAddrKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShipZoneKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SourceModule" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="STaxAmt" Type="System.Decimal" DbType="Decimal(15,3) NOT NULL" CanBeNull="false" />
+      <Column Name="STaxCalc" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="STaxTranKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TradeDiscAmt" Type="System.Decimal" DbType="Decimal(15,3) NOT NULL" CanBeNull="false" />
+      <Column Name="TranAmt" Type="System.Decimal" DbType="Decimal(15,3) NOT NULL" CanBeNull="false" />
+      <Column Name="TranAmtHC" Type="System.Decimal" DbType="Decimal(15,3) NOT NULL" CanBeNull="false" />
+      <Column Name="TranCmnt" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TranDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TranID" Type="System.String" DbType="VarChar(13) NOT NULL" CanBeNull="false" />
+      <Column Name="TranNo" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="TranType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateCounter" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdateUserID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="VoucherKey" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

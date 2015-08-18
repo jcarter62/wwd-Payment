@@ -1,11 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 11.75" name="m500Class">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 13.625" name="m500Class">
   <DataContextMoniker Name="/m500ClassDataContext" />
   <nestedChildShapes>
-    <classShape Id="b57093d1-2d6a-4f2b-bfb7-69e504539a72" absoluteBounds="0.5, 0.5, 2, 11.001365559895833">
+    <classShape Id="7b3ed591-ab3d-4196-b515-a9c492f9a9c9" absoluteBounds="0.875, 0.5, 2, 11.001365559895833">
       <DataClassMoniker Name="/m500ClassDataContext/tarCustomer" />
       <nestedChildShapes>
-        <elementListCompartment Id="508d9ab4-85d0-47b8-ba56-656e0c865af7" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 10.441365559895832" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="f2aa6d7b-58b8-4610-956f-499e1a90990b" absoluteBounds="0.89, 0.96, 1.9700000000000002, 10.441365559895832" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1123f498-87e3-402e-92ed-8fe7de7c8677" absoluteBounds="3.5, 0.5, 2, 12.9243798828125">
+      <DataClassMoniker Name="/m500ClassDataContext/tarInvoice" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9471f4c9-66ea-4a4a-954f-37ec66cb4ea4" absoluteBounds="3.515, 0.96, 1.9700000000000002, 12.3643798828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

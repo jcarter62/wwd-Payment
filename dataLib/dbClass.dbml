@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="testdb" Class="DbClassDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost\sqlexpress;Initial Catalog=testdb;Integrated Security=True" SettingsObjectName="dataLib.Properties.Settings" SettingsPropertyName="testdbConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=df2a\sqlexpress;Initial Catalog=testdb;Integrated Security=True" SettingsObjectName="dataLib.Properties.Settings" SettingsPropertyName="testdbConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.CRMasterId" Member="CRMasterIds">
     <Type Name="CRMasterId">
       <Column Name="id" Type="System.String" DbType="VarChar(40) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
@@ -322,6 +322,25 @@
       <Column Name="ArMstId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CrMid" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="CrDid" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CRPaymentInfo" Member="CRPaymentInfos">
+    <Type Name="CRPaymentInfo">
+      <Column Name="RcptID" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DeliveryName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PayType" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="PayRef" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="PayVia" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="RcvState" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="ReceiveDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Postmark" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="BankBatch" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="GAState" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="DepositAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="DepositDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="StateAR" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="id" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Function Name="dbo.sp_Outstanding" Method="sp_Outstanding">

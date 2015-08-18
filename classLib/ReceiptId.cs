@@ -19,8 +19,13 @@ namespace classLib {
         string result;
         public string id { get { return result; } }
 
-        static string GoodChars = "0123456789ABCDEFGHIJKMNPQRSTUWXYZ"; 
-        //                         123456789012345678901234567890123
+        //                                   ABCDEFGHI
+        //                                           JKL
+        //                                             MNO
+        //                                               PQRSTUV
+        //                                                     WXYZ@#$%+=
+        static string GoodChars = "0123456789ABCDEFGHJKMNPQRSTUWXYZ@#$%+="; 
+        //                         12345678901234567890123456789012345678
         //                                  1         2         3  
 
         public ReceiptId() {

@@ -57,13 +57,6 @@ namespace RcvPayment.Ca {
                 gridMaster.Rows.Remove(r);
             }
 
-            /*
-                        var mst = (from pmt in dc.CRMasters
-                                   where pmt.StateAR == "created" ||
-                                   pmt.StateAR == "selected"
-                                   orderby pmt.CDate descending
-                                   select pmt);
-            */
             var mst =
             from pmt in dc.CRMasters
             from log in dc.TblLogs.Where(log => ((pmt.Id == log.tblId) && (log.txt == "receiving post"))).DefaultIfEmpty()
@@ -86,6 +79,7 @@ namespace RcvPayment.Ca {
             };
 
             WipeColumns(gridMaster);
+            WipeColumns(gridDetail);
             foreach (var rec in mst) {
                 //        grid object, field name, header text
                 AddColumn(gridMaster, "CDate", "Created");
@@ -165,7 +159,6 @@ namespace RcvPayment.Ca {
                 dtl.Note
             });
 
-
             WipeColumns(gridDetail);
             foreach (var rec in detail) {
                 //        grid object, field name, header text
@@ -180,7 +173,6 @@ namespace RcvPayment.Ca {
             }
 
             gridDetail.DataSource = detail;
-
             // Determine column for Id field.
             detailIdCol = 0;
             for (int c = 0; c < gridDetail.ColumnCount; c++) {
@@ -435,11 +427,10 @@ namespace RcvPayment.Ca {
             }
 
             timestate++;
-            if ( timestate > 8) timestate = 0;
+            if (timestate > 8) timestate = 0;
 
             string x;
-            switch (timestate)
-            {
+            switch (timestate) {
                 case 0:
                     x = "|";
                     break;
@@ -452,7 +443,7 @@ namespace RcvPayment.Ca {
                 case 3:
                     x = "\\";
                     break;
-                case 4: 
+                case 4:
                     x = "|";
                     break;
                 case 5:
@@ -477,6 +468,7 @@ namespace RcvPayment.Ca {
 
         private void UpdateDisplay() {
             OpenMasterTable();
+
             timeCheck_Start();
         }
 
@@ -506,6 +498,54 @@ namespace RcvPayment.Ca {
                 if (f != null) {
                     (f as PaymentDetails).Id = currentID;
                 }
+            }
+        }
+
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e) {
+            //
+            OpenMasterTable();
+            LoadDetailRecords();
+        }
+
+        private void refreshToolStripMenuItem1_Click(object sender, EventArgs e) {
+            //
+            gridDetail.Rows.Clear();
+            OpenMasterTable();
+            LoadDetailRecords();
+
+        }
+
+        private void markItemAsPostedToolStripMenuItem_Click(object sender, EventArgs e) {
+            // For Mas500 items, allow user to "post" payment.
+
+            // if only one item is selected, then
+            // perform post.
+            int ItemsSelected = 0;
+            string IdSelected = "";
+
+            ItemsSelected = gridMaster.SelectedRows.Count;
+            if (ItemsSelected == 1) {
+                IdSelected = gridMaster.SelectedRows[0].Cells[masterIdCol].Value.ToString();
+
+                IQueryable<CRMaster> qm;
+                IQueryable<CRDetail> qd;
+                qm = (from item in dc.CRMasters
+                      where item.Id == IdSelected
+                      select item);
+
+                foreach (CRMaster m in qm) {
+                    m.StateAR = "posted";
+
+                    qd = (from dtem in dc.CRDetails
+                          where dtem.CRMid == IdSelected
+                          select dtem);
+                    foreach (CRDetail d in qd) {
+                        d.State = "posted";
+                    }
+                }
+
+                dc.SubmitChanges();
+                UpdateDisplay();
             }
         }
     }

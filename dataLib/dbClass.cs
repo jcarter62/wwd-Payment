@@ -6,6 +6,10 @@ using System.Linq;
 using System.Linq.Expressions;
 
 namespace dataLib {
+    partial class CRPaymentInfo {
+
+    }
+
     partial class DbClassDataContext {
     }
 

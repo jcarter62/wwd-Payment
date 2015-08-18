@@ -62,12 +62,46 @@ namespace DbCombined {
             Data.Columns.Add("Description", typeof(string));
             Data.Columns.Add("DueDate", typeof(DateTime));
             Data.Columns.Add("Amount", typeof(float));
-            Data.Columns.Add("Account", typeof(int));
+            Data.Columns.Add("Account", typeof(string));
             Data.Columns.Add("Invoice", typeof(int));
         }
 
         private void loadMas500Data() {
+            // Wipe data if exists.
+            if (Data.Rows.Count > 0) {
+                Data.Rows.Clear();
+            }
 
+            var qry = from m in mc.tarCustomers
+                    from d in mc.tarInvoices.Where( 
+                        d=>(m.CustKey == d.CustKey)).DefaultIfEmpty()
+                    where m.CustKey == AccountKey
+                    select new
+                    {
+                      Type = "Misc",
+                      Parcel = "",
+                      DueDate = d.DueDate,
+                      Amount = d.Balance,
+                      Account = m.CustID,
+                      Invoice = string2int(d.TranID)
+                    } ;
+
+            foreach (var r in qry) {
+                double d = 0.0;
+                double.TryParse(r.Amount.ToString() , out d );
+                if ( d > 0.0 ) {
+                    Data.Rows.Add( 0, r.Type, r.Parcel,
+                                   r.DueDate, r.Amount, 
+                                   r.Account, r.Invoice);
+                }
+            }
+        }
+
+        private int string2int(string tranID) {
+            int result = 0;
+            string nums = tranID.ToLower().Replace("-in", "" );
+            int.TryParse(nums, out result);
+            return result;
         }
 
         private void loadWmisData() {
@@ -85,10 +119,8 @@ namespace DbCombined {
 
             foreach (var r in q) {
                 Data.Rows.Add(r.ItemGroup, r.TranType, r.Description,
-                              r.DueDate, r.Amount, r.Account, r.Invoice);
+                              r.DueDate, r.Amount, r.Account.ToString() , r.Invoice);
             }
-            // At this point, data contains the accounts from both lists.
-
         }
 
         private void SetAccount() {

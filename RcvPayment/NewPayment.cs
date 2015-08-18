@@ -325,11 +325,9 @@ namespace RcvPayment {
             string fname = "paymentdetails";
             Form f = null;
 
-            if ( isFormOpen(fname) )
-            {
-                GetFormPtr(fname, ref f );
-                if ( f != null )
-                {
+            if (isFormOpen(fname)) {
+                GetFormPtr(fname, ref f);
+                if (f != null) {
                     (f as PaymentDetails).Id = currentID;
                 }
             }
@@ -666,10 +664,23 @@ namespace RcvPayment {
 
         private void txtItmAcct_TextChanged(object sender, EventArgs e) {
             int num;
+            string result = "";
+
+            // try to find in wmis
             if (int.TryParse(txtItmAcct.Text, out num)) {
                 CustomerInfo ci = new CustomerInfo(num);
-                txtItmName.Text = ci.Name;
+                if ( ci.Name.ToLower() != "not found")
+                    result = ci.Name;
             }
+
+            // if not found, then try to find in mas500
+            if ( result.Length <= 0 )
+            {
+                CustomerInfo ci = new CustomerInfo(txtItmAcct.Text);
+                result = ci.Name;
+            }
+
+            txtItmName.Text = result;
         }
 
         /// <summary>
@@ -783,7 +794,6 @@ namespace RcvPayment {
                     }
                 }
             }
-
         }
 
         // TODO: lookup account name
@@ -794,6 +804,11 @@ namespace RcvPayment {
             rec.Account = r.Account.ToString();
             if (int.TryParse(r.Account.Value.ToString(), out num)) {
                 CustomerInfo ci = new CustomerInfo(num);
+                rec.Name = ci.Name;
+            }
+            if (r.Account.Value == 0) {
+                rec.Account = r.SAccount;
+                CustomerInfo ci = new CustomerInfo(r.SAccount);
                 rec.Name = ci.Name;
             }
             rec.Amount = r.Amount;

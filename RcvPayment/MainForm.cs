@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using dataLib;
 using classLib;
+using RcvPayment.report;
 
 namespace RcvPayment {
     public partial class MainForm : RcvPayment.MyForm {
@@ -136,6 +137,19 @@ namespace RcvPayment {
                 f.Show();
                 f.BringToFront();
             } 
+        }
+
+        private void paymentLogReportToolStripMenuItem1_Click(object sender, EventArgs e) {
+            // 
+            if (!isFormOpen("paymentlog")) {
+                PaymentLogView f = new PaymentLogView();
+                f.MdiParent = this;
+                f.Show();
+                f.BringToFront();
+                // 
+                DateTime TodaysDate = DateTime.Now;
+                f.DisplayReport(TodaysDate);
+            }
         }
     }
 }

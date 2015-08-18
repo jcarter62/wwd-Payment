@@ -60,11 +60,13 @@
             this.newPaymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.paymentBatchesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unAppliedPaymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewPaymentDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusDB = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusMisc = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.viewPaymentDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.paymentLogReportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -76,7 +78,8 @@
             this.editToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.helpToolStripMenuItem,
-            this.paymentsToolStripMenuItem});
+            this.paymentsToolStripMenuItem,
+            this.reportsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(784, 24);
@@ -347,6 +350,13 @@
             this.unAppliedPaymentsToolStripMenuItem.Text = "Apply Payments (Accounts Receivable)";
             this.unAppliedPaymentsToolStripMenuItem.Click += new System.EventHandler(this.unAppliedPaymentsToolStripMenuItem_Click);
             // 
+            // viewPaymentDetailToolStripMenuItem
+            // 
+            this.viewPaymentDetailToolStripMenuItem.Name = "viewPaymentDetailToolStripMenuItem";
+            this.viewPaymentDetailToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.viewPaymentDetailToolStripMenuItem.Text = "View Payment Detail";
+            this.viewPaymentDetailToolStripMenuItem.Click += new System.EventHandler(this.viewPaymentDetailToolStripMenuItem_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -370,12 +380,20 @@
             this.statusMisc.Size = new System.Drawing.Size(56, 17);
             this.statusMisc.Text = "Misc Info";
             // 
-            // viewPaymentDetailToolStripMenuItem
+            // reportsToolStripMenuItem
             // 
-            this.viewPaymentDetailToolStripMenuItem.Name = "viewPaymentDetailToolStripMenuItem";
-            this.viewPaymentDetailToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
-            this.viewPaymentDetailToolStripMenuItem.Text = "View Payment Detail";
-            this.viewPaymentDetailToolStripMenuItem.Click += new System.EventHandler(this.viewPaymentDetailToolStripMenuItem_Click);
+            this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.paymentLogReportToolStripMenuItem1});
+            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.reportsToolStripMenuItem.Text = "Reports";
+            // 
+            // paymentLogReportToolStripMenuItem1
+            // 
+            this.paymentLogReportToolStripMenuItem1.Name = "paymentLogReportToolStripMenuItem1";
+            this.paymentLogReportToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.paymentLogReportToolStripMenuItem1.Text = "Payment Log";
+            this.paymentLogReportToolStripMenuItem1.Click += new System.EventHandler(this.paymentLogReportToolStripMenuItem1_Click);
             // 
             // MainForm
             // 
@@ -441,6 +459,8 @@
         private System.Windows.Forms.ToolStripStatusLabel statusMisc;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripMenuItem viewPaymentDetailToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem paymentLogReportToolStripMenuItem1;
     }
 }
 

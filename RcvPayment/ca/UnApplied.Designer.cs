@@ -45,6 +45,7 @@
             this.uUserDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cMenuDtl = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.selectDetailRecords = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.cRDetailBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.lblDetail = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
@@ -69,9 +70,11 @@
             this.uUserDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.selectMasterRecords = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cRMasterBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.timeCheck = new System.Windows.Forms.Timer(this.components);
+            this.markItemAsPostedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.panDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridDetail)).BeginInit();
@@ -255,9 +258,10 @@
             // cMenuDtl
             // 
             this.cMenuDtl.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.selectDetailRecords});
+            this.selectDetailRecords,
+            this.refreshToolStripMenuItem1});
             this.cMenuDtl.Name = "cMenuDtl";
-            this.cMenuDtl.Size = new System.Drawing.Size(184, 26);
+            this.cMenuDtl.Size = new System.Drawing.Size(184, 48);
             // 
             // selectDetailRecords
             // 
@@ -265,6 +269,13 @@
             this.selectDetailRecords.Size = new System.Drawing.Size(183, 22);
             this.selectDetailRecords.Text = "Select Detail Records";
             this.selectDetailRecords.Click += new System.EventHandler(this.SelectDetailRecordsClick);
+            // 
+            // refreshToolStripMenuItem1
+            // 
+            this.refreshToolStripMenuItem1.Name = "refreshToolStripMenuItem1";
+            this.refreshToolStripMenuItem1.Size = new System.Drawing.Size(183, 22);
+            this.refreshToolStripMenuItem1.Text = "Refresh";
+            this.refreshToolStripMenuItem1.Click += new System.EventHandler(this.refreshToolStripMenuItem1_Click);
             // 
             // cRDetailBindingSource
             // 
@@ -490,9 +501,11 @@
             // cMenu
             // 
             this.cMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.selectMasterRecords});
+            this.selectMasterRecords,
+            this.markItemAsPostedToolStripMenuItem,
+            this.refreshToolStripMenuItem});
             this.cMenu.Name = "cMenu";
-            this.cMenu.Size = new System.Drawing.Size(190, 26);
+            this.cMenu.Size = new System.Drawing.Size(190, 92);
             // 
             // selectMasterRecords
             // 
@@ -500,6 +513,13 @@
             this.selectMasterRecords.Size = new System.Drawing.Size(189, 22);
             this.selectMasterRecords.Text = "Select Master Records";
             this.selectMasterRecords.Click += new System.EventHandler(this.SelectMasterRecordsClick);
+            // 
+            // refreshToolStripMenuItem
+            // 
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.refreshToolStripMenuItem.Text = "Refresh";
+            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // cRMasterBindingSource
             // 
@@ -518,6 +538,13 @@
             // 
             this.timeCheck.Interval = 1000;
             this.timeCheck.Tick += new System.EventHandler(this.timeCheck_Tick);
+            // 
+            // markItemAsPostedToolStripMenuItem
+            // 
+            this.markItemAsPostedToolStripMenuItem.Name = "markItemAsPostedToolStripMenuItem";
+            this.markItemAsPostedToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.markItemAsPostedToolStripMenuItem.Text = "Mark Item As Posted";
+            this.markItemAsPostedToolStripMenuItem.Click += new System.EventHandler(this.markItemAsPostedToolStripMenuItem_Click);
             // 
             // UnApplied
             // 
@@ -594,5 +621,8 @@
         private System.Windows.Forms.ToolStripMenuItem selectDetailRecords;
         private System.Windows.Forms.Timer timeCheck;
         private System.Windows.Forms.Label timeLbl;
+        private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem markItemAsPostedToolStripMenuItem;
     }
 }

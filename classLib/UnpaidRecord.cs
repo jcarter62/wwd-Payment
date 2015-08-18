@@ -13,5 +13,6 @@ namespace classLib {
         public System.Nullable<int> Account;
         public System.Nullable<int> Invoice;
         public string Session;
+        public string SAccount;
     }
 }
