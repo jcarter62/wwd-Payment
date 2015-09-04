@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../css/local.css">
+
+    <meta charset="UTF-8">
+    <title>Payment Entry, Account Entry</title>
+</head>
+<body>
+<div class="container">
+    <h1>Payment Entry, Account Entry</h1>
+
+    <p>
+        The user has two options to specify the Account for proper payment application.
+    </p>
+    <ul>
+        <li>Simply Type Account: If the user knows the exact
+            account number, they can simply type the account.
+            As the user's cursor leaves this field, the system
+            will attempt to lookup the account name. If found, then the account name
+            will fill the Name field.
+        </li>
+        <li>Double Click the Account Text Box: The user will be presented with
+            a lookup window.
+        </li>
+    </ul>
+    <hr>
+    <p>Here is an example payment entry</p>
+    <img src="../images/payment/img1.png">
+
+    <p>The lower right area of the payment entry has an Account text input field.</p>
+    <img src="../images/window-newpayment-acctlookup.png"><br>
+
+    <p>When the user double clicks the Account field, they will be presented
+        with another window like the following</p>
+    <img src="../images/payment/lookup1.png">
+
+    <p>The user enters a search term in the upper left area, and the system
+        will populate the list of accounts that match the term. In this case the
+        user was searching for the term "jacki", and the system found 3 accounts.</p>
+
+    <p>Here is another example where the user searched for "140".</p>
+    <img src="../images/payment/lookup2.png">
+
+    <p>After the user clicks or selects one of the accounts, the system will attempt
+        to find any outstanding charges for the selected account. In this case
+        the system found some outstanding/unpaid charges.</p>
+
+    <hr>
+</div>
+<div class="container">
+    <a class="btn btn-primary btn-md" href="../home.html">Home</a></li>
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

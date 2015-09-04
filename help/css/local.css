@@ -1,0 +1,15 @@
+/*
+ Make Images Responsive by Default, ref:
+ http://skeeterz71.com/make-images-responsive-default-bootstrap-3/
+ */
+img {
+    display:block;
+    height: auto;
+    max-width: 100%;
+}
+
+img.nonresponsive {
+    display: inline;
+    height: auto;
+    max-width: 100%;
+}

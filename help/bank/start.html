@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../css/local.css">
+
+    <meta charset="UTF-8">
+    <title>Deposit funds to bank account</title>
+</head>
+<body>
+<div class="container">
+    <h1>Deposit funds to bank account</h1>
+
+    <div class="container">
+        <p>
+            To access this part of the application, select the payments menu, and then Payment Batches.
+            You should see a window similar to the following:
+        </p>
+        <img src="batch-start.png">
+
+        <p>
+            The first step is to click the new button, and a new batch will be created.
+        </p>
+        <img src="batch-start1.png">
+
+        <p>
+            In this case, we have a batch id of DT20150828001.
+            This id created models the batch numbers provided by the bank check scanning
+            software system. You can change the ID and/or the Deposit Date if required.
+        </p>
+
+        <p>
+            The next step is to add documents(checks) to this batch. You will do this by either double clicking
+            the batch listed in the left side grid, or selecting the batch, and
+            clicking the Documents button.
+        </p>
+
+        <p>
+            When you enter the documents for a batch, you will be presented with a list
+            of pending(unselected) payments similar to the following.
+        </p>
+        <img src="documents.png">
+
+        <p>
+            At this point, you should select payments on left side, click and drag
+            to the right side. This drag & drop activity will select the payment(s)
+            for this specific batch. You may notice the totals on the bottom of the
+            window will update as you drag & drop payments.
+        </p>
+        <img src="documents-after.png">
+
+        <p>
+            There may be cases where you need to modify the amount of a payment. The system
+            will allow a change to the amount only if it has not been associated with a
+            payment batch. You can only change the amount if it is considered a pending payment.
+            Here is an example of a payment change from $0.00 to $10.00.
+        </p>
+
+        <p>The user selected a payment that was created with $0.00, and we need to change to $10.00.</p>
+
+        <p>
+            The steps required for changing the amount:
+        <ul>
+            <li>Find the payment on left side and select.</li>
+            <li>Click the Edit Amount button.</li>
+            <li>Change the amount</li>
+            <li>Click the Save button.</li>
+            <li>If this payment had already been posted to A/R,
+                then a message will be displayed instructing you
+                to contact the A/R department.
+            </li>
+        </ul>
+
+        <hr>
+        <img src="documents-edit1.png">
+
+        <p>User edits amount.</p>
+        <img src="documents-edit2.png">
+
+        <p>Amount has been changed, and user selected this payment for the batch.</p>
+
+        </p>
+
+        <p>
+            The last step in this process is to post the batch.  You should have a batch total available
+            from the bank scanning software.  The document count & amount for the bank batch and
+            this software should match.  If they don't match, you will need to determine what is
+            different, and resolve the issues.<br>
+            Once the two sources match, you will simply click the post button.
+        </p>
+    </div>
+</div>
+</div>
+<hr>
+<div class="container">
+    <a class="btn btn-primary btn-md" href="../home.html">Home</a></li>
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>

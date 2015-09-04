@@ -53,6 +53,7 @@ namespace RcvPayment {
             }
         }
 
+        // http://stackoverflow.com/a/987090
         private bool IsVisible() {
             bool result = false;
             Rectangle formRec = new Rectangle(this.Left, this.Top, this.Width, this.Height);
