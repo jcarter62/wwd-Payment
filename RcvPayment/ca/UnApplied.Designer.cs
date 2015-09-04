@@ -70,11 +70,11 @@
             this.uUserDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.selectMasterRecords = new System.Windows.Forms.ToolStripMenuItem();
+            this.markItemAsPostedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cRMasterBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.timeCheck = new System.Windows.Forms.Timer(this.components);
-            this.markItemAsPostedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.panDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridDetail)).BeginInit();
@@ -505,7 +505,7 @@
             this.markItemAsPostedToolStripMenuItem,
             this.refreshToolStripMenuItem});
             this.cMenu.Name = "cMenu";
-            this.cMenu.Size = new System.Drawing.Size(190, 92);
+            this.cMenu.Size = new System.Drawing.Size(190, 70);
             // 
             // selectMasterRecords
             // 
@@ -513,6 +513,13 @@
             this.selectMasterRecords.Size = new System.Drawing.Size(189, 22);
             this.selectMasterRecords.Text = "Select Master Records";
             this.selectMasterRecords.Click += new System.EventHandler(this.SelectMasterRecordsClick);
+            // 
+            // markItemAsPostedToolStripMenuItem
+            // 
+            this.markItemAsPostedToolStripMenuItem.Name = "markItemAsPostedToolStripMenuItem";
+            this.markItemAsPostedToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.markItemAsPostedToolStripMenuItem.Text = "Mark Item As Posted";
+            this.markItemAsPostedToolStripMenuItem.Click += new System.EventHandler(this.markItemAsPostedToolStripMenuItem_Click);
             // 
             // refreshToolStripMenuItem
             // 
@@ -539,13 +546,6 @@
             this.timeCheck.Interval = 1000;
             this.timeCheck.Tick += new System.EventHandler(this.timeCheck_Tick);
             // 
-            // markItemAsPostedToolStripMenuItem
-            // 
-            this.markItemAsPostedToolStripMenuItem.Name = "markItemAsPostedToolStripMenuItem";
-            this.markItemAsPostedToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.markItemAsPostedToolStripMenuItem.Text = "Mark Item As Posted";
-            this.markItemAsPostedToolStripMenuItem.Click += new System.EventHandler(this.markItemAsPostedToolStripMenuItem_Click);
-            // 
             // UnApplied
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -554,6 +554,7 @@
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.panDetail);
             this.Controls.Add(this.statusStrip1);
+            this.HelpPage = "apply/index.html";
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UnApplied";
             this.Text = "Un-Applied Payments";

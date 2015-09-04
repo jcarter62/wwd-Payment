@@ -130,6 +130,7 @@
             this.Controls.Add(this.panelTrak2);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.panelTrak1);
+            this.HelpPage = "entry/accountlist.html";
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UnpaidList";
             this.Text = "Unpaid List for Account";

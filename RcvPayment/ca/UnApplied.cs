@@ -29,7 +29,6 @@ namespace RcvPayment.Ca {
         public UnApplied() {
             InitializeComponent();
             localInit();
-            //            DragDropInit();
         }
 
         private void localInit() {
@@ -202,10 +201,20 @@ namespace RcvPayment.Ca {
                 currentMasterRow = newindex;
                 MasterSelected();
                 LoadDetailRecords();
+                // UpdateLogWindow(currentMasterId);
             }
             timeCheck_Stop();
         }
 
+        private void UpdateLogWindow(string currID) {
+            Form f = null;
+
+            GetFormPtr("logview", ref f);
+            if (f != null) {
+                misc.LogView lf = f as misc.LogView;
+                lf.Id = currID;
+            }
+        }
 
         private void MasterSelected() {
             if (currentMasterRow >= 0) {

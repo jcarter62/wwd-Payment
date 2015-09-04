@@ -9,10 +9,10 @@ using System.Reflection;
 
 namespace classLib {
     public class PosSize {
-        private int left;
-        private int right;
-        private int top;
-        private int bottom;
+        public int left;
+        public int right;
+        public int top;
+        public int bottom;
         private string name;
         private Form form;
 

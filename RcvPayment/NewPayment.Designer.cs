@@ -43,6 +43,8 @@
             this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ReceivePost = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Deposited = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.cMenuList = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuLog = new System.Windows.Forms.ToolStripMenuItem();
             this.cRMasterBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblAppliedChk = new System.Windows.Forms.PictureBox();
@@ -96,13 +98,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.paymentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.cMenuList = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.menuLog = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PaymentsGrid)).BeginInit();
+            this.cMenuList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cRMasterBindingSource)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lblAppliedChk)).BeginInit();
@@ -111,7 +112,6 @@
             this.panelItem.SuspendLayout();
             this.panelDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paymentsBindingSource)).BeginInit();
-            this.cMenuList.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -292,6 +292,20 @@
             this.Deposited.Name = "Deposited";
             this.Deposited.ReadOnly = true;
             this.Deposited.Width = 61;
+            // 
+            // cMenuList
+            // 
+            this.cMenuList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuLog});
+            this.cMenuList.Name = "cMenuList";
+            this.cMenuList.Size = new System.Drawing.Size(127, 26);
+            // 
+            // menuLog
+            // 
+            this.menuLog.Name = "menuLog";
+            this.menuLog.Size = new System.Drawing.Size(126, 22);
+            this.menuLog.Text = "Show Log";
+            this.menuLog.Click += new System.EventHandler(this.menuLog_Click);
             // 
             // cRMasterBindingSource
             // 
@@ -868,20 +882,6 @@
             // 
             this.paymentsBindingSource.DataSource = typeof(classLib.Payments);
             // 
-            // cMenuList
-            // 
-            this.cMenuList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuLog});
-            this.cMenuList.Name = "cMenuList";
-            this.cMenuList.Size = new System.Drawing.Size(153, 48);
-            // 
-            // menuLog
-            // 
-            this.menuLog.Name = "menuLog";
-            this.menuLog.Size = new System.Drawing.Size(152, 22);
-            this.menuLog.Text = "Show Log";
-            this.menuLog.Click += new System.EventHandler(this.menuLog_Click);
-            // 
             // NewPayment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -892,6 +892,7 @@
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.HelpPage = "entry/new.html";
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "NewPayment";
             this.Text = "Payment Entry/Review";
@@ -904,6 +905,7 @@
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PaymentsGrid)).EndInit();
+            this.cMenuList.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cRMasterBindingSource)).EndInit();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lblAppliedChk)).EndInit();
@@ -914,7 +916,6 @@
             this.panelDetail.ResumeLayout(false);
             this.panelDetail.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paymentsBindingSource)).EndInit();
-            this.cMenuList.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

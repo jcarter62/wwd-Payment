@@ -13,7 +13,7 @@ namespace classLib {
     /// * ToString() enumerates user+domain+groups
     /// </summary>
     public class NtGroups {
-        private string CurrentUser { get; set; }
+        public string CurrentUser { get; protected set; }
         private string DomainName { get; set; }
 
         /// <summary>

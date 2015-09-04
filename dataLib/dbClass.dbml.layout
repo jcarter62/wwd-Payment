@@ -123,5 +123,11 @@
         <elementListCompartment Id="57e8661c-5e0f-497f-9eb8-af566cfd288e" absoluteBounds="7.265, 4.835, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="41eea116-675f-4773-821f-b78a3c9a3401" absoluteBounds="0.625, 4.5, 2, 1.9631982421875">
+      <DataClassMoniker Name="/DbClassDataContext/CRMasterActivity" />
+      <nestedChildShapes>
+        <elementListCompartment Id="948815ab-af7e-47a7-a577-17795e18a604" absoluteBounds="0.64000000000000012, 4.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

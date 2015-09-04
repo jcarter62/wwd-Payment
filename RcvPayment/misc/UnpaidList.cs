@@ -244,9 +244,8 @@ namespace RcvPayment {
 
         private int Convert2int(string v) {
             int i = 0;
-            if ( v.Length > 0 )
-            {
-                int.TryParse(v,out i);
+            if (v.Length > 0) {
+                int.TryParse(v, out i);
             }
             return i;
         }

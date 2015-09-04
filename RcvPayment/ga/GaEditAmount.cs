@@ -58,7 +58,11 @@ namespace RcvPayment {
 
             if ( payment != null )
             {
-                AmountStr = payment.Amount.Value.ToString();
+                string lblstr;
+                lblstr = "Receipt ID:" + payment.RcptID.ToString().Trim() +
+                    " Ref:" + payment.PayRef.Trim();
+                labelText.Text = lblstr;
+                AmountStr = payment.Amount.Value.ToString("C2");
             }
 
             UpdateVisibleAmount();
@@ -71,13 +75,16 @@ namespace RcvPayment {
         private void BtnSaveClick(object sender, EventArgs e) {
             if (pId.Length > 0 )
             {
+                string newAmt;
+                newAmt = txtAmount.Text.Replace("$","").Replace(",","");
+
                 var payment = (from r in dc.CRMasters
                                where r.Id == pId
                                select r).FirstOrDefault();
 
                 if (payment != null) {
                     double dbl;
-                    double.TryParse(txtAmount.Text, out dbl);
+                    double.TryParse(newAmt, out dbl);
                     payment.Amount = dbl;
                     dc.SubmitChanges();
                 }

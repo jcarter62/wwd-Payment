@@ -36,18 +36,18 @@ namespace RcvPayment {
             this.textBox5 = new Telerik.Reporting.TextBox();
             this.textBox6 = new Telerik.Reporting.TextBox();
             this.textBox7 = new Telerik.Reporting.TextBox();
+            this.textBox10 = new Telerik.Reporting.TextBox();
             this.detailSection1 = new Telerik.Reporting.DetailSection();
             this.itemNrTextBox = new Telerik.Reporting.TextBox();
             this.itemDescriptionTextBox = new Telerik.Reporting.TextBox();
             this.lineTotalTextBox = new Telerik.Reporting.TextBox();
             this.textBox4 = new Telerik.Reporting.TextBox();
             this.textBox9 = new Telerik.Reporting.TextBox();
-            this.pageFooterSection1 = new Telerik.Reporting.PageFooterSection();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // groupFooterSection
             // 
-            this.groupFooterSection.Height = Telerik.Reporting.Drawing.Unit.Inch(0.70866191387176514D);
+            this.groupFooterSection.Height = Telerik.Reporting.Drawing.Unit.Inch(0.64082705974578857D);
             this.groupFooterSection.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
             this.subTotalPanel});
             this.groupFooterSection.Name = "groupFooterSection";
@@ -59,9 +59,9 @@ namespace RcvPayment {
             this.subTotalPanel.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
             this.subTotalLabelTextBox,
             this.subTotalTextBox});
-            this.subTotalPanel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.subTotalPanel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.0084657669067382812D), Telerik.Reporting.Drawing.Unit.Inch(0D));
             this.subTotalPanel.Name = "subTotalPanel";
-            this.subTotalPanel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(6.2677164077758789D), Telerik.Reporting.Drawing.Unit.Inch(0.35433071851730347D));
+            this.subTotalPanel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(6.4914155006408691D), Telerik.Reporting.Drawing.Unit.Inch(0.35433068871498108D));
             this.subTotalPanel.Style.BorderColor.Default = System.Drawing.Color.Silver;
             this.subTotalPanel.Style.BorderStyle.Bottom = Telerik.Reporting.Drawing.BorderType.Solid;
             this.subTotalPanel.Style.BorderStyle.Top = Telerik.Reporting.Drawing.BorderType.Solid;
@@ -85,7 +85,7 @@ namespace RcvPayment {
             this.subTotalTextBox.Format = "{0:C2}";
             this.subTotalTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(5.09999942779541D), Telerik.Reporting.Drawing.Unit.Inch(0D));
             this.subTotalTextBox.Name = "subTotalTextBox";
-            this.subTotalTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.1677565574645996D), Telerik.Reporting.Drawing.Unit.Inch(0.35433071851730347D));
+            this.subTotalTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.3914165496826172D), Telerik.Reporting.Drawing.Unit.Inch(0.35433071851730347D));
             this.subTotalTextBox.Style.BorderColor.Default = System.Drawing.Color.Silver;
             this.subTotalTextBox.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
             this.subTotalTextBox.Style.Font.Bold = true;
@@ -114,7 +114,7 @@ namespace RcvPayment {
             this.textBox8});
             this.itemsHeaderPanel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0D), Telerik.Reporting.Drawing.Unit.Inch(0D));
             this.itemsHeaderPanel.Name = "itemsHeaderPanel";
-            this.itemsHeaderPanel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(6.2677164077758789D), Telerik.Reporting.Drawing.Unit.Inch(0.23610194027423859D));
+            this.itemsHeaderPanel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(6.4999213218688965D), Telerik.Reporting.Drawing.Unit.Inch(0.23610194027423859D));
             this.itemsHeaderPanel.Style.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.itemsHeaderPanel.Style.BorderColor.Default = System.Drawing.Color.Silver;
             this.itemsHeaderPanel.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
@@ -151,7 +151,7 @@ namespace RcvPayment {
             // 
             this.lineTotalHeaderTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(5.0999999046325684D), Telerik.Reporting.Drawing.Unit.Inch(0D));
             this.lineTotalHeaderTextBox.Name = "lineTotalHeaderTextBox";
-            this.lineTotalHeaderTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.1596451997756958D), Telerik.Reporting.Drawing.Unit.Inch(0.23610194027423859D));
+            this.lineTotalHeaderTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.3999214172363281D), Telerik.Reporting.Drawing.Unit.Inch(0.23610194027423859D));
             this.lineTotalHeaderTextBox.Style.BorderColor.Default = System.Drawing.Color.Silver;
             this.lineTotalHeaderTextBox.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
             this.lineTotalHeaderTextBox.Style.Color = System.Drawing.Color.DimGray;
@@ -202,7 +202,7 @@ namespace RcvPayment {
             // 
             // pageHeaderSection
             // 
-            this.pageHeaderSection.Height = Telerik.Reporting.Drawing.Unit.Inch(1.7324018478393555D);
+            this.pageHeaderSection.Height = Telerik.Reporting.Drawing.Unit.Inch(1.9685826301574707D);
             this.pageHeaderSection.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
             this.invoiceInfoPanel});
             this.pageHeaderSection.Name = "pageHeaderSection";
@@ -221,10 +221,11 @@ namespace RcvPayment {
             this.textBox2,
             this.textBox5,
             this.textBox6,
-            this.textBox7});
+            this.textBox7,
+            this.textBox10});
             this.invoiceInfoPanel.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0D), Telerik.Reporting.Drawing.Unit.Inch(0D));
             this.invoiceInfoPanel.Name = "invoiceInfoPanel";
-            this.invoiceInfoPanel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(6.26775598526001D), Telerik.Reporting.Drawing.Unit.Inch(1.7324018478393555D));
+            this.invoiceInfoPanel.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(6.4998817443847656D), Telerik.Reporting.Drawing.Unit.Inch(1.9685826301574707D));
             // 
             // invoiceHeaderTextBox
             // 
@@ -257,7 +258,7 @@ namespace RcvPayment {
             // 
             this.invoiceNrTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(4.5999999046325684D), Telerik.Reporting.Drawing.Unit.Inch(0.55236375331878662D));
             this.invoiceNrTextBox.Name = "invoiceNrTextBox";
-            this.invoiceNrTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.6597640514373779D), Telerik.Reporting.Drawing.Unit.Inch(0.23582650721073151D));
+            this.invoiceNrTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.8998420238494873D), Telerik.Reporting.Drawing.Unit.Inch(0.23582650721073151D));
             this.invoiceNrTextBox.Style.BorderColor.Default = System.Drawing.Color.Silver;
             this.invoiceNrTextBox.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
             this.invoiceNrTextBox.Style.BorderWidth.Default = Telerik.Reporting.Drawing.Unit.Pixel(1D);
@@ -286,7 +287,7 @@ namespace RcvPayment {
             this.invoiceDateTextBox.Format = "{0:d}";
             this.invoiceDateTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(4.5999999046325684D), Telerik.Reporting.Drawing.Unit.Inch(0.78826862573623657D));
             this.invoiceDateTextBox.Name = "invoiceDateTextBox";
-            this.invoiceDateTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.6597636938095093D), Telerik.Reporting.Drawing.Unit.Inch(0.23574751615524292D));
+            this.invoiceDateTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.8998416662216187D), Telerik.Reporting.Drawing.Unit.Inch(0.23574751615524292D));
             this.invoiceDateTextBox.Style.BorderColor.Default = System.Drawing.Color.Silver;
             this.invoiceDateTextBox.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
             this.invoiceDateTextBox.Style.BorderWidth.Default = Telerik.Reporting.Drawing.Unit.Pixel(1D);
@@ -315,7 +316,7 @@ namespace RcvPayment {
             this.invoiceTotalTextBox1.Format = "{0:C2}";
             this.invoiceTotalTextBox1.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(4.5999999046325684D), Telerik.Reporting.Drawing.Unit.Inch(1.0240950584411621D));
             this.invoiceTotalTextBox1.Name = "invoiceTotalTextBox1";
-            this.invoiceTotalTextBox1.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.6597638130187988D), Telerik.Reporting.Drawing.Unit.Inch(0.23566867411136627D));
+            this.invoiceTotalTextBox1.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.8998417854309082D), Telerik.Reporting.Drawing.Unit.Inch(0.23566867411136627D));
             this.invoiceTotalTextBox1.Style.BorderColor.Default = System.Drawing.Color.Silver;
             this.invoiceTotalTextBox1.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
             this.invoiceTotalTextBox1.Style.BorderWidth.Default = Telerik.Reporting.Drawing.Unit.Pixel(1D);
@@ -344,7 +345,7 @@ namespace RcvPayment {
             this.textBox2.Format = "{0:C2}";
             this.textBox2.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(4.5999999046325684D), Telerik.Reporting.Drawing.Unit.Inch(1.2598425149917603D));
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.65925133228302D), Telerik.Reporting.Drawing.Unit.Inch(0.23566867411136627D));
+            this.textBox2.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.8993293046951294D), Telerik.Reporting.Drawing.Unit.Inch(0.23566867411136627D));
             this.textBox2.Style.BorderColor.Default = System.Drawing.Color.Silver;
             this.textBox2.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
             this.textBox2.Style.BorderWidth.Default = Telerik.Reporting.Drawing.Unit.Pixel(1D);
@@ -384,7 +385,7 @@ namespace RcvPayment {
             // 
             this.textBox7.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(4.5999999046325684D), Telerik.Reporting.Drawing.Unit.Inch(1.4965753555297852D));
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.6676772832870483D), Telerik.Reporting.Drawing.Unit.Inch(0.23582650721073151D));
+            this.textBox7.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.8993291854858398D), Telerik.Reporting.Drawing.Unit.Inch(0.23582650721073151D));
             this.textBox7.Style.BorderColor.Default = System.Drawing.Color.Silver;
             this.textBox7.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
             this.textBox7.Style.BorderWidth.Default = Telerik.Reporting.Drawing.Unit.Pixel(1D);
@@ -392,6 +393,19 @@ namespace RcvPayment {
             this.textBox7.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
             this.textBox7.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.textBox7.Value = "= Fields.mPayRef";
+            // 
+            // textBox10
+            // 
+            this.textBox10.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(-4.4408920985006262E-16D), Telerik.Reporting.Drawing.Unit.Inch(1.7327561378479004D));
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(6.49932861328125D), Telerik.Reporting.Drawing.Unit.Inch(0.23582650721073151D));
+            this.textBox10.Style.BorderColor.Default = System.Drawing.Color.Silver;
+            this.textBox10.Style.BorderStyle.Default = Telerik.Reporting.Drawing.BorderType.Solid;
+            this.textBox10.Style.BorderWidth.Default = Telerik.Reporting.Drawing.Unit.Pixel(1D);
+            this.textBox10.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Inch(0.078740157186985016D);
+            this.textBox10.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
+            this.textBox10.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
+            this.textBox10.Value = "= \"Payment Note: \" + Fields.mnote";
             // 
             // detailSection1
             // 
@@ -412,7 +426,7 @@ namespace RcvPayment {
             // 
             this.itemNrTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0D), Telerik.Reporting.Drawing.Unit.Inch(0D));
             this.itemNrTextBox.Name = "itemNrTextBox";
-            this.itemNrTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.79999995231628418D), Telerik.Reporting.Drawing.Unit.Inch(0.35433071851730347D));
+            this.itemNrTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.79149442911148071D), Telerik.Reporting.Drawing.Unit.Inch(0.35433071851730347D));
             this.itemNrTextBox.Style.BorderColor.Default = System.Drawing.Color.Silver;
             this.itemNrTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(10D);
             this.itemNrTextBox.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Inch(0.11811023950576782D);
@@ -423,7 +437,7 @@ namespace RcvPayment {
             // 
             this.itemDescriptionTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.80007869005203247D), Telerik.Reporting.Drawing.Unit.Inch(0D));
             this.itemDescriptionTextBox.Name = "itemDescriptionTextBox";
-            this.itemDescriptionTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.8999214172363281D), Telerik.Reporting.Drawing.Unit.Inch(0.35433071851730347D));
+            this.itemDescriptionTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.8914159536361694D), Telerik.Reporting.Drawing.Unit.Inch(0.35433071851730347D));
             this.itemDescriptionTextBox.Style.BorderColor.Default = System.Drawing.Color.Silver;
             this.itemDescriptionTextBox.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
             this.itemDescriptionTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(10D);
@@ -436,7 +450,7 @@ namespace RcvPayment {
             this.lineTotalTextBox.Format = "{0:C2}";
             this.lineTotalTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(5.0999999046325684D), Telerik.Reporting.Drawing.Unit.Inch(0D));
             this.lineTotalTextBox.Name = "lineTotalTextBox";
-            this.lineTotalTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.167677640914917D), Telerik.Reporting.Drawing.Unit.Inch(0.35433071851730347D));
+            this.lineTotalTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.3998819589614868D), Telerik.Reporting.Drawing.Unit.Inch(0.35433071851730347D));
             this.lineTotalTextBox.Style.BorderColor.Default = System.Drawing.Color.Silver;
             this.lineTotalTextBox.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
             this.lineTotalTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(10D);
@@ -449,7 +463,7 @@ namespace RcvPayment {
             // 
             this.textBox4.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3.4994869232177734D), Telerik.Reporting.Drawing.Unit.Inch(0.00015767414879519492D));
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.6004341840744019D), Telerik.Reporting.Drawing.Unit.Inch(0.35433071851730347D));
+            this.textBox4.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(1.5919287204742432D), Telerik.Reporting.Drawing.Unit.Inch(0.35433071851730347D));
             this.textBox4.Style.BorderColor.Default = System.Drawing.Color.Silver;
             this.textBox4.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
             this.textBox4.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(10D);
@@ -461,18 +475,13 @@ namespace RcvPayment {
             // 
             this.textBox9.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(2.7000789642333984D), Telerik.Reporting.Drawing.Unit.Inch(0D));
             this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.79932910203933716D), Telerik.Reporting.Drawing.Unit.Inch(0.35433071851730347D));
+            this.textBox9.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(0.79082357883453369D), Telerik.Reporting.Drawing.Unit.Inch(0.35433071851730347D));
             this.textBox9.Style.BorderColor.Default = System.Drawing.Color.Silver;
             this.textBox9.Style.BorderStyle.Left = Telerik.Reporting.Drawing.BorderType.Solid;
             this.textBox9.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(10D);
             this.textBox9.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Inch(0.11811023950576782D);
             this.textBox9.Style.VerticalAlign = Telerik.Reporting.Drawing.VerticalAlign.Middle;
             this.textBox9.Value = "= Fields.dType";
-            // 
-            // pageFooterSection1
-            // 
-            this.pageFooterSection1.Height = Telerik.Reporting.Drawing.Unit.Inch(0.30468478798866272D);
-            this.pageFooterSection1.Name = "pageFooterSection1";
             // 
             // Report1
             // 
@@ -487,8 +496,7 @@ namespace RcvPayment {
             this.groupHeaderSection,
             this.groupFooterSection,
             this.pageHeaderSection,
-            this.detailSection1,
-            this.pageFooterSection1});
+            this.detailSection1});
             this.Name = "Invoice1";
             this.PageSettings.Landscape = false;
             this.PageSettings.Margins = new Telerik.Reporting.Drawing.MarginsU(Telerik.Reporting.Drawing.Unit.Inch(1D), Telerik.Reporting.Drawing.Unit.Inch(1D), Telerik.Reporting.Drawing.Unit.Inch(1D), Telerik.Reporting.Drawing.Unit.Inch(1D));
@@ -511,7 +519,7 @@ namespace RcvPayment {
             styleRule1,
             styleRule2});
             this.UnitOfMeasure = Telerik.Reporting.Drawing.UnitType.Inch;
-            this.Width = Telerik.Reporting.Drawing.Unit.Inch(6.2677164077758789D);
+            this.Width = Telerik.Reporting.Drawing.Unit.Inch(6.4999608993530273D);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
@@ -531,16 +539,12 @@ namespace RcvPayment {
         private Telerik.Reporting.TextBox itemNrTextBox;
         private Telerik.Reporting.TextBox itemDescriptionTextBox;
         private Telerik.Reporting.TextBox lineTotalTextBox;
-        private Telerik.Reporting.PageFooterSection pageFooterSection1;
         private Telerik.Reporting.GroupHeaderSection groupHeaderSection;
         private Telerik.Reporting.Panel itemsHeaderPanel;
         private Telerik.Reporting.TextBox ItemNoHeaderTextBox;
         private Telerik.Reporting.TextBox descriptionHeaderTextBox;
         private Telerik.Reporting.TextBox lineTotalHeaderTextBox;
         private Telerik.Reporting.GroupFooterSection groupFooterSection;
-        private Telerik.Reporting.Panel subTotalPanel;
-        private Telerik.Reporting.TextBox subTotalLabelTextBox;
-        private Telerik.Reporting.TextBox subTotalTextBox;
         private Telerik.Reporting.TextBox textBox1;
         private Telerik.Reporting.TextBox textBox2;
         private Telerik.Reporting.TextBox textBox4;
@@ -550,5 +554,9 @@ namespace RcvPayment {
         private Telerik.Reporting.TextBox textBox6;
         private Telerik.Reporting.TextBox textBox7;
         private Telerik.Reporting.TextBox textBox9;
+        private Telerik.Reporting.TextBox textBox10;
+        private Telerik.Reporting.Panel subTotalPanel;
+        private Telerik.Reporting.TextBox subTotalLabelTextBox;
+        private Telerik.Reporting.TextBox subTotalTextBox;
     }
 }

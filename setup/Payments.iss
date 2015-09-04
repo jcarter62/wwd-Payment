@@ -40,6 +40,7 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 Source: "C:\local\projects\Payments\RcvPayment\bin\Debug\RcvPayment.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\local\projects\Payments\RcvPayment\bin\Debug\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "c:\local\projects\Payments\Payments.zip"; DestDir: "{app}"; Flags: ignoreversion
+Source: "c:\local\projects\Payments\help\*"; Excludes: "*.idea"; DestDir:"{app}\help"; Flags: recursesubdirs createallsubdirs ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

@@ -60,6 +60,9 @@ namespace dataLib
     partial void InsertCrArMst(CrArMst instance);
     partial void UpdateCrArMst(CrArMst instance);
     partial void DeleteCrArMst(CrArMst instance);
+    partial void InsertCRMasterActivity(CRMasterActivity instance);
+    partial void UpdateCRMasterActivity(CRMasterActivity instance);
+    partial void DeleteCRMasterActivity(CRMasterActivity instance);
     #endregion
 		
 		public DbClassDataContext() : 
@@ -241,6 +244,14 @@ namespace dataLib
 			get
 			{
 				return this.GetTable<CRPaymentInfo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CRMasterActivity> CRMasterActivities
+		{
+			get
+			{
+				return this.GetTable<CRMasterActivity>();
 			}
 		}
 		
@@ -6460,6 +6471,188 @@ namespace dataLib
 				{
 					this._id = value;
 				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CRMasterActivity")]
+	public partial class CRMasterActivity : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _id;
+		
+		private string _CrMid;
+		
+		private string _Dept;
+		
+		private string _Operation;
+		
+		private string _Person;
+		
+		private System.Nullable<System.DateTime> _TimeStamp;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(string value);
+    partial void OnidChanged();
+    partial void OnCrMidChanging(string value);
+    partial void OnCrMidChanged();
+    partial void OnDeptChanging(string value);
+    partial void OnDeptChanged();
+    partial void OnOperationChanging(string value);
+    partial void OnOperationChanged();
+    partial void OnPersonChanging(string value);
+    partial void OnPersonChanged();
+    partial void OnTimeStampChanging(System.Nullable<System.DateTime> value);
+    partial void OnTimeStampChanged();
+    #endregion
+		
+		public CRMasterActivity()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="VarChar(40) NOT NULL", CanBeNull=false, IsPrimaryKey=true, UpdateCheck=UpdateCheck.Never)]
+		public string id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CrMid", DbType="VarChar(40)", UpdateCheck=UpdateCheck.Never)]
+		public string CrMid
+		{
+			get
+			{
+				return this._CrMid;
+			}
+			set
+			{
+				if ((this._CrMid != value))
+				{
+					this.OnCrMidChanging(value);
+					this.SendPropertyChanging();
+					this._CrMid = value;
+					this.SendPropertyChanged("CrMid");
+					this.OnCrMidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dept", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string Dept
+		{
+			get
+			{
+				return this._Dept;
+			}
+			set
+			{
+				if ((this._Dept != value))
+				{
+					this.OnDeptChanging(value);
+					this.SendPropertyChanging();
+					this._Dept = value;
+					this.SendPropertyChanged("Dept");
+					this.OnDeptChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Operation", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string Operation
+		{
+			get
+			{
+				return this._Operation;
+			}
+			set
+			{
+				if ((this._Operation != value))
+				{
+					this.OnOperationChanging(value);
+					this.SendPropertyChanging();
+					this._Operation = value;
+					this.SendPropertyChanged("Operation");
+					this.OnOperationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Person", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string Person
+		{
+			get
+			{
+				return this._Person;
+			}
+			set
+			{
+				if ((this._Person != value))
+				{
+					this.OnPersonChanging(value);
+					this.SendPropertyChanging();
+					this._Person = value;
+					this.SendPropertyChanged("Person");
+					this.OnPersonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeStamp", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<System.DateTime> TimeStamp
+		{
+			get
+			{
+				return this._TimeStamp;
+			}
+			set
+			{
+				if ((this._TimeStamp != value))
+				{
+					this.OnTimeStampChanging(value);
+					this.SendPropertyChanging();
+					this._TimeStamp = value;
+					this.SendPropertyChanged("TimeStamp");
+					this.OnTimeStampChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

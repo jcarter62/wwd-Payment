@@ -30,10 +30,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.HelpButton = true;
             this.Name = "MyForm";
             this.Text = "MyForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MyForm_FormClosing);
             this.Load += new System.EventHandler(this.MyForm_Load);
+            this.HelpRequested += new System.Windows.Forms.HelpEventHandler(this.MyForm_HelpRequested);
             this.ResumeLayout(false);
 
         }

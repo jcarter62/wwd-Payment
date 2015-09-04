@@ -15,12 +15,10 @@ namespace dataLib {
 
     public partial class DbClassDataContext {
         public override void SubmitChanges(ConflictMode failureMode) {
-            ChangeSet changes = this.GetChangeSet() ;
+            ChangeSet changes = this.GetChangeSet();
 
-            foreach ( var cs in changes.Inserts )
-            {
-                if ( cs.GetType() == typeof(CRMaster) )
-                {
+            foreach (var cs in changes.Inserts) {
+                if (cs.GetType() == typeof(CRMaster)) {
                     var m = (CRMaster)cs;
                     TblLog log = new TblLog();
                     log.tblId = m.Id.ToString();
@@ -38,6 +36,18 @@ namespace dataLib {
     static class Shortid {
         public static String newId {
             get { return Guid.NewGuid().ToString().ToLower().Replace("{", "").Replace("}", "").Replace("-", ""); }
+        }
+    }
+
+    public partial class CRMasterActivity {
+        partial void OnCreated() {
+            init();
+        }
+
+        public void init() {
+            if (id == null) {
+                id = Shortid.newId;
+            }
         }
     }
 

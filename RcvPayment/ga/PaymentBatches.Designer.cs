@@ -39,6 +39,7 @@
             this.uUserDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataSrc = new System.Windows.Forms.BindingSource(this.components);
             this.panRight = new classLib.PanelTrak(this.components);
+            this.textDepositDate = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.btnReport = new System.Windows.Forms.Button();
             this.btnPost = new System.Windows.Forms.Button();
@@ -61,7 +62,6 @@
             this.statGrid = new System.Windows.Forms.ToolStripStatusLabel();
             this.statDetail = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.textDepositDate = new System.Windows.Forms.DateTimePicker();
             this.panLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSrc)).BeginInit();
@@ -219,6 +219,16 @@
             this.panRight.Name = "panRight";
             this.panRight.Size = new System.Drawing.Size(219, 288);
             this.panRight.TabIndex = 1;
+            // 
+            // textDepositDate
+            // 
+            this.textDepositDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textDepositDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.textDepositDate.Location = new System.Drawing.Point(103, 31);
+            this.textDepositDate.Name = "textDepositDate";
+            this.textDepositDate.Size = new System.Drawing.Size(104, 20);
+            this.textDepositDate.TabIndex = 19;
             // 
             // label5
             // 
@@ -435,16 +445,6 @@
             this.splitter1.TabIndex = 3;
             this.splitter1.TabStop = false;
             // 
-            // textDepositDate
-            // 
-            this.textDepositDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textDepositDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.textDepositDate.Location = new System.Drawing.Point(103, 31);
-            this.textDepositDate.Name = "textDepositDate";
-            this.textDepositDate.Size = new System.Drawing.Size(104, 20);
-            this.textDepositDate.TabIndex = 19;
-            // 
             // PaymentBatches
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -453,6 +453,7 @@
             this.Controls.Add(this.panLeft);
             this.Controls.Add(this.panRight);
             this.Controls.Add(this.statusStrip1);
+            this.HelpPage = "bank/start.html";
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PaymentBatches";
             this.Text = "Payment Batches";

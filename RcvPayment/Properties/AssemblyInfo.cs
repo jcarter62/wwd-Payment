@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Receive Payments")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("This is a payment processing application developed to support Westlands Water District.  The application supports WMIS and Sage Mas500 as source data data, and supports selection of WMIS and Mas500 customer accounts as well as open items.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Westlands Water District")]
 [assembly: AssemblyProduct("Receive Payments")]

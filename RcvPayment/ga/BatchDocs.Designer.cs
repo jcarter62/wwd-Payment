@@ -511,6 +511,7 @@
             this.Controls.Add(this.panRight);
             this.Controls.Add(this.panBot);
             this.Controls.Add(this.statStrip);
+            this.HelpPage = "bank/start.html";
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BatchDocs";
             this.Text = "Payment Batch / Documents";

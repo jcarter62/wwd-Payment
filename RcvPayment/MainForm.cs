@@ -151,5 +151,29 @@ namespace RcvPayment {
                 f.DisplayReport(TodaysDate);
             }
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
+            this.Close();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
+            // Display Help About.
+            About f = new About();
+            f.MdiParent = this;
+            f.Show();
+        }
+
+        private void contentsToolStripMenuItem_Click(object sender, EventArgs e) {
+            // Open help
+            try
+            {
+                Point mousePos = System.Windows.Forms.Cursor.Position;
+                HelpEventArgs hea = new HelpEventArgs(mousePos);
+                this.OnHelpRequested(hea);
+            } catch
+            {
+                // nothing...
+            }
+        }
     }
 }

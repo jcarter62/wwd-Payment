@@ -744,6 +744,7 @@
             this.ClientSize = new System.Drawing.Size(546, 387);
             this.Controls.Add(this.tabDB);
             this.Controls.Add(this.panel1);
+            this.HelpPage = "setup/setup.html";
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Settings";
             this.Text = "Setup";

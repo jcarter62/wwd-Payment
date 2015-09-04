@@ -107,33 +107,52 @@ namespace RcvPayment {
         }
 
         private void loadDetail(String id) {
-            var q = (from item in dc.CRMasters
-                     where item.Id == id
-                     select item).First();
-
-            txtReceiptId.Text = q.RcptID;
-            txtTimeStamp.Text = q.CDate.ToString();
-            txtRecBy.Text = q.CUser;
-            txtRecFrom.Text = q.DeliveryName;
-            cbPayType.Text = q.PayType;
-            txtRef.Text = q.PayRef;
-            cbVia.Text = q.PayVia;
-            txtNote.Text = q.Note;
-            txtAmount.Text = q.Amount.Value.ToString("C");
-            paymentAmount = q.Amount.Value;
-            txtPM.Text = q.Postmark.ToString();
-
-            PaymentPosted = q.ReceivePost;
-
-
-            panelDetail.Start(btnSavePayment);
-            if (PaymentPosted) {
-                panelDetail.DisableControls();
+            if (id.Length <= 0) {
+                txtReceiptId.Text = "";
+                txtTimeStamp.Text = "";
+                txtRecBy.Text = "";
+                txtRecFrom.Text = "";
+                cbPayType.Text = "";
+                txtRef.Text = "";
+                cbVia.Text = "";
+                txtNote.Text = "";
+                txtAmount.Text = "";
+                txtPM.Text = "";
+                panelDetail.Start(btnSavePayment);
             }
             else {
-                panelDetail.EnableControls();
+                try {
+                    var q = (from item in dc.CRMasters
+                             where item.Id == id
+                             select item).First();
+
+                    txtReceiptId.Text = q.RcptID;
+                    txtTimeStamp.Text = q.CDate.ToString();
+                    txtRecBy.Text = q.CUser;
+                    txtRecFrom.Text = q.DeliveryName;
+                    cbPayType.Text = q.PayType;
+                    txtRef.Text = q.PayRef;
+                    cbVia.Text = q.PayVia;
+                    txtNote.Text = q.Note;
+                    txtAmount.Text = q.Amount.Value.ToString("C");
+                    paymentAmount = q.Amount.Value;
+                    txtPM.Text = q.Postmark.ToString();
+
+                    PaymentPosted = q.ReceivePost;
+
+                    panelDetail.Start(btnSavePayment);
+                    if (PaymentPosted) {
+                        panelDetail.DisableControls();
+                    }
+                    else {
+                        panelDetail.EnableControls();
+                    }
+                    LoadItemsGrid(id);
+                }
+                catch {
+
+                }
             }
-            LoadItemsGrid(id);
         }
 
         private void LoadItemsGrid(string id) {
@@ -223,31 +242,41 @@ namespace RcvPayment {
         }
 
         private void loadItemDetail(string thisId) {
-            try {
-                var q = (from item in dc.CRDetails
-                         where item.Id == thisId
-                         select item).First();
+            if (thisId.Length <= 0) {
+                txtItmAcct.Text = "";
+                txtItmName.Text = "";
+                txtItmAmount.Text = "";
+                txtItmNote.Text = "";
+                cbItmApply2.Text = "";
+                currentDetailID = "";
+            }
+            else {
+                try {
+                    var q = (from item in dc.CRDetails
+                             where item.Id == thisId
+                             select item).First();
 
-                if (q != null) {
-                    txtItmAcct.Text = q.Account;
-                    txtItmName.Text = q.Name;
-                    txtItmAmount.Text = q.Amount.Value.ToString("C");
-                    txtItmNote.Text = q.Note;
-                    cbItmApply2.Text = q.Type;
-                    currentDetailID = thisId;
+                    if (q != null) {
+                        txtItmAcct.Text = q.Account;
+                        txtItmName.Text = q.Name;
+                        txtItmAmount.Text = q.Amount.Value.ToString("C");
+                        txtItmNote.Text = q.Note;
+                        cbItmApply2.Text = q.Type;
+                        currentDetailID = thisId;
 
-                    // Start monitoring input objects on this panel.
-                    if (PaymentPosted) {
-                        panelItem.DisableControls();
-                    }
-                    else {
-                        panelItem.EnableControls();
-                        panelItem.Start(btnSaveItem);
+                        // Start monitoring input objects on this panel.
+                        if (PaymentPosted) {
+                            panelItem.DisableControls();
+                        }
+                        else {
+                            panelItem.EnableControls();
+                            panelItem.Start(btnSaveItem);
+                        }
                     }
                 }
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex.Message);
+                catch (Exception ex) {
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
 
@@ -383,6 +412,8 @@ namespace RcvPayment {
             bool ok2del = true;
 
             // determine if ok to delete.
+            ok2del = IsOk2Delete(currentID);
+            // 
 
             if (ok2del) {
                 if (userIsOkWithDeletion(currentID)) {
@@ -392,6 +423,10 @@ namespace RcvPayment {
             else {
                 tellUserTheyCantDelete(currentID);
             }
+        }
+
+        private bool IsOk2Delete(string currentID) {
+            return false;
         }
 
         private void tellUserTheyCantDelete(string currentID) {
@@ -669,13 +704,12 @@ namespace RcvPayment {
             // try to find in wmis
             if (int.TryParse(txtItmAcct.Text, out num)) {
                 CustomerInfo ci = new CustomerInfo(num);
-                if ( ci.Name.ToLower() != "not found")
+                if (ci.Name.ToLower() != "not found")
                     result = ci.Name;
             }
 
             // if not found, then try to find in mas500
-            if ( result.Length <= 0 )
-            {
+            if (result.Length <= 0) {
                 CustomerInfo ci = new CustomerInfo(txtItmAcct.Text);
                 result = ci.Name;
             }
@@ -836,30 +870,47 @@ namespace RcvPayment {
                 id = PaymentsGrid.SelectedRows[0].Cells["Id"].Value.ToString();
                 userSelectedPaymentRow(id);
             }
+            else {
+                userSelectedPaymentRow("");
+                ItemsGrid.Rows.Clear();
+            }
         }
 
         private void PostThisPayment() {
-            // Save this record.
-            var q = (from item in dc.CRMasters
-                     where item.Id == currentID
-                     select item).First();
+            if (currentID.Length > 0) {
+                // Save this record.
+                var q = (from item in dc.CRMasters
+                         where item.Id == currentID
+                         select item).First();
 
-            q.StateRcv = "posted";
-            q.StateAR = "created";
-            q.StateGA = "created";
+                if (q.StateRcv != "posted") {
+                    q.StateRcv = "posted";
+                    q.StateAR = "created";
+                    q.StateGA = "created";
 
-            TblLog l = new TblLog();
-            l.tblName = "crmaster";
-            l.tblId = currentID;
-            l.txt = "receiving post";
+                    var l = new TblLog();
+                    l.tblName = "crmaster";
+                    l.tblId = currentID;
+                    l.txt = "receiving post";
 
-            try {
-                dc.TblLogs.InsertOnSubmit(l);
-                dc.SubmitChanges();
-                dc.Refresh(RefreshMode.OverwriteCurrentValues, q);
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex.Message);
+                    var act = new CRMasterActivity();
+                    var nt = new NtGroups();
+                    act.CrMid = currentID;
+                    act.Dept = "receiving";
+                    act.Operation = "post";
+                    act.Person = nt.CurrentUser;
+                    act.TimeStamp = DateTime.Now;
+
+                    try {
+                        dc.TblLogs.InsertOnSubmit(l);
+                        dc.CRMasterActivities.InsertOnSubmit(act);
+                        dc.SubmitChanges();
+                        dc.Refresh(RefreshMode.OverwriteCurrentValues, q);
+                    }
+                    catch (Exception ex) {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
             }
         }
 
