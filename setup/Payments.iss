@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Payment Processor"
-#define MyAppVersion "2015.08.19.01"
+#define MyAppVersion "2015.09.08.01"
 #define MyAppPublisher "Westlands Water District"
 #define MyAppURL "http://wwd.ca.gov"
 #define MyAppExeName "RcvPayment.exe"
