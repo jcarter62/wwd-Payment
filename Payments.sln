@@ -60,6 +60,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "help", "help\", "{21002328-
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "63772"
+		SlnRelativePath = "help\"
 	EndProjectSection
 EndProject
 Global

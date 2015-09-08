@@ -1,57 +1,23 @@
-Items to do:
+Release Notes:
 
-* During Post operation, apply deposit date to Armst records as deposit date.
-* If deposit date is available, use deposit date during paydrop.
-* In Un-Applied Payments:
-  Add to context menu, mark as posted.
-* Payment Entry/Review
-  Add context menu to show payment log.
-* Allow GA to modify payment amount.
+2015-09-04:
 
-Done:
-* Add Deposit Date to CRDepBatch
-* Require entry of Deposit Date in CrDepBatch table, prior to post.
+Add "Help About" form.
+Add "Help Contents" and F1 help in windows.
 
-
-
+Disable File->New, etc. and 
 
 Payment Entry/Review
-(x) List open/unpaid charges from wmis
-(x) List open/unpaid charges from mas500
-( ) Mark charges as wmis or mas500 when created.
-( ) In pop-up window, if user double clicks on
-    account, then send back account # only,
-    if user double clicks on charge amount, then
-    fill in amount, type, with note filled in
-    with details of charge amount.
+Clear Window Receipt Data after Post when no other receipt is listed
+in grid on left of window.
+Clear Detail Grid and Details relating to payment, when no receipt is
+listed in grid on left of window.
 
-Payment batches 
-( ) Create report that is similar to "tape"
-    list of all selected payments for included
-    in batch.
-( ) Display posted payment batches in different
-    color (grey ?).
-( ) If posted, don't allow changes to batch.
+Window Positions
+When restoring window position, ignore saved position when restore
+will display windows in a non visible position.
 
-Payment Docs 
-( ) If payment batch or payment has been posted
-	do not allow changes.
-( ) When user selects a payment in this interface
-    change the field CRMaster.StateGA to "selected".
-	And implement code in Payment Entry, to not allow
-	changes to this record.
-( ) Allow user to change amount, in case the amount
-	is incorrect.  Also, add note to CRMaster, indicating
-	the amount was changed.
+Payment Receipt (report)
+Add payment note text to upper portion of receipt report.
 
-Customer Accounting Interface
-( ) Implement this interface
-
-Overall
-( ) There are 3 areas of application
-	A. Payment Entry
-	B. Send batch of payments to bank
-	C. Apply payment(s) to A/R
-( ) Do not allow the same person to perform any
-    two application areas
 

@@ -6,6 +6,9 @@
 *.user
 *.sln.docstates
 help/.idea/*
+HelpProject/*
+SimpleTest/*
+Payments.zip
 
 # Build results
 [Dd]ebug/
