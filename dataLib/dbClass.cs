@@ -91,7 +91,7 @@ namespace dataLib {
             init();
         }
 
-        public void init() {
+        private void init() {
             if (Id == null) {
                 Id = Shortid.newId;
                 Amount = 0.0;
@@ -101,6 +101,9 @@ namespace dataLib {
                 Name = "";
             }
         }
+
+        
+
     }
 
     public partial class CRMaster {

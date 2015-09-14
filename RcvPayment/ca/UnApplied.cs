@@ -518,6 +518,7 @@ namespace RcvPayment.Ca {
 
         private void refreshToolStripMenuItem1_Click(object sender, EventArgs e) {
             //
+            gridDetail.DataSource = null;
             gridDetail.Rows.Clear();
             OpenMasterTable();
             LoadDetailRecords();

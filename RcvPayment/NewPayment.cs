@@ -619,10 +619,8 @@ namespace RcvPayment {
 
         private void btnAddItem_Click(object sender, EventArgs e) {
             // Add a new record
-            currentDetailID = ShortGuid.newId;
-            CRDetail r = new CRDetail();
-            r.Id = currentDetailID;
-            r.init();
+            var r = new CRDetail();
+            currentDetailID = r.Id;
             r.CRMid = currentID;
             //
             // set amount = unapplied amount.
@@ -931,6 +929,7 @@ namespace RcvPayment {
             }
             else {
                 userSelectedPaymentRow("");
+                ItemsGrid.DataSource = null;
                 ItemsGrid.Rows.Clear();
             }
         }

@@ -74,7 +74,7 @@ namespace RcvPayment {
                 n.FullName,
                 dtl.Note
             });
-
+            
             dgDetail.Columns.Clear();
             dgDetail.Rows.Clear();
 
