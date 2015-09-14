@@ -5,14 +5,22 @@ using System.Windows.Forms;
 
 namespace RcvPayment {
     static class Program {
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main() {
+        static void Main(string[] args) {
+            bool param = false;
+            if (args.Length > 1) {
+                if (args[1].ToLower().Trim().CompareTo("private") == 0) {
+                    param = true;
+                }
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new MainForm(param));
         }
     }
 }

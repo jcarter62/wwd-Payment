@@ -353,6 +353,19 @@
       <Column Name="TimeStamp" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
     </Type>
   </Table>
+  <Table Name="dbo.USERTABLE" Member="USERTABLEs">
+    <Type Name="USERTABLE">
+      <Column Name="USER_ID" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="AdminRights" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UseStamp" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ShowHints" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="nt_username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.sp_Outstanding" Method="sp_Outstanding">
     <Parameter Name="Account" Parameter="account" Type="System.Int32" DbType="Int" />
     <Parameter Name="Session" Parameter="session" Type="System.String" DbType="VarChar(50)" />

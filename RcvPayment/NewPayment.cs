@@ -19,6 +19,7 @@ namespace RcvPayment {
         Images statusImages;
         private string currentID;
         private string currentDetailID;
+        private bool WeCanPostItem = false;
         private AppSettings aset;
         private DbClassDataContext dc;
 
@@ -44,11 +45,12 @@ namespace RcvPayment {
 
         // Update graphic, and message to left.
         private void UpdateAppliedGraphic() {
-
             Image i;
 
+            WeCanPostItem = false;
             if (Math.Abs(_AppliedAmount) < 0.001) {
                 lblAppliedAmount.Text = "-- UnApplied --";
+                WeCanPostItem = true;
             }
             else {
                 string msg;
@@ -59,6 +61,7 @@ namespace RcvPayment {
                 if (isApplied) {
                     msg = "Applied.";
                     i = Image.FromFile(statusImages.successImage);
+                    WeCanPostItem = true;
                 }
                 else {
                     if (unAppliedAmount < 0.00) {
@@ -73,6 +76,7 @@ namespace RcvPayment {
                 _AppliedAmountMessage = msg;
                 lblAppliedAmount.Text = _AppliedAmountMessage;
                 lblAppliedChk.Image = i;
+
             }
         }
 
@@ -306,6 +310,7 @@ namespace RcvPayment {
         }
 
         private void NewPayment_Load(object sender, EventArgs e) {
+            btnDelete.Enabled = CurrentUserIsWmisAdmin();
             ConnectGrid();
         }
         #endregion
@@ -409,24 +414,67 @@ namespace RcvPayment {
         }
 
         private void btnDelete_Click(object sender, EventArgs e) {
-            bool ok2del = true;
+            bool ok2del = false;
+            string msg = "";
+            bool err = false;
 
-            // determine if ok to delete.
-            ok2del = IsOk2Delete(currentID);
-            // 
+            if (PaymentsGrid.Rows.Count <= 0) {
+                msg = "No Records to delete!";
+                err = true;
+            }
 
-            if (ok2del) {
-                if (userIsOkWithDeletion(currentID)) {
-                    deleteCurrentPayment(currentID);
-                }
+            if ((!err) && (PaymentsGrid.SelectedRows.Count <= 0)) {
+                msg = "No Records Selected!";
+                err = true;
+            }
+
+            if ((!err) && (currentID.Trim().Length <= 0)) {
+                msg = "CurrentID is blank, Nothing to delete!";
+                err = true;
+            }
+
+            if (err) {
+                MessageBox.Show(msg, "Error", MessageBoxButtons.OK);
             }
             else {
-                tellUserTheyCantDelete(currentID);
+                // determine if ok to delete.
+                ok2del = IsOk2Delete(currentID);
+                // 
+
+                if (ok2del) {
+                    if (userIsOkWithDeletion(currentID)) {
+                        deleteCurrentPayment(currentID);
+                    }
+                }
+                else {
+                    tellUserTheyCantDelete(currentID);
+                }
             }
         }
 
         private bool IsOk2Delete(string currentID) {
-            return false;
+            bool result = false;
+            if (CurrentUserIsWmisAdmin()) {
+                result = true;
+            }
+            return result;
+        }
+
+        private bool CurrentUserIsWmisAdmin() {
+            bool result = false;
+            NtGroups grp = new NtGroups();
+            string thisuser = grp.CurrentUser.ToLower();
+
+            var records = from user in dc.USERTABLEs
+                          where (user.nt_username.ToLower() == thisuser)
+                          select user;
+
+            foreach (var r in records) {
+                if (r.AdminRights == 1) {
+                    result = true;
+                }
+            }
+            return result;
         }
 
         private void tellUserTheyCantDelete(string currentID) {
@@ -434,14 +482,7 @@ namespace RcvPayment {
         }
 
         private void deleteCurrentPayment(string curID) {
-            // first delete items
-            var records = from item in dc.CRDetails
-                          where (item.CRMid == curID)
-                          select item;
-
-            foreach (var r in records) {
-                dc.CRDetails.DeleteOnSubmit(r);
-            }
+            bool MoreThan1Rec = false;
 
             // then delete the payment
             var payRec = from item in dc.CRMasters
@@ -450,6 +491,16 @@ namespace RcvPayment {
 
             foreach (var r in payRec) {
                 dc.CRMasters.DeleteOnSubmit(r);
+
+                // first delete items
+                var records = from item in dc.CRDetails
+                              where (item.CRMid == curID)
+                              select item;
+
+                foreach (var dtl in records) {
+
+                    dc.CRDetails.DeleteOnSubmit(dtl);
+                }
             }
 
             try {
@@ -857,8 +908,16 @@ namespace RcvPayment {
                 MessageBox.Show("Please Save Payment before Posting.", "Warning", MessageBoxButtons.OK);
             }
             else {
-                PostThisPayment();
-                ReloadGrids();
+                if (!WeCanPostItem) {
+                    MessageBox.Show(
+                        "Out of Balance, please resolve and then post.",
+                        "Warning",
+                        MessageBoxButtons.OK);
+                }
+                else {
+                    PostThisPayment();
+                    ReloadGrids();
+                }
             }
         }
 

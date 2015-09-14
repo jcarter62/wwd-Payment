@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Security.AccessControl;
 using System.Security.Principal;
+using System.Windows.Forms;
 using System.Xml;
 
 namespace classLib {
@@ -108,6 +109,7 @@ namespace classLib {
             // string dir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             // In this case we are using a system wide settings file (since the service must be able to access).
             //
+
             string dir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
             dir = System.IO.Path.Combine(dir, companyname);
             if (!Directory.Exists(dir))

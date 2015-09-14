@@ -14,9 +14,14 @@ namespace RcvPayment {
     public partial class MainForm : RcvPayment.MyForm {
         public enum StatusTypes { DB, Misc }
         public enum AuthTypes { Authorized, NotAuthorized, Administrator }
+        public bool UseLocalConfig {
+            get { return RcvPayment.Properties.Settings.Default.UseLocalConfiguration; }
+            set { RcvPayment.Properties.Settings.Default.UseLocalConfiguration = value; }
+        }
 
-        public MainForm() {
+        public MainForm(bool param) {
             InitializeComponent();
+            UseLocalConfig = param;
         }
 
         private void AuthorizationMessageToUser(string msg) {
@@ -121,8 +126,7 @@ namespace RcvPayment {
             int n;
 
             n = this.MdiChildren.Count();
-            for ( int i = 0; i < n; i++)
-            {
+            for (int i = 0; i < n; i++) {
                 Form f = MdiChildren[i];
                 if (f.Name.Trim().ToLower().CompareTo(frm) == 0) {
                     isopn = true;
@@ -130,13 +134,12 @@ namespace RcvPayment {
                     break;
                 } // if 
             }
-            if ( ! isopn )
-            {
+            if (!isopn) {
                 PaymentDetails f = new PaymentDetails();
                 f.MdiParent = this;
                 f.Show();
                 f.BringToFront();
-            } 
+            }
         }
 
         private void paymentLogReportToolStripMenuItem1_Click(object sender, EventArgs e) {
@@ -165,13 +168,12 @@ namespace RcvPayment {
 
         private void contentsToolStripMenuItem_Click(object sender, EventArgs e) {
             // Open help
-            try
-            {
+            try {
                 Point mousePos = System.Windows.Forms.Cursor.Position;
                 HelpEventArgs hea = new HelpEventArgs(mousePos);
                 this.OnHelpRequested(hea);
-            } catch
-            {
+            }
+            catch {
                 // nothing...
             }
         }

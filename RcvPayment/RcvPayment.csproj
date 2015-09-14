@@ -180,6 +180,7 @@
     <Compile Include="misc\UnpaidList.Designer.cs">
       <DependentUpon>UnpaidList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
@@ -264,7 +265,7 @@
     <None Include="Properties\DataSources\dataLib.v_CrDepositBatch.datasource" />
     <None Include="Properties\DataSources\dataLib.v_CrReceipt.datasource" />
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Compile Include="Properties\Settings.Designer.cs">

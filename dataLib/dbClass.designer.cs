@@ -255,6 +255,14 @@ namespace dataLib
 			}
 		}
 		
+		public System.Data.Linq.Table<USERTABLE> USERTABLEs
+		{
+			get
+			{
+				return this.GetTable<USERTABLE>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Outstanding")]
 		public int sp_Outstanding([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Account", DbType="Int")] System.Nullable<int> account, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Session", DbType="VarChar(50)")] string session)
 		{
@@ -6653,6 +6661,177 @@ namespace dataLib
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.USERTABLE")]
+	public partial class USERTABLE
+	{
+		
+		private string _USER_ID;
+		
+		private string _LastName;
+		
+		private string _FirstName;
+		
+		private string _Password;
+		
+		private int _AdminRights;
+		
+		private int _IsActive;
+		
+		private System.Nullable<System.DateTime> _UseStamp;
+		
+		private System.Nullable<char> _ShowHints;
+		
+		private string _nt_username;
+		
+		public USERTABLE()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_USER_ID", DbType="VarChar(5) NOT NULL", CanBeNull=false)]
+		public string USER_ID
+		{
+			get
+			{
+				return this._USER_ID;
+			}
+			set
+			{
+				if ((this._USER_ID != value))
+				{
+					this._USER_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="VarChar(25)")]
+		public string LastName
+		{
+			get
+			{
+				return this._LastName;
+			}
+			set
+			{
+				if ((this._LastName != value))
+				{
+					this._LastName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="VarChar(25)")]
+		public string FirstName
+		{
+			get
+			{
+				return this._FirstName;
+			}
+			set
+			{
+				if ((this._FirstName != value))
+				{
+					this._FirstName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(10)")]
+		public string Password
+		{
+			get
+			{
+				return this._Password;
+			}
+			set
+			{
+				if ((this._Password != value))
+				{
+					this._Password = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdminRights", DbType="Int NOT NULL")]
+		public int AdminRights
+		{
+			get
+			{
+				return this._AdminRights;
+			}
+			set
+			{
+				if ((this._AdminRights != value))
+				{
+					this._AdminRights = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Int NOT NULL")]
+		public int IsActive
+		{
+			get
+			{
+				return this._IsActive;
+			}
+			set
+			{
+				if ((this._IsActive != value))
+				{
+					this._IsActive = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UseStamp", DbType="DateTime")]
+		public System.Nullable<System.DateTime> UseStamp
+		{
+			get
+			{
+				return this._UseStamp;
+			}
+			set
+			{
+				if ((this._UseStamp != value))
+				{
+					this._UseStamp = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShowHints", DbType="Char(1)")]
+		public System.Nullable<char> ShowHints
+		{
+			get
+			{
+				return this._ShowHints;
+			}
+			set
+			{
+				if ((this._ShowHints != value))
+				{
+					this._ShowHints = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nt_username", DbType="VarChar(50)")]
+		public string nt_username
+		{
+			get
+			{
+				return this._nt_username;
+			}
+			set
+			{
+				if ((this._nt_username != value))
+				{
+					this._nt_username = value;
+				}
 			}
 		}
 	}

@@ -1,6 +1,11 @@
 Release Notes:
 
-2015-09-04:
+New
+
+Payment Receiving: Added detail "type" = Mas500.
+Payment Receiving: Post Button, disabled if out of balance.
+
+2015-09-08:
 
 Add "Help About" form.
 Add "Help Contents" and F1 help in windows.

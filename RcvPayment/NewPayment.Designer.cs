@@ -485,7 +485,8 @@
             "Water",
             "LnBase",
             "Assess",
-            "Other"});
+            "Other",
+            "Mas500"});
             this.cbItmApply2.Location = new System.Drawing.Point(205, 29);
             this.cbItmApply2.Name = "cbItmApply2";
             this.cbItmApply2.Size = new System.Drawing.Size(94, 21);
