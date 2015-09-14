@@ -1,9 +1,10 @@
 Release Notes:
 
-New
+2015-09-13:
 
 Payment Receiving: Added detail "type" = Mas500.
 Payment Receiving: Post Button, disabled if out of balance.
+Payment Receiving: Delete Payment button, disabled if user is not a WMIS Admin.
 
 2015-09-08:
 
