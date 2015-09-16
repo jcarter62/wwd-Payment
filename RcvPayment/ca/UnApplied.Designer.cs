@@ -70,11 +70,14 @@
             this.uUserDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.selectMasterRecords = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.markItemAsPostedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cRMasterBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.timeCheck = new System.Windows.Forms.Timer(this.components);
+            this.unSelectMasterRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.panDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridDetail)).BeginInit();
@@ -502,29 +505,42 @@
             // 
             this.cMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.selectMasterRecords,
+            this.unSelectMasterRecordToolStripMenuItem,
+            this.toolStripSeparator1,
             this.markItemAsPostedToolStripMenuItem,
+            this.toolStripSeparator2,
             this.refreshToolStripMenuItem});
             this.cMenu.Name = "cMenu";
-            this.cMenu.Size = new System.Drawing.Size(190, 70);
+            this.cMenu.Size = new System.Drawing.Size(205, 126);
             // 
             // selectMasterRecords
             // 
             this.selectMasterRecords.Name = "selectMasterRecords";
-            this.selectMasterRecords.Size = new System.Drawing.Size(189, 22);
+            this.selectMasterRecords.Size = new System.Drawing.Size(204, 22);
             this.selectMasterRecords.Text = "Select Master Records";
             this.selectMasterRecords.Click += new System.EventHandler(this.SelectMasterRecordsClick);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(201, 6);
             // 
             // markItemAsPostedToolStripMenuItem
             // 
             this.markItemAsPostedToolStripMenuItem.Name = "markItemAsPostedToolStripMenuItem";
-            this.markItemAsPostedToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.markItemAsPostedToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.markItemAsPostedToolStripMenuItem.Text = "Mark Item As Posted";
             this.markItemAsPostedToolStripMenuItem.Click += new System.EventHandler(this.markItemAsPostedToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(201, 6);
             // 
             // refreshToolStripMenuItem
             // 
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.refreshToolStripMenuItem.Text = "Refresh";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
@@ -545,6 +561,13 @@
             // 
             this.timeCheck.Interval = 1000;
             this.timeCheck.Tick += new System.EventHandler(this.timeCheck_Tick);
+            // 
+            // unSelectMasterRecordToolStripMenuItem
+            // 
+            this.unSelectMasterRecordToolStripMenuItem.Name = "unSelectMasterRecordToolStripMenuItem";
+            this.unSelectMasterRecordToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.unSelectMasterRecordToolStripMenuItem.Text = "Un-Select Master Record";
+            this.unSelectMasterRecordToolStripMenuItem.Click += new System.EventHandler(this.unSelectMasterRecordToolStripMenuItem_Click);
             // 
             // UnApplied
             // 
@@ -625,5 +648,8 @@
         private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem markItemAsPostedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem unSelectMasterRecordToolStripMenuItem;
     }
 }

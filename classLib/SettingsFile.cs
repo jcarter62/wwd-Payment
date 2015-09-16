@@ -109,8 +109,13 @@ namespace classLib {
             // string dir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             // In this case we are using a system wide settings file (since the service must be able to access).
             //
-
-            string dir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            string dir;
+            if (Environment.GetEnvironmentVariable("UseLocalConfig", EnvironmentVariableTarget.Process) == "yes") {
+                dir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            }
+            else {
+                dir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            }
             dir = System.IO.Path.Combine(dir, companyname);
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);

@@ -6123,7 +6123,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ArMstId", DbType="Int")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ArMstId", DbType="Int", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<int> ArMstId
 		{
 			get
@@ -6143,7 +6143,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CrMid", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CrMid", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string CrMid
 		{
 			get
@@ -6163,7 +6163,7 @@ namespace dataLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CrDid", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CrDid", DbType="VarChar(50)", UpdateCheck=UpdateCheck.Never)]
 		public string CrDid
 		{
 			get

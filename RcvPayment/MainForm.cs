@@ -14,15 +14,56 @@ namespace RcvPayment {
     public partial class MainForm : RcvPayment.MyForm {
         public enum StatusTypes { DB, Misc }
         public enum AuthTypes { Authorized, NotAuthorized, Administrator }
-        public bool UseLocalConfig {
-            get { return RcvPayment.Properties.Settings.Default.UseLocalConfiguration; }
-            set { RcvPayment.Properties.Settings.Default.UseLocalConfiguration = value; }
+
+        public MainForm() {
+            InitializeComponent();
+            if (Environment.GetEnvironmentVariable("UseLocalConfig", EnvironmentVariableTarget.Process) == "yes") {
+                statusStrip1.BackColor = System.Drawing.SystemColors.MenuHighlight;// Color.DarkRed;
+                TestModeIndicator.Text = "<<< Private Environment Active >>>";
+                TestModeIndicator.ForeColor = Color.White;
+                TestModeIndicator.TextAlign = ContentAlignment.MiddleCenter;
+                timerTestMode.Enabled = true;
+                MakeMeStandOut();
+            }
+            else {
+                TestModeIndicator.Text = "";
+                TestModeIndicator.ForeColor = Color.Black;
+                TestModeIndicator.TextAlign = ContentAlignment.MiddleLeft;
+                timerTestMode.Enabled = false;
+            }
         }
 
-        public MainForm(bool param) {
-            InitializeComponent();
-            UseLocalConfig = param;
+        #region Test Mode Colors.
+        // https://social.msdn.microsoft.com/Forums/en-US/b79b874b-ddb4-40b3-807b-bc5e1662e3eb/mdi-parent-background-color?forum=winforms
+        private void MakeMeStandOut() {
+            foreach (Control c in this.Controls) {
+                if (c is MdiClient) {
+                    c.BackColor = System.Drawing.SystemColors.MenuHighlight; //  Color.Red;
+                }
+            }
         }
+
+        private void MakeMeNormal()
+        {
+            foreach (Control c in this.Controls) {
+                if (c is MdiClient) {
+                    c.BackColor = System.Drawing.SystemColors.Control;
+                }
+            }
+        }
+
+        private void timerTestMode_Tick(object sender, EventArgs e) {
+            if (TestModeIndicator.ForeColor == Color.White) {
+                TestModeIndicator.ForeColor = Color.Black;
+                MakeMeStandOut();
+            }
+            else {
+                TestModeIndicator.ForeColor = Color.White;
+                MakeMeNormal();
+            }
+        }
+
+        #endregion
 
         private void AuthorizationMessageToUser(string msg) {
             MessageBox.Show(msg, "Warning", MessageBoxButtons.OK);
@@ -177,5 +218,6 @@ namespace RcvPayment {
                 // nothing...
             }
         }
+
     }
 }

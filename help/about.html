@@ -16,6 +16,20 @@
                 <pre>
 Release Notes:
 
+2015-09-16:
+
+Un-Applied Payments (Context Menu):
+* Added Un-Select Master Record
+* Added separators between Select/Unselect, Mark Posted, Refresh items.
+
+Program Startup
+* Implemented startup parameter to command line "private".  When
+  used, will use private local storage for application settings.
+  Please be aware, when this mode is used, you may still be connected 
+  to live production data.  The private feature simply allows access
+  to a set of private application settings.  When in private mode,
+  the background should change color periodically.
+
 2015-09-14:
 Payment Receiving: Changed grid clear code to apply null to
                    grid datasource property, instead of simple

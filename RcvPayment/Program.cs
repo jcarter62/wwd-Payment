@@ -12,15 +12,18 @@ namespace RcvPayment {
         [STAThread]
         static void Main(string[] args) {
             bool param = false;
-            if (args.Length > 1) {
-                if (args[1].ToLower().Trim().CompareTo("private") == 0) {
-                    param = true;
+            if (args.Length > 0) {
+                if (args[0].ToLower().Trim().CompareTo("private") == 0) {
+                    Environment.SetEnvironmentVariable(
+                        "UseLocalConfig", 
+                        "yes", 
+                        EnvironmentVariableTarget.Process);
                 }
             }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm(param));
+            Application.Run(new MainForm());
         }
     }
 }

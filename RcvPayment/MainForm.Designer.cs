@@ -51,6 +51,7 @@
             this.newPaymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.paymentBatchesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unAppliedPaymentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.viewPaymentDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.paymentLogReportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,8 +63,9 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusDB = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusMisc = new System.Windows.Forms.ToolStripStatusLabel();
+            this.TestModeIndicator = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.timerTestMode = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -103,7 +105,7 @@
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.newToolStripMenuItem.Text = "&New";
             this.newToolStripMenuItem.Visible = false;
             // 
@@ -113,7 +115,7 @@
             this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Visible = false;
             // 
@@ -123,14 +125,14 @@
             this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Visible = false;
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.saveAsToolStripMenuItem.Text = "Save &As";
             this.saveAsToolStripMenuItem.Visible = false;
             // 
@@ -140,7 +142,7 @@
             this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.printToolStripMenuItem.Text = "&Print";
             this.printToolStripMenuItem.Visible = false;
             // 
@@ -149,14 +151,14 @@
             this.printPreviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripMenuItem.Image")));
             this.printPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
-            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.printPreviewToolStripMenuItem.Text = "Print Pre&view";
             this.printPreviewToolStripMenuItem.Visible = false;
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -297,6 +299,11 @@
             this.unAppliedPaymentsToolStripMenuItem.Text = "Apply Payments (Accounts Receivable)";
             this.unAppliedPaymentsToolStripMenuItem.Click += new System.EventHandler(this.unAppliedPaymentsToolStripMenuItem_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(278, 6);
+            // 
             // viewPaymentDetailToolStripMenuItem
             // 
             this.viewPaymentDetailToolStripMenuItem.Name = "viewPaymentDetailToolStripMenuItem";
@@ -315,7 +322,7 @@
             // paymentLogReportToolStripMenuItem1
             // 
             this.paymentLogReportToolStripMenuItem1.Name = "paymentLogReportToolStripMenuItem1";
-            this.paymentLogReportToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.paymentLogReportToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
             this.paymentLogReportToolStripMenuItem1.Text = "Payment Log";
             this.paymentLogReportToolStripMenuItem1.Click += new System.EventHandler(this.paymentLogReportToolStripMenuItem1_Click);
             // 
@@ -333,28 +340,28 @@
             // contentsToolStripMenuItem
             // 
             this.contentsToolStripMenuItem.Name = "contentsToolStripMenuItem";
-            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.contentsToolStripMenuItem.Text = "&Contents";
             this.contentsToolStripMenuItem.Click += new System.EventHandler(this.contentsToolStripMenuItem_Click);
             // 
             // indexToolStripMenuItem
             // 
             this.indexToolStripMenuItem.Name = "indexToolStripMenuItem";
-            this.indexToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.indexToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.indexToolStripMenuItem.Text = "&Index";
             this.indexToolStripMenuItem.Visible = false;
             // 
             // searchToolStripMenuItem
             // 
             this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
-            this.searchToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.searchToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.searchToolStripMenuItem.Text = "&Search";
             this.searchToolStripMenuItem.Visible = false;
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -362,7 +369,8 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusDB,
-            this.statusMisc});
+            this.statusMisc,
+            this.TestModeIndicator});
             this.statusStrip1.Location = new System.Drawing.Point(0, 539);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(784, 22);
@@ -381,15 +389,22 @@
             this.statusMisc.Size = new System.Drawing.Size(56, 17);
             this.statusMisc.Text = "Misc Info";
             // 
-            // toolStripSeparator1
+            // TestModeIndicator
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(278, 6);
+            this.TestModeIndicator.Name = "TestModeIndicator";
+            this.TestModeIndicator.Size = new System.Drawing.Size(113, 17);
+            this.TestModeIndicator.Text = "Test Mode Indicator";
+            // 
+            // timerTestMode
+            // 
+            this.timerTestMode.Interval = 5000;
+            this.timerTestMode.Tick += new System.EventHandler(this.timerTestMode_Tick);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -449,6 +464,8 @@
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem paymentLogReportToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripStatusLabel TestModeIndicator;
+        private System.Windows.Forms.Timer timerTestMode;
     }
 }
 

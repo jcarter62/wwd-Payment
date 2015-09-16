@@ -536,27 +536,194 @@ namespace RcvPayment.Ca {
             ItemsSelected = gridMaster.SelectedRows.Count;
             if (ItemsSelected == 1) {
                 IdSelected = gridMaster.SelectedRows[0].Cells[masterIdCol].Value.ToString();
+                string thisReceiptId = "";
 
-                IQueryable<CRMaster> qm;
-                IQueryable<CRDetail> qd;
-                qm = (from item in dc.CRMasters
-                      where item.Id == IdSelected
-                      select item);
+                try {
+                    IQueryable<CRMaster> qm;
+                    IQueryable<CRDetail> qd;
+                    qm = (from item in dc.CRMasters
+                          where item.Id == IdSelected
+                          select item);
 
-                foreach (CRMaster m in qm) {
-                    m.StateAR = "posted";
+                    foreach (CRMaster m in qm) {
+                        m.StateAR = "posted";
+                        thisReceiptId = m.RcptID.ToString();
 
-                    qd = (from dtem in dc.CRDetails
-                          where dtem.CRMid == IdSelected
-                          select dtem);
-                    foreach (CRDetail d in qd) {
-                        d.State = "posted";
+                        qd = (from dtem in dc.CRDetails
+                              where dtem.CRMid == IdSelected
+                              select dtem);
+                        foreach (CRDetail d in qd) {
+                            d.State = "posted";
+                        }
+                    }
+
+                    dc.SubmitChanges();
+
+                    // Now let's try to find 
+                    var qnext = (from mst in dc.CRMasters
+                                 where
+                                   ((mst.RcptID.CompareTo(thisReceiptId) <= 0) &&
+                                     ( (mst.StateAR == "created") || (mst.StateAR == "selected") ) )
+                                 orderby mst.CDate descending
+                                 select mst);
+                    foreach (var qr in qnext) {
+                        thisReceiptId = qr.Id;
+                        break;  // only need to look at one.
+                    }
+
+                    UpdateDisplay();
+
+                    // Let's go find a record near where we got rid
+                    // of the posted one.
+                    string rowid;
+                    foreach (DataGridViewRow row in gridMaster.Rows) {
+                        rowid = row.Cells[masterIdCol].Value.ToString();
+                        if ( rowid.CompareTo(thisReceiptId) == 0 )
+                        {
+                            int rowindx = row.Index;
+                            gridMaster.FirstDisplayedScrollingRowIndex = rowindx;
+                            gridMaster.Rows[rowindx].Selected = true;
+                            break;
+                        }
+                    }
+                }
+                catch (Exception ex) {
+                    string msg = "Error in record update: " + ex.Message + "\n" +
+                        "ref:201509161400";
+                    MessageBox.Show(msg, "Error", MessageBoxButtons.OK);
+                }
+            }
+            else {
+                string msg;
+                msg = "Please select one row you wish to mark as posted.\n" +
+                    "ref:201509161419";
+                MessageBox.Show(msg, "Information", MessageBoxButtons.OK);
+            }
+        }
+
+        // User wishes to un-select a record.
+        private void unSelectMasterRecordToolStripMenuItem_Click(object sender, EventArgs e) {
+            bool ContinueOp = true;
+            int selectedCount = 0;
+            string id = "";
+
+            // User clicked Un-Select Master Record.
+            // Requirements:
+            // Only one record can be un-selected Record.StateAR == "selected"
+            // Record is in fact "selected", Record.StateAR == "selected"
+            // Count how many CrArMst records for the selected id, and
+            // confirm that user wishes to delete those records.
+            // 
+
+            selectedCount = gridMaster.SelectedRows.Count;
+            if (selectedCount <= 0) {
+                ContinueOp = false;
+            }
+
+            if (ContinueOp) {
+                id = gridMaster.SelectedRows[0].Cells[masterIdCol].Value.ToString();
+                string ReceiptId = RecordIsSelected(id);
+
+                if (ReceiptId.Length > 0) {
+                    string msg;
+                    msg = "Please confirm you wish to unselect Receipt ID: " + ReceiptId;
+                    var answer = MessageBox.Show(msg, "Confirm", MessageBoxButtons.YesNoCancel);
+                    if (answer != DialogResult.Yes) {
+                        ContinueOp = false;
                     }
                 }
 
-                dc.SubmitChanges();
-                UpdateDisplay();
+                int LinkCount = 0;
+                LinkCount = CountCrArMstLinks(id);
+                if (LinkCount > 0) {
+                    string msg;
+                    msg = "Unselecting will remove " +
+                        LinkCount.ToString() +
+                        " links to wmis. Continue with Un-Select?";
+
+                    var answer = MessageBox.Show(msg, "Warning", MessageBoxButtons.YesNo);
+                    if (answer != DialogResult.Yes) {
+                        ContinueOp = false;
+                    }
+                }
             }
+
+            /*
+            At this point, we have verified we have one row selected.
+            The row selected is in fact "selected".
+            The user has confirmed they wish to un-select
+            The user is aware of linked rows that will be deleted.
+            */
+            if (ContinueOp) {
+                var changes = dc.GetChangeSet();
+                if (changes.Deletes.Count + changes.Inserts.Count + changes.Updates.Count > 0) {
+                    string msg;
+                    msg = "Something went wrong, please try again: 201509161023";
+
+                    MessageBox.Show(msg, "Error", MessageBoxButtons.OK);
+                    ContinueOp = false;
+                }
+            }
+
+            if (ContinueOp) {
+                try {
+                    var recs = from lnks in dc.CrArMsts
+                               where lnks.CrMid == id
+                               select lnks;
+
+                    dc.CrArMsts.DeleteAllOnSubmit(recs);
+
+                    var crm = (from mst in dc.CRMasters
+                               where mst.Id == id
+                               select mst).First();
+
+                    if (crm == null) {
+                        throw new Exception("Can't find CRMaster Record: 201509161152");
+                    }
+                    crm.StateAR = "created";
+                    dc.SubmitChanges();
+                    // Perform refresh.
+                    OpenMasterTable();
+                    LoadDetailRecords();
+                }
+                catch (Exception ex) {
+                    Console.WriteLine(ex.Message + ":201509161153");
+                }
+            }
+        }
+
+        // Check to see if this CrMaster.id is selected
+        // and return RcptID if true.
+        private string RecordIsSelected(string id) {
+            string result = "";
+            try {
+                var rec = (from m in dc.CRMasters
+                           where ((m.Id == id) && (m.StateAR == "selected"))
+                           select m).First();
+
+                if (rec != null) {
+                    result = rec.RcptID.ToString();
+                }
+            }
+            catch {
+
+            }
+
+            return result;
+        }
+
+        // Return number of CrArMst records for a given
+        // CrMaster.id 
+        private int CountCrArMstLinks(string id) {
+            int result = 0;
+            var recs = from lnks in dc.CrArMsts
+                       where lnks.CrMid == id
+                       select lnks.id;
+
+            if (recs != null) {
+                result = recs.Count();
+            }
+            return result;
         }
     }
 }

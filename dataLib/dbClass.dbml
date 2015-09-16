@@ -319,9 +319,9 @@
   <Table Name="dbo.CrArMst" Member="CrArMsts">
     <Type Name="CrArMst">
       <Column Name="id" Type="System.String" DbType="VarChar(40) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ArMstId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CrMid" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="CrDid" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ArMstId" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CrMid" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CrDid" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
     </Type>
   </Table>
   <Table Name="dbo.CRPaymentInfo" Member="CRPaymentInfos">
