@@ -70,6 +70,18 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="ca\Apply.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ca\Apply.Designer.cs">
+      <DependentUpon>Apply.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ca\ArApply.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ca\ArApply.Designer.cs">
+      <DependentUpon>ArApply.cs</DependentUpon>
+    </Compile>
     <Compile Include="ga\GaEditAmount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,6 +195,12 @@
     <Compile Include="Settings.cs" />
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ca\Apply.resx">
+      <DependentUpon>Apply.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ca\ArApply.resx">
+      <DependentUpon>ArApply.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ga\GaEditAmount.resx">
       <DependentUpon>GaEditAmount.cs</DependentUpon>

@@ -219,5 +219,11 @@ namespace RcvPayment {
             }
         }
 
+        private void applyPaymentsnewToolStripMenuItem_Click(object sender, EventArgs e) {
+            //
+            var f = new ca.Apply();
+            f.MdiParent = this;
+            f.Show();
+        }
     }
 }

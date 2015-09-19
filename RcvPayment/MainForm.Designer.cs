@@ -66,6 +66,7 @@
             this.TestModeIndicator = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timerTestMode = new System.Windows.Forms.Timer(this.components);
+            this.applyPaymentsnewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -272,6 +273,7 @@
             this.newPaymentToolStripMenuItem,
             this.paymentBatchesToolStripMenuItem,
             this.unAppliedPaymentsToolStripMenuItem,
+            this.applyPaymentsnewToolStripMenuItem,
             this.toolStripSeparator1,
             this.viewPaymentDetailToolStripMenuItem});
             this.paymentsToolStripMenuItem.Name = "paymentsToolStripMenuItem";
@@ -400,6 +402,13 @@
             this.timerTestMode.Interval = 5000;
             this.timerTestMode.Tick += new System.EventHandler(this.timerTestMode_Tick);
             // 
+            // applyPaymentsnewToolStripMenuItem
+            // 
+            this.applyPaymentsnewToolStripMenuItem.Name = "applyPaymentsnewToolStripMenuItem";
+            this.applyPaymentsnewToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.applyPaymentsnewToolStripMenuItem.Text = "Apply Payments (new)";
+            this.applyPaymentsnewToolStripMenuItem.Click += new System.EventHandler(this.applyPaymentsnewToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -466,6 +475,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripStatusLabel TestModeIndicator;
         private System.Windows.Forms.Timer timerTestMode;
+        private System.Windows.Forms.ToolStripMenuItem applyPaymentsnewToolStripMenuItem;
     }
 }
 
