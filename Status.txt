@@ -1,5 +1,14 @@
 Release Notes:
 
+2015-09-20:
+
+Un-Applied Payments (new interface)
+* Implemented new selection grid, that supports filters, etc.
+* New grid layout is saved in private directory.  If layout
+  is not acceptable, the layout can be reset using context
+  menu.
+* When marking as posted, log table is updated.
+
 2015-09-16:
 
 Un-Applied Payments (Context Menu):

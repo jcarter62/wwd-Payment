@@ -66,7 +66,86 @@ namespace RcvPayment.ca {
                 }
                 else if (txt.Equals("reset grid layout")) {
                     cmenu.Items[i].Click += ResetMasterLayout;
+                } else if ( txt.Equals("mark item as posted"))
+                {
+                    cmenu.Items[i].Click += MarkItemAsPosted;
+                } else if ( txt.Equals("refresh") )
+                {
+                    cmenu.Items[i].Click += RefreshData;
+                    //
                 }
+            }
+        }
+
+        private void RefreshData(object sender, EventArgs e) {
+            OpenMasterTable(CurrentId);
+        }
+
+        private void MarkItemAsPosted(object sender, EventArgs e) {
+            // For Mas500 items, allow user to "post" payment.
+
+            // if only one item is selected, then
+            // perform post.
+            int ItemsSelected = 0;
+            string IdSelected = "";
+
+            ItemsSelected = gridMaster.SelectedRows.Count;
+            if (ItemsSelected == 1) {
+                IdSelected = gridMaster.SelectedRows[0].Cells[MasterIdCol].Value.ToString();
+                string thisReceiptId = "";
+
+                try {
+                    IQueryable<CRMaster> qm;
+                    IQueryable<CRDetail> qd;
+                    qm = (from item in dc.CRMasters
+                          where item.Id == IdSelected
+                          select item);
+
+                    foreach (CRMaster m in qm) {
+                        m.StateAR = "posted";
+                        thisReceiptId = m.RcptID.ToString();
+
+                        qd = (from dtem in dc.CRDetails
+                              where dtem.CRMid == IdSelected
+                              select dtem);
+                        foreach (CRDetail d in qd) {
+                            d.State = "posted";
+                        }
+                    }
+
+                    var l = new TblLog();
+                    l.tblName = "crmaster";
+                    l.tblId = IdSelected;
+                    l.txt = "ar post";
+                    dc.TblLogs.InsertOnSubmit(l);
+
+                    dc.SubmitChanges();
+
+                    // Now let's try to find 
+                    var qnext = (from mst in dc.CRMasters
+                                 where
+                                   ((mst.RcptID.CompareTo(thisReceiptId) <= 0) &&
+                                     ((mst.StateAR == "created") || (mst.StateAR == "selected")))
+                                 orderby mst.CDate descending
+                                 select mst);
+                    foreach (var qr in qnext) {
+                        thisReceiptId = qr.Id;
+                        break;  // only need to look at one.
+                    }
+                    UpdateDisplay();
+
+                }
+                catch (Exception ex) {
+                    string msg = "Error in record update: " + ex.Message + "\n" +
+                        "ref:201509161400";
+                    MessageBox.Show(msg, "Error", MessageBoxButtons.OK);
+                }
+            }
+            else {
+                string msg;
+                msg = "Please select one row you wish to mark as posted.\n" +
+                    "ref:201509161419";
+                MessageBox.Show(msg, "Information", MessageBoxButtons.OK);
             }
         }
 
@@ -176,13 +255,27 @@ namespace RcvPayment.ca {
                     crm.StateAR = "created";
                     dc.SubmitChanges();
                     // Perform refresh.
-                    OpenMasterTable();
-                    // Find this record again.
-
+                    OpenMasterTable(id);
 
                 }
                 catch (Exception ex) {
                     Console.WriteLine(ex.Message + ":201509161153");
+                }
+            }
+        }
+
+        // Open Master Table & make sure id is visible.
+        private void OpenMasterTable(string id) {
+            OpenMasterTable();
+
+            // http://www.telerik.com/help/winforms/gridview-rows-iterating-rows.html
+            // now find the record with id = id.
+            // if found, then make sure it is visible.
+            foreach (GridViewRowInfo r in gridMaster.Rows) {
+                string rowId = r.Cells[MasterIdCol].Value.ToString();
+                if (id == rowId) {
+                    r.EnsureVisible();
+                    break;
                 }
             }
         }
@@ -311,31 +404,6 @@ namespace RcvPayment.ca {
                     // do nothing.
                 }
             }
-
-            // figure out where the columns are.
-            MasterIdCol = 0;
-            MasterRcptIdCol = 0;
-            MasterStateCol = 0;
-            for (int i = 0; i < gridMaster.ColumnCount; i++) {
-                string cname = gridMaster.Columns[i].FieldName.ToLower();
-                if (cname.CompareTo("id") == 0) {
-                    MasterIdCol = i;
-                }
-                else if (cname.CompareTo("rcptid") == 0) {
-                    MasterRcptIdCol = i;
-                }
-                else if (cname.CompareTo("statear") == 0) {
-                    MasterStateCol = i;
-                }
-            }
-
-            // conditional formatting for "selected" rows
-            ConditionalFormattingObject obj =
-                new ConditionalFormattingObject("MyCondition",
-                ConditionTypes.Contains, "selected", "", true);
-            obj.RowBackColor = Color.Bisque;
-            gridMaster.Columns[MasterStateCol].ConditionalFormattingObjectList.Add(obj);
-
         }
 
         private void Apply_FormClosing(object sender, FormClosingEventArgs e) {
@@ -356,13 +424,12 @@ namespace RcvPayment.ca {
         private void gridMaster_CurrentRowChanged(object sender, CurrentRowChangedEventArgs e) {
             // 
             try {
-
                 CurrentId = "";
                 string msg = "";
 
                 if (gridMaster.DataSource != null) {
                     if (gridMaster.RowCount > 0) {
-                        if (e.CurrentRow != null) {
+                        if ((e.CurrentRow != null) && (e.CurrentRow.Index >= 0)) {
                             CurrentId = e.CurrentRow.Cells[MasterIdCol].Value.ToString();
                             msg = "Id: " + CurrentId +
                                 ", Receipt ID:" +
@@ -371,9 +438,11 @@ namespace RcvPayment.ca {
                     }
                 }
                 statLabel.Text = msg;
+                lblMaster.Text = MasterLabel(CurrentId);
+                lblDetail.Text = DetailLabel(CurrentId);
 
+                DisplayDetailRecords(CurrentId);
                 if (CurrentId.Length > 0) {
-                    DisplayDetailRecords(CurrentId);
                     UpdateLogWindow(CurrentId);
                     UpdatePaymentDetails(CurrentId);
                 }
@@ -381,6 +450,38 @@ namespace RcvPayment.ca {
             catch (Exception ex) {
                 MessageBox.Show(ex.Message + "\n(ref: 2015091801)");
             }
+        }
+
+        private string DetailLabel(string id) {
+            string result = "";
+
+            foreach (GridViewRowInfo r in gridMaster.Rows) {
+                string rowId = r.Cells[MasterIdCol].Value.ToString();
+                string recId = r.Cells[MasterRcptIdCol].Value.ToString();
+                if (id == rowId) {
+                    result = "Payment Detail Records for:" +
+                        recId +
+                        ".";
+                    break;
+                }
+            }
+            return result;
+        }
+
+        private string MasterLabel(string id) {
+            string result = "";
+
+            foreach (GridViewRowInfo r in gridMaster.Rows) {
+                string rowId = r.Cells[MasterIdCol].Value.ToString();
+                string recId = r.Cells[MasterRcptIdCol].Value.ToString();
+                if (id == rowId) {
+                    result = "Receipt:" +
+                        recId +
+                        " Selected.";
+                    break;
+                }
+            }
+            return result;
         }
 
         private void UpdatePaymentDetails(string currentId) {
@@ -463,6 +564,51 @@ namespace RcvPayment.ca {
             int curval = rpb.Value1 + 1;
             if (curval > 10) curval = 1;
             rpb.Value1 = curval;
+        }
+
+        private void gridMaster_LayoutLoaded(object sender, LayoutLoadedEventArgs e) {
+            // figure out where the columns are.
+            MasterIdCol = 0;
+            MasterRcptIdCol = 0;
+            MasterStateCol = 0;
+            for (int i = 0; i < gridMaster.ColumnCount; i++) {
+                string cname = gridMaster.Columns[i].FieldName.ToLower();
+                if (cname.CompareTo("id") == 0) {
+                    MasterIdCol = i;
+                }
+                else if (cname.CompareTo("rcptid") == 0) {
+                    MasterRcptIdCol = i;
+                }
+                else if (cname.CompareTo("statear") == 0) {
+                    MasterStateCol = i;
+                }
+            }
+
+            // conditional formatting for "selected" rows
+            ConditionalFormattingObject obj =
+                new ConditionalFormattingObject("MyCondition",
+                ConditionTypes.Contains, "selected", "", true);
+            obj.RowBackColor = Color.Bisque;
+            gridMaster.Columns[MasterStateCol].ConditionalFormattingObjectList.Add(obj);
+
+            // Add summary
+            // Ref:
+            // http://www.telerik.com/help/winforms/gridview-rows-summary-rows.html
+            //
+            GridViewSummaryItem RcptIDItem = new GridViewSummaryItem();
+            RcptIDItem.Name = "RcptID";
+            RcptIDItem.Aggregate = GridAggregateFunction.Count;
+
+            GridViewSummaryItem AmountItem = new GridViewSummaryItem();
+            AmountItem.Name = "Amount";
+            AmountItem.FormatString = "{0:C}";
+            AmountItem.Aggregate = GridAggregateFunction.Sum;
+
+            // Now add the summary at bottom.
+            GridViewSummaryRowItem summaryRowItem = new GridViewSummaryRowItem(
+                new GridViewSummaryItem[] {RcptIDItem, AmountItem } );
+            gridMaster.SummaryRowsBottom.Clear();
+            gridMaster.SummaryRowsBottom.Add(summaryRowItem);
         }
     }
 }

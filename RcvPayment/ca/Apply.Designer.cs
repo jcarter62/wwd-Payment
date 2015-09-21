@@ -58,9 +58,13 @@
             this.cmenuItem1 = new Telerik.WinControls.UI.RadMenuItem();
             this.cmenuItem2 = new Telerik.WinControls.UI.RadMenuItem();
             this.radMenuSeparatorItem1 = new Telerik.WinControls.UI.RadMenuSeparatorItem();
-            this.cmResetLayout = new Telerik.WinControls.UI.RadMenuItem();
+            this.cmenuItem5 = new Telerik.WinControls.UI.RadMenuItem();
             this.radContextMenuManager1 = new Telerik.WinControls.UI.RadContextMenuManager();
             this.timeCheck = new System.Windows.Forms.Timer(this.components);
+            this.radMenuSeparatorItem2 = new Telerik.WinControls.UI.RadMenuSeparatorItem();
+            this.cmenuItem3 = new Telerik.WinControls.UI.RadMenuItem();
+            this.radMenuSeparatorItem3 = new Telerik.WinControls.UI.RadMenuSeparatorItem();
+            this.cmenuItem4 = new Telerik.WinControls.UI.RadMenuItem();
             this.statusStrip1.SuspendLayout();
             this.panDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridDetail)).BeginInit();
@@ -309,6 +313,7 @@
             this.gridMaster.TabIndex = 1;
             this.gridMaster.Text = "radGridView1";
             this.gridMaster.CurrentRowChanged += new Telerik.WinControls.UI.CurrentRowChangedEventHandler(this.gridMaster_CurrentRowChanged);
+            this.gridMaster.LayoutLoaded += new Telerik.WinControls.UI.LayoutLoadedEventHandler(this.gridMaster_LayoutLoaded);
             // 
             // cRMasterBindingSource
             // 
@@ -329,7 +334,11 @@
             this.cmenuItem1,
             this.cmenuItem2,
             this.radMenuSeparatorItem1,
-            this.cmResetLayout});
+            this.cmenuItem3,
+            this.radMenuSeparatorItem2,
+            this.cmenuItem4,
+            this.radMenuSeparatorItem3,
+            this.cmenuItem5});
             // 
             // cmenuItem1
             // 
@@ -352,17 +361,45 @@
             this.radMenuSeparatorItem1.Name = "radMenuSeparatorItem1";
             this.radMenuSeparatorItem1.Text = "radMenuSeparatorItem1";
             // 
-            // cmResetLayout
+            // cmenuItem5
             // 
-            this.cmResetLayout.AccessibleDescription = "Reset Grid Layout";
-            this.cmResetLayout.AccessibleName = "Reset Grid Layout";
-            this.cmResetLayout.Name = "cmResetLayout";
-            this.cmResetLayout.Text = "Reset Grid Layout";
+            this.cmenuItem5.AccessibleDescription = "Reset Grid Layout";
+            this.cmenuItem5.AccessibleName = "Reset Grid Layout";
+            this.cmenuItem5.Name = "cmenuItem5";
+            this.cmenuItem5.Text = "Reset Grid Layout";
             // 
             // timeCheck
             // 
             this.timeCheck.Interval = 1000;
             this.timeCheck.Tick += new System.EventHandler(this.timeCheck_Tick);
+            // 
+            // radMenuSeparatorItem2
+            // 
+            this.radMenuSeparatorItem2.AccessibleDescription = "radMenuSeparatorItem2";
+            this.radMenuSeparatorItem2.AccessibleName = "radMenuSeparatorItem2";
+            this.radMenuSeparatorItem2.Name = "radMenuSeparatorItem2";
+            this.radMenuSeparatorItem2.Text = "radMenuSeparatorItem2";
+            // 
+            // cmenuItem3
+            // 
+            this.cmenuItem3.AccessibleDescription = "Mark Item As Posted";
+            this.cmenuItem3.AccessibleName = "Mark Item As Posted";
+            this.cmenuItem3.Name = "cmenuItem3";
+            this.cmenuItem3.Text = "Mark Item As Posted";
+            // 
+            // radMenuSeparatorItem3
+            // 
+            this.radMenuSeparatorItem3.AccessibleDescription = "radMenuSeparatorItem3";
+            this.radMenuSeparatorItem3.AccessibleName = "radMenuSeparatorItem3";
+            this.radMenuSeparatorItem3.Name = "radMenuSeparatorItem3";
+            this.radMenuSeparatorItem3.Text = "radMenuSeparatorItem3";
+            // 
+            // cmenuItem4
+            // 
+            this.cmenuItem4.AccessibleDescription = "Refresh";
+            this.cmenuItem4.AccessibleName = "Refresh";
+            this.cmenuItem4.Name = "cmenuItem4";
+            this.cmenuItem4.Text = "Refresh";
             // 
             // Apply
             // 
@@ -418,6 +455,10 @@
         private System.Windows.Forms.Timer timeCheck;
         private Telerik.WinControls.UI.RadProgressBar rpb;
         private System.Windows.Forms.BindingSource cRDetailBindingSource;
-        private Telerik.WinControls.UI.RadMenuItem cmResetLayout;
+        private Telerik.WinControls.UI.RadMenuItem cmenuItem5;
+        private Telerik.WinControls.UI.RadMenuSeparatorItem radMenuSeparatorItem2;
+        private Telerik.WinControls.UI.RadMenuItem cmenuItem3;
+        private Telerik.WinControls.UI.RadMenuSeparatorItem radMenuSeparatorItem3;
+        private Telerik.WinControls.UI.RadMenuItem cmenuItem4;
     }
 }
