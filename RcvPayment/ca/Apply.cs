@@ -41,10 +41,18 @@ namespace RcvPayment.ca {
         private void LocalInit() {
             string companyname = GetCompanyName();
             string appdir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string appdirPlusCo = System.IO.Path.Combine(appdir, companyname);
 
             this.Text = formTitle;
             aset = new AppSettings();
             dc = new DbClassDataContext(aset.wmis.connectionString);
+            if (!Directory.Exists(appdir)) {
+                Directory.CreateDirectory(appdir);
+            }
+            if (!Directory.Exists(appdirPlusCo)) {
+                Directory.CreateDirectory(appdirPlusCo);
+            }
+
             XmlMasterFile =
                 System.IO.Path.Combine(appdir, companyname, "mastergrid." + formId + ".xml");
             XmlDetailFile =
@@ -66,11 +74,11 @@ namespace RcvPayment.ca {
                 }
                 else if (txt.Equals("reset grid layout")) {
                     cmenu.Items[i].Click += ResetMasterLayout;
-                } else if ( txt.Equals("mark item as posted"))
-                {
+                }
+                else if (txt.Equals("mark item as posted")) {
                     cmenu.Items[i].Click += MarkItemAsPosted;
-                } else if ( txt.Equals("refresh") )
-                {
+                }
+                else if (txt.Equals("refresh")) {
                     cmenu.Items[i].Click += RefreshData;
                     //
                 }
@@ -606,7 +614,7 @@ namespace RcvPayment.ca {
 
             // Now add the summary at bottom.
             GridViewSummaryRowItem summaryRowItem = new GridViewSummaryRowItem(
-                new GridViewSummaryItem[] {RcptIDItem, AmountItem } );
+                new GridViewSummaryItem[] { RcptIDItem, AmountItem });
             gridMaster.SummaryRowsBottom.Clear();
             gridMaster.SummaryRowsBottom.Add(summaryRowItem);
         }
