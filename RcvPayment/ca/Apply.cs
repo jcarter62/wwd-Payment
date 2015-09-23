@@ -173,9 +173,15 @@ namespace RcvPayment.ca {
 
         private void SelectMasterClick(object sender, EventArgs e) {
             string copyBuffer;
-            copyBuffer = "id," + CurrentId;
             Clipboard.Clear();
-            Clipboard.SetText(copyBuffer);
+
+            copyBuffer = "id," + CurrentId;
+            try {
+                Clipboard.SetText(copyBuffer, TextDataFormat.Text);
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
 
             timeCheck_Start();
 

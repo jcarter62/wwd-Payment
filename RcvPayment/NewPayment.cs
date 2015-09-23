@@ -19,6 +19,7 @@ namespace RcvPayment {
         Images statusImages;
         private string currentID;
         private string currentDetailID;
+        private string MyUserId;
         private bool WeCanPostItem = false;
         private AppSettings aset;
         private DbClassDataContext dc;
@@ -296,13 +297,14 @@ namespace RcvPayment {
             IOrderedQueryable<CRMaster> q;
             if (!chkShowAll.Checked) {
                 q = from item in dc.CRMasters
-                    where item.StateRcv == "created"
+                    where ( item.StateRcv == "created" ) &&
+                          ((item.CUser == MyUserId) ||
+                           (item.UUser == MyUserId))
                     orderby item.RcptID descending
                     select item;
             }
             else {
                 q = from item in dc.CRMasters
-                        //                    where item.StateGA == "created"
                     orderby item.RcptID descending
                     select item;
             }
@@ -310,6 +312,11 @@ namespace RcvPayment {
         }
 
         private void NewPayment_Load(object sender, EventArgs e) {
+            // Determine my nt userid, so we can use in the list of
+            // records to show to me.
+            NtGroups mygroups = new NtGroups();
+            MyUserId = mygroups.CurrentUser;
+
             btnDelete.Enabled = CurrentUserIsWmisAdmin();
             ConnectGrid();
         }

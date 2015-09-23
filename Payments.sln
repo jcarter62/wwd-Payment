@@ -21,6 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		setup\Payments.iss = setup\Payments.iss
 		Status.txt = Status.txt
+		StepsForDeploy.txt = StepsForDeploy.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbCombined", "DbCombined\DbCombined.csproj", "{B80F3811-91B0-4E17-BB9B-E5E8D4449CA2}"

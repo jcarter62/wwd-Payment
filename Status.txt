@@ -1,5 +1,15 @@
 Release Notes:
 
+2015-09-22
+
+Payment Batches (Gen Acct)
+* Payment Batch Report, allow report to be sorted by
+  Receipt ID, or Amount.
+
+Payment Entry (Receiving)
+* Limit standard list of records to current
+  logged in userid, when "show all" is not checked.
+
 2015-09-20:
 
 Un-Applied Payments (new interface)

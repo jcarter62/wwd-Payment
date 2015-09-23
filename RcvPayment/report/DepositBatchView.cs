@@ -24,10 +24,10 @@ namespace RcvPayment.report {
             dc = new DbClassDataContext(aset.wmis.connectionString);
         }
 
-        public void DisplayReport(string id) {
+        public void DisplayReport(string id, string sortorder ) {
             Id = id;
             aset = new AppSettings();
-            var rpt = new DepositBatch(aset.wmis.connectionString, Id);
+            var rpt = new DepositBatch(aset.wmis.connectionString, Id, sortorder );
 
             rview.ReportSource = rpt;
             rview.RefreshReport();

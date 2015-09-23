@@ -39,9 +39,11 @@
             this.uUserDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataSrc = new System.Windows.Forms.BindingSource(this.components);
             this.panRight = new classLib.PanelTrak(this.components);
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnReportAmount = new System.Windows.Forms.Button();
+            this.btnReportRcptId = new System.Windows.Forms.Button();
             this.textDepositDate = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnReport = new System.Windows.Forms.Button();
             this.btnPost = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -66,6 +68,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSrc)).BeginInit();
             this.panRight.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -195,9 +198,9 @@
             // 
             // panRight
             // 
+            this.panRight.Controls.Add(this.groupBox1);
             this.panRight.Controls.Add(this.textDepositDate);
             this.panRight.Controls.Add(this.label5);
-            this.panRight.Controls.Add(this.btnReport);
             this.panRight.Controls.Add(this.btnPost);
             this.panRight.Controls.Add(this.btnClose);
             this.panRight.Controls.Add(this.btnDelete);
@@ -220,6 +223,40 @@
             this.panRight.Size = new System.Drawing.Size(219, 288);
             this.panRight.TabIndex = 1;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.btnReportAmount);
+            this.groupBox1.Controls.Add(this.btnReportRcptId);
+            this.groupBox1.Location = new System.Drawing.Point(6, 174);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(201, 52);
+            this.groupBox1.TabIndex = 21;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Report, Sorted By:";
+            // 
+            // btnReportAmount
+            // 
+            this.btnReportAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReportAmount.Location = new System.Drawing.Point(110, 19);
+            this.btnReportAmount.Name = "btnReportAmount";
+            this.btnReportAmount.Size = new System.Drawing.Size(85, 23);
+            this.btnReportAmount.TabIndex = 18;
+            this.btnReportAmount.Text = "Amount";
+            this.btnReportAmount.UseVisualStyleBackColor = true;
+            this.btnReportAmount.Click += new System.EventHandler(this.btnReportAmount_Click);
+            // 
+            // btnReportRcptId
+            // 
+            this.btnReportRcptId.Location = new System.Drawing.Point(6, 19);
+            this.btnReportRcptId.Name = "btnReportRcptId";
+            this.btnReportRcptId.Size = new System.Drawing.Size(85, 23);
+            this.btnReportRcptId.TabIndex = 17;
+            this.btnReportRcptId.Text = "Receipt ID";
+            this.btnReportRcptId.UseVisualStyleBackColor = true;
+            this.btnReportRcptId.Click += new System.EventHandler(this.btnReportRcptId_Click);
+            // 
             // textDepositDate
             // 
             this.textDepositDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -239,21 +276,10 @@
             this.label5.TabIndex = 17;
             this.label5.Text = "Deposit Date:";
             // 
-            // btnReport
-            // 
-            this.btnReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnReport.Location = new System.Drawing.Point(81, 230);
-            this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(53, 23);
-            this.btnReport.TabIndex = 16;
-            this.btnReport.Text = "Report";
-            this.btnReport.UseVisualStyleBackColor = true;
-            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
-            // 
             // btnPost
             // 
             this.btnPost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPost.Location = new System.Drawing.Point(162, 230);
+            this.btnPost.Location = new System.Drawing.Point(154, 230);
             this.btnPost.Name = "btnPost";
             this.btnPost.Size = new System.Drawing.Size(53, 23);
             this.btnPost.TabIndex = 15;
@@ -266,7 +292,7 @@
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.Location = new System.Drawing.Point(162, 259);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(51, 23);
+            this.btnClose.Size = new System.Drawing.Size(45, 23);
             this.btnClose.TabIndex = 14;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
@@ -463,6 +489,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataSrc)).EndInit();
             this.panRight.ResumeLayout(false);
             this.panRight.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -505,8 +532,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cUserDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn uDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn uUserDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Button btnReport;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker textDepositDate;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnReportAmount;
+        private System.Windows.Forms.Button btnReportRcptId;
     }
 }

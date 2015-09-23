@@ -422,7 +422,7 @@ namespace RcvPayment.report {
             this.dataSource1.Parameters.AddRange(new Telerik.Reporting.SqlDataSourceParameter[] {
             new Telerik.Reporting.SqlDataSourceParameter("@Param1", System.Data.DbType.String, "= Parameters.Param1.Value")});
             this.dataSource1.ProviderName = "System.Data.SqlClient";
-            this.dataSource1.SelectCommand = "select * from v_CrDepositBatch where ( id = @Param1 )";
+            this.dataSource1.SelectCommand = "select * from v_CrDepositBatch where ( id = @Param1 ) ";
             // 
             // pageFooterSection1
             // 

@@ -1,0 +1,16 @@
+Update Checklist
+
+Complete programming
+Version Changes Review (Git)
+Update Code Comments
+Update Status.txt
+Update help about.html
+Update Payments.iss
+Update RcvPayment assembly version.
+Build Solution & test version number.
+Commit Changes to VC.
+Perform Dpack backup.
+Build Solution.
+Perform Inno compile
+Test on local machine
+save setup to t: drive.

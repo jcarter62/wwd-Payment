@@ -331,7 +331,8 @@ namespace RcvPayment {
                 btnDocs.Enabled = true;
                 btnAdd.Enabled = true;
                 btnClose.Enabled = true;
-                btnReport.Enabled = true;
+                btnReportRcptId.Enabled = true;
+                btnReportAmount.Enabled = true;
             }
         }
 
@@ -470,16 +471,21 @@ namespace RcvPayment {
             return result;
         }
 
-        private void btnReport_Click(object sender, EventArgs e) {
-            //            if (!isFormOpen("showreceipt")) {
+        private void btnReportRcptId_Click(object sender, EventArgs e) {
             var f = new report.DepositBatchView();
             f.MdiParent = MdiParent;
             f.Show();
             f.BringToFront();
-            // 
-            f.DisplayReport(CurrentId);
-            //            }
+            f.DisplayReport(CurrentId, "RcptID" );
 
+        }
+
+        private void btnReportAmount_Click(object sender, EventArgs e) {
+            var f = new report.DepositBatchView();
+            f.MdiParent = MdiParent;
+            f.Show();
+            f.BringToFront();
+            f.DisplayReport(CurrentId, "Amount");
         }
     }
     // ref:
