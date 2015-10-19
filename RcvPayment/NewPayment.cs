@@ -21,6 +21,7 @@ namespace RcvPayment {
         private string currentDetailID;
         private string MyUserId;
         private bool WeCanPostItem = false;
+        private bool ThisUserIsAdmin = false;
         private AppSettings aset;
         private DbClassDataContext dc;
 
@@ -103,6 +104,7 @@ namespace RcvPayment {
             aset = new AppSettings();
             dc = new DbClassDataContext(aset.wmis.connectionString);
             statUpdate("");
+            menuUnPost.Visible = false;
         }
         #endregion
 
@@ -297,7 +299,7 @@ namespace RcvPayment {
             IOrderedQueryable<CRMaster> q;
             if (!chkShowAll.Checked) {
                 q = from item in dc.CRMasters
-                    where ( item.StateRcv == "created" ) &&
+                    where (item.StateRcv == "created") &&
                           ((item.CUser == MyUserId) ||
                            (item.UUser == MyUserId))
                     orderby item.RcptID descending
@@ -317,7 +319,13 @@ namespace RcvPayment {
             NtGroups mygroups = new NtGroups();
             MyUserId = mygroups.CurrentUser;
 
-            btnDelete.Enabled = CurrentUserIsWmisAdmin();
+            ThisUserIsAdmin = false;
+            if (CurrentUserIsWmisAdmin()) {
+                ThisUserIsAdmin = true;
+            }
+
+            btnDelete.Enabled = ThisUserIsAdmin;
+            menuUnPost.Visible = ThisUserIsAdmin;
             ConnectGrid();
         }
         #endregion
@@ -360,6 +368,7 @@ namespace RcvPayment {
             initItemDetail();
             UpdateLogWindow(currentID);
             UpdateDetailWindow(currentID);
+            ChangeContextMenu(currentID);
         }
 
         private void UpdateDetailWindow(string currentID) {
@@ -1006,6 +1015,252 @@ namespace RcvPayment {
                 misc.LogView lf = f as misc.LogView;
                 lf.Id = currID;
             }
+        }
+
+        enum MenuType {
+            Unknown = 10,
+            Mas500 = 20,
+            WmisSelected = 30,
+            WmisPosted = 40,
+            NotPosted = 50,
+            NotAReceipt = 60
+        };
+
+        // User has selected/changed to passed currentID.
+        // Change the context menu for Un-Post
+        private void ChangeContextMenu(string currentID) {
+            MenuType RcptType = MenuType.Unknown;
+            CRMaster thisRec = null;
+            string menuToolTipText;
+            string menuItemText;
+            bool menuItemEnabled;
+
+            thisRec = loadRecord(currentID);
+
+            // todo: handle thisRec == null
+            //
+            if (thisRec != null) {
+
+                if (thisRec.StateAR == "created") {
+                    RcptType = MenuType.NotPosted;
+                }
+                else if (thisRec.StateAR == "selected") {
+                    RcptType = MenuType.WmisSelected;
+                }
+                else if (thisRec.StateAR == "posted") {
+                    // Determine if this is a wmis posting.
+                    if (RecordIsInWmis(currentID)) {
+                        RcptType = MenuType.WmisPosted;
+                    }
+                    else {
+                        RcptType = MenuType.Mas500;
+                    }
+                }
+                // At this point, RcptType should be set to correct value.
+                // Now Create Message for User.
+
+                switch (RcptType) {
+                    case MenuType.Mas500:
+                        menuToolTipText = "Receipt posted to Mas500";
+                        menuItemText = "Un-Post Receipt";
+                        menuItemEnabled = true;
+                        break;
+
+                    case MenuType.WmisPosted:
+                        menuToolTipText = "Receipt has been posted as part of batch " + batchNo(currentID);
+                        menuItemText = "Un-Post Not Possible";
+                        menuItemEnabled = false;
+                        break;
+
+                    case MenuType.WmisSelected:
+                        menuToolTipText = "Receipt has been selected for batch " + batchNo(currentID) +
+                                          ", please unselect in wmis";
+                        menuItemText = "Unselect in wmis";
+                        menuItemEnabled = false;
+                        break;
+
+                    case MenuType.Unknown:
+                    case MenuType.NotAReceipt:
+                    case MenuType.NotPosted:
+                    default:
+                        menuToolTipText = "";
+                        menuItemText = "";
+                        menuItemEnabled = false;
+                        break;
+                }
+                menuUnPost.ToolTipText = menuToolTipText;
+                menuUnPost.Text = menuItemText;
+                menuUnPost.Enabled = menuItemEnabled;
+                menuUnPost.Tag = RcptType;
+
+            }
+            else {
+                menuUnPost.ToolTipText = "";
+                menuUnPost.Text = "";
+                menuUnPost.Enabled = false;
+                menuUnPost.Tag = MenuType.NotAReceipt;
+            }
+        }
+
+        // Create list of batch numbers that this currentID 
+        // is associated with in wmis.
+        private string batchNo(string currentID) {
+            string result = "";
+            try {
+                var q = from rec in dc.CrArMsts
+                        from mst in dc.Armsts
+                        where (
+                               (rec.ArMstId == mst.ARMSTID) &&
+                               (rec.CrMid == currentID)
+                              )
+                        select new {
+                            mst.BatchID
+                        };
+
+                if (q != null) {
+                    foreach (var r in q.Distinct()) {
+                        if (result.Length > 0)
+                            result = result + ", ";
+                        result = result + r.BatchID.ToString();
+                    }
+                }
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+            }
+            return result;
+        }
+
+        // check to see if this record is associated
+        // with a record in armst.
+        private bool RecordIsInWmis(string currentID) {
+            bool result = false;
+            try {
+                int n = (from rec in dc.CrArMsts
+                         where rec.CrMid == currentID
+                         select rec.id).Count();
+
+                if (n > 0) {
+                    result = true;
+                }
+            }
+            catch (Exception ex) {
+                result = true;
+                Console.WriteLine(ex.Message);
+            }
+            return result;
+        }
+
+        private CRMaster loadRecord(string currentID) {
+            CRMaster result = null;
+            try {
+                CRMaster q = (from item in dc.CRMasters
+                              where item.Id == currentID
+                              select item).First();
+
+                if (q != null) {
+                    result = q;
+                }
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+            }
+            return result;
+        }
+
+        private void menuUnPost_Click(object sender, EventArgs e) {
+            // Menu Item has been selected, so this means
+            // currentId is only a Mas500 record.  The 
+            // Only thing that needs updating is CrMaster.StatusAr.
+            string recptid;
+            string thisMid = currentID;
+            string msg = "";
+
+            recptid = getSelectedReceiptID(thisMid);
+
+            msg = "Are you sure you wish to un-post receipt " +
+                    recptid + "?";
+
+            if (MessageBox.Show(msg, "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                string unpostmsg = UnPostOneReceipt(thisMid);
+                MessageBox.Show(unpostmsg);
+            }
+        }
+
+        private string UnPostOneReceipt(string mid) {
+            string msg = "";
+            var q = (from item in dc.CRMasters
+                     where item.Id == mid
+                     select item);
+
+            if (q.Count() <= 0) {
+                msg = "Receipt not found.... :-( ... Unable to un-post. ";
+            }
+            else if (q.Count() > 1) {
+                msg = "More than one record found, so unable to un-post.";
+            }
+            else {
+                var rec = q.First();
+
+                rec.StateAR = "created";
+
+                var l = new TblLog();
+                l.tblName = "crmaster";
+                l.tblId = currentID;
+                l.txt = "ar un-post";
+
+                try {
+                    dc.TblLogs.InsertOnSubmit(l);
+                    dc.SubmitChanges();
+                    dc.Refresh(RefreshMode.OverwriteCurrentValues, q);
+                    msg = "completed";
+                }
+                catch (Exception ex) {
+                    msg = ex.Message;
+                }
+            }
+            return msg;
+        }
+
+        //private bool notPosted(string mid) {
+        //    bool result = false;
+
+        //    // check to see if posted to 
+        //    try {
+        //        var q = (from rec in dc.CrArMsts
+        //                 where rec.CrMid == mid
+        //                 select rec);
+
+        //        if (q == null) {
+        //            result = false;
+        //        }
+        //    }
+        //    catch (Exception ex) {
+        //        result = true;
+        //        Console.WriteLine(ex.Message);
+        //    }
+
+        //    return result;
+        //}
+
+        private string getSelectedReceiptID(string id) {
+            string result = "";
+
+            try {
+                var q = (from item in dc.CRMasters
+                         where item.Id == id
+                         select item).First();
+
+                if (q != null) {
+                    result = q.RcptID.ToString();
+                }
+            }
+            catch (Exception ex) {
+                result = "";
+                Console.WriteLine(ex.Message);
+            }
+
+            return result;
         }
     }
 }

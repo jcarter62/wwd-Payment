@@ -13,3 +13,13 @@ img.nonresponsive {
     height: auto;
     max-width: 100%;
 }
+
+img.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img.indent {
+    margin-left: 10%;
+    margin-right: auto;
+}

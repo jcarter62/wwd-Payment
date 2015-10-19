@@ -17,7 +17,7 @@
             This window is used in the process of applying payments to WMIS or Mas500.
             Here is an example window with one item
         </p>
-        <img src="unapplied-window.png">
+        <img class="center" src="unapplied-window.png">
 
         <p>
             You can see we have one master record and one detail record listed.
@@ -43,13 +43,46 @@
         <hr>
         <p>
             The context menus available are as follows:
-            <img src="context-menu-top.png" />
-            <p>Master Records Context Menu</p>
-            <img src="context-menu-bottom.png" />
-            <p>Detail Records Context Menu</p>
+            <img class="indent" src="context-menu-top.png" />
         </p>
         <hr>
         <p>
+            Here are the options available in the context menu:
+            <ul>
+                <li>Select Master Record: This is used to copy the master record record id to the copy buffer,
+                    preparing for you to click the payment import button in wmis.  </li>
+                <li>
+                    Un-Select Master Record: This is used only if you have selected a record by mistake.
+                </li>
+                <li>Mark Item as Posted: Use this for a mas500 receipt.  When using this method of marking,
+                    There will be no automatic data association of this receipt to a corresponding record
+                    in mas500.  At this time, there is no data linking of records between the payment processing
+                    system and mas500.
+                </li>
+                <li>
+                    Refresh: This item simply reloads the data within the grids.
+                </li>
+                <li>
+                    Reset Grid Layout: The grid layout and search/filter settings are saved and restored for each user.
+                    This layout information is stored in an xml file in the user's private data.
+                    If for some reason the layout is not as expected,
+                    use this item to reset back to default.
+                </li>
+            </ul>
+        </p>
+        <hr>
+        <p>
+            The user can use the filtering and searching capabilities built into the grid component to
+            limit the number of records displayed.  Here is an example where the user was searching for
+            the substring "8W1".
+            <img class="indent" src="search.png">
+            You can see the string has been highlighted in within the row containing 8W1.
+            <br>
+            You can also use filters for each column.
+        </p>
+        <hr>
+        <p>
+
             <a href="wmis.html">Click here for WMIS window examples.</a>
         </p>
 

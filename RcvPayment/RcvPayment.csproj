@@ -142,6 +142,18 @@
     <Compile Include="misc\PaymentDetails.Designer.cs">
       <DependentUpon>PaymentDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="report\Deposit4Date.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report\Deposit4Date.designer.cs">
+      <DependentUpon>Deposit4Date.cs</DependentUpon>
+    </Compile>
+    <Compile Include="report\Deposit4DateView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="report\Deposit4DateView.Designer.cs">
+      <DependentUpon>Deposit4DateView.cs</DependentUpon>
+    </Compile>
     <Compile Include="report\PaymentLog.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -231,6 +243,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="misc\PaymentDetails.resx">
       <DependentUpon>PaymentDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report\Deposit4Date.resx">
+      <DependentUpon>Deposit4Date.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report\Deposit4DateView.resx">
+      <DependentUpon>Deposit4DateView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="report\PaymentLog.resx">
       <DependentUpon>PaymentLog.cs</DependentUpon>

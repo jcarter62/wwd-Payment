@@ -4,6 +4,7 @@ using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Xml;
 using System.Net.Mail;
+using System.Windows.Forms;
 
 namespace classLib {
 
@@ -58,9 +59,17 @@ namespace classLib {
         private void AppSettingsInit() {
             _Key = Keys.getKey();
             sf = new SettingsFile(_filename);
+            // Determine application name:
+            _AppName = getAppName();
             wmis = new DbSettings();
             mas500 = new DbSettings();
             Load();
+        }
+
+        private string getAppName() {
+            string result = "";
+            result = Application.ProductName + "/" +Application.ProductVersion;
+            return result;
         }
 
         #endregion Startup
@@ -75,6 +84,7 @@ namespace classLib {
             string yn;
             yn = GetString(prefix + "WindowsAuthentication");
             db.WindowsAuth = (yn == "Y");
+            db.AppName = _AppName;
         }
 
         /// <summary>

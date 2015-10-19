@@ -225,5 +225,18 @@ namespace RcvPayment {
             f.MdiParent = this;
             f.Show();
         }
+
+        private void depositsForDateToolStripMenuItem_Click(object sender, EventArgs e) {
+            // 
+            if (!isFormOpen("deposit4dateview")) {
+                Deposit4DateView f = new Deposit4DateView();
+                f.MdiParent = this;
+                f.Show();
+                f.BringToFront();
+                // 
+                DateTime TodaysDate = DateTime.Now;
+                f.DisplayReport(TodaysDate);
+            }
+        }
     }
 }

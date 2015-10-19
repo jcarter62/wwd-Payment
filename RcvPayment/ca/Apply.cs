@@ -383,8 +383,18 @@ namespace RcvPayment.ca {
 
         private void OpenMasterTable() {
 
-            //            gridMaster.DataSource = null;
-            //            gridMaster.Rows.Clear();
+            // Load layout for user if not loaded.
+            if (!XmlMasterFileLoaded) {
+                try {
+                    if (File.Exists(XmlMasterFile)) {
+                        gridMaster.LoadLayout(XmlMasterFile);
+                        XmlMasterFileLoaded = true;
+                    }
+                }
+                finally {
+                    // do nothing.
+                }
+            }
 
             var mst =
             from pmt in dc.CRMasters
@@ -405,19 +415,6 @@ namespace RcvPayment.ca {
             };
 
             gridMaster.DataSource = mst;
-
-            // Load layout for user.
-            if (!XmlMasterFileLoaded) {
-                try {
-                    if (File.Exists(XmlMasterFile)) {
-                        gridMaster.LoadLayout(XmlMasterFile);
-                        XmlMasterFileLoaded = true;
-                    }
-                }
-                finally {
-                    // do nothing.
-                }
-            }
         }
 
         private void Apply_FormClosing(object sender, FormClosingEventArgs e) {

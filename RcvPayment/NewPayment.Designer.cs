@@ -45,6 +45,7 @@
             this.Deposited = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.cMenuList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuLog = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuUnPost = new System.Windows.Forms.ToolStripMenuItem();
             this.cRMasterBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblAppliedChk = new System.Windows.Forms.PictureBox();
@@ -296,16 +297,24 @@
             // cMenuList
             // 
             this.cMenuList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuLog});
+            this.menuLog,
+            this.menuUnPost});
             this.cMenuList.Name = "cMenuList";
-            this.cMenuList.Size = new System.Drawing.Size(127, 26);
+            this.cMenuList.Size = new System.Drawing.Size(153, 70);
             // 
             // menuLog
             // 
             this.menuLog.Name = "menuLog";
-            this.menuLog.Size = new System.Drawing.Size(126, 22);
+            this.menuLog.Size = new System.Drawing.Size(152, 22);
             this.menuLog.Text = "Show Log";
             this.menuLog.Click += new System.EventHandler(this.menuLog_Click);
+            // 
+            // menuUnPost
+            // 
+            this.menuUnPost.Name = "menuUnPost";
+            this.menuUnPost.Size = new System.Drawing.Size(152, 22);
+            this.menuUnPost.Text = "A/R Un-Post";
+            this.menuUnPost.Click += new System.EventHandler(this.menuUnPost_Click);
             // 
             // cRMasterBindingSource
             // 
@@ -994,5 +1003,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn Deposited;
         private System.Windows.Forms.ContextMenuStrip cMenuList;
         private System.Windows.Forms.ToolStripMenuItem menuLog;
+        private System.Windows.Forms.ToolStripMenuItem menuUnPost;
     }
 }
